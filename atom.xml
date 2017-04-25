@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-24T17:01:44.000Z</updated>
+  <updated>2017-04-25T13:02:36.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,82 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面向对象的程序设计(二)</title>
+    <link href="http://yoursite.com/2017/04/25/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E4%BA%8C/"/>
+    <id>http://yoursite.com/2017/04/25/面向对象的程序设计-二/</id>
+    <published>2017-04-25T12:36:34.000Z</published>
+    <updated>2017-04-25T13:02:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h3 id="OO语言中支持两种继承方式：实现继承，接口继承"><a href="#OO语言中支持两种继承方式：实现继承，接口继承" class="headerlink" title="OO语言中支持两种继承方式：实现继承，接口继承"></a>OO语言中支持两种继承方式：实现继承，接口继承</h3><ul>
+<li>实现继承：继承实际的方法  </li>
+<li>接口继承：继承函数签名  </li>
+</ul>
+<h4 id="由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的"><a href="#由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的" class="headerlink" title="由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的"></a>由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的</h4><h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p><img src="http://ooytyiziz.bkt.clouddn.com/7895A860-4021-47A7-A343-BBC78A970381.png" alt="原型链"></p>
+<a id="more"></a>
+<h4 id="原型链的问题（缺点）"><a href="#原型链的问题（缺点）" class="headerlink" title="原型链的问题（缺点）"></a>原型链的问题（缺点）</h4><ul>
+<li>1、当在实例中对引用类型的值进行操作时，很有可能改变原型中的值。（共享问题）  </li>
+<li>2、在创建子类型的实例时，不能向超类型的构造函数中传递参数  </li>
+</ul>
+<h4 id="默认的原型"><a href="#默认的原型" class="headerlink" title="默认的原型"></a>默认的原型</h4><ul>
+<li>所有函数的默认原型都是Object的实例，因此默认原型都会包含一个内部指针，指向Object.prototype。  </li>
+</ul>
+<h4 id="如何确定原型和实例之间的关系"><a href="#如何确定原型和实例之间的关系" class="headerlink" title="如何确定原型和实例之间的关系"></a>如何确定原型和实例之间的关系</h4><ul>
+<li>1、通过instanceof:测试实例与原型链中出现过的构造函数，结果会返回true  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">	   alert(instance instanceof Object)    //true  </div><div class="line">		alert(instance instanceof SuperType)    //true  </div><div class="line">		alert(instance instanceof Subtype)    //true  </div><div class="line">```  </div><div class="line">* 2、isPropertyOf()方法：只要是原型链中出现过的原型，都会返回true</div><div class="line"></div><div class="line">```  </div><div class="line">	    alert(Object.prtotype.isPropertyOf(instance))    //true  </div><div class="line">		alert(SuperType.prtotype.isPropertyOf(instance))    //true  </div><div class="line">		alert(Subtype.prtotype.isPropertyOf(instance))    //true</div></pre></td></tr></table></figure>
+<h4 id="定义方法时要注意的几个问题"><a href="#定义方法时要注意的几个问题" class="headerlink" title="定义方法时要注意的几个问题"></a>定义方法时要注意的几个问题</h4><ul>
+<li>场景：子类型优势需要覆盖超类型中的某个方法，或者需要添加类型中不存在的某个方法  </li>
+<li>2、不能通过对象字面量方法添加新方法（因为会重写原型链）  </li>
+<li>1、给子类型添加方法的代码一定要放在替换原型的语句之后（否则会因为重新定义了原型而导致添加代码无效）  </li>
+</ul>
+<h4 id="基本思想：利用原型，让一个引用类型继承另一个引用类型的属性和方法"><a href="#基本思想：利用原型，让一个引用类型继承另一个引用类型的属性和方法" class="headerlink" title="基本思想：利用原型，让一个引用类型继承另一个引用类型的属性和方法"></a>基本思想：利用原型，让一个引用类型继承另一个引用类型的属性和方法</h4><h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;  </div><div class="line">    this.SuperProperty = true;  </div><div class="line">&#125;;  </div><div class="line">SuperType.prototype.getSuperProperty = function()&#123;return this.SuperProperty&#125;;  </div><div class="line">  </div><div class="line">function SubType()&#123;  </div><div class="line">    this.SubProperty = false;  </div><div class="line">&#125;;  </div><div class="line">SubType.prototype = new SuperType();  </div><div class="line">SubType.prototype.getSubProperty = function()&#123;return this.getSubProperty&#125;;  </div><div class="line">  </div><div class="line">var instance = new SubType();  </div><div class="line">alert(instance.getSuperProperty()) //true</div></pre></td></tr></table></figure>
+<h3 id="借用构造函数"><a href="#借用构造函数" class="headerlink" title="借用构造函数"></a>借用构造函数</h3><h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>1、方法都在构造函数中定义，函数无法复用，每个方法都是function的一个新实例  </li>
+<li>2、在超类型的原型中定义的方法，对子类型而言也是不可见的，结果所有类型都只能使用构造函数模式  </li>
+</ul>
+<h4 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h4><ul>
+<li>优点：借用构造函数有一个很大的优势，即可以在子类型构造函数中向超类型构造函数传递参数 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">  function SuperType (name) &#123;function   </div><div class="line">	this.name= name;  </div><div class="line">	&#125;  </div><div class="line">	function SubType () &#123;  </div><div class="line">	//继承了Super&apos;l&apos;ype, 同时还传递了参数  </div><div class="line">	superType.call(this, &quot;Nicholas&quot;);  </div><div class="line">	//实例属性  </div><div class="line">	this.age= 29;&#125;  </div><div class="line">	var instance= new SubType();  </div><div class="line">	alert(instance.name) ; //“Nicholas” alert(instance.age); //29  </div><div class="line">	</div><div class="line">```  </div><div class="line">#### 基本思想：在子类型构造函数中调用超类型构造函数  </div><div class="line"></div><div class="line">```  </div><div class="line">    function SuperType()&#123;  </div><div class="line">    this.color = [&quot;red&quot;,&quot;blue&quot;,&quot;yellow&quot;]      </div><div class="line">&#125;;  </div><div class="line">function SubType()&#123;  </div><div class="line">    SuperType.call(this);  </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><ul>
+<li>1、将原型链和借用构造函数的技术组合到一块，从而发挥二者之长的一种继承模式，又叫伪经典继承  </li>
+<li>2、基本思想：使用原型链实现对原型属性和方法的继承，而通过构造函数来实现对实例属性的继承  </li>
+<li>3.是JavaScript中最常用的继承模式  </li>
+</ul>
+<h4 id="优点：既通过在原型上定义方法实现了函数的复用，又能够保证每个实例都有它自己的属性"><a href="#优点：既通过在原型上定义方法实现了函数的复用，又能够保证每个实例都有它自己的属性" class="headerlink" title="优点：既通过在原型上定义方法实现了函数的复用，又能够保证每个实例都有它自己的属性"></a>优点：既通过在原型上定义方法实现了函数的复用，又能够保证每个实例都有它自己的属性</h4><h4 id="组合继承避免了原型链和借用构造函数的缺陷，融合了它们的优点，成为javascript中最常用的继承模式"><a href="#组合继承避免了原型链和借用构造函数的缺陷，融合了它们的优点，成为javascript中最常用的继承模式" class="headerlink" title="组合继承避免了原型链和借用构造函数的缺陷，融合了它们的优点，成为javascript中最常用的继承模式"></a>组合继承避免了原型链和借用构造函数的缺陷，融合了它们的优点，成为javascript中最常用的继承模式</h4><h4 id="function-SuperType-name"><a href="#function-SuperType-name" class="headerlink" title="function SuperType(name){"></a>function SuperType(name){</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">    this.name = name;  </div><div class="line">    this.color = [&quot;red&quot;,&quot;blue&quot;,&quot;yellow&quot;]  </div><div class="line">&#125;;  </div><div class="line">SuperType.prototype.sayName = function()&#123;alert(this.name)&#125;;  </div><div class="line">function SubType(name)&#123;  </div><div class="line">    SuperType.call(this,name);  </div><div class="line">    this.age = age;  </div><div class="line">&#125;;  </div><div class="line">SubType.prototype = new SuperType();  </div><div class="line">SubType.prototype.constructor = SubType;  </div><div class="line">SubType.prototype.sayAge = function()&#123;alert(this.age)&#125;;  </div><div class="line"></div><div class="line">```  </div><div class="line">### 原型式继承  </div><div class="line">  </div><div class="line">#### Object.creat()  </div><div class="line">  </div><div class="line">* 参数一  </div><div class="line">	* 用作新对象原型的对象 </div><div class="line"></div><div class="line">``` </div><div class="line">	 var person = &#123;name:&quot;Nick&quot; ,friends:[&quot;Tom&quot;,&quot;Sam&quot;]&#125;;  </div><div class="line">		var anotherPerson =Object.create(person);  </div><div class="line">```  </div><div class="line">* 参数二  </div><div class="line">	* 为新对象定义额外属性的对象（以这种方式指定的任何属性都会覆盖原型对象上的同名属性），注意格式</div><div class="line">	</div><div class="line">```  </div><div class="line">	   var person = &#123;name:&quot;Nick&quot; ,friends:[&quot;Tom&quot;,&quot;Sam&quot;]&#125;;  </div><div class="line">		var anotherPerson =Object.create(person,&#123;  </div><div class="line">		    name:&#123;  </div><div class="line">		    value:&quot;Greg&quot;  </div><div class="line">		    &#125;  </div><div class="line">		&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>ECMAScipt5通过新增的Object.create()规范化了原型式继承  </li>
+</ul>
+<h4 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function object(o)&#123;  </div><div class="line">    function F()&#123;&#125;;  </div><div class="line">    F.prototype = o;  </div><div class="line">    return new F();  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var person = &#123;name:&quot;Nick&quot; ,friends:[&quot;Tom&quot;,&quot;Sam&quot;]&#125;;  </div><div class="line">var anotherPerson =object(person);  </div><div class="line">//person成为了anotherPerson的原型</div></pre></td></tr></table></figure>
+<h3 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h3><h4 id="寄生式继承的思路与寄生构造函数和工厂模式类似，即创建一个仅用于封装继承过程的函数，该函数在内部以某种方式来增强对象，最后再像真地是它做了所有工作一样返回对象。"><a href="#寄生式继承的思路与寄生构造函数和工厂模式类似，即创建一个仅用于封装继承过程的函数，该函数在内部以某种方式来增强对象，最后再像真地是它做了所有工作一样返回对象。" class="headerlink" title="寄生式继承的思路与寄生构造函数和工厂模式类似，即创建一个仅用于封装继承过程的函数，该函数在内部以某种方式来增强对象，最后再像真地是它做了所有工作一样返回对象。"></a>寄生式继承的思路与寄生构造函数和工厂模式类似，即创建一个仅用于封装继承过程的函数，该函数在内部以某种方式来增强对象，最后再像真地是它做了所有工作一样返回对象。</h4><h4 id="缺点：不能实现函数复用"><a href="#缺点：不能实现函数复用" class="headerlink" title="缺点：不能实现函数复用"></a>缺点：不能实现函数复用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function creatAnother(original)&#123;  </div><div class="line">    var clone = object(original);  </div><div class="line">    clone.sayHi = function()&#123;alert(&quot;Hi&quot;)&#125;;  </div><div class="line">    return clone;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="在主要考虑对象而不是自定义类型和构造函数的悄况下，寄生式继承也是一种有用的模式。"><a href="#在主要考虑对象而不是自定义类型和构造函数的悄况下，寄生式继承也是一种有用的模式。" class="headerlink" title="在主要考虑对象而不是自定义类型和构造函数的悄况下，寄生式继承也是一种有用的模式。"></a>在主要考虑对象而不是自定义类型和构造函数的悄况下，寄生式继承也是一种有用的模式。</h4><h3 id="寄生组合式继承"><a href="#寄生组合式继承" class="headerlink" title="寄生组合式继承"></a>寄生组合式继承</h3><h4 id="所谓寄生组合式继承，即通过借用构造函数来继承属性，-通过原型链的混成形式来继承方法。"><a href="#所谓寄生组合式继承，即通过借用构造函数来继承属性，-通过原型链的混成形式来继承方法。" class="headerlink" title="所谓寄生组合式继承，即通过借用构造函数来继承属性， 通过原型链的混成形式来继承方法。"></a>所谓寄生组合式继承，即通过借用构造函数来继承属性， 通过原型链的混成形式来继承方法。</h4><h4 id="基本思路：-不必为了指定子类型的原型而调用超类型的构造函数，我们所需要的无非就是超类型原型的一个副本而已。本质上，就是使用寄生式继承来继承超类型的原型，然后再将结果指定给子类型的原型。"><a href="#基本思路：-不必为了指定子类型的原型而调用超类型的构造函数，我们所需要的无非就是超类型原型的一个副本而已。本质上，就是使用寄生式继承来继承超类型的原型，然后再将结果指定给子类型的原型。" class="headerlink" title="基本思路： 不必为了指定子类型的原型而调用超类型的构造函数，我们所需要的无非就是超类型原型的一个副本而已。本质上，就是使用寄生式继承来继承超类型的原型，然后再将结果指定给子类型的原型。"></a>基本思路： 不必为了指定子类型的原型而调用超类型的构造函数，我们所需要的无非就是超类型原型的一个副本而已。本质上，就是使用寄生式继承来继承超类型的原型，然后再将结果指定给子类型的原型。</h4><h4 id="目的：解决组合继承模式中调用两次超类型构造函数，导致属性重写，影响性能的问题"><a href="#目的：解决组合继承模式中调用两次超类型构造函数，导致属性重写，影响性能的问题" class="headerlink" title="目的：解决组合继承模式中调用两次超类型构造函数，导致属性重写，影响性能的问题"></a>目的：解决组合继承模式中调用两次超类型构造函数，导致属性重写，影响性能的问题</h4><ul>
+<li>组合继承例子：  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function SuperType(name)&#123;  //超类型构造函数  </div><div class="line">	    this.name=name;  </div><div class="line">	    this.color=&#123;&quot;red&quot;,&quot;blue&quot;,&quot;green&quot;]  </div><div class="line">	  &#125;  </div><div class="line">	 SuperType.prototype.sayName=function()&#123;  </div><div class="line">	 alert(this.name);  </div><div class="line">	 function SubType(name,age)&#123;  </div><div class="line">	     SuperType.call(this,name) //第二次调用  </div><div class="line">	     this.age = age;  </div><div class="line">	 &#125;  </div><div class="line">	 SubType.prototype = new SuperType(); //第一次调用  </div><div class="line">	 SubType.prototype.construtor =SuperType;  </div><div class="line">	 SubType.protptype.sayAge =function()&#123;  </div><div class="line">	     alert(this.age)</div></pre></td></tr></table></figure>
+<h4 id="这个例子高效体现在它只调用了一次SuperType的构造函数，并且避免了再prototype上创建不必要的、多余的属性。同时还能保证原型链不变"><a href="#这个例子高效体现在它只调用了一次SuperType的构造函数，并且避免了再prototype上创建不必要的、多余的属性。同时还能保证原型链不变" class="headerlink" title="这个例子高效体现在它只调用了一次SuperType的构造函数，并且避免了再prototype上创建不必要的、多余的属性。同时还能保证原型链不变"></a>这个例子高效体现在它只调用了一次SuperType的构造函数，并且避免了再prototype上创建不必要的、多余的属性。同时还能保证原型链不变</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">   function inheritPrototype(subType,superType)&#123;  </div><div class="line">    //prototype成为superType的一个副本，而不用调用构造函数  </div><div class="line">    var prototype = SuperType.prototype;  </div><div class="line">    prototype.constructor = SubType;  </div><div class="line">    SubType.prototype = prototype;  </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function SuperType(name)&#123;  </div><div class="line">    this.name = name;  </div><div class="line">&#125;;  </div><div class="line">SuperType.prototype.sayName = function()&#123;alert(this.name)&#125;;  </div><div class="line">function SubType(name,age)&#123;  </div><div class="line">    SuperType.call(this,name);  </div><div class="line">    this.age = age;  </div><div class="line">&#125;  </div><div class="line">inheritPrototype(Subtype,SuperType);  </div><div class="line">SubType.prototype.sayAge = function()&#123;alert(this.age)&#125;;  </div><div class="line"></div><div class="line">    function inheritPrototype(SubType，SuperType)&#123;   </div><div class="line">      var prototype = object(SuperType.prototype);//创建对象  </div><div class="line">     prototype.constructor = subType;//增强对象  </div><div class="line">      subType.prototype = prototype ;//指定对象  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在函数内部，第一步是创建超类型原型的一个副本。第二步是为创建的副本添加constructor屈性，从而弥补因重写原型而失去的默认的constructor属性。最后一步， 将新创建的对象（即副本）赋值给子类型的原型。  </li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;继承&quot;&gt;&lt;a href=&quot;#继承&quot; class=&quot;headerlink&quot; title=&quot;继承&quot;&gt;&lt;/a&gt;继承&lt;/h2&gt;&lt;h3 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h3&gt;&lt;h3 id=&quot;OO语言中支持两种继承方式：实现继承，接口继承&quot;&gt;&lt;a href=&quot;#OO语言中支持两种继承方式：实现继承，接口继承&quot; class=&quot;headerlink&quot; title=&quot;OO语言中支持两种继承方式：实现继承，接口继承&quot;&gt;&lt;/a&gt;OO语言中支持两种继承方式：实现继承，接口继承&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;实现继承：继承实际的方法  &lt;/li&gt;
+&lt;li&gt;接口继承：继承函数签名  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的&quot;&gt;&lt;a href=&quot;#由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的&quot; class=&quot;headerlink&quot; title=&quot;由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的&quot;&gt;&lt;/a&gt;由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的&lt;/h4&gt;&lt;h3 id=&quot;原型链&quot;&gt;&lt;a href=&quot;#原型链&quot; class=&quot;headerlink&quot; title=&quot;原型链&quot;&gt;&lt;/a&gt;原型链&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://ooytyiziz.bkt.clouddn.com/7895A860-4021-47A7-A343-BBC78A970381.png&quot; alt=&quot;原型链&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="-学习笔记 -JavaScript" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>添加畅言评论</title>
@@ -76,16 +152,20 @@
     <link href="http://yoursite.com/2017/04/18/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AF%95%EF%BC%8C%E6%95%B4%E7%90%86-1/"/>
     <id>http://yoursite.com/2017/04/18/第一次笔试，整理-1/</id>
     <published>2017-04-18T10:11:12.000Z</published>
-    <updated>2017-04-24T10:16:30.000Z</updated>
+    <updated>2017-04-25T12:55:55.000Z</updated>
     
-    <content type="html"><![CDATA[<p><strong>之前就关注了美图招聘的公众号，忽然惊喜地看到美图的春招，有招暑假的实习生，我匆忙制作了第一个自己的前端简历，然后投了，很惊喜地收到美图的笔试通知，然后隔天就要笔试了😂，之前都没做过面试的相关准备，也只能临时匆忙准备了.特别想提的一点是在过程中感觉到美图的HR和技术总监为人很 <code>nice</code>，~(≧▽≦)/~赞。</strong></p>
+    <content type="html"><![CDATA[<p><strong>之前就关注了美图招聘的公众号，忽然惊喜地看到美图的春招，有招暑假的实习生，我匆忙制作了第一个自己的前端简历，然后投了，很惊喜地收到美图的笔试通知，然后隔天就要笔试了😂，之前都没做过面试的相关准备，也只能临时匆忙准备了.</strong></p>
+<a id="more"></a>
+<blockquote>
+<p>特别想提的一点是在过程中感觉到美图的HR和技术总监为人很 <code>nice</code>，~(≧▽≦)/~赞。**</p>
+</blockquote>
 <p><strong>这几天都在考期中考，所以笔试完也没马上做总结就去准备接下去接连一天一科的期中考了。</strong></p>
 <p><strong><em>笔试有要求题目不能外泄，以下只是自己依稀记得的不大会做，不会做的知识点，仅供补缺补漏使用。</em></strong></p>
 <h3 id="1-CSS的某些样式是具有继承性的"><a href="#1-CSS的某些样式是具有继承性的" class="headerlink" title="1.CSS的某些样式是具有继承性的"></a>1.CSS的某些样式是具有继承性的</h3><p><strong>什么是继承呢？继承是一种规则，它允许样式不仅应用于某个特定html标签元素，而且应用于其后代。</strong></p>
 <blockquote>
 <p>不可继承的：display、margin、border、padding、background、height、min-height、max-height、width、min-width、max-width、overflow、position、left、right、top、bottom、z-index、float、clear、table-layout、vertical-align、page-break-after、page-bread-before和unicode-bidi。（注：基本上什么盒子外边距、内边距，还有定位什么的是不能被继承的）<br>所有元素可继承：visibility和cursor。<br>内联元素可继承：letter-spacing、word-spacing、white-space、line-height、color、font、font-family、font-size、font-style、font-variant、font-weight、text-decoration、text-transform、direction。<br>终端块状元素可继承：text-indent和text-align。<br>列表元素可继承：list-style、list-style-type、list-style-position、list-style-image。<br>表格元素可继承：border-collapse。</p>
 </blockquote>
-<a id="more"></a>
+<!-- more -->
 <h3 id="2-对象的深拷贝与浅拷贝的区别"><a href="#2-对象的深拷贝与浅拷贝的区别" class="headerlink" title="2.对象的深拷贝与浅拷贝的区别"></a>2.对象的深拷贝与浅拷贝的区别</h3><blockquote>
 <p>浅拷贝：仅仅复制对象的引用，而不是对象本身；<br>深拷贝：把复制的对象所引用的全部对象都复制一遍。</p>
 </blockquote>
@@ -96,13 +176,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;strong&gt;之前就关注了美图招聘的公众号，忽然惊喜地看到美图的春招，有招暑假的实习生，我匆忙制作了第一个自己的前端简历，然后投了，很惊喜地收到美图的笔试通知，然后隔天就要笔试了😂，之前都没做过面试的相关准备，也只能临时匆忙准备了.特别想提的一点是在过程中感觉到美图的HR和技术总监为人很 &lt;code&gt;nice&lt;/code&gt;，~(≧▽≦)/~赞。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;这几天都在考期中考，所以笔试完也没马上做总结就去准备接下去接连一天一科的期中考了。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;笔试有要求题目不能外泄，以下只是自己依稀记得的不大会做，不会做的知识点，仅供补缺补漏使用。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&quot;1-CSS的某些样式是具有继承性的&quot;&gt;&lt;a href=&quot;#1-CSS的某些样式是具有继承性的&quot; class=&quot;headerlink&quot; title=&quot;1.CSS的某些样式是具有继承性的&quot;&gt;&lt;/a&gt;1.CSS的某些样式是具有继承性的&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;什么是继承呢？继承是一种规则，它允许样式不仅应用于某个特定html标签元素，而且应用于其后代。&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;不可继承的：display、margin、border、padding、background、height、min-height、max-height、width、min-width、max-width、overflow、position、left、right、top、bottom、z-index、float、clear、table-layout、vertical-align、page-break-after、page-bread-before和unicode-bidi。（注：基本上什么盒子外边距、内边距，还有定位什么的是不能被继承的）&lt;br&gt;所有元素可继承：visibility和cursor。&lt;br&gt;内联元素可继承：letter-spacing、word-spacing、white-space、line-height、color、font、font-family、font-size、font-style、font-variant、font-weight、text-decoration、text-transform、direction。&lt;br&gt;终端块状元素可继承：text-indent和text-align。&lt;br&gt;列表元素可继承：list-style、list-style-type、list-style-position、list-style-image。&lt;br&gt;表格元素可继承：border-collapse。&lt;/p&gt;
-&lt;/blockquote&gt;
+      &lt;p&gt;&lt;strong&gt;之前就关注了美图招聘的公众号，忽然惊喜地看到美图的春招，有招暑假的实习生，我匆忙制作了第一个自己的前端简历，然后投了，很惊喜地收到美图的笔试通知，然后隔天就要笔试了😂，之前都没做过面试的相关准备，也只能临时匆忙准备了.&lt;/strong&gt;&lt;/p&gt;
     
     </summary>
     
@@ -116,42 +190,27 @@
     <link href="http://yoursite.com/2017/04/18/js%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/"/>
     <id>http://yoursite.com/2017/04/18/js面对对象/</id>
     <published>2017-04-17T16:11:12.000Z</published>
-    <updated>2017-04-24T10:21:52.000Z</updated>
+    <updated>2017-04-25T13:17:06.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="面向对象的程序设计"><a href="#面向对象的程序设计" class="headerlink" title="面向对象的程序设计"></a>面向对象的程序设计</h1><h2 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h2><h3 id="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"><a href="#定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数" class="headerlink" title="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"></a>定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数</h3><h3 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h3><ul>
+    <content type="html"><![CDATA[<h3 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h3><h4 id="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"><a href="#定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数" class="headerlink" title="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"></a>定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数</h4><h4 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h4><ul>
 <li>数据属性  <ul>
 <li>[[Configurabke]]:能否通过delete删除属性从而重新定义属性  </li>
 </ul>
 </li>
 <li>访问器属性  </li>
 </ul>
-<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><h3 id="可以通过“构造函数”或者“对象字面量”方法创建函数"><a href="#可以通过“构造函数”或者“对象字面量”方法创建函数" class="headerlink" title="可以通过“构造函数”或者“对象字面量”方法创建函数"></a>可以通过“构造函数”或者“对象字面量”方法创建函数</h3><ul>
+<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><h4 id="可以通过“构造函数”或者“对象字面量”方法创建函数"><a href="#可以通过“构造函数”或者“对象字面量”方法创建函数" class="headerlink" title="可以通过“构造函数”或者“对象字面量”方法创建函数"></a>可以通过“构造函数”或者“对象字面量”方法创建函数</h4><ul>
 <li>缺点：通过一个接口创建很多对象，会产生大量的重复代码  </li>
 </ul>
-<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><a id="more"></a>
+<h4 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h4><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> function creatPerson(name,age,job)&#123;  </div><div class="line">    var o=new Object();  </div><div class="line">    o.name=name;  </div><div class="line">    o.age=age;  </div><div class="line">    o.job=job;  </div><div class="line">    return o  </div><div class="line">&#125;                                                                        </div><div class="line"> var person1 = creatPerson(“hxvin”,21,”F-E”);</div></pre></td></tr></table></figure>
 <ul>
-<li><p>function creatPerson(name,age,job){  </p>
-<pre><code>var o=new Object();  
-o.name=name;  
-o.age=age;  
-o.job=job;  
-return o  
-</code></pre><p>  }                                                                        var person1 = creatPerson(“hxvin”,21,”F-E”);  </p>
-</li>
-<li><p>用函数来封装以特定接口创建对象的细节  </p>
-</li>
+<li>用函数来封装以特定接口创建对象的细节  </li>
 <li>缺点：没有解决对象识别的问题  </li>
 </ul>
-<h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h3><ul>
-<li><p>function Person(name,age,job){  </p>
-<pre><code>this.name=name;  
-this.age=age;  
-this.job=job;  
-this.sayName=function sayName(){alert(this.name);};  
-</code></pre><p>  };<br>  var person1=new Person(“hxvin”,21,”Front-end-Engineer”);  </p>
-</li>
-<li><p>和工厂模式的区别：  </p>
+<h4 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Person(name,age,job)&#123;  </div><div class="line">    this.name=name;  </div><div class="line">    this.age=age;  </div><div class="line">    this.job=job;  </div><div class="line">    this.sayName=function sayName()&#123;alert(this.name);&#125;;  </div><div class="line">&#125;;  </div><div class="line">var person1=new Person(“hxvin”,21,&quot;Front-end-Engineer&quot;);</div></pre></td></tr></table></figure>
 <ul>
+<li>和工厂模式的区别：  <ul>
 <li>没有显式的创建对象  </li>
 <li>直接将属性和方法赋给了this  </li>
 <li>没有return语句  </li>
@@ -166,35 +225,34 @@ this.sayName=function sayName(){alert(this.name);};
 </li>
 <li><p>缺点：每个方法都要在每个实例上创建一遍  </p>
 <ul>
-<li>上例中sayName方法相当于this.sayName=new Funciton(“alert(name,age,job)”)  </li>
+<li><p>上例中sayName方法相当于</p>
+<blockquote>
+<p>this.sayName=new Funciton(“alert(name,age,job)”)  </p>
+</blockquote>
+</li>
 <li><p>解决方法  </p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> function Person(name,age,job)&#123;  </div><div class="line">    this.name=name;  </div><div class="line">    this.age=age;  </div><div class="line">    this.job=job;  </div><div class="line">    this.sayName=sayName  </div><div class="line">&#125;;  </div><div class="line">function sayName()&#123;alert(this.name);&#125;;  </div><div class="line">//将sayName添加到全局变量中，这样显然有很多不足</div></pre></td></tr></table></figure>
 <ul>
-<li><p>function Person(name,age,job){  </p>
-<pre><code>this.name=name;  
-this.age=age;  
-this.job=job;  
-this.sayName=sayName  
-</code></pre><p>  };<br>  function sayName(){alert(this.name);};<br>  //将sayName添加到全局变量中，这样显然有很多不足  </p>
-</li>
-<li><p>原型模式  </p>
-</li>
+<li>原型模式  </li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><ul>
+<h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4><ul>
 <li><p>概念  </p>
 <ul>
 <li><p>每个函数都有一个prototype（原型）属性，这个属性是一个指针，指向一个对象，而这个对象的用途是包含可以<br>  由特定类型的所有实例共享的属性和方法  </p>
 </li>
 <li><p>使用原型对象的好处是可以让所有对象实例共享它所包含的属性和方法  </p>
 </li>
-<li>创建原型:function Person(){};<br>  Person.prototype.name=“hxvin”；Person.prototype.sayname=function(){ alert(this.name);  }；                         var person1=new Person();                                     person1.dayName(); //“hxvin”  </li>
+<li>创建原型:</li>
 </ul>
 </li>
-<li><p>理解原型  </p>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  function Person()&#123;&#125;;  </div><div class="line">Person.prototype.name=“hxvin”；  </div><div class="line">Person.prototype.sayname=function()&#123; alert(this.name);  &#125;；                         </div><div class="line">var person1=new Person();                                   </div><div class="line">person1.dayName(); //“hxvin”</div></pre></td></tr></table></figure>
 <ul>
+<li>理解原型  <ul>
 <li>只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个protoype属性，这个属性指向函数的原型对象。  </li>
 <li>在默认情况下，所有原型对象都会自动获得一个constructor（构造函数）属性，包含一个指向prototype属性所在函数的指针  </li>
 <li>搜索流程  <ul>
@@ -225,28 +283,15 @@ this.sayName=sayName
 </li>
 </ul>
 </li>
-<li><p>更简单的原型语法  </p>
-<ul>
-<li><p>//可以重新设置constructor<br>  function Perspn(){};<br>  Person.prototype={  </p>
-<pre><code>constructor=Person,  
-name=&quot;Nick&quot;  
-</code></pre><p>  };  </p>
-</li>
-<li><p>function Person(){};<br>  Person.prototype={  </p>
-<pre><code>name=&quot;Nick&quot;,  
-sayName=function(){alert(this.name)}  
-</code></pre><p>  }  </p>
-</li>
-<li><p>注意！！！！constructor属性不再指向Person了，我们在这里使用的语法本质上完全重写了默认的prototype对象，因此现在的constructor指向Object构造函数  </p>
-</li>
+<li>更简单的原型语法 </li>
 </ul>
-</li>
-<li>原型的动态性  <ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> //可以重新设置constructor  </div><div class="line">function Perspn()&#123;&#125;;  </div><div class="line">Person.prototype=&#123;  </div><div class="line">    constructor=Person,  </div><div class="line">    name=&quot;Nick&quot;  </div><div class="line">&#125;;  </div><div class="line"></div><div class="line"> function Person()&#123;&#125;;  </div><div class="line">Person.prototype=&#123;  </div><div class="line">    name=&quot;Nick&quot;,  </div><div class="line">    sayName=function()&#123;alert(this.name)&#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>注意！！！！constructor属性不再指向Person了，我们在这里使用的语法本质上完全重写了默认的prototype对象，因此现在的constructor指向Object构造函数  <ul>
+<li>原型的动态性  </li>
 <li>注意：如果把原型修改为另一个对象就等于切断了构造函数与最初原型之间的联系（因为改变了[[prototype]]指针）  </li>
 <li>我们对原型对象所做的任何修改都能够立即从实例上反映出来  </li>
-</ul>
-</li>
-<li>原型对象的问题（缺点）  <ul>
+<li>原型对象的问题（缺点）  </li>
 <li>1、省略了为构造函数传递初始化参数这一环节，结果所有实例在默认情况下都将取得相同的属性值  </li>
 <li>2、当在实例中对引用类型的值进行操作时，很有可能改变原型中的值。（共享问题）  <ul>
 <li>由于friends 数组存在于Person.prototype而非person1中，所以刚刚提到的修改也会通过person2. friends (与person2.friends指向同一个数组反映出来  </li>
@@ -255,72 +300,33 @@ sayName=function(){alert(this.name)}
 </ul>
 </li>
 </ul>
-<h3 id="组合使用构造函数模式和原型模式"><a href="#组合使用构造函数模式和原型模式" class="headerlink" title="组合使用构造函数模式和原型模式"></a>组合使用构造函数模式和原型模式</h3><ul>
-<li><p>function Person(name,age,job){  </p>
-<pre><code>this.name=name,  
-this.age=age,  
-this.job=job  
-</code></pre><p>  };<br>  Person.prototype={  </p>
-<pre><code>constructor=Person,  
-sayName=function(){alert(this.name)}  
-</code></pre><p>  }  </p>
+<h4 id="组合使用构造函数模式和原型模式"><a href="#组合使用构造函数模式和原型模式" class="headerlink" title="组合使用构造函数模式和原型模式"></a>组合使用构造函数模式和原型模式</h4> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> function Person(name,age,job)&#123;  </div><div class="line">    this.name=name,  </div><div class="line">    this.age=age,  </div><div class="line">    this.job=job  </div><div class="line">&#125;;  </div><div class="line">Person.prototype=&#123;  </div><div class="line">    constructor=Person,  </div><div class="line">    sayName=function()&#123;alert(this.name)&#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
-<li>Person1.friends不会影响到Person2.friends，因为它们分别引用了不同的数组  </li>
-</ul>
-</li>
-<li>优点  <ul>
+<li>Person1.friends不会影响到Person2.friends，因为它们分别引用了不同的数组  <ul>
+<li>优点  </li>
 <li>每个实例都会有自己的一份实例属性副本，但同时由共享着对方法的引用，最大限度的节省了内存  </li>
 <li>创建自定义类型最常见的方式  </li>
 <li>支持向构造函数传递参数  </li>
 </ul>
 </li>
 </ul>
-<h3 id="动态原型模式"><a href="#动态原型模式" class="headerlink" title="动态原型模式"></a>动态原型模式</h3><ul>
-<li><p>function Person(name,age,job){                       //属性  </p>
-<pre><code>this.name=name;  
-this.age=age;  
-this.job=job;  
-//方法  
-if(typeof sayName != &quot;function&quot;){  
-    Person.prototype.sayName = function(){alert(this.name)}  
-}  
-</code></pre><p>  }  </p>
+<h4 id="动态原型模式"><a href="#动态原型模式" class="headerlink" title="动态原型模式"></a>动态原型模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> function Person(name,age,job)&#123;          //属性  </div><div class="line">    this.name=name;  </div><div class="line">    this.age=age;  </div><div class="line">    this.job=job;  </div><div class="line">    //方法  </div><div class="line">    if(typeof sayName != &quot;function&quot;)&#123;  </div><div class="line">        Person.prototype.sayName = function()&#123;alert(this.name)&#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
-<p>//方法中，只在sayName()方法不存在的清况下，才会将它添加到原型中。 这里对原型所做的修改，能够立即在所有实例中得到反映。  </p>
+<p>//方法中，只在sayName()方法不存在的清况下，才会将它添加到原型中。<br> 这里对原型所做的修改，能够立即在所有实例中得到反映。  </p>
 </blockquote>
-</li>
+<ul>
 <li>把所有信息封装在构造函数中，并通过if语句初始化原型  </li>
 </ul>
-<h3 id="寄生构造函数模式"><a href="#寄生构造函数模式" class="headerlink" title="寄生构造函数模式"></a>寄生构造函数模式</h3><ul>
-<li><p>function Person(name,age,job){  </p>
-<pre><code>var o = new Object();  
-o.name = name;  
-o.age = age;  
-o.job = job;  
-o.sayName = function(){alert(o.name)};  
-return o  
-</code></pre><p>  };<br>  var person1 = new Person();  </p>
-</li>
-<li><p>应用场景：创建有额外方法的特殊对象，而又不想改变其原有的构造函数  </p>
-</li>
-<li>特点  <ul>
-<li>返回的对象和构造函数没有关系  </li>
-<li>不能依赖instanceof操作符来确定对象类型  </li>
-</ul>
-</li>
-</ul>
-<h3 id="稳妥构造函数模式"><a href="#稳妥构造函数模式" class="headerlink" title="稳妥构造函数模式"></a>稳妥构造函数模式</h3><ul>
-<li>所谓稳妥对象，指的是没有公共属性， 而且其方法也不引用this的对象。  </li>
-<li><p>function Person(name,age,job){  </p>
-<pre><code>var o = new Object();  
-o.sayName = function(){alert(name)}  
-</code></pre><p>  }  </p>
-<p>  var friend = Person (“hxvin”,”21”,”f-e”);  </p>
-<pre><code>friend.sayName(}; //“hxvin”   
-</code></pre><p>&gt;<br>这样，变蜇person 中保存的是一个稳妥对象， 而除了调用sayName() 方法外,没有别的方式可以访问其数据成员。  </p>
-</li>
-<li><p>这种模式创建的对象中，出了使用sayName()方法之外，没有其他任何办法访问name的值。  </p>
-</li>
+<h4 id="寄生构造函数模式"><a href="#寄生构造函数模式" class="headerlink" title="寄生构造函数模式"></a>寄生构造函数模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">  function Person(name,age,job)&#123;  </div><div class="line">	    var o = new Object();  </div><div class="line">	    o.name = name;  </div><div class="line">	    o.age = age;  </div><div class="line">	    o.job = job;  </div><div class="line">	    o.sayName = function()&#123;alert(o.name)&#125;;  </div><div class="line">	    return o  </div><div class="line">	&#125;;  </div><div class="line">	var person1 = new Person();  </div><div class="line">	</div><div class="line">``` </div><div class="line"></div><div class="line">* 应用场景：创建有额外方法的特殊对象，而又不想改变其原有的构造函数  </div><div class="line">* 特点  </div><div class="line">	* 返回的对象和构造函数没有关系  </div><div class="line">	* 不能依赖instanceof操作符来确定对象类型  </div><div class="line">  </div><div class="line">#### 稳妥构造函数模式  </div><div class="line">  </div><div class="line">* 所谓稳妥对象，指的是没有公共属性， 而且其方法也不引用this的对象。</div></pre></td></tr></table></figure>
+<p>  function Person(name,age,job){<br>        var o = new Object();<br>        o.sayName = function(){alert(name)}<br>    }  </p>
+<pre><code>var friend = Person (“hxvin”,”21”,”f-e”);  
+    friend.sayName(}; //“hxvin” 
+</code></pre><p>```  </p>
+<blockquote>
+<p>这样，变蜇person 中保存的是一个稳妥对象， 而除了调用sayName() 方法外,没有别的方式可以访问其数据成员。  </p>
+</blockquote>
+<ul>
+<li>这种模式创建的对象中，出了使用sayName()方法之外，没有其他任何办法访问name的值。  </li>
 <li>应用场景： 一些安全的环境中（这些环境中会禁止使用this和new), 或者在防止数据被其他应用程序（如Mashup程序）改动时使用  </li>
 <li>特点：遵循与寄生构造函数类似的模式，但有两点不同： 一是新创建对象的实例方法不引用this;二是不使用new操作符调用构造函数  </li>
 </ul>
@@ -328,17 +334,17 @@ o.sayName = function(){alert(name)}
     
     <summary type="html">
     
-      &lt;h1 id=&quot;面向对象的程序设计&quot;&gt;&lt;a href=&quot;#面向对象的程序设计&quot; class=&quot;headerlink&quot; title=&quot;面向对象的程序设计&quot;&gt;&lt;/a&gt;面向对象的程序设计&lt;/h1&gt;&lt;h2 id=&quot;理解对象&quot;&gt;&lt;a href=&quot;#理解对象&quot; class=&quot;headerlink&quot; title=&quot;理解对象&quot;&gt;&lt;/a&gt;理解对象&lt;/h2&gt;&lt;h3 id=&quot;定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&quot;&gt;&lt;a href=&quot;#定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&quot; class=&quot;headerlink&quot; title=&quot;定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&quot;&gt;&lt;/a&gt;定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&lt;/h3&gt;&lt;h3 id=&quot;属性类型&quot;&gt;&lt;a href=&quot;#属性类型&quot; class=&quot;headerlink&quot; title=&quot;属性类型&quot;&gt;&lt;/a&gt;属性类型&lt;/h3&gt;&lt;ul&gt;
+      &lt;h3 id=&quot;理解对象&quot;&gt;&lt;a href=&quot;#理解对象&quot; class=&quot;headerlink&quot; title=&quot;理解对象&quot;&gt;&lt;/a&gt;理解对象&lt;/h3&gt;&lt;h4 id=&quot;定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&quot;&gt;&lt;a href=&quot;#定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&quot; class=&quot;headerlink&quot; title=&quot;定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&quot;&gt;&lt;/a&gt;定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&lt;/h4&gt;&lt;h4 id=&quot;属性类型&quot;&gt;&lt;a href=&quot;#属性类型&quot; class=&quot;headerlink&quot; title=&quot;属性类型&quot;&gt;&lt;/a&gt;属性类型&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;数据属性  &lt;ul&gt;
 &lt;li&gt;[[Configurabke]]:能否通过delete删除属性从而重新定义属性  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;访问器属性  &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;创建对象&quot;&gt;&lt;a href=&quot;#创建对象&quot; class=&quot;headerlink&quot; title=&quot;创建对象&quot;&gt;&lt;/a&gt;创建对象&lt;/h2&gt;&lt;h3 id=&quot;可以通过“构造函数”或者“对象字面量”方法创建函数&quot;&gt;&lt;a href=&quot;#可以通过“构造函数”或者“对象字面量”方法创建函数&quot; class=&quot;headerlink&quot; title=&quot;可以通过“构造函数”或者“对象字面量”方法创建函数&quot;&gt;&lt;/a&gt;可以通过“构造函数”或者“对象字面量”方法创建函数&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id=&quot;创建对象&quot;&gt;&lt;a href=&quot;#创建对象&quot; class=&quot;headerlink&quot; title=&quot;创建对象&quot;&gt;&lt;/a&gt;创建对象&lt;/h3&gt;&lt;h4 id=&quot;可以通过“构造函数”或者“对象字面量”方法创建函数&quot;&gt;&lt;a href=&quot;#可以通过“构造函数”或者“对象字面量”方法创建函数&quot; class=&quot;headerlink&quot; title=&quot;可以通过“构造函数”或者“对象字面量”方法创建函数&quot;&gt;&lt;/a&gt;可以通过“构造函数”或者“对象字面量”方法创建函数&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;缺点：通过一个接口创建很多对象，会产生大量的重复代码  &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&quot;工厂模式&quot;&gt;&lt;a href=&quot;#工厂模式&quot; class=&quot;headerlink&quot; title=&quot;工厂模式&quot;&gt;&lt;/a&gt;工厂模式&lt;/h3&gt;
+&lt;h4 id=&quot;工厂模式&quot;&gt;&lt;a href=&quot;#工厂模式&quot; class=&quot;headerlink&quot; title=&quot;工厂模式&quot;&gt;&lt;/a&gt;工厂模式&lt;/h4&gt;
     
     </summary>
     
