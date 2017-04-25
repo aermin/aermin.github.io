@@ -190,7 +190,7 @@
     <link href="http://yoursite.com/2017/04/18/js%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/"/>
     <id>http://yoursite.com/2017/04/18/js面对对象/</id>
     <published>2017-04-17T16:11:12.000Z</published>
-    <updated>2017-04-25T13:17:06.000Z</updated>
+    <updated>2017-04-25T13:19:20.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h3><h4 id="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"><a href="#定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数" class="headerlink" title="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"></a>定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数</h4><h4 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h4><ul>
 <li>数据属性  <ul>
@@ -317,12 +317,26 @@
 <ul>
 <li>把所有信息封装在构造函数中，并通过if语句初始化原型  </li>
 </ul>
-<h4 id="寄生构造函数模式"><a href="#寄生构造函数模式" class="headerlink" title="寄生构造函数模式"></a>寄生构造函数模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">  function Person(name,age,job)&#123;  </div><div class="line">	    var o = new Object();  </div><div class="line">	    o.name = name;  </div><div class="line">	    o.age = age;  </div><div class="line">	    o.job = job;  </div><div class="line">	    o.sayName = function()&#123;alert(o.name)&#125;;  </div><div class="line">	    return o  </div><div class="line">	&#125;;  </div><div class="line">	var person1 = new Person();  </div><div class="line">	</div><div class="line">``` </div><div class="line"></div><div class="line">* 应用场景：创建有额外方法的特殊对象，而又不想改变其原有的构造函数  </div><div class="line">* 特点  </div><div class="line">	* 返回的对象和构造函数没有关系  </div><div class="line">	* 不能依赖instanceof操作符来确定对象类型  </div><div class="line">  </div><div class="line">#### 稳妥构造函数模式  </div><div class="line">  </div><div class="line">* 所谓稳妥对象，指的是没有公共属性， 而且其方法也不引用this的对象。</div></pre></td></tr></table></figure>
-<p>  function Person(name,age,job){<br>        var o = new Object();<br>        o.sayName = function(){alert(name)}<br>    }  </p>
-<pre><code>var friend = Person (“hxvin”,”21”,”f-e”);  
-    friend.sayName(}; //“hxvin” 
-</code></pre><p>```  </p>
-<blockquote>
+<h4 id="寄生构造函数模式"><a href="#寄生构造函数模式" class="headerlink" title="寄生构造函数模式"></a>寄生构造函数模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> function Person(name,age,job)&#123;  </div><div class="line">    var o = new Object();  </div><div class="line">    o.name = name;  </div><div class="line">    o.age = age;  </div><div class="line">    o.job = job;  </div><div class="line">    o.sayName = function()&#123;alert(o.name)&#125;;  </div><div class="line">    return o  </div><div class="line">&#125;;  </div><div class="line">var person1 = new Person();</div></pre></td></tr></table></figure>
+<ul>
+<li>应用场景：创建有额外方法的特殊对象，而又不想改变其原有的构造函数  </li>
+<li>特点  <ul>
+<li>返回的对象和构造函数没有关系  </li>
+<li>不能依赖instanceof操作符来确定对象类型  </li>
+</ul>
+</li>
+</ul>
+<h4 id="稳妥构造函数模式"><a href="#稳妥构造函数模式" class="headerlink" title="稳妥构造函数模式"></a>稳妥构造函数模式</h4><ul>
+<li>所谓稳妥对象，指的是没有公共属性， 而且其方法也不引用this的对象。  </li>
+</ul>
+<pre><code>function Person(name,age,job){  
+      var o = new Object();  
+      o.sayName = function(){alert(name)}  
+  }  
+
+  var friend = Person (“hxvin”,”21”,”f-e”);  
+      friend.sayName(}; //“hxvin”
+</code></pre><blockquote>
 <p>这样，变蜇person 中保存的是一个稳妥对象， 而除了调用sayName() 方法外,没有别的方式可以访问其数据成员。  </p>
 </blockquote>
 <ul>
