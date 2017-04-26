@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="-学习笔记 -JavaScript," />
 
 
 
@@ -92,15 +92,17 @@
 
 
 
-<meta name="description" content="做最努力的FE">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hxvin的博客">
-<meta property="og:url" content="http://yoursite.com/tags/笔试-美图/index.html">
+<meta name="description" content="先给一个例子123456789101112var name = &amp;quot;The Window&amp;quot;var object = &amp;#123;    name : &amp;quot;My Object&amp;quot;,        f1 : function()&amp;#123;       return function()&amp;#123;           return this.name;">
+<meta name="keywords" content="-学习笔记 -JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于this对象的一个易错点">
+<meta property="og:url" content="http://yoursite.com/2017/04/26/关于this对象的一个易错点/index.html">
 <meta property="og:site_name" content="Hxvin的博客">
-<meta property="og:description" content="做最努力的FE">
+<meta property="og:description" content="先给一个例子123456789101112var name = &amp;quot;The Window&amp;quot;var object = &amp;#123;    name : &amp;quot;My Object&amp;quot;,        f1 : function()&amp;#123;       return function()&amp;#123;           return this.name;">
+<meta property="og:updated_time" content="2017-04-26T15:41:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hxvin的博客">
-<meta name="twitter:description" content="做最努力的FE">
+<meta name="twitter:title" content="关于this对象的一个易错点">
+<meta name="twitter:description" content="先给一个例子123456789101112var name = &amp;quot;The Window&amp;quot;var object = &amp;#123;    name : &amp;quot;My Object&amp;quot;,        f1 : function()&amp;#123;       return function()&amp;#123;           return this.name;">
 
 
 
@@ -128,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/笔试-美图/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/26/关于this对象的一个易错点/"/>
 
 
 
 
 
-  <title>标签: -笔试 -美图 | Hxvin的博客</title>
+  <title>关于this对象的一个易错点 | Hxvin的博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -159,7 +161,7 @@
     
   
 
-  <div class="container sidebar-position-right  ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -277,46 +279,190 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        -笔试 -美图
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/26/关于this对象的一个易错点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.qqcan.com/uploads/allimg/c110716/1310M922450-3H3L.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于this对象的一个易错点
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T23:39:31+08:00">
+                2017-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/04/26/关于this对象的一个易错点/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/04/26/关于this对象的一个易错点/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h4 id="先给一个例子"><a href="#先给一个例子" class="headerlink" title="先给一个例子"></a>先给一个例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var name = &quot;The Window&quot;</div><div class="line">var object = &#123;</div><div class="line">    name : &quot;My Object&quot;,</div><div class="line">    </div><div class="line">    f1 : function()&#123;</div><div class="line">       return function()&#123;</div><div class="line">           return this.name;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"> &#125;;</div><div class="line"></div><div class="line">  alert(object.f1()());</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<blockquote>
+<p>这个例子返回的字符串是 “The Window”，为啥不是”My Object”呢？</p>
+</blockquote>
+<ul>
+<li>原因是每个函数在被调用时， 其活动对象都会自动取得两个特殊变量：<code>this</code>和<code>arguments</code>。内部函数在搜索这两个变最时， 只会搜索到其活动对象为止，因此永远不可能直接访问外部函数中的这两个变量。</li>
+<li>也就是说要想让闭包【return function(){}】访问到外部函数【f1 :function(){}】里的this（或者arguments）变量，就要先将其赋值给到一个闭包能够访问到的变量里，如var that = this，这样就可以了。</li>
+</ul>
+<h4 id="修改后的例子如下"><a href="#修改后的例子如下" class="headerlink" title="修改后的例子如下"></a>修改后的例子如下</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var name = &quot;The Window&quot;</div><div class="line">var object = &#123;</div><div class="line">    name : &quot;My Object&quot;,</div><div class="line">    </div><div class="line">    f1 : function()&#123;</div><div class="line">       var that = this; //添加这行</div><div class="line">       return function()&#123;</div><div class="line">           return this.name;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"> &#125;;</div><div class="line"></div><div class="line">  alert(object.f1()());</div></pre></td></tr></table></figure>
+<blockquote>
+<p>返回”My Object”</p>
+</blockquote>
+<h4 id="另外一个例子"><a href="#另外一个例子" class="headerlink" title="另外一个例子"></a>另外一个例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var name = &quot;The Window•;</div><div class="line">var object = &#123;</div><div class="line">    name : &quot;My Object&quot;;</div><div class="line">    getName: function() &#123;</div><div class="line">         return this.name;</div><div class="line">    &#125;</div><div class="line"> &#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>上一个例子中的<br>return function(){<br>    return this.name；<br>}<br>被换掉了，不再是闭包</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">object.getName(); //&apos;My Object&apos;</div><div class="line">(object.getName)(); //&apos;My Object&quot;</div><div class="line">(object.getName = object.getNamel (); //&quot;The Window•, 在非严格模式下</div></pre></td></tr></table></figure>
+<blockquote>
+<p>第一行代码跟平常一样词用了object.getName (), 返回的是飞y Object”, 因为this.name<br>就是object.name。第二行代码在调用这个方法前先给它加上了括号。虽然加上括号之后， 就好􀉀只<br>是在引用一个函数， 但this的值得到了维持， 因为objec七.getName 和(object.getName)的定义<br>是相同的。第三行代码先执行了一条赋值语句，然后再诮用赋值后的结果。因为这个赋值表达式的值是<br>函数本身， 所以this的值不能得到维持， 结果就返回了崎The Window飞</p>
+</blockquote>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/04/18/第一次笔试，整理-1/" itemprop="url">
-              
-                <span itemprop="name">第一次笔试，整理(1)</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-18T18:11:12+08:00"
-              content="2017-04-18" >
-          04-18
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记-JavaScript/" rel="tag"># -学习笔记 -JavaScript</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/26/关于自执行函数（立即执行函数）/" rel="next" title="关于自执行函数（立即执行函数）">
+                <i class="fa fa-chevron-left"></i> 关于自执行函数（立即执行函数）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/25/面向对象的程序设计-二/" rel="prev" title="面向对象的程序设计(二)">
+                面向对象的程序设计(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -324,6 +470,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
 
         </div>
         
@@ -343,8 +495,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://www.qqcan.com/uploads/allimg/c110716/1310M922450-3H3L.jpg"
@@ -442,6 +603,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#先给一个例子"><span class="nav-number">1.</span> <span class="nav-text">先给一个例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改后的例子如下"><span class="nav-number">2.</span> <span class="nav-text">修改后的例子如下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#另外一个例子"><span class="nav-number">3.</span> <span class="nav-text">另外一个例子</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -556,6 +733,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 

@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="-学习笔记 -JavaScript," />
 
 
 
@@ -92,15 +92,20 @@
 
 
 
-<meta name="description" content="做最努力的FE">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hxvin的博客">
-<meta property="og:url" content="http://yoursite.com/tags/笔试-美图/index.html">
+<meta name="description" content="什么是自执行函数？一下有三种写法 1.最前最后加括号1(function()&amp;#123;alert(1);&amp;#125;());  这种方法好处是能提醒阅读代码的人，这段代码是一个整体。 坏处是前面的代码行后记得加分号，不然会报错。如：">
+<meta name="keywords" content="-学习笔记 -JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于自执行函数（立即执行函数）">
+<meta property="og:url" content="http://yoursite.com/2017/04/26/关于自执行函数（立即执行函数）/index.html">
 <meta property="og:site_name" content="Hxvin的博客">
-<meta property="og:description" content="做最努力的FE">
+<meta property="og:description" content="什么是自执行函数？一下有三种写法 1.最前最后加括号1(function()&amp;#123;alert(1);&amp;#125;());  这种方法好处是能提醒阅读代码的人，这段代码是一个整体。 坏处是前面的代码行后记得加分号，不然会报错。如：">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/336056/201610/336056-20161011221635859-1560145581.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/336056/201610/336056-20161011221647906-1355610620.png">
+<meta property="og:updated_time" content="2017-04-26T15:43:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hxvin的博客">
-<meta name="twitter:description" content="做最努力的FE">
+<meta name="twitter:title" content="关于自执行函数（立即执行函数）">
+<meta name="twitter:description" content="什么是自执行函数？一下有三种写法 1.最前最后加括号1(function()&amp;#123;alert(1);&amp;#125;());  这种方法好处是能提醒阅读代码的人，这段代码是一个整体。 坏处是前面的代码行后记得加分号，不然会报错。如：">
+<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/336056/201610/336056-20161011221635859-1560145581.png">
 
 
 
@@ -128,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/笔试-美图/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/26/关于自执行函数（立即执行函数）/"/>
 
 
 
 
 
-  <title>标签: -笔试 -美图 | Hxvin的博客</title>
+  <title>关于自执行函数（立即执行函数） | Hxvin的博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -159,7 +164,7 @@
     
   
 
-  <div class="container sidebar-position-right  ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -277,46 +282,204 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        -笔试 -美图
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/26/关于自执行函数（立即执行函数）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.qqcan.com/uploads/allimg/c110716/1310M922450-3H3L.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于自执行函数（立即执行函数）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T23:42:12+08:00">
+                2017-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/04/26/关于自执行函数（立即执行函数）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/04/26/关于自执行函数（立即执行函数）/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h3 id="什么是自执行函数？"><a href="#什么是自执行函数？" class="headerlink" title="什么是自执行函数？"></a>什么是自执行函数？</h3><p>一下有三种写法</p>
+<p>1.最前最后加括号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(function()&#123;alert(1);&#125;());</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这种方法好处是能提醒阅读代码的人，这段代码是一个整体。 坏处是前面的代码行后记得加分号，不然会报错。如：</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var a=1 </div><div class="line">(function()&#123;alert(1);&#125;());</div></pre></td></tr></table></figure>
+<p>2.function外面加括号 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(function()&#123;alert(1);&#125;)();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这种做法比方法1少了一个代码整体性的好处.</p>
+</blockquote>
+<p>3.function前面加运算符，常见的是!与void 。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">!function()&#123;alert(1);&#125;(); </div><div class="line">void function()&#123;alert(2);&#125;();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显然，加上“!”或“+”等运算符，写起来是最简单的。加上“void ”要敲五下键盘，但是听说有一个好处是，比加”!”少一次逻辑运算。</p>
+</blockquote>
+<p><img src="http://images2015.cnblogs.com/blog/336056/201610/336056-20161011221635859-1560145581.png" alt="自执行函数"></p>
+<ul>
+<li>首先声明一个匿名函数 function(){alert(‘我是匿名函数’)}。</li>
+<li>然后在匿名函数后面接一对括号 ()，调用这个匿名函数。</li>
+</ul>
+<h3 id="自执行函数的作用"><a href="#自执行函数的作用" class="headerlink" title="自执行函数的作用"></a>自执行函数的作用</h3><p>创建一个独立的作用域，这个作用域里面的变量，外面访问不到（即避免「变量污染」）</p>
+<p>例子来看一个著名的面试题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var liList = ul.getElementsByTagName(&apos;li&apos;)</div><div class="line">for(var i=0; i&lt;6; i++)&#123;</div><div class="line">  liList[i].onclick = function()&#123;</div><div class="line">    alert(i) // 为什么 alert 出来的总是6,而不是0、1、2、3、4、5</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 为什么 alert 的总是 6 呢?</p>
+<blockquote>
+<p>因为 i 是贯穿整个作用域的，而不是给每个li 分配了一个i,如下：</p>
+</blockquote>
+<p><img src="http://images2015.cnblogs.com/blog/336056/201610/336056-20161011221647906-1355610620.png" alt="也是网上的图"></p>
+<p> 那么怎么解决这个问题呢？</p>
+<blockquote>
+<p>用立即执行函数给每个li创造一个独立作用域即可（当然还有其他办法）：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var liList = ul.getElementsByTagName(&apos;li&apos;)</div><div class="line">for(var i=0; i&lt;6; i++)&#123;</div><div class="line">  !function(ii)&#123;</div><div class="line">    liList[ii].onclick = function()&#123;</div><div class="line">      alert(ii) // 0、1、2、3、4、5</div><div class="line">    &#125;</div><div class="line">  &#125;(i)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在立即执行函数执行的时候，i 的值被赋值给 ii，此后 ii 的值一直不变。i 的值从 0 变化到 5，对应 6 个立即执行函数，这 6 个立即执行函数里面的 ii 「分别」是 0、1、2、3、4、5。</p>
+</blockquote>
+<p>(整理自网络)</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/04/18/第一次笔试，整理-1/" itemprop="url">
-              
-                <span itemprop="name">第一次笔试，整理(1)</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-18T18:11:12+08:00"
-              content="2017-04-18" >
-          04-18
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记-JavaScript/" rel="tag"># -学习笔记 -JavaScript</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/26/关于this对象的一个易错点/" rel="prev" title="关于this对象的一个易错点">
+                关于this对象的一个易错点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -324,6 +487,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
 
         </div>
         
@@ -343,8 +512,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://www.qqcan.com/uploads/allimg/c110716/1310M922450-3H3L.jpg"
@@ -442,6 +620,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是自执行函数？"><span class="nav-number">1.</span> <span class="nav-text">什么是自执行函数？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自执行函数的作用"><span class="nav-number">2.</span> <span class="nav-text">自执行函数的作用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -556,6 +750,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
