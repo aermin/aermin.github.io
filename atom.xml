@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-27T11:42:18.000Z</updated>
+  <updated>2017-04-29T03:37:56.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>轻松学习JS快速排序(QuickSort)</title>
+    <link href="http://yoursite.com/2017/04/29/%E8%BD%BB%E6%9D%BE%E5%AD%A6%E4%B9%A0JS%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F-QuickSort/"/>
+    <id>http://yoursite.com/2017/04/29/轻松学习JS快速排序-QuickSort/</id>
+    <published>2017-04-29T03:32:03.000Z</published>
+    <updated>2017-04-29T03:37:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="需了解的基础知识"><a href="#需了解的基础知识" class="headerlink" title="需了解的基础知识"></a>需了解的基础知识</h3><p> 1.递归函数：编程语言中，函数Func(Type a,……)直接或间接调用函数本身，则该函数称为递归函数。<br> <code>一个典型阶乘递归函数：</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function fact(num)&#123; </div><div class="line">   if (num&lt;=1)&#123; </div><div class="line">   return 1; </div><div class="line">   &#125;else&#123; </div><div class="line">   return num*fact(num-1); </div><div class="line">&#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> <code>该函数的弊端：</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var another=factorical;</div><div class="line">factorical=null;</div><div class="line">console.log(another(2))//会报错说 factorical not a function</div></pre></td></tr></table></figure></p>
+<p> <code>解决方法</code>: 用arguments.callee去代替函数名，就可以确保函数不管怎么调用都不会出错。</p>
+ <a id="more"></a>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function factorical(num)&#123;</div><div class="line">　　if(num&lt;=1)&#123;</div><div class="line">　　　　return 1;</div><div class="line">　　&#125;</div><div class="line">　　else&#123;</div><div class="line">　　　　return num*arguments.callee(num-1);</div><div class="line">　　&#125;</div><div class="line">&#125;</div><div class="line">var another=factorical;</div><div class="line">factorical=null;</div><div class="line">console.log(another(2))//2</div></pre></td></tr></table></figure>
+<p> (来自js高程)<br> 2.<a href="http://www.jb51.net/article/88894.htm" target="_blank" rel="external">JavaScript中的splice方法用法详解</a><br> 3.<a href="http://www.w3school.com.cn/jsref/jsref_concat_array.asp" target="_blank" rel="external">JavaScript concat()方法</a><br> 3.<a href="http://www.jb51.net/article/86083.htm" target="_blank" rel="external">Javascript之Math对象详解</a></p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>以下内容整理自<code>阮一峰老师</code>的<a href="http://www.ruanyifeng.com/blog/2011/04/quicksort_in_javascript.html" target="_blank" rel="external">快速排序（Quicksort）的Javascript实现</a></p>
+<blockquote>
+<p>首先，定义一个quickSort函数，它的参数是一个数组。</p>
+</blockquote>
+<p>var quickSort = function(arr) { </p>
+<blockquote>
+<p>然后，检查数组的元素个数，如果小于等于1，就返回。</p>
+</blockquote>
+<p>　　if (arr.length &lt;= 1) { return arr; } 
+　　</p>
+<blockquote>
+<p>接着，选择”基准”（pivot），并将其与原数组分离，再定义两个空数组，用来存放一左一右的两个子集。<code>splice返回的是数组,用[0]返回值</code></p>
+</blockquote>
+<p>　　var pivotIndex = Math.floor(arr.length / 2);<br>　　var pivot = arr.splice(pivotIndex, 1)[0];<br>　　var left = [];<br>　　var right = [];
+　　</p>
+<blockquote>
+<p>然后，开始遍历数组，小于”基准”的元素放入左边的子集，大于基准的元素放入右边的子集。</p>
+</blockquote>
+<p>　　for (var i = 0; i &lt; arr.length; i++){<br>　　　　if (arr[i] &lt; pivot) {<br>　　　　　　left.push(arr[i]);<br>　　　　} else {<br>　　　　　　right.push(arr[i]);<br>　　　　}<br>　　}
+　　</p>
+<blockquote>
+<p>最后，使用递归不断重复这个过程，就可以得到排序后的数组。</p>
+</blockquote>
+<p>　　return quickSort(left).concat([pivot], quickSort(right));<br>};</p>
+<blockquote>
+<p>使用的时候，直接调用quickSort()就行了。</p>
+</blockquote>
+<h3 id="最终的快排函数"><a href="#最终的快排函数" class="headerlink" title="最终的快排函数"></a>最终的快排函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var quickSort = function(arr) &#123;</div><div class="line">　　if (arr.length &lt;= 1) &#123; return arr; &#125;</div><div class="line">　　var pivotIndex = Math.floor(arr.length / 2);</div><div class="line">　　var pivot = arr.splice(pivotIndex, 1)[0];</div><div class="line">　　var left = [];</div><div class="line">　　var right = [];</div><div class="line">　　for (var i = 0; i &lt; arr.length; i++)&#123;</div><div class="line">　　　　if (arr[i] &lt; pivot) &#123;</div><div class="line">　　　　　　left.push(arr[i]);</div><div class="line">　　　　&#125; else &#123;</div><div class="line">　　　　　　right.push(arr[i]);</div><div class="line">　　　　&#125;</div><div class="line">　　&#125;</div><div class="line">　　return quickSort(left).concat([pivot], quickSort(right));</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="实例运用"><a href="#实例运用" class="headerlink" title="实例运用"></a>实例运用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var array = [7,4,1,9,6,3,2,5,8] ;</div><div class="line">quickSort(array); //输出1，2，3，4，5，6，7，8，9</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;需了解的基础知识&quot;&gt;&lt;a href=&quot;#需了解的基础知识&quot; class=&quot;headerlink&quot; title=&quot;需了解的基础知识&quot;&gt;&lt;/a&gt;需了解的基础知识&lt;/h3&gt;&lt;p&gt; 1.递归函数：编程语言中，函数Func(Type a,……)直接或间接调用函数本身，则该函数称为递归函数。&lt;br&gt; &lt;code&gt;一个典型阶乘递归函数：&lt;/code&gt;&lt;br&gt; &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;function fact(num)&amp;#123; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   if (num&amp;lt;=1)&amp;#123; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   return 1; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   &amp;#125;else&amp;#123; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   return num*fact(num-1); &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt; &lt;code&gt;该函数的弊端：&lt;/code&gt;&lt;br&gt; &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var another=factorical;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;factorical=null;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;console.log(another(2))//会报错说 factorical not a function&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt; &lt;code&gt;解决方法&lt;/code&gt;: 用arguments.callee去代替函数名，就可以确保函数不管怎么调用都不会出错。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="-学习笔记 -JavaScript" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>开发中js数组的常用方法</title>
