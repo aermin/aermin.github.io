@@ -289,6 +289,286 @@
   
 
   <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/09/vue2的todolist入门小项目的详细解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.qqcan.com/uploads/allimg/c110716/1310M922450-3H3L.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/09/vue2的todolist入门小项目的详细解析/" itemprop="url">
+                  vue2的todolist入门小项目的详细解析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T13:08:49+08:00">
+                2017-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/05/09/vue2的todolist入门小项目的详细解析/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/05/09/vue2的todolist入门小项目的详细解析/" class="cy_cmt_count" data-xid="2017/05/09/vue2的todolist入门小项目的详细解析/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>看完vue2的官方文档后，找个入门项目巩固下知识点，简单的todolsit是个不错的选择。<br>项目用到了<code>vue.js</code> <code>vue.cli</code> <code>webpack</code> <code>ES6</code> <code>node环境</code>，完成项目后会对这些技术栈有了些了解。</p>
+<h3 id="准备开发环境"><a href="#准备开发环境" class="headerlink" title="准备开发环境"></a>准备开发环境</h3><ul>
+<li>$ npm install -g vue-cli </li>
+<li>$ vue init <template-name> <project-name></project-name></template-name></li>
+<li>如 vue innit webpack todolist</li>
+<li>$ cd todolist</li>
+<li>$ npm install</li>
+<li>$ npm run dev</li>
+<li>安装谷歌插件vue.js devtools</li>
+<li>下载vue.js的<a href="https://github.com/vuejs-templates/webpack" target="_blank" rel="external">webpack模板</a></li>
+<li>下载 <a href="https://github.com/tastejs/todomvc-app-template" target="_blank" rel="external">todomvc的模板</a><br>（也可以直接$ git clone <a href="https://github.com/tastejs/todomvc-app-template.git" target="_blank" rel="external">https://github.com/tastejs/todomvc-app-template.git</a> 来下载）</li>
+<li>把todomvc的index.html拖到todolist文件夹去覆盖里面的index.html</li>
+<li>打开todomvc的json文件，会看到 “todomvc-app-css”: “^2.0.0”,就是要你 npm  install todomvc-app-css -S 从而下载该css</li>
+<li>删点todolsit index.html的默认css，js引用，src文件夹下的main.js引入模板css（import‘todomvc-app-css/index.css’）</li>
+<li>引入vue（import Vue form ‘vue’）</li>
+</ul>
+<h3 id="main-js的代码"><a href="#main-js的代码" class="headerlink" title="main.js的代码"></a>main.js的代码</h3><blockquote>
+<p>//后面的为注释讲解， ~表示串联index.html的对应内容</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div></pre></td><td class="code"><pre><div class="line">import &apos;todomvc-app-css/index.css&apos;</div><div class="line"></div><div class="line">import Vue from &apos;vue&apos;</div><div class="line"></div><div class="line"></div><div class="line">//用过滤器筛选出三种状态</div><div class="line">var filters = &#123;</div><div class="line">  all(todos) &#123;</div><div class="line">    return todos</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  active(todos) &#123;</div><div class="line">    return todos.filter((todo) =&gt; &#123;</div><div class="line">      return !todo.completed</div><div class="line">    &#125;)</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  completed(todos) &#123;</div><div class="line">    return todos.filter((todo) =&gt; &#123;</div><div class="line">      return todo.completed</div><div class="line">    &#125;)</div><div class="line">  &#125;,</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">let app = new Vue(&#123;</div><div class="line">  el: &apos;.todoapp&apos;,    // ~ &lt;section class=&quot;todoapp&quot;&gt;</div><div class="line">  data: &#123;</div><div class="line">    msg: &apos;hello world&apos;,</div><div class="line">    title: &apos;待做清单&apos;,   // 渲染标题 ~ &#123;&#123;title&#125;&#125;</div><div class="line">    newTodo: &apos;&apos;,</div><div class="line">    todos: [&#123;   // ~ v-show=&quot;todos.length&quot; ； ~ &#123;&#123;todos.length&gt;1?&apos;items&apos;:&apos;item&apos;&#125;&#125; </div><div class="line">      content: &apos;下午：读完“追风筝的人”&apos;,  // 渲染 li ~  v-for=&quot;(todo,index) in filteredTodos&quot; </div><div class="line">      completed: false</div><div class="line">    &#125;, &#123;</div><div class="line">      content: &apos;晚上：写读书笔记&apos;,</div><div class="line">      completed: false</div><div class="line">    &#125;],</div><div class="line">    editedTodo: &apos;&apos;,   // 空的编辑对象</div><div class="line">    hashName: &apos;all&apos;    </div><div class="line">  &#125;,</div><div class="line">  computed: &#123;</div><div class="line">    remain() &#123;</div><div class="line">      return filters.active(this.todos).length   //未完成事项的数量 ~ &#123;&#123;remain&#125;&#125;</div><div class="line">    &#125;, </div><div class="line">    isAll: &#123;     // ~ v-model=&quot;isAll&quot;</div><div class="line">      get() &#123;</div><div class="line">        return this.remain === 0</div><div class="line">      &#125;,</div><div class="line">      set(value) &#123;</div><div class="line">        this.todos.forEach((todo) =&gt; &#123;</div><div class="line">          todo.completed = value</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    filteredTodos() &#123;    //用hashName过滤出当前页面的todos  ~ v-for=&quot;(todo,index) in filteredTodos&quot; </div><div class="line">      return filters[this.hashName](this.todos)</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  methods: &#123;</div><div class="line">    addTodo(e) &#123;  //输入值为空时，不添加（trim去除前后空格） ~ v-model.trim=&quot;newTodo&quot; </div><div class="line">      if (!this.newTodo) &#123;</div><div class="line">        return</div><div class="line">      &#125;</div><div class="line">      this.todos.push(&#123;</div><div class="line">        content: this.newTodo,</div><div class="line">        completed: false //结合v-model 根据completed状态绑定样式  ~:class=&quot;&#123;completed:todo.completed； ~ v-model=&quot;todo.completed&quot;</div><div class="line">      &#125;)</div><div class="line">      this.newTodo = &apos;&apos;</div><div class="line">    &#125;,</div><div class="line">    removeTodo(index) &#123;   //绑定x样式，点击删除该todo ~ @click=&quot;removeTodo(index)&quot;</div><div class="line">      this.todos.splice(index, 1)</div><div class="line">    &#125;,</div><div class="line">    editTodo(todo) &#123;         //编辑 ~ @dblclick=&quot;editTodo(todo)&quot;</div><div class="line">      this.editCache = todo.content //储存编辑前的内容</div><div class="line">      this.editedTodo = todo  // 点击编辑里面的内容而不是只是空文本框~ editing:todo==editedTodo&#125;&quot;</div><div class="line">    &#125;,</div><div class="line">    doneEdit(todo, index) &#123;  //失去焦点后 ~ @blur=&quot;doneEdit(todo)&quot;；@keyup.enter=&quot;doneEdit(todo)&quot;</div><div class="line">      this.editedTodo = null  //不存在编辑了或者说编辑已完成</div><div class="line">      if (!todo.content) &#123;  //如果编辑后没有内容了，删除该todo</div><div class="line">        this.removeTodo(index)</div><div class="line">      &#125;</div><div class="line"></div><div class="line">    &#125;,</div><div class="line">    cancelEdit(todo) &#123;    //按esc键取消此次编辑操作 ~ @keyup.esc=&quot;cancelEdit(todo)&quot;&gt;</div><div class="line">      this.editedTodo = null     </div><div class="line">      todo.content = this.editCache //当esc取消编辑时，还原编辑前的内容</div><div class="line">    &#125;,</div><div class="line">    clear() &#123;  //点击清除已完成的功能 ~ @click=&quot;clear&quot;</div><div class="line">      this.todos = filters.active(this.todos)  //获取并渲染未完成的事项 ~ </div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  directives: &#123;   //自定义属性 ~ v-focus=&quot;todo == editedTodo&quot;</div><div class="line">    focus(el, value) &#123;  //文本框双击获取焦点</div><div class="line">      if (value) &#123;</div><div class="line">        el.focus()</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">//hash（url地址中#以及之后的字符）</div><div class="line">function hashChange() &#123; </div><div class="line">// ~ :class=&quot;&#123;selected:hashName==&apos;all&apos;&#125;&quot;；:class=&quot;&#123;selected:hashName==&apos;active&apos;&#125;&quot;；:class=&quot;&#123;selected:hashName==&apos;completed&apos;&#125;&quot;</div><div class="line">  let hashName = location.hash.replace(/#\/?/, &apos;&apos;)  //正则表达式去除#/？，获取如all，active，completed</div><div class="line">  if (filters[hashName]) &#123;   //如果过滤状态的hashName存在</div><div class="line">    app.hashName = hashName  //给整个app变量里的hashName赋上那个值</div><div class="line">  &#125; else &#123;</div><div class="line">    location.hash = &apos;&apos;    //取消</div><div class="line">    app.hashName = &apos;all&apos;  //否则就赋值‘all’，回到全部事项的页面</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">window.addEventListener(&apos;hashchange&apos;, hashChange) //全局监听hash</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/29/冒泡排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.qqcan.com/uploads/allimg/c110716/1310M922450-3H3L.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/29/冒泡排序/" itemprop="url">
+                  冒泡排序
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-29T17:46:44+08:00">
+                2017-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/04/29/冒泡排序/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/04/29/冒泡排序/" class="cy_cmt_count" data-xid="2017/04/29/冒泡排序/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/29/轻松学习JS快速排序-QuickSort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1379,154 +1659,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/18/js面对对象/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hxvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://www.qqcan.com/uploads/allimg/c110716/1310M922450-3H3L.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hxvin的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/18/js面对对象/" itemprop="url">
-                  面向对象的程序设计(-)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-18T00:11:12+08:00">
-                2017-04-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/04/18/js面对对象/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/04/18/js面对对象/" class="cy_cmt_count" data-xid="2017/04/18/js面对对象/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h3><h4 id="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"><a href="#定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数" class="headerlink" title="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"></a>定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数</h4><h4 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h4><ul>
-<li>数据属性  <ul>
-<li>[[Configurabke]]:能否通过delete删除属性从而重新定义属性  </li>
-</ul>
-</li>
-<li>访问器属性  </li>
-</ul>
-<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><h4 id="可以通过“构造函数”或者“对象字面量”方法创建函数"><a href="#可以通过“构造函数”或者“对象字面量”方法创建函数" class="headerlink" title="可以通过“构造函数”或者“对象字面量”方法创建函数"></a>可以通过“构造函数”或者“对象字面量”方法创建函数</h4><ul>
-<li>缺点：通过一个接口创建很多对象，会产生大量的重复代码  </li>
-</ul>
-<h4 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h4>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/18/js面对对象/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1569,7 +1708,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1582,7 +1721,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
