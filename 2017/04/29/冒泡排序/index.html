@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="-学习笔记 -JavaScript -算法," />
 
 
 
@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="做最努力的FE">
-<meta name="keywords">
+<meta name="description" content="冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要">
+<meta name="keywords" content="-学习笔记 -JavaScript -算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="冒泡排序">
 <meta property="og:url" content="http://yoursite.com/2017/04/29/冒泡排序/index.html">
 <meta property="og:site_name" content="Hxvin的博客">
-<meta property="og:description" content="做最努力的FE">
-<meta property="og:updated_time" content="2017-04-29T09:46:44.000Z">
+<meta property="og:description" content="冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要">
+<meta property="og:updated_time" content="2017-05-10T03:40:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="冒泡排序">
-<meta name="twitter:description" content="做最努力的FE">
+<meta name="twitter:description" content="冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要">
 
 
 
@@ -371,7 +371,11 @@
       
 
       
-        
+        <p>冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。<br>在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。<br>冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算<br>因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要交换的可能，也可以把最好的复杂度降低到O(n)。在这个情况，已经排序好的数列就无交换的需要。若在每次走访数列时，把走访顺序反过来，也可以稍微地改进效率。有时候称为鸡尾酒排序，因为算法会从数列的一端到另一端之间穿梭往返。</p>
+<a id="more"></a>
+<p>冒泡排序算法的运作如下：（两个for循环差不多搞定）</p>
+<p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。<br>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。<br>针对所有的元素重复以上的步骤，除了最后一个。<br>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。<br>由于它的简洁，冒泡排序通常被用来对于程序设计入门的学生介绍算法的概念。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function bubbleSort(arr)&#123;</div><div class="line">if(arr.length&lt;=1)&#123;</div><div class="line"> return arr;</div><div class="line"> &#125;</div><div class="line"> for(var j=0;j&lt;arr.length;j++)&#123;</div><div class="line">     for( var i = 0; i&lt;arr.length-j;i++)&#123;</div><div class="line">         if(arr[i] &gt; arr[i+1])&#123; </div><div class="line">             var num = arr[i];</div><div class="line">             arr[i] = arr[i+1];</div><div class="line">             arr[i+1] = num;</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      return arr;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -397,6 +401,12 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记-JavaScript-算法/" rel="tag"># -学习笔记 -JavaScript -算法</a>
+          
+        </div>
       
 
       
@@ -497,7 +507,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
