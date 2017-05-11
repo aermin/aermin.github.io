@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-09T12:16:11.000Z</updated>
+  <updated>2017-05-10T03:44:15.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/05/09/vue2%E7%9A%84todolist%E5%85%A5%E9%97%A8%E5%B0%8F%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AF%A6%E7%BB%86%E8%A7%A3%E6%9E%90/"/>
     <id>http://yoursite.com/2017/05/09/vue2的todolist入门小项目的详细解析/</id>
     <published>2017-05-09T05:08:49.000Z</published>
-    <updated>2017-05-09T12:16:11.000Z</updated>
+    <updated>2017-05-10T03:44:15.000Z</updated>
     
     <content type="html"><![CDATA[<p>看完vue2的官方文档后，找个入门项目巩固下知识点，简单的todolsit是个不错的选择。<br>项目用到了<code>vue.js</code> <code>vue.cli</code> <code>webpack</code> <code>ES6</code> <code>node环境</code>，完成项目后会对这些技术栈有了些了解。</p>
 <a id="more"></a>
@@ -52,7 +52,53 @@
     </summary>
     
     
-      <category term="-vue2 -项目总结" scheme="http://yoursite.com/tags/vue2-%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+      <category term="vue2" scheme="http://yoursite.com/tags/vue2/"/>
+    
+      <category term="项目总结" scheme="http://yoursite.com/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue学习</title>
+    <link href="http://yoursite.com/2017/05/08/Vue%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://yoursite.com/2017/05/08/Vue学习/</id>
+    <published>2017-05-08T02:21:32.000Z</published>
+    <updated>2017-05-11T02:26:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>此文章用来不断记录Vue学习过程中一知半解知识点的总结，fighting~</p>
+<blockquote>
+<p>组件：可以扩展 HTML 元素，封装可重用的代码</p>
+</blockquote>
+<p><a href="https://www.zhihu.com/question/55892803" target="_blank" rel="external">理解父组件，子组件</a></p>
+<a id="more"></a>
+<blockquote>
+<p>v-model：使用 v-model 来进行数据双向绑定，根据控件类型自动选取正确的方法来更新元素，负责监听用户的输入事件以更新数据</p>
+</blockquote>
+<p>  <a href="http://blog.csdn.net/hellochenlu/article/details/52821827" target="_blank" rel="external">理解数据单向绑定，双向绑定</a></p>
+<blockquote>
+<p>钩子：</p>
+</blockquote>
+<p><a href="https://segmentfault.com/q/1010000004335505" target="_blank" rel="external">hook形象解释</a></p>
+<blockquote>
+<p>生命周期：</p>
+</blockquote>
+<p><a href="https://www.zhihu.com/question/52917848/answer/150661534" target="_blank" rel="external">生命周期形象解释</a><br><img src="https://cn.vuejs.org/images/lifecycle.png" alt="生命周期官网图"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;此文章用来不断记录Vue学习过程中一知半解知识点的总结，fighting~&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;组件：可以扩展 HTML 元素，封装可重用的代码&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.zhihu.com/question/55892803&quot;&gt;理解父组件，子组件&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Vue" scheme="http://yoursite.com/tags/Vue/"/>
+    
+      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -61,7 +107,7 @@
     <link href="http://yoursite.com/2017/04/29/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/"/>
     <id>http://yoursite.com/2017/04/29/冒泡排序/</id>
     <published>2017-04-29T09:46:44.000Z</published>
-    <updated>2017-05-10T03:40:55.000Z</updated>
+    <updated>2017-05-10T03:42:53.000Z</updated>
     
     <content type="html"><![CDATA[<p>冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。<br>在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。<br>冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算<br>因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要交换的可能，也可以把最好的复杂度降低到O(n)。在这个情况，已经排序好的数列就无交换的需要。若在每次走访数列时，把走访顺序反过来，也可以稍微地改进效率。有时候称为鸡尾酒排序，因为算法会从数列的一端到另一端之间穿梭往返。</p>
 <a id="more"></a>
@@ -76,7 +122,11 @@
     </summary>
     
     
-      <category term="-学习笔记 -JavaScript -算法" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-JavaScript-%E7%AE%97%E6%B3%95/"/>
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
@@ -85,7 +135,7 @@
     <link href="http://yoursite.com/2017/04/29/%E8%BD%BB%E6%9D%BE%E5%AD%A6%E4%B9%A0JS%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F-QuickSort/"/>
     <id>http://yoursite.com/2017/04/29/轻松学习JS快速排序-QuickSort/</id>
     <published>2017-04-29T03:32:03.000Z</published>
-    <updated>2017-04-29T03:37:56.000Z</updated>
+    <updated>2017-05-11T01:38:48.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="需了解的基础知识"><a href="#需了解的基础知识" class="headerlink" title="需了解的基础知识"></a>需了解的基础知识</h3><p> 1.递归函数：编程语言中，函数Func(Type a,……)直接或间接调用函数本身，则该函数称为递归函数。<br> <code>一个典型阶乘递归函数：</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function fact(num)&#123; </div><div class="line">   if (num&lt;=1)&#123; </div><div class="line">   return 1; </div><div class="line">   &#125;else&#123; </div><div class="line">   return num*fact(num-1); </div><div class="line">&#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p> <code>该函数的弊端：</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var another=factorical;</div><div class="line">factorical=null;</div><div class="line">console.log(another(2))//会报错说 factorical not a function</div></pre></td></tr></table></figure></p>
@@ -104,9 +154,9 @@
 <p>　　if (arr.length &lt;= 1) { return arr; } 
 　　</p>
 <blockquote>
-<p>接着，选择”基准”（pivot），并将其与原数组分离，再定义两个空数组，用来存放一左一右的两个子集。<code>splice返回的是数组,用[0]返回值</code></p>
+<p>接着，选择”基准”（pivot），并将其与原数组分离，再定义两个空数组，用来存放一左一右的两个子集。</p>
 </blockquote>
-<p>　　var pivotIndex = Math.floor(arr.length / 2);<br>　　var pivot = arr.splice(pivotIndex, 1)[0];<br>　　var left = [];<br>　　var right = [];
+<p>　　var pivotIndex = Math.floor(arr.length / 2);<br>　　var pivot = arr.splice(pivotIndex, 1);<br>　　var left = [];<br>　　var right = [];
 　　</p>
 <blockquote>
 <p>然后，开始遍历数组，小于”基准”的元素放入左边的子集，大于基准的元素放入右边的子集。</p>
@@ -120,7 +170,7 @@
 <blockquote>
 <p>使用的时候，直接调用quickSort()就行了。</p>
 </blockquote>
-<h3 id="最终的快排函数"><a href="#最终的快排函数" class="headerlink" title="最终的快排函数"></a>最终的快排函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var quickSort = function(arr) &#123;</div><div class="line">　　if (arr.length &lt;= 1) &#123; return arr; &#125;</div><div class="line">　　var pivotIndex = Math.floor(arr.length / 2);</div><div class="line">　　var pivot = arr.splice(pivotIndex, 1)[0];</div><div class="line">　　var left = [];</div><div class="line">　　var right = [];</div><div class="line">　　for (var i = 0; i &lt; arr.length; i++)&#123;</div><div class="line">　　　　if (arr[i] &lt; pivot) &#123;</div><div class="line">　　　　　　left.push(arr[i]);</div><div class="line">　　　　&#125; else &#123;</div><div class="line">　　　　　　right.push(arr[i]);</div><div class="line">　　　　&#125;</div><div class="line">　　&#125;</div><div class="line">　　return quickSort(left).concat([pivot], quickSort(right));</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="最终的快排函数"><a href="#最终的快排函数" class="headerlink" title="最终的快排函数"></a>最终的快排函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var quickSort = function(arr) &#123;</div><div class="line">　　if (arr.length &lt;= 1) &#123; return arr; &#125;</div><div class="line">　　var pivotIndex = Math.floor(arr.length / 2);</div><div class="line">　　var pivot = arr.splice(pivotIndex, 1);</div><div class="line">　　var left = [];</div><div class="line">　　var right = [];</div><div class="line">　　for (var i = 0; i &lt; arr.length; i++)&#123;</div><div class="line">　　　　if (arr[i] &lt; pivot) &#123;</div><div class="line">　　　　　　left.push(arr[i]);</div><div class="line">　　　　&#125; else &#123;</div><div class="line">　　　　　　right.push(arr[i]);</div><div class="line">　　　　&#125;</div><div class="line">　　&#125;</div><div class="line">　　return quickSort(left).concat([pivot], quickSort(right));</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h3 id="实例运用"><a href="#实例运用" class="headerlink" title="实例运用"></a>实例运用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var array = [7,4,1,9,6,3,2,5,8] ;</div><div class="line">quickSort(array); //输出1，2，3，4，5，6，7，8，9</div></pre></td></tr></table></figure>
 ]]></content>
     
@@ -133,7 +183,9 @@
     </summary>
     
     
-      <category term="-学习笔记 -JavaScript" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-JavaScript/"/>
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -142,7 +194,7 @@
     <link href="http://yoursite.com/2017/04/27/%E5%BC%80%E5%8F%91%E4%B8%ADjs%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2017/04/27/开发中js数组的常用方法/</id>
     <published>2017-04-27T05:03:14.000Z</published>
-    <updated>2017-04-27T11:42:18.000Z</updated>
+    <updated>2017-05-10T03:44:46.000Z</updated>
     
     <content type="html"><![CDATA[<ul>
 <li>在ES5中，一共有9个Array方法：</li>
@@ -204,7 +256,9 @@
     </summary>
     
     
-      <category term="-学习笔记 -JavaScript" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-JavaScript/"/>
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -213,7 +267,7 @@
     <link href="http://yoursite.com/2017/04/26/%E5%85%B3%E4%BA%8E%E8%87%AA%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%EF%BC%88%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%EF%BC%89/"/>
     <id>http://yoursite.com/2017/04/26/关于自执行函数（立即执行函数）/</id>
     <published>2017-04-26T15:42:12.000Z</published>
-    <updated>2017-04-26T15:43:27.000Z</updated>
+    <updated>2017-05-10T03:44:04.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="什么是自执行函数？"><a href="#什么是自执行函数？" class="headerlink" title="什么是自执行函数？"></a>什么是自执行函数？</h3><p>一下有三种写法</p>
 <p>1.最前最后加括号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(function()&#123;alert(1);&#125;());</div></pre></td></tr></table></figure></p>
@@ -267,7 +321,9 @@
     </summary>
     
     
-      <category term="-学习笔记 -JavaScript" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-JavaScript/"/>
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -276,7 +332,7 @@
     <link href="http://yoursite.com/2017/04/26/%E5%85%B3%E4%BA%8Ethis%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%80%E4%B8%AA%E6%98%93%E9%94%99%E7%82%B9/"/>
     <id>http://yoursite.com/2017/04/26/关于this对象的一个易错点/</id>
     <published>2017-04-26T15:39:31.000Z</published>
-    <updated>2017-04-26T15:41:45.000Z</updated>
+    <updated>2017-05-10T03:43:57.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="先给一个例子"><a href="#先给一个例子" class="headerlink" title="先给一个例子"></a>先给一个例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var name = &quot;The Window&quot;</div><div class="line">var object = &#123;</div><div class="line">    name : &quot;My Object&quot;,</div><div class="line">    </div><div class="line">    f1 : function()&#123;</div><div class="line">       return function()&#123;</div><div class="line">           return this.name;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"> &#125;;</div><div class="line"></div><div class="line">  alert(object.f1()());</div></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -308,7 +364,9 @@
     </summary>
     
     
-      <category term="-学习笔记 -JavaScript" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-JavaScript/"/>
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -317,7 +375,7 @@
     <link href="http://yoursite.com/2017/04/25/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E4%BA%8C/"/>
     <id>http://yoursite.com/2017/04/25/面向对象的程序设计-二/</id>
     <published>2017-04-25T12:36:34.000Z</published>
-    <updated>2017-04-25T13:02:36.000Z</updated>
+    <updated>2017-05-10T03:43:16.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h3 id="OO语言中支持两种继承方式：实现继承，接口继承"><a href="#OO语言中支持两种继承方式：实现继承，接口继承" class="headerlink" title="OO语言中支持两种继承方式：实现继承，接口继承"></a>OO语言中支持两种继承方式：实现继承，接口继承</h3><ul>
 <li>实现继承：继承实际的方法  </li>
@@ -384,7 +442,9 @@
     </summary>
     
     
-      <category term="-学习笔记 -JavaScript" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-JavaScript/"/>
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -393,7 +453,7 @@
     <link href="http://yoursite.com/2017/04/25/%E6%B7%BB%E5%8A%A0%E7%95%85%E8%A8%80%E8%AF%84%E8%AE%BA/"/>
     <id>http://yoursite.com/2017/04/25/添加畅言评论/</id>
     <published>2017-04-24T16:48:36.000Z</published>
-    <updated>2017-04-24T17:01:44.000Z</updated>
+    <updated>2017-05-10T03:43:42.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="多说评论听说要关闭了，大家都在找评论系统替换。"><a href="#多说评论听说要关闭了，大家都在找评论系统替换。" class="headerlink" title="多说评论听说要关闭了，大家都在找评论系统替换。"></a>多说评论听说要关闭了，大家都在找评论系统替换。</h4><h4 id="我搜索对比了大家的解决方式，最终选择了畅言评论，可以用qq，微博，手机登录，还算可以，后台功能也挺好的。"><a href="#我搜索对比了大家的解决方式，最终选择了畅言评论，可以用qq，微博，手机登录，还算可以，后台功能也挺好的。" class="headerlink" title="我搜索对比了大家的解决方式，最终选择了畅言评论，可以用qq，微博，手机登录，还算可以，后台功能也挺好的。"></a>我搜索对比了大家的解决方式，最终选择了畅言评论，可以用qq，微博，手机登录，还算可以，后台功能也挺好的。</h4><h4 id="而且有小伙伴对畅言评论需要备案这件事望而却步，我试了下，其能实挺快搞定的。"><a href="#而且有小伙伴对畅言评论需要备案这件事望而却步，我试了下，其能实挺快搞定的。" class="headerlink" title="而且有小伙伴对畅言评论需要备案这件事望而却步，我试了下，其能实挺快搞定的。"></a>而且有小伙伴对畅言评论需要备案这件事望而却步，我试了下，其能实挺快搞定的。</h4><blockquote>
 <p>步骤教程写在简书上了，就不搬过来啦</p>
@@ -408,7 +468,7 @@
     </summary>
     
     
-      <category term="-其他" scheme="http://yoursite.com/tags/%E5%85%B6%E4%BB%96/"/>
+      <category term="其他" scheme="http://yoursite.com/tags/%E5%85%B6%E4%BB%96/"/>
     
   </entry>
   
@@ -417,7 +477,7 @@
     <link href="http://yoursite.com/2017/04/23/justjavac%E7%9A%84%E7%9F%A5%E4%B9%8Elive%E5%90%AC%E5%90%8E%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2017/04/23/justjavac的知乎live听后总结/</id>
     <published>2017-04-23T00:11:12.000Z</published>
-    <updated>2017-04-24T15:13:39.000Z</updated>
+    <updated>2017-05-10T03:43:46.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>get点：</strong></p>
 <blockquote>
@@ -440,7 +500,7 @@
     </summary>
     
     
-      <category term="-学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -449,7 +509,7 @@
     <link href="http://yoursite.com/2017/04/18/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AF%95%EF%BC%8C%E6%95%B4%E7%90%86-1/"/>
     <id>http://yoursite.com/2017/04/18/第一次笔试，整理-1/</id>
     <published>2017-04-18T10:11:12.000Z</published>
-    <updated>2017-04-25T12:55:55.000Z</updated>
+    <updated>2017-05-10T03:43:36.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>之前就关注了美图招聘的公众号，忽然惊喜地看到美图的春招，有招暑假的实习生，我匆忙制作了第一个自己的前端简历，然后投了，很惊喜地收到美图的笔试通知，然后隔天就要笔试了😂，之前都没做过面试的相关准备，也只能临时匆忙准备了.</strong></p>
 <a id="more"></a>
@@ -478,7 +538,7 @@
     </summary>
     
     
-      <category term="-笔试 -美图" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AF%95-%E7%BE%8E%E5%9B%BE/"/>
+      <category term="笔试" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AF%95/"/>
     
   </entry>
   
@@ -487,7 +547,7 @@
     <link href="http://yoursite.com/2017/04/18/js%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/"/>
     <id>http://yoursite.com/2017/04/18/js面对对象/</id>
     <published>2017-04-17T16:11:12.000Z</published>
-    <updated>2017-04-25T13:19:20.000Z</updated>
+    <updated>2017-05-10T03:43:52.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h3><h4 id="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"><a href="#定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数" class="headerlink" title="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"></a>定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数</h4><h4 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h4><ul>
 <li>数据属性  <ul>
@@ -660,7 +720,9 @@
     </summary>
     
     
-      <category term="-学习笔记 -JavaScript" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-JavaScript/"/>
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
   </entry>
   
