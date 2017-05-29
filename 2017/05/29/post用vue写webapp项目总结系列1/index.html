@@ -99,17 +99,18 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/29/post用vue写webapp项目总结系列1/index.html">
 <meta property="og:site_name" content="Hxvin的博客">
 <meta property="og:description" content="前言一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。这是一个基于vue+vue-cli+vue-router+axios+webpack开发的vue社区SPA;UI用Muse-UI;css用scss，flex布局，rem做移动端适配，最终效果web端移动端都适配。 如果你和我一样用vue还挺生疏的，那好好做完这个项目，会学到很多东西，能有挺大的进步，一起(๑•̀ㅂ•́)و✧加油。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5287253-ea6d4e5ec360acb6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://ooytyiziz.bkt.clouddn.com/vue-home:config:index.%E3%80%81js.png">
 <meta property="og:image" content="http://ooytyiziz.bkt.clouddn.com/%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E6%8A%A5%E9%94%99%E5%9B%BE.png">
 <meta property="og:image" content="http://ooytyiziz.bkt.clouddn.com/github%E5%9B%BE.png">
 <meta property="og:image" content="http://ooytyiziz.bkt.clouddn.com/vue-home:src:App.vue%E5%9B%BE.png">
 <meta property="og:image" content="http://ooytyiziz.bkt.clouddn.com/:vue-home:index.html%E5%9B%BE.png">
 <meta property="og:image" content="http://ooytyiziz.bkt.clouddn.com/vue-home:src:main.js%E5%9B%BE.png">
-<meta property="og:updated_time" content="2017-05-29T10:23:22.000Z">
+<meta property="og:updated_time" content="2017-05-29T12:12:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue2写单页面项目总结记录">
 <meta name="twitter:description" content="前言一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。这是一个基于vue+vue-cli+vue-router+axios+webpack开发的vue社区SPA;UI用Muse-UI;css用scss，flex布局，rem做移动端适配，最终效果web端移动端都适配。 如果你和我一样用vue还挺生疏的，那好好做完这个项目，会学到很多东西，能有挺大的进步，一起(๑•̀ㅂ•́)و✧加油。">
-<meta name="twitter:image" content="http://ooytyiziz.bkt.clouddn.com/vue-home:config:index.%E3%80%81js.png">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/5287253-ea6d4e5ec360acb6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -381,8 +382,34 @@
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。<br>这是一个基于<code>vue+vue-cli+vue-router+axios+webpack</code>开发的vue社区<code>SPA</code>;UI用<code>Muse-UI</code>;css用<code>scss</code>，<code>flex</code>布局，<code>rem</code>做移动端适配，最终效果web端移动端都适配。</p>
 <p>如果你和我一样用vue还挺生疏的，那好好做完这个项目，会学到很多东西，能有挺大的进步，一起(๑•̀ㅂ•́)و✧加油。</p>
 <p>如果对您有帮助，请给一个<code>star</code>鼓励一下萌新，感谢 ^ ^</p>
+<p><a href="http://www.hxvin.me/vue-home/dist/" target="_blank" rel="external">效果预览</a></p>
 <p><a href="https://github.com/Hxvin/vue-home" target="_blank" rel="external">github项目地址</a> </p>
 <p><a href="https://www.vue-js.com/api/" target="_blank" rel="external">项目API</a></p>
+<a id="more"></a>
+<p><img src="http://upload-images.jianshu.io/upload_images/5287253-ea6d4e5ec360acb6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="手机扫描查看效果"></p>
+<blockquote>
+<p>完成功能</p>
+</blockquote>
+<ul>
+<li>首页列表</li>
+<li>下拉加载</li>
+<li>用户信息（点击头像）</li>
+<li>主题内容</li>
+<li>登录功能</li>
+<li>收藏（取消收藏）主题</li>
+<li>评论列表</li>
+<li>点赞（取消点赞）功能</li>
+<li>消息中心（已读、未读）</li>
+<li>个人中心</li>
+</ul>
+<blockquote>
+<p>todo功能</p>
+</blockquote>
+<ul>
+<li>发表评论</li>
+<li>回复评论</li>
+<li>发布主题（支持markdown格式）</li>
+</ul>
 <h3 id="准备开发环境"><a href="#准备开发环境" class="headerlink" title="准备开发环境"></a>准备开发环境</h3><ul>
 <li>$ npm install -g vue-cli </li>
 <li>$ vue init webpack vue-home</li>
