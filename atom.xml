@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-17T05:41:13.000Z</updated>
+  <updated>2017-05-29T10:23:22.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue2写单页面项目总结记录</title>
+    <link href="http://yoursite.com/2017/05/29/post%E7%94%A8vue%E5%86%99webapp%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%B3%BB%E5%88%971/"/>
+    <id>http://yoursite.com/2017/05/29/post用vue写webapp项目总结系列1/</id>
+    <published>2017-05-29T01:40:25.000Z</published>
+    <updated>2017-05-29T10:23:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。<br>这是一个基于<code>vue+vue-cli+vue-router+axios+webpack</code>开发的vue社区<code>SPA</code>;UI用<code>Muse-UI</code>;css用<code>scss</code>，<code>flex</code>布局，<code>rem</code>做移动端适配，最终效果web端移动端都适配。</p>
+<p>如果你和我一样用vue还挺生疏的，那好好做完这个项目，会学到很多东西，能有挺大的进步，一起(๑•̀ㅂ•́)و✧加油。</p>
+<p>如果对您有帮助，请给一个<code>star</code>鼓励一下萌新，感谢 ^ ^</p>
+<p><a href="https://github.com/Hxvin/vue-home" target="_blank" rel="external">github项目地址</a> </p>
+<p><a href="https://www.vue-js.com/api/" target="_blank" rel="external">项目API</a></p>
+<h3 id="准备开发环境"><a href="#准备开发环境" class="headerlink" title="准备开发环境"></a>准备开发环境</h3><ul>
+<li>$ npm install -g vue-cli </li>
+<li>$ vue init webpack vue-home</li>
+</ul>
+<p><code>? Project name vue-home
+? Project description vue-home
+? Author afei
+? Vue build standalone
+? Install vue-router? Yes
+? Use ESLint to lint your code? No
+? Setup unit tests with Karma + Mocha? No
+? Setup e2e tests with Nightwatch? No</code></p>
+<ul>
+<li>$ cd vue-home</li>
+<li>$ npm install</li>
+<li>$ npm run dev<br>等写完项目后</li>
+<li>$ npm run build</li>
+<li><blockquote>
+<p>注意：npm run dev 之后 默认浏览器打开的是<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>  请换成<a href="http://localhost:8080/vue-home/dist" target="_blank" rel="external">http://localhost:8080/vue-home/dist</a><br>如果你电脑的8080端口被占用，请congfig/index.js中找到<code>port: 8080</code>修改成8081或者其他可用的端口</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="开始动手（我会根据每个文件来讲解）"><a href="#开始动手（我会根据每个文件来讲解）" class="headerlink" title="开始动手（我会根据每个文件来讲解）"></a>开始动手（我会根据每个文件来讲解）</h3><h4 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">├── build</div><div class="line">│   ├── build.js</div><div class="line">│   ├── check-versions.js</div><div class="line">│   ├── dev-client.js</div><div class="line">│   ├── dev-server.js</div><div class="line">│   ├── utils.js</div><div class="line">│   ├── vue-loader.conf.js</div><div class="line">│   ├── webpack.base.conf.js</div><div class="line">│   ├── webpack.dev.conf.js</div><div class="line">│   └── webpack.prod.conf.js</div><div class="line">├── config</div><div class="line">│   ├── dev.env.js</div><div class="line">│   ├── index.js</div><div class="line">│   └── prod.env.js</div><div class="line">├── dist                  //等写完项目后 $ npm run build 的打包文件</div><div class="line">│   ├── index.html</div><div class="line">│   └── static</div><div class="line">├── index.html            //首页入口文件</div><div class="line">├── node_modules</div><div class="line">├── package.json          </div><div class="line">├── src</div><div class="line">│   ├── App.vue           //项目入口文件</div><div class="line">│   ├── assets</div><div class="line">│   │   ├── 1495982696.png  //手机扫描二维码</div><div class="line">│   │   ├── logo.png        //vue logo</div><div class="line">│   │   └── sass            //sass通用样式</div><div class="line">│   ├── components          //组件</div><div class="line">│   │   ├── FooterNav.vue   //底部nav组件</div><div class="line">│   │   ├── HeaderBar.vue   //顶部横条</div><div class="line">│   │   ├── HeaderTabs.vue  //顶部tabs组件&amp;主页面内容拉取</div><div class="line">│   │   └── Hello.vue        </div><div class="line">│   ├── main.js             //核心文件 在这里引入了Muse UI 时间过滤器</div><div class="line">│   ├── pages               //页面</div><div class="line">│   │   ├── content.vue     //帖子内容页面  </div><div class="line">│   │   ├── index.vue       //首页</div><div class="line">│   │   ├── login.vue       //登录页面</div><div class="line">│   │   ├── message.vue     //信息通知页面</div><div class="line">│   │   ├── more.vue        </div><div class="line">│   │   ├── my.vue          //个人信息页面</div><div class="line">│   │   ├── people.vue      //社区用户信息页面</div><div class="line">│   │   └── publish.vue     //发布帖子页面(此页面还没写完)</div><div class="line">│   ├── router              //路由与组件配置</div><div class="line">│   │   └── index.js </div><div class="line">│   └── util                //时间过滤器，转换时间格式</div><div class="line">│       └── filter.js</div><div class="line">└── static</div></pre></td></tr></table></figure>
+<h4 id="vue-home-config-index-js"><a href="#vue-home-config-index-js" class="headerlink" title="vue-home/config/index.js"></a>vue-home/config/index.js</h4><p><img src="http://ooytyiziz.bkt.clouddn.com/vue-home:config:index.%E3%80%81js.png" alt="vue-home/config/index.js图"></p>
+<p><code>assetsPublicPath: &#39;/vue-home/dist&#39;</code></p>
+<blockquote>
+<p>这个公共路径原本为assetsPublicPath: ‘/‘，这样在本地服务器是可以跑，可是打包上传到github后会发现打开的页面是空白的，报错如下图。</p>
+</blockquote>
+<p><img src="http://ooytyiziz.bkt.clouddn.com/%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E6%8A%A5%E9%94%99%E5%9B%BE.png" alt="网页加载报错图"></p>
+<p>原因是路径错了，vue-home是项目文件夹名称，dist是npm run build之后出现的文件夹，github上线就是读取dist文件夹而生成的网页（成功展示的demo地址长这样：<a href="http://www.hxvin.me/vue-home/dist/）" target="_blank" rel="external">http://www.hxvin.me/vue-home/dist/）</a></p>
+<p><img src="http://ooytyiziz.bkt.clouddn.com/github%E5%9B%BE.png" alt="github图"></p>
+<p>解决上线路径问题不知道还有没有其他更方便的解决方法，如果有，请跟我讲下哦</p>
+<blockquote>
+<p>port: 8080 这个是让你改端口的</p>
+</blockquote>
+<h4 id="vue-home-src-App-vue"><a href="#vue-home-src-App-vue" class="headerlink" title="vue-home/src/App.vue"></a>vue-home/src/App.vue</h4><p><img src="http://ooytyiziz.bkt.clouddn.com/vue-home:src:App.vue%E5%9B%BE.png" alt="vue-home/src/App.vue图"></p>
+<p>rem适配移动端，1rem=10px</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">html&#123;</div><div class="line">  font-size: 62.5%;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>建议注释掉这段，不然会然干扰后面的css</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/*text-align: center;*/</div><div class="line">/*color: #2c3e50;</div><div class="line">margin-top: 60px;*/</div></pre></td></tr></table></figure>
+<h4 id="vue-home-index-html图"><a href="#vue-home-index-html图" class="headerlink" title="/vue-home/index.html图"></a>/vue-home/index.html图</h4><p><img src="http://ooytyiziz.bkt.clouddn.com/:vue-home:index.html%E5%9B%BE.png" alt="/vue-home/index.html图"></p>
+<p>我们是做的移动端，适配web端，所以在index.html里面加上meta</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,user-scalable=0&quot;&gt;</div></pre></td></tr></table></figure>
+<p>用MuseUI的添加之一</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&quot;&gt;</div><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot;&gt;</div></pre></td></tr></table></figure>
+<h4 id="vue-home-src-main-js"><a href="#vue-home-src-main-js" class="headerlink" title="vue-home/src/main.js"></a>vue-home/src/main.js</h4><p><img src="http://ooytyiziz.bkt.clouddn.com/vue-home:src:main.js%E5%9B%BE.png" alt="vue-home/src/main.js图"></p>
+<p>图中有标识了哪些是用来干嘛的，分别是用MuseUI的添加之一；filters是用来把社区api数据中的时间格式转换成<code>*分钟前``*小时前``*天前</code></p>
+<p>未完待续。。。。。。（代码好像用文章不方便介绍，我还是写好代码注释好了哦）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。&lt;br&gt;这是一个基于&lt;code&gt;vue+vue-cli+vue-route
+    
+    </summary>
+    
+    
+      <category term="vue2" scheme="http://yoursite.com/tags/vue2/"/>
+    
+      <category term="项目总结" scheme="http://yoursite.com/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>JS函数方法坑与填坑</title>
@@ -133,9 +208,9 @@
     </summary>
     
     
-      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
-    
       <category term="Vue" scheme="http://yoursite.com/tags/Vue/"/>
+    
+      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -542,64 +617,17 @@
   </entry>
   
   <entry>
-    <title>111</title>
-    <link href="http://yoursite.com/2017/04/22/111/"/>
-    <id>http://yoursite.com/2017/04/22/111/</id>
-    <published>2017-04-22T00:11:12.000Z</published>
-    <updated>2017-05-12T01:20:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>前端工程化：<br>模块化、组件化、规范化、自动化</p>
-<p>用Webpack+Babel将所有模块打包成一个文件同步加载；<br>模块化只是在语言层面上，对代码的拆分；而组件化是基于模块化，在设计层面上，对UI（用户界面）的拆分。</p>
-<p>从UI拆分下来的每个包含模板(HTML)+样式(CSS)+逻辑(JS)功能完备的结构单元，我们称之为组件。<br>规范化</p>
-<p>模块化和组件化确定了开发模型，而这些东西的实现就需要规范去落实。<br>规范化其实是工程化中很重要的一个部分，项目初期规范制定的好坏会直接影响到后期的开发质量。</p>
-<h2 id="两边固定中间自适应"><a href="#两边固定中间自适应" class="headerlink" title="两边固定中间自适应"></a>两边固定中间自适应</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">html,body&#123; height: 100%;margin: 0; &#125;</div><div class="line">.middle &#123;left:200px; right: 200px; background: red;height: 200px; &#125;</div><div class="line">.left &#123;position: absolute;left: 0; width: 200px;background: blue;height: 200px;&#125;</div><div class="line">.right &#123;position: absolute;right: 0;width: 200px;background: green;height: 200px;&#125;</div></pre></td></tr></table></figure>
-<h2 id="两边自适应中间固定"><a href="#两边自适应中间固定" class="headerlink" title="两边自适应中间固定"></a>两边自适应中间固定</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> html, body &#123; height: 100%; margin: 0; &#125;</div><div class="line"> .left, .middle, .right &#123; height: 100%; &#125;</div><div class="line"> .left &#123; background-color: gold; position: absolute; left: 0; right: 50%; margin-right: 400px; &#125;</div><div class="line"> .middle &#123; background-color: palegreen; position: absolute; left: 50%; margin-left: -400px; &#125;</div><div class="line"> .right &#123; background-color: firebrick; position: absolute; right: 0; left: 50%; margin-left: 400px; &#125;</div><div class="line"> .middle &#123; width: 800px; &#125;</div><div class="line"> </div><div class="line">我是右边</div><div class="line"> </div><div class="line">我是左边</div><div class="line"> </div><div class="line">我是中间</div></pre></td></tr></table></figure>
-<h2 id="左边固定-右边自适应"><a href="#左边固定-右边自适应" class="headerlink" title="左边固定 右边自适应"></a>左边固定 右边自适应</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  html,body&#123;</div><div class="line">  height: 100%;</div><div class="line">  margin: 0; &#125;</div><div class="line">  .left,.right&#123; height: 100%;&#125;</div><div class="line">  .left&#123;position: absolute;left:0; width: 200px;background-color: red;&#125;</div><div class="line">  .right&#123;osition: absolute;right:0; left: 0;margin-left: 200px; background-color: green;&#125;</div><div class="line"> </div><div class="line">左边</div><div class="line"> </div><div class="line">右边</div></pre></td></tr></table></figure>
-<h2 id="响应式网格布局"><a href="#响应式网格布局" class="headerlink" title="响应式网格布局"></a>响应式网格布局</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">.row::after,</div><div class="line">.row::before&#123;</div><div class="line">  content:&apos;&apos;;</div><div class="line">  display: block;</div><div class="line">  clear: both;</div><div class="line">&#125;</div><div class="line">@media all and ( min-width: 768px )&#123;</div><div class="line">.col-md-1 &#123; width: 8.333%; &#125;</div><div class="line">.col-md-2 &#123; width: 16.666%; &#125;</div><div class="line"></div><div class="line">.......</div><div class="line">&#125;</div><div class="line">@media all and (max-width:768px)</div><div class="line">.col-sm-1 &#123; width: 8.333%; &#125;</div><div class="line">......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="flex布局"><a href="#flex布局" class="headerlink" title="flex布局"></a>flex布局</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.container&#123;</div><div class="line">  display: flex;</div><div class="line">  flex-flow: row wrap;</div><div class="line">  justify-content: space-between;</div><div class="line">  align-items: center;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h2 id="移动web"><a href="#移动web" class="headerlink" title="移动web"></a>移动web</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">---------------</div><div class="line">html &#123;</div><div class="line">font-size: 62.5%; 1rem=16px*62.5%=10px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="倒计时"><a href="#倒计时" class="headerlink" title="倒计时"></a>倒计时</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function showTime()&#123;</div><div class="line">  var endtime=new Date(&quot;2017/6/15,12:00:00&quot;);//结束时间</div><div class="line">  var nowtime = new Date();//当前时间</div><div class="line">  var lefttime=parseInt((endtime.getTime()-nowtime.getTime())/1000);</div><div class="line">  d=parseInt(lefttime/(24*60*60)); 总秒数/一天的秒数，然后取整数</div><div class="line">  h=parseInt(lefttime/(60*60)%24);</div><div class="line">  m=parseInt(lefttime/60%60);</div><div class="line">  s=parseInt(lefttime%60);</div><div class="line"> </div><div class="line">  document.getElementById(&quot;LeftTime&quot;).innerHTML=d+&quot;天&quot;+h+&quot;小时&quot;+m+&quot;分&quot;+s+&quot;秒&quot;;</div><div class="line">  setTimeout(showTime,500);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="视频展示左右移动"><a href="#视频展示左右移动" class="headerlink" title="视频展示左右移动"></a>视频展示左右移动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vshow.animate(&#123;left:&apos;0px&apos;&#125;,&quot;normal&quot;); //则跳到内容的最左端</div><div class="line">vshow.animate(&#123;left:&apos;-=&apos;+vwidth&#125;,&quot;normal&quot;); //否则页面每次往右移动一页 (‘-=’+width意思是该元素往左移动width长度，左减右加)</div></pre></td></tr></table></figure>
-<h2 id="表格内容过滤"><a href="#表格内容过滤" class="headerlink" title="表格内容过滤"></a>表格内容过滤</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//输入框绑定按键松开事件；先隐藏所有tbody tr的内容；过滤筛出输入文本；显示该文本；</div><div class="line"> $(function()&#123;</div><div class="line">  $(&quot;#filtername&quot;).keyup(function()&#123;</div><div class="line">  $(&quot;table tbody tr&quot;)</div><div class="line">  .hide()</div><div class="line">  .filter(&quot;:contains(&apos;&quot;+$(this).val()+&quot;&apos;)&quot;)</div><div class="line">  .show();</div><div class="line">  &#125;).keyup(); //DOM刚下载完即触发keyup事件</div><div class="line"> &#125;)</div></pre></td></tr></table></figure>
-<h2 id="控制字体大小"><a href="#控制字体大小" class="headerlink" title="控制字体大小"></a>控制字体大小</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"> $(function()&#123;</div><div class="line"> //绑定点击事件；获取字体；获取字体大小；获取字体单位；获取span属性；若属性=bigger递增2 否则同理；字体大小+字体单位</div><div class="line"> $(&quot;span&quot;).click(function()&#123;</div><div class="line"> var fontSize=$(&quot;#para&quot;).css(&quot;font-size&quot;);</div><div class="line"> var textFontSize=parseFloat(fontSize,10);</div><div class="line"> var unit=fontSize.slice(-2);</div><div class="line"> var className=$(this).attr(&quot;class&quot;);</div><div class="line"> if(className==&quot;bigger&quot;)&#123;</div><div class="line"> if(textFontSize &lt;=30)&#123;</div><div class="line"> textFontSize +=2;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> &#125;else if(className==&quot;smaller&quot;)&#123;</div><div class="line"> if(textFontSize &gt;=10)&#123;</div><div class="line"> textFontSize -=2;</div><div class="line"> &#125;</div><div class="line"> &#125;</div><div class="line"> $(&quot;#para&quot;).css(&quot;font-size&quot;,textFontSize+unit);</div><div class="line"> &#125;)</div><div class="line"></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="前端语义化"><a href="#前端语义化" class="headerlink" title="前端语义化"></a>前端语义化</h2><p>web语义化是指通过HTML标记表示页面包含的信息，包含了HTML标签的语义化和css命名的语义化。 HTML标签的语义化是指：通过使用包含语义的标签（如h1-h6）恰当地表示文档结构 css命名的语义化是指：为html标签添加有意义的class，id补充未表达的语义，如Microformat通过添加符合规则的class描述信息 为什么需要语义化：</p>
-<p>去掉样式后页面呈现清晰的结构<br>盲人使用读屏器更好地阅读<br>搜索引擎更好地理解页面，有利于收录<br>便团队项目的可持续运作及维护</p>
-<h2 id="es6"><a href="#es6" class="headerlink" title="es6"></a>es6</h2><p><a href="http://www.jianshu.com/p/ebfeb687eb70" target="_blank" rel="external">es6</a></p>
-<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><p><a href="http://www.hxvin.me/2017/05/09/vue2%E7%9A%84todolist%E5%85%A5%E9%97%A8%E5%B0%8F%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AF%A6%E7%BB%86%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">vue</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前端工程化：&lt;br&gt;模块化、组件化、规范化、自动化&lt;/p&gt;
-&lt;p&gt;用Webpack+Babel将所有模块打包成一个文件同步加载；&lt;br&gt;模块化只是在语言层面上，对代码的拆分；而组件化是基于模块化，在设计层面上，对UI（用户界面）的拆分。&lt;/p&gt;
-&lt;p&gt;从UI拆分下来的每个包
-    
-    </summary>
-    
-    
-      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第一次笔试，整理(1)</title>
+    <title>笔试整理(1)</title>
     <link href="http://yoursite.com/2017/04/18/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AF%95%EF%BC%8C%E6%95%B4%E7%90%86-1/"/>
     <id>http://yoursite.com/2017/04/18/第一次笔试，整理-1/</id>
     <published>2017-04-18T10:11:12.000Z</published>
-    <updated>2017-05-10T03:43:36.000Z</updated>
+    <updated>2017-05-29T01:46:20.000Z</updated>
     
-    <content type="html"><![CDATA[<p><strong>之前就关注了美图招聘的公众号，忽然惊喜地看到美图的春招，有招暑假的实习生，我匆忙制作了第一个自己的前端简历，然后投了，很惊喜地收到美图的笔试通知，然后隔天就要笔试了😂，之前都没做过面试的相关准备，也只能临时匆忙准备了.</strong></p>
-<a id="more"></a>
-<blockquote>
-<p>特别想提的一点是在过程中感觉到美图的HR和技术总监为人很 <code>nice</code>，~(≧▽≦)/~赞。**</p>
-</blockquote>
-<p><strong>这几天都在考期中考，所以笔试完也没马上做总结就去准备接下去接连一天一科的期中考了。</strong></p>
-<p><strong><em>笔试有要求题目不能外泄，以下只是自己依稀记得的不大会做，不会做的知识点，仅供补缺补漏使用。</em></strong></p>
-<h3 id="1-CSS的某些样式是具有继承性的"><a href="#1-CSS的某些样式是具有继承性的" class="headerlink" title="1.CSS的某些样式是具有继承性的"></a>1.CSS的某些样式是具有继承性的</h3><p><strong>什么是继承呢？继承是一种规则，它允许样式不仅应用于某个特定html标签元素，而且应用于其后代。</strong></p>
+    <content type="html"><![CDATA[<h3 id="1-CSS的某些样式是具有继承性的"><a href="#1-CSS的某些样式是具有继承性的" class="headerlink" title="1.CSS的某些样式是具有继承性的"></a>1.CSS的某些样式是具有继承性的</h3><p><strong>什么是继承呢？继承是一种规则，它允许样式不仅应用于某个特定html标签元素，而且应用于其后代。</strong></p>
 <blockquote>
 <p>不可继承的：display、margin、border、padding、background、height、min-height、max-height、width、min-width、max-width、overflow、position、left、right、top、bottom、z-index、float、clear、table-layout、vertical-align、page-break-after、page-bread-before和unicode-bidi。（注：基本上什么盒子外边距、内边距，还有定位什么的是不能被继承的）<br>所有元素可继承：visibility和cursor。<br>内联元素可继承：letter-spacing、word-spacing、white-space、line-height、color、font、font-family、font-size、font-style、font-variant、font-weight、text-decoration、text-transform、direction。<br>终端块状元素可继承：text-indent和text-align。<br>列表元素可继承：list-style、list-style-type、list-style-position、list-style-image。<br>表格元素可继承：border-collapse。</p>
 </blockquote>
-<!-- more -->
+<a id="more"></a>
 <h3 id="2-对象的深拷贝与浅拷贝的区别"><a href="#2-对象的深拷贝与浅拷贝的区别" class="headerlink" title="2.对象的深拷贝与浅拷贝的区别"></a>2.对象的深拷贝与浅拷贝的区别</h3><blockquote>
 <p>浅拷贝：仅仅复制对象的引用，而不是对象本身；<br>深拷贝：把复制的对象所引用的全部对象都复制一遍。</p>
 </blockquote>
@@ -610,7 +638,10 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;strong&gt;之前就关注了美图招聘的公众号，忽然惊喜地看到美图的春招，有招暑假的实习生，我匆忙制作了第一个自己的前端简历，然后投了，很惊喜地收到美图的笔试通知，然后隔天就要笔试了😂，之前都没做过面试的相关准备，也只能临时匆忙准备了.&lt;/strong&gt;&lt;/p&gt;
+      &lt;h3 id=&quot;1-CSS的某些样式是具有继承性的&quot;&gt;&lt;a href=&quot;#1-CSS的某些样式是具有继承性的&quot; class=&quot;headerlink&quot; title=&quot;1.CSS的某些样式是具有继承性的&quot;&gt;&lt;/a&gt;1.CSS的某些样式是具有继承性的&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;什么是继承呢？继承是一种规则，它允许样式不仅应用于某个特定html标签元素，而且应用于其后代。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不可继承的：display、margin、border、padding、background、height、min-height、max-height、width、min-width、max-width、overflow、position、left、right、top、bottom、z-index、float、clear、table-layout、vertical-align、page-break-after、page-bread-before和unicode-bidi。（注：基本上什么盒子外边距、内边距，还有定位什么的是不能被继承的）&lt;br&gt;所有元素可继承：visibility和cursor。&lt;br&gt;内联元素可继承：letter-spacing、word-spacing、white-space、line-height、color、font、font-family、font-size、font-style、font-variant、font-weight、text-decoration、text-transform、direction。&lt;br&gt;终端块状元素可继承：text-indent和text-align。&lt;br&gt;列表元素可继承：list-style、list-style-type、list-style-position、list-style-image。&lt;br&gt;表格元素可继承：border-collapse。&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
