@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-29T12:12:20.000Z</updated>
+  <updated>2017-05-30T08:49:09.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mac使用tree</title>
+    <link href="http://yoursite.com/2017/05/30/mac%E4%BD%BF%E7%94%A8tree/"/>
+    <id>http://yoursite.com/2017/05/30/mac使用tree/</id>
+    <published>2017-05-30T05:53:43.000Z</published>
+    <updated>2017-05-30T08:49:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一、brew安装"><a href="#一、brew安装" class="headerlink" title="一、brew安装"></a>一、brew安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure>
+<p>然后一直按return键即可</p>
+<h2 id="二、brew使用"><a href="#二、brew使用" class="headerlink" title="二、brew使用"></a>二、brew使用</h2><h3 id="brew安装套件："><a href="#brew安装套件：" class="headerlink" title="brew安装套件："></a>brew安装套件：</h3><blockquote>
+<p>$ brew install tree</p>
+</blockquote>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><p>$ tree -a          //显示所有文件和目录。</p>
+<p>$ tree -d         //显示目录名称而非内容</p>
+<p>$ tree -L 2      //这个命令是比较实用的，后面的数字2代表几层</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;一、brew安装&quot;&gt;&lt;a href=&quot;#一、brew安装&quot; class=&quot;headerlink&quot; title=&quot;一、brew安装&quot;&gt;&lt;/a&gt;一、brew安装&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td cl
+    
+    </summary>
+    
+    
+      <category term="工具使用" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>vue2写单页面项目总结记录</title>
