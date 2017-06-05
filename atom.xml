@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-30T08:49:09.000Z</updated>
+  <updated>2017-06-05T14:44:58.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>图文解析HTMLElement.offsetHeight,scrollHeight,clientHeight</title>
+    <link href="http://yoursite.com/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/"/>
+    <id>http://yoursite.com/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/</id>
+    <published>2017-06-05T14:32:29.000Z</published>
+    <updated>2017-06-05T14:44:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="HTMLElement-offsetHeight"><a href="#HTMLElement-offsetHeight" class="headerlink" title="HTMLElement.offsetHeight"></a>HTMLElement.offsetHeight</h3><p>是一个只读属性，它返回该元素的像素高度，高度包含该元素的垂直内边距和边框，且是一个整数。</p>
+<p>通常，元素的offsetHeight是一种衡量标准，包括元素的边框、垂直内边距和元素的水平滚动条（如果存在且渲染的话）和元素的CSS高度。</p>
+<p>对于文档的主体对象，它包括代替元素的CSS高度线性总含量高。浮动元素的向下延伸内容高度是被忽略的。 </p>
+<p><img src="https://developer.mozilla.org/@api/deki/files/788/=OffsetHeight.png" alt="实例"></p>
+<a id="more"></a>
+<h3 id="Element-scrollHeight"><a href="#Element-scrollHeight" class="headerlink" title="Element.scrollHeight"></a>Element.scrollHeight</h3><p>Element.scrollHeight 是计量元素内容高度的只读属性，包括overflow样式属性导致的视图中不可见内容。没有垂直滚动条的情况下，scrollHeight值与元素视图填充所有内容所需要的最小值clientHeight相同。包括元素的padding，但不包括元素的margin.</p>
+<p><img src="https://developer.mozilla.org/@api/deki/files/840/=ScrollHeight.png" alt="实例"></p>
+<h3 id="Element-clientHeight"><a href="#Element-clientHeight" class="headerlink" title="Element.clientHeight"></a>Element.clientHeight</h3><p>返回元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。</p>
+<p>clientHeight 可以通过 CSS height + CSS padding - 水平滚动条高度 (如果存在)来计算.</p>
+<p>也就是说，是没有垂直滚动条版本的scrollHeight。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;HTMLElement-offsetHeight&quot;&gt;&lt;a href=&quot;#HTMLElement-offsetHeight&quot; class=&quot;headerlink&quot; title=&quot;HTMLElement.offsetHeight&quot;&gt;&lt;/a&gt;HTMLElement.offsetHeight&lt;/h3&gt;&lt;p&gt;是一个只读属性，它返回该元素的像素高度，高度包含该元素的垂直内边距和边框，且是一个整数。&lt;/p&gt;
+&lt;p&gt;通常，元素的offsetHeight是一种衡量标准，包括元素的边框、垂直内边距和元素的水平滚动条（如果存在且渲染的话）和元素的CSS高度。&lt;/p&gt;
+&lt;p&gt;对于文档的主体对象，它包括代替元素的CSS高度线性总含量高。浮动元素的向下延伸内容高度是被忽略的。 &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://developer.mozilla.org/@api/deki/files/788/=OffsetHeight.png&quot; alt=&quot;实例&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="HTML" scheme="http://yoursite.com/tags/HTML/"/>
+    
+  </entry>
   
   <entry>
     <title>mac使用tree</title>
@@ -267,9 +302,9 @@
     </summary>
     
     
-      <category term="Vue" scheme="http://yoursite.com/tags/Vue/"/>
-    
       <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="Vue" scheme="http://yoursite.com/tags/Vue/"/>
     
   </entry>
   
