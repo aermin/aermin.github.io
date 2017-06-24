@@ -289,6 +289,171 @@
   
 
   <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/24/图片懒加载及节流函数优化性能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/24/图片懒加载及节流函数优化性能/" itemprop="url">
+                  图片懒加载及节流函数优化性能
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-24T21:02:40+08:00">
+                2017-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/06/24/图片懒加载及节流函数优化性能/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/06/24/图片懒加载及节流函数优化性能/" class="cy_cmt_count" data-xid="2017/06/24/图片懒加载及节流函数优化性能/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="为啥要用图片懒加载"><a href="#为啥要用图片懒加载" class="headerlink" title="为啥要用图片懒加载"></a>为啥要用图片懒加载</h2><p>对页面加载速度影响最大的就是图片，一张普通的图片可以达到几M的大小，而代码也许就只有几十KB。当页面图片很多时，页面的加载速度缓慢，几S钟内页面没有加载完成，也许会失去很多的用户。<br>所以，对于图片过多的页面，为了加速页面加载速度，所以很多时候我们需要将页面内未出现在可视区域内的图片先不做加载， 等到滚动到可视区域后再去加载。这样子对于页面加载性能上会有很大的提升，也提高了用户体验。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>将页面中的img标签src指向一张小图片或者src为空，然后定义data-src（这个属性可以自定义命名，我才用data-src）属性指向真实的图片。src指向一张默认的图片，否则当src为空时也会向服务器发送一次请求（指向默认的一张图那就只需请求一次）。可以指向loading的地址。</p>
+<p>当载入页面时，先把可视区域内的img标签的data-src属性值负给src，然后监听滚动事件，把用户即将看到的图片加载。这样便实现了懒加载。</p>
+<ul>
+<li>ps：图片要指定宽高</li>
+</ul>
+<p>关于窗口各种宽度，给出网上找的一张好图</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/nianshi/0928300.gif" alt="各种宽度"></p>
+<blockquote>
+<p>如果仍不是很理解，看这两篇文章</p>
+</blockquote>
+<p><a href="http://www.cnblogs.com/kongxianghai/p/4192032.html" target="_blank" rel="external">scrollWidth,clientWidth,offsetWidth的区别</a></p>
+<p><a href="http://www.cnblogs.com/fullhouse/archive/2012/01/16/2324131.html" target="_blank" rel="external">JS中关于clientWidth offsetWidth scrollWidth 等的含义</a></p>
+<h2 id="图片懒加载的实现代码"><a href="#图片懒加载的实现代码" class="headerlink" title="图片懒加载的实现代码"></a>图片懒加载的实现代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</div><div class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;style&gt;</div><div class="line">        img &#123;</div><div class="line">            display: block;</div><div class="line">            margin-bottom: 50px;</div><div class="line">            width: 400px;</div><div class="line">            height: 400px;</div><div class="line">        &#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">     &lt;img src=&quot;&quot; data-src=&quot;http://pic.58pic.com/58pic/17/18/97/01U58PIC4Xr_1024.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://cover.read.duokan.com/mfsv2/download/fdsc3/p01N203pHTU7/Wr5314kcLAtVCi.jpg!t&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://77fkxu.com1.z0.glb.clouddn.com/20160308/1457402219_73571.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://pic1.cxtuku.com/00/16/18/b3809a2ba0f3.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://img.bitscn.com/upimg/allimg/c150708/14363B06253120-6060O.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://cover.read.duokan.com/mfsv2/download/fdsc3/p015trgKM7vw/H0iyDPPneOVrA4.jpg!t&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://imgsrc.baidu.com/baike/pic/item/2f9cbdcc5e0bcf5c00e9283b.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    (function()&#123;</div><div class="line">    let num = document.getElementsByTagName(&apos;img&apos;).length;</div><div class="line">    let img = document.getElementsByTagName(&quot;img&quot;);</div><div class="line">    let n = 0; //存储图片加载到的位置，避免每次都从第一张图片开始遍历</div><div class="line">    lazyload(); //页面载入完毕加载可是区域内的图片</div><div class="line">     window.onscroll = lazyload;</div><div class="line">    function lazyload() &#123; //监听页面滚动事件</div><div class="line">        let seeHeight = document.documentElement.clientHeight; //可见区域高度</div><div class="line">        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop; //滚动条距离顶部高度</div><div class="line">        for (let i = n; i &lt; num; i++) &#123;</div><div class="line">            // 图片未出现时距离顶部的距离大于滚动条距顶部的距离+可视区的高度</div><div class="line">            if (img[i].offsetTop &lt; seeHeight + scrollTop) &#123;</div><div class="line">                if (img[i].getAttribute(&quot;src&quot;) == &quot;&quot;) &#123;</div><div class="line">                    img[i].src = img[i].getAttribute(&quot;data-src&quot;);</div><div class="line">                &#125;</div><div class="line">                n = i + 1;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    &#125;)()</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="使用节流函数进行优化"><a href="#使用节流函数进行优化" class="headerlink" title="使用节流函数进行优化"></a>使用节流函数进行优化</h2><p>如果直接将函数绑定在scroll事件上，当页面滚动时，函数会被高频触发，这非常影响浏览器的性能。</p>
+<p>同时还有以下场景往往由于事件频繁被触发，因而频繁执行DOM操作、资源加载等重行为，导致UI停顿甚至浏览器崩溃。</p>
+<p>1.window对象的resize、scroll事件</p>
+<p>2.拖拽时的mousemove事件</p>
+<p>3.射击游戏中的mousedown、keydown事件</p>
+<p>4.文字输入、自动完成的keyup事件</p>
+<p>解决这个问题的方法有去抖动和节流的方法</p>
+<ul>
+<li>去抖动原理： 当调用动作n毫秒后，才会执行该动作，若在这n毫秒内又调用此动作则将重新计算执行时间。</li>
+</ul>
+<blockquote>
+<p>不足:当我一直滚动鼠标的时候，lazyload函数就会不断被延迟，这样只有停下来的时候才会执行，那么再有些需要及时显示的情况下，就显得不那么友好了</p>
+</blockquote>
+<ul>
+<li>节流原理：预设一个执行周期，如果这个周期结束了都还没触发函数，那就会执行一次函数；如果这个周期还没结束就触发了函数，那定时器将重置，开始新周期。</li>
+</ul>
+<blockquote>
+<p>达到了想要的效果，既没有频繁的执行也没有延迟执行</p>
+</blockquote>
+<p>详细可看此文<br><a href="http://www.jianshu.com/p/4f3e2c8f5e95" target="_blank" rel="external">关于js函数节流和去抖动</a></p>
+<h2 id="运用节流函数的图片懒加载代码"><a href="#运用节流函数的图片懒加载代码" class="headerlink" title="运用节流函数的图片懒加载代码"></a>运用节流函数的图片懒加载代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</div><div class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;style&gt;</div><div class="line">        img &#123;</div><div class="line">            display: block;</div><div class="line">            margin-bottom: 50px;</div><div class="line">            width: 400px;</div><div class="line">            height: 400px;</div><div class="line">        &#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">     &lt;img src=&quot;&quot; data-src=&quot;http://pic.58pic.com/58pic/17/18/97/01U58PIC4Xr_1024.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://cover.read.duokan.com/mfsv2/download/fdsc3/p01N203pHTU7/Wr5314kcLAtVCi.jpg!t&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://77fkxu.com1.z0.glb.clouddn.com/20160308/1457402219_73571.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://pic1.cxtuku.com/00/16/18/b3809a2ba0f3.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://img.bitscn.com/upimg/allimg/c150708/14363B06253120-6060O.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://cover.read.duokan.com/mfsv2/download/fdsc3/p015trgKM7vw/H0iyDPPneOVrA4.jpg!t&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://imgsrc.baidu.com/baike/pic/item/2f9cbdcc5e0bcf5c00e9283b.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    (function()&#123;</div><div class="line">    let num = document.getElementsByTagName(&apos;img&apos;).length;</div><div class="line">    let img = document.getElementsByTagName(&quot;img&quot;);</div><div class="line">    let n = 0; //存储图片加载到的位置，避免每次都从第一张图片开始遍历</div><div class="line">    lazyload(); //页面载入完毕加载可是区域内的图片</div><div class="line">    function lazyload() &#123; //监听页面滚动事件</div><div class="line">        let seeHeight = document.documentElement.clientHeight; //可见区域高度</div><div class="line">        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop; //滚动条距离顶部高度</div><div class="line">        for (let i = n; i &lt; num; i++) &#123;</div><div class="line">            // 图片未出现时距离顶部的距离大于滚动条距顶部的距离+可视区的高度</div><div class="line">            if (img[i].offsetTop &lt; seeHeight + scrollTop) &#123;</div><div class="line">                if (img[i].getAttribute(&quot;src&quot;) == &quot;&quot;) &#123;</div><div class="line">                    img[i].src = img[i].getAttribute(&quot;data-src&quot;);</div><div class="line">                &#125;</div><div class="line">                n = i + 1;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    采用了节流函数</div><div class="line">        function throttle(fun, delay, time) &#123;</div><div class="line">    let timeout,</div><div class="line">        startTime = new Date();</div><div class="line">    return function() &#123;</div><div class="line">        let context = this,</div><div class="line">            args = arguments,</div><div class="line">            curTime = new Date();</div><div class="line">        clearTimeout(timeout);</div><div class="line">        // 如果达到了规定的触发时间间隔，触发 handler</div><div class="line">        if (curTime - startTime &gt;= time) &#123;</div><div class="line">            fun.apply(context, args);</div><div class="line">            startTime = curTime;</div><div class="line">            // 没达到触发间隔，重新设定定时器</div><div class="line">        &#125; else &#123;</div><div class="line">            timeout = setTimeout(fun, delay);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line">window.addEventListener(&apos;scroll&apos;,throttle(lazyload,500,1000));</div><div class="line">    &#125;)()</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1521,145 +1686,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/26/关于自执行函数（立即执行函数）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hxvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hxvin的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/26/关于自执行函数（立即执行函数）/" itemprop="url">
-                  关于自执行函数（立即执行函数）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T23:42:12+08:00">
-                2017-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/04/26/关于自执行函数（立即执行函数）/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/04/26/关于自执行函数（立即执行函数）/" class="cy_cmt_count" data-xid="2017/04/26/关于自执行函数（立即执行函数）/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="什么是自执行函数？"><a href="#什么是自执行函数？" class="headerlink" title="什么是自执行函数？"></a>什么是自执行函数？</h3><p>一下有三种写法</p>
-<p>1.最前最后加括号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(function()&#123;alert(1);&#125;());</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>这种方法好处是能提醒阅读代码的人，这段代码是一个整体。 坏处是前面的代码行后记得加分号，不然会报错。如：</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/26/关于自执行函数（立即执行函数）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1709,7 +1735,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
