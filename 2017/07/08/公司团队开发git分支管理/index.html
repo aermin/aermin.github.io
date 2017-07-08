@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习笔记,JavaScript,算法," />
+  <meta name="keywords" content="工具使用,实习日记," />
 
 
 
@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要">
-<meta name="keywords" content="学习笔记,JavaScript,算法">
+<meta name="description" content="前言 从台湾回来那天刚好HR姐姐通知我隔天去公司面试，经过一下午四个面试官的面试之后(讲道理我司面试效率很高👍)，开心地收到公司的实习offer，现在懵逼地上了一周的班。。。。。懵逼的原因是自己太菜了。公司的前端要求具备全栈能力，而我不懂后端吗，所以增哥让我这几天学下php，yaf(php框架)，koa(node js框架)。然后就是熟悉团队开发流程，前端，后端，测试，运维。。。git分支管理代">
+<meta name="keywords" content="工具使用,实习日记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="冒泡排序">
-<meta property="og:url" content="http://yoursite.com/2017/04/29/冒泡排序/index.html">
+<meta property="og:title" content="公司团队开发git分支管理">
+<meta property="og:url" content="http://yoursite.com/2017/07/08/公司团队开发git分支管理/index.html">
 <meta property="og:site_name" content="Hxvin的博客">
-<meta property="og:description" content="冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要">
-<meta property="og:updated_time" content="2017-05-10T03:42:53.000Z">
+<meta property="og:description" content="前言 从台湾回来那天刚好HR姐姐通知我隔天去公司面试，经过一下午四个面试官的面试之后(讲道理我司面试效率很高👍)，开心地收到公司的实习offer，现在懵逼地上了一周的班。。。。。懵逼的原因是自己太菜了。公司的前端要求具备全栈能力，而我不懂后端吗，所以增哥让我这几天学下php，yaf(php框架)，koa(node js框架)。然后就是熟悉团队开发流程，前端，后端，测试，运维。。。git分支管理代">
+<meta property="og:updated_time" content="2017-07-08T03:32:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="冒泡排序">
-<meta name="twitter:description" content="冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要">
+<meta name="twitter:title" content="公司团队开发git分支管理">
+<meta name="twitter:description" content="前言 从台湾回来那天刚好HR姐姐通知我隔天去公司面试，经过一下午四个面试官的面试之后(讲道理我司面试效率很高👍)，开心地收到公司的实习offer，现在懵逼地上了一周的班。。。。。懵逼的原因是自己太菜了。公司的前端要求具备全栈能力，而我不懂后端吗，所以增哥让我这几天学下php，yaf(php框架)，koa(node js框架)。然后就是熟悉团队开发流程，前端，后端，测试，运维。。。git分支管理代">
 
 
 
@@ -130,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/29/冒泡排序/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/08/公司团队开发git分支管理/"/>
 
 
 
 
 
-  <title>冒泡排序 | Hxvin的博客</title>
+  <title>公司团队开发git分支管理 | Hxvin的博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -289,7 +289,7 @@
   
 
   <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/29/冒泡排序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/08/公司团队开发git分支管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hxvin">
@@ -310,7 +310,7 @@
             
             
               
-                冒泡排序
+                公司团队开发git分支管理
               
             
           </h1>
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-29T17:46:44+08:00">
-                2017-04-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-08T10:48:02+08:00">
+                2017-07-08
               </time>
             
 
@@ -345,8 +345,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/04/29/冒泡排序/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/04/29/冒泡排序/" itemprop="commentsCount"></span>
+                <a href="/2017/07/08/公司团队开发git分支管理/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/07/08/公司团队开发git分支管理/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -371,11 +371,17 @@
       
 
       
-        <p>冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。<br>在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。<br>冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算<br>因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要交换的可能，也可以把最好的复杂度降低到O(n)。在这个情况，已经排序好的数列就无交换的需要。若在每次走访数列时，把走访顺序反过来，也可以稍微地改进效率。有时候称为鸡尾酒排序，因为算法会从数列的一端到另一端之间穿梭往返。</p>
-<a id="more"></a>
-<p>冒泡排序算法的运作如下：（两个for循环差不多搞定）</p>
-<p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。<br>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。<br>针对所有的元素重复以上的步骤，除了最后一个。<br>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。<br>由于它的简洁，冒泡排序通常被用来对于程序设计入门的学生介绍算法的概念。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function bubbleSort(arr)&#123;</div><div class="line">if(arr.length&lt;=1)&#123;</div><div class="line"> return arr;</div><div class="line"> &#125;</div><div class="line"> for(var j=0;j&lt;arr.length;j++)&#123;</div><div class="line">     for( var i = 0; i&lt;arr.length-j;i++)&#123;</div><div class="line">         if(arr[i] &gt; arr[i+1])&#123; </div><div class="line">             var num = arr[i];</div><div class="line">             arr[i] = arr[i+1];</div><div class="line">             arr[i+1] = num;</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      return arr;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 从台湾回来那天刚好HR姐姐通知我隔天去公司面试，经过一下午四个面试官的面试之后(讲道理我司面试效率很高👍)，开心地收到公司的实习offer，现在懵逼地上了一周的班。。。。。懵逼的原因是自己太菜了。公司的前端要求具备全栈能力，而我不懂后端吗，所以增哥让我这几天学下php，yaf(php框架)，koa(node js框架)。然后就是熟悉团队开发流程，前端，后端，测试，运维。。。git分支管理代码提交。。。。等，新奇的一周，好多技术可以学，好开心，哈哈哈~~(这里着重感谢增哥大神不厌其烦地指导我)</p>
+ <a id="more"></a>
+<h2 id="git分支管理策略学习"><a href="#git分支管理策略学习" class="headerlink" title="git分支管理策略学习"></a>git分支管理策略学习</h2><p>这里可以看看廖雪峰老师写的教程，写得挺好的。<br><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013758410364457b9e3d821f4244beb0fd69c61a185ae0000" target="_blank" rel="external">廖雪峰git分支管理策略</a></p>
+<h2 id="我们的git分支管理流程"><a href="#我们的git分支管理流程" class="headerlink" title="我们的git分支管理流程"></a>我们的git分支管理流程</h2><p>git分支管理对团队协作开发真的好用，我们是这样做的。</p>
+<p>1.把项目clone到本地，然后建一个自己的子分支，自己就在子分支上写你的代码；</p>
+<p>2.写完了提交(commit)</p>
+<p>3.把dev分支合并(merge)到自己的分支上看有没有冲突，这样如果有冲突就直接在自己的分支上解决掉</p>
+<p>4.check out到dev分支，把自己没问题的分支合并(merge)到dev分支上</p>
+<p>5.push dev分支</p>
+<p>6.你的上级check一下，觉得没问题就合并到origin</p>
+
       
     </div>
 
@@ -404,11 +410,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            <a href="/tags/工具使用/" rel="tag"># 工具使用</a>
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-          
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/实习日记/" rel="tag"># 实习日记</a>
           
         </div>
       
@@ -421,18 +425,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/08/Vue学习/" rel="next" title="Vue学习">
-                <i class="fa fa-chevron-left"></i> Vue学习
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/29/轻松学习JS快速排序-QuickSort/" rel="prev" title="轻松学习JS快速排序(QuickSort)">
-                轻松学习JS快速排序(QuickSort) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/24/图片懒加载及节流函数优化性能/" rel="prev" title="图片懒加载及节流函数优化性能">
+                图片懒加载及节流函数优化性能 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -482,8 +482,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg"
@@ -581,6 +590,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git分支管理策略学习"><span class="nav-number">2.</span> <span class="nav-text">git分支管理策略学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们的git分支管理流程"><span class="nav-number">3.</span> <span class="nav-text">我们的git分支管理流程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
