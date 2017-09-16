@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/15/记录下node项目部署上线的过程及坑/index.html">
 <meta property="og:site_name" content="Hxvin的博客">
 <meta property="og:description" content="前言这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填坑。。。。。。现在趁还记得一些，记录一下，免得下次忘了 nodejs写爬虫，论坛系统说到nodejs，肯定离不开异步，我在项目中用的是promise+async/await这一套异步方案 async/await是写异步代码的新方式，以前的方法有回调函数和P">
-<meta property="og:updated_time" content="2017-09-16T15:03:15.000Z">
+<meta property="og:updated_time" content="2017-09-16T15:10:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录下node项目部署上线的过程及坑">
 <meta name="twitter:description" content="前言这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填坑。。。。。。现在趁还记得一些，记录一下，免得下次忘了 nodejs写爬虫，论坛系统说到nodejs，肯定离不开异步，我在项目中用的是promise+async/await这一套异步方案 async/await是写异步代码的新方式，以前的方法有回调函数和P">
@@ -421,7 +421,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># rpm -qa |grep mariadb</div></pre></td></tr></table></figure>
 <p>参考：<br><a href="https://www.howtoing.com/how-to-install-mysql-on-centos-7/" target="_blank" rel="external">文章1</a><br><a href="http://www.cnblogs.com/starof/p/4680083.html" target="_blank" rel="external">文章2</a></p>
 <p>然后要修改mysql可以查这些语法<br><a href="http://www.cnblogs.com/719907411hl/p/6558987.html" target="_blank" rel="external">链接</a></p>
+<p>附带一个定心丸，如果mysql安装失败了要先彻底删除mysql</p>
+<p>用这方法-&gt; <a href="http://blog.duicode.com/1529.html" target="_blank" rel="external">centos下彻底删除MYSQL 和重新安装MYSQL</a></p>
 <p>另外一个看起来还可以的<a href="http://www.jb51.net/article/107075.htm" target="_blank" rel="external">教程</a></p>
+<p>这里我还用了pm2这个进程管理器，证进程永远都活着（刚好外加一些模块可以让我的爬虫程序每天定时爬取）<br>安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g pm2</div></pre></td></tr></table></figure>
+<p>启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start app.js</div></pre></td></tr></table></figure>
+<p>其他pm2<a href="http://www.nodeclass.com/articles/89283" target="_blank" rel="external">指令教程</a></p>
 
       
     </div>
