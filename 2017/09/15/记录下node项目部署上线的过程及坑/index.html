@@ -1,0 +1,1066 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="开发总结,NODE,运维," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hxvin的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填坑。。。。。。现在趁还记得一些，记录一下，免得下次忘了 nodejs写爬虫，论坛系统说到nodejs，肯定离不开异步，我在项目中用的是promise+async/await这一套异步方案 async/await是写异步代码的新方式，以前的方法有回调函数和P">
+<meta name="keywords" content="开发总结,NODE,运维">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录下node项目部署上线的过程及坑">
+<meta property="og:url" content="http://yoursite.com/2017/09/15/记录下node项目部署上线的过程及坑/index.html">
+<meta property="og:site_name" content="Hxvin的博客">
+<meta property="og:description" content="前言这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填坑。。。。。。现在趁还记得一些，记录一下，免得下次忘了 nodejs写爬虫，论坛系统说到nodejs，肯定离不开异步，我在项目中用的是promise+async/await这一套异步方案 async/await是写异步代码的新方式，以前的方法有回调函数和P">
+<meta property="og:updated_time" content="2017-09-16T14:56:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记录下node项目部署上线的过程及坑">
+<meta name="twitter:description" content="前言这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填坑。。。。。。现在趁还记得一些，记录一下，免得下次忘了 nodejs写爬虫，论坛系统说到nodejs，肯定离不开异步，我在项目中用的是promise+async/await这一套异步方案 async/await是写异步代码的新方式，以前的方法有回调函数和P">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/15/记录下node项目部署上线的过程及坑/"/>
+
+
+
+
+
+  <title>记录下node项目部署上线的过程及坑 | Hxvin的博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hxvin的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/记录下node项目部署上线的过程及坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                记录下node项目部署上线的过程及坑
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-15T10:11:32+08:00">
+                2017-09-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/09/15/记录下node项目部署上线的过程及坑/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/09/15/记录下node项目部署上线的过程及坑/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填坑。。。。。。现在趁还记得一些，记录一下，免得下次忘了</p>
+<h3 id="nodejs写爬虫，论坛系统"><a href="#nodejs写爬虫，论坛系统" class="headerlink" title="nodejs写爬虫，论坛系统"></a>nodejs写爬虫，论坛系统</h3><p>说到nodejs，肯定离不开异步，我在项目中用的是<br>promise+async/await这一套异步方案</p>
+<p>async/await是写异步代码的新方式，以前的方法有回调函数和Promise。<br>async/await是基于Promise实现的，它不能用于普通的回调函数。<br>async/await与Promise一样，是非阻塞的。<br>async/await使得异步代码看起来像同步代码，这正是它的魔力所在。</p>
+<p><a href="https://www.zhihu.com/collection/119015788" target="_blank" rel="external">了解回调函数是什么</a></p>
+<p><a href="https://www.zhihu.com/question/19732473/answer/20851256" target="_blank" rel="external">了解异步与同步，阻塞与非阻塞</a></p>
+<p><a href="https://blog.fundebug.com/2017/04/04/nodejs-async-await/" target="_blank" rel="external">Async/Await替代Promise的6个理由</a></p>
+<p><a href="https://cnodejs.org/topic/5640b80d3a6aa72c5e0030b6" target="_blank" rel="external">Async/Await详解</a></p>
+<p>show code：<br>操作mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">let query = function( sql, values ) &#123;</div><div class="line"></div><div class="line">  return new Promise(( resolve, reject ) =&gt; &#123;</div><div class="line">    pool.getConnection(function(err, connection) &#123;</div><div class="line">      if (err) &#123;</div><div class="line">        resolve( err )</div><div class="line">      &#125; else &#123;</div><div class="line">        connection.query(sql, values, ( err, rows) =&gt; &#123;</div><div class="line"></div><div class="line">          if ( err ) &#123;</div><div class="line">            reject( err )</div><div class="line">          &#125; else &#123;</div><div class="line">            resolve( rows )</div><div class="line">          &#125;</div><div class="line">          connection.release()</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;)</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">let findDataByUser = function (  name ) &#123;</div><div class="line">  let _sql = `</div><div class="line">    SELECT * from posts</div><div class="line">      where name=&quot;$&#123;name&#125;&quot;</div><div class="line">      `</div><div class="line">  return query( _sql)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>控制器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Post:async(ctx,next)=&gt;&#123;</div><div class="line">    if (ctx.request.querystring)</div><div class="line">	 &#123;				</div><div class="line"></div><div class="line">		await userModel.findDataByUser(decodeURIComponent(ctx.request.querystring.split(&apos;=&apos;)[1]))</div><div class="line">			.then(result=&gt;&#123;	</div><div class="line">					 var string=JSON.stringify(result); </div><div class="line">					   res=JSON.parse(string).reverse();</div><div class="line">			&#125;)</div><div class="line">		await ctx.render(&apos;post&apos;,&#123;</div><div class="line">				session:ctx.session,</div><div class="line">				posts:res	</div><div class="line">			&#125;)</div><div class="line">	&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="购买，部署云服务器"><a href="#购买，部署云服务器" class="headerlink" title="购买，部署云服务器"></a>购买，部署云服务器</h3><p>1.服务器购买<br>我买的是京东云的学生机，选的是centos7.2（国内用centos多一点）</p>
+<p>2.服务器登陆<br>通过ssh方式登陆服务器<br>$ ssh root@192.168.1.112     //格式:ssh用户名@公网IP</p>
+<p>3.<a href="https://help.aliyun.com/document_detail/50775.html" target="_blank" rel="external">部署nodejs</a>  / <a href="http://www.jb51.net/article/118493.htm" target="_blank" rel="external">部署nodejs</a><br>ps:部署node环境我使用NVM安装多版本</p>
+<h3 id="上传项目文件"><a href="#上传项目文件" class="headerlink" title="上传项目文件"></a>上传项目文件</h3><p>我用的是FileZilla 这个ftp可视化客户端<br>直接去官网下载安装<br>然后输入主机名（你买的云服务器的公网ip） ，用户名（默认是root），密码（你设的云服务器密码）<br>还有端口22 。然后连接。<br>想上传啥直接拖拽就行了，记得先把项目里的node包删掉，不然文件数量<br>分分钟上万。。。。上传到猴年马月。</p>
+<p>正确姿势-&gt;<br>删除node包，在云服务器中 npm i  </p>
+<h3 id="部署mysql"><a href="#部署mysql" class="headerlink" title="部署mysql"></a>部署mysql</h3><p>如果想简单快速搞定mysql部署的可以用centos6.5<br>centos7以上的版本部署mysql有点麻烦<br>但是呢，对新鲜技术充满鸡血的我还是入坑centos7.2😂</p>
+<p>1.确认你的系统环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># cat /etc/redhat-release</div></pre></td></tr></table></figure>
+<p>2.安装mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#yum install mysql</div><div class="line">#yum install mysql-devel</div><div class="line">#yum install mysql-server</div></pre></td></tr></table></figure>
+<p>如果你是centos7以上版本，你会发现安装mysql-server会失败</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@yl-web yl]# yum install mysql-server</div><div class="line">Loaded plugins: fastestmirror</div><div class="line">Loading mirror speeds from cached hostfile</div><div class="line"> * base: mirrors.sina.cn</div><div class="line"> * extras: mirrors.sina.cn</div><div class="line"> * updates: mirrors.sina.cn</div><div class="line">No package mysql-server available.</div><div class="line">Error: Nothing to do</div></pre></td></tr></table></figure>
+<p>原因是CentOS 7 版本将MySQL数据库软件从默认的程序列表中移除，用mariadb代替了。</p>
+<blockquote>
+<p>解决办法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</div><div class="line"># rpm -ivh mysql-community-release-el7-5.noarch.rpm</div><div class="line"># yum install mysql-community-server</div></pre></td></tr></table></figure>
+<p>安装成功后重启mysql服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># service mysqld restart</div></pre></td></tr></table></figure>
+<p>初次安装mysql，root账户没有密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">[root@yl-web yl]# mysql -u root </div><div class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</div><div class="line">Your MySQL connection id is 3</div><div class="line">Server version: 5.6.26 MySQL Community Server (GPL)</div><div class="line"></div><div class="line">Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.</div><div class="line"></div><div class="line">Oracle is a registered trademark of Oracle Corporation and/or its</div><div class="line">affiliates. Other names may be trademarks of their respective</div><div class="line">owners.</div><div class="line"></div><div class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</div><div class="line"></div><div class="line">mysql&gt; show databases;</div><div class="line">+--------------------+</div><div class="line">| Database           |</div><div class="line">+--------------------+</div><div class="line">| information_schema |</div><div class="line">| mysql              |</div><div class="line">| performance_schema |</div><div class="line">| test               |</div><div class="line">+--------------------+</div><div class="line">4 rows in set (0.01 sec)</div><div class="line"></div><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<p>设置密码方案1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysql&gt; set password for &apos;root&apos;@&apos;localhost&apos; =password(&apos;password&apos;);</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<p>不需要重启数据库即可生效。</p>
+<p>设置密码方案2（此方案将提高mysql安全性）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mysql_secure_installation</div></pre></td></tr></table></figure>
+<p>这将提示您输入默认的根密码。一旦您输入，您将需要更改它。<br>接下去选择yes or no参考这个<a href="http://www.jb51.net/article/35426.htm" target="_blank" rel="external">连接</a></p>
+<p>登录mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mysql -u root -p</div></pre></td></tr></table></figure>
+<p>输入密码</p>
+<p>如果是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<p>则说明没问题了</p>
+<p>最后mariadb自动替换了，将不再生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># rpm -qa |grep mariadb</div></pre></td></tr></table></figure>
+<p>参考：<br><a href="https://www.howtoing.com/how-to-install-mysql-on-centos-7/" target="_blank" rel="external">文章1</a><br><a href="http://www.cnblogs.com/starof/p/4680083.html" target="_blank" rel="external">文章2</a></p>
+<p>然后要修改mysql可以查这些语法<br><a href="http://www.cnblogs.com/719907411hl/p/6558987.html" target="_blank" rel="external">链接</a></p>
+<p>另外一个看起来还可以的<a href="http://www.jb51.net/article/107075.htm" target="_blank" rel="external">教程</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发总结/" rel="tag"># 开发总结</a>
+          
+            <a href="/tags/NODE/" rel="tag"># NODE</a>
+          
+            <a href="/tags/运维/" rel="tag"># 运维</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/10/对付反爬虫战略/" rel="prev" title="对付反爬虫战略">
+                对付反爬虫战略 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg"
+               alt="Hxvin" />
+          <p class="site-author-name" itemprop="name">Hxvin</p>
+           
+              <p class="site-description motion-element" itemprop="description">做最努力的FE</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Hxvin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:13055503310@163.com" target="_blank" title="email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  email
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.hxvin.me/-demo-practice-/weixincontact/weixincontact.html" target="_blank" title="微信">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微信
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/64d96b36bbc5" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs写爬虫，论坛系统"><span class="nav-number">2.</span> <span class="nav-text">nodejs写爬虫，论坛系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#购买，部署云服务器"><span class="nav-number">3.</span> <span class="nav-text">购买，部署云服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传项目文件"><span class="nav-number">4.</span> <span class="nav-text">上传项目文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署mysql"><span class="nav-number">5.</span> <span class="nav-text">部署mysql</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hxvin</span>
+</div>
+
+
+<div class="powered-by">
+   <a class="theme-link" href="https://github.com/Hxvin">github互动</a> 
+</div>
+
+<div class="theme-info">
+  学无止境 
+  
+</div>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysXCghbr';
+      var conf = 'c9c5c4144766cfcea9c2ab8b6a44650c';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            var resultItems = [];
+            if (this.value.trim().length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCountInArticle = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCountInArticle = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  var resultItem = '';
+
+                  function highlightKeyword(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+
+                    var matchText = text.substring(start, end);
+                    var matchResult = [];
+                    var prevEnd = 0;
+                    while (position + word.length <= end && index.length != 0) {
+
+                      // highlight keyword
+
+                      var wordBegin = position - start;
+                      var wordEnd = position - start + word.length;
+                      matchResult.push(matchText.substring(prevEnd, wordBegin));
+                      matchResult.push("<b class=\"search-keyword\">" + matchText.substring(wordBegin, wordEnd) + "</b>");
+
+                      // move to next position of hit
+
+                      index.pop();
+                      prevEnd = wordEnd;
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (prevEnd > position - start) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    matchResult.push(matchText.substring(prevEnd));
+                    return matchResult.join('');
+                  }
+
+                  // sort index by position of keyword
+
+                  indexOfTitle.sort(function (itemLeft, itemRight) {
+                    return itemRight.position - itemLeft.position;
+                  });
+
+                  indexOfContent.sort(function (itemLeft, itemRight) {
+                    return itemRight.position - itemLeft.position;
+                  });
+
+                  // highlight title
+
+                  if (indexOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, 0, title.length, indexOfTitle) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  // highlight content
+
+                  var resultUpperBound = parseInt(1);
+                  var withoutUpperBound = false;
+                  if (resultUpperBound === -1) {
+                    withoutUpperBound = true;
+                  }
+                  var currentResultNum = 0;
+                  while (indexOfContent.length != 0 && (withoutUpperBound || (currentResultNum < resultUpperBound))) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                    "<p class=\"search-result\">" + highlightKeyword(content, start, end, indexOfContent) +
+                    "...</p>" + "</a>";
+                    currentResultNum++;
+                  }
+                  resultItem += "</li>";
+                  resultItems.push({item: resultItem, hitCount: hitCountInArticle, id: resultItems.length});
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              $resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              $resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.hitCount != resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultLeft.id - resultRight.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result, i) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              $resultContent.innerHTML = searchResultList;
+            }
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

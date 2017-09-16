@@ -289,6 +289,745 @@
   
 
   <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/记录下node项目部署上线的过程及坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/15/记录下node项目部署上线的过程及坑/" itemprop="url">
+                  记录下node项目部署上线的过程及坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-15T10:11:32+08:00">
+                2017-09-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/09/15/记录下node项目部署上线的过程及坑/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/09/15/记录下node项目部署上线的过程及坑/" class="cy_cmt_count" data-xid="2017/09/15/记录下node项目部署上线的过程及坑/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填坑。。。。。。现在趁还记得一些，记录一下，免得下次忘了</p>
+<h3 id="nodejs写爬虫，论坛系统"><a href="#nodejs写爬虫，论坛系统" class="headerlink" title="nodejs写爬虫，论坛系统"></a>nodejs写爬虫，论坛系统</h3><p>说到nodejs，肯定离不开异步，我在项目中用的是<br>promise+async/await这一套异步方案</p>
+<p>async/await是写异步代码的新方式，以前的方法有回调函数和Promise。<br>async/await是基于Promise实现的，它不能用于普通的回调函数。<br>async/await与Promise一样，是非阻塞的。<br>async/await使得异步代码看起来像同步代码，这正是它的魔力所在。</p>
+<p><a href="https://www.zhihu.com/collection/119015788" target="_blank" rel="external">了解回调函数是什么</a></p>
+<p><a href="https://www.zhihu.com/question/19732473/answer/20851256" target="_blank" rel="external">了解异步与同步，阻塞与非阻塞</a></p>
+<p><a href="https://blog.fundebug.com/2017/04/04/nodejs-async-await/" target="_blank" rel="external">Async/Await替代Promise的6个理由</a></p>
+<p><a href="https://cnodejs.org/topic/5640b80d3a6aa72c5e0030b6" target="_blank" rel="external">Async/Await详解</a></p>
+<p>show code：<br>操作mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">let query = function( sql, values ) &#123;</div><div class="line"></div><div class="line">  return new Promise(( resolve, reject ) =&gt; &#123;</div><div class="line">    pool.getConnection(function(err, connection) &#123;</div><div class="line">      if (err) &#123;</div><div class="line">        resolve( err )</div><div class="line">      &#125; else &#123;</div><div class="line">        connection.query(sql, values, ( err, rows) =&gt; &#123;</div><div class="line"></div><div class="line">          if ( err ) &#123;</div><div class="line">            reject( err )</div><div class="line">          &#125; else &#123;</div><div class="line">            resolve( rows )</div><div class="line">          &#125;</div><div class="line">          connection.release()</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;)</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">let findDataByUser = function (  name ) &#123;</div><div class="line">  let _sql = `</div><div class="line">    SELECT * from posts</div><div class="line">      where name=&quot;$&#123;name&#125;&quot;</div><div class="line">      `</div><div class="line">  return query( _sql)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>控制器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Post:async(ctx,next)=&gt;&#123;</div><div class="line">    if (ctx.request.querystring)</div><div class="line">	 &#123;				</div><div class="line"></div><div class="line">		await userModel.findDataByUser(decodeURIComponent(ctx.request.querystring.split(&apos;=&apos;)[1]))</div><div class="line">			.then(result=&gt;&#123;	</div><div class="line">					 var string=JSON.stringify(result); </div><div class="line">					   res=JSON.parse(string).reverse();</div><div class="line">			&#125;)</div><div class="line">		await ctx.render(&apos;post&apos;,&#123;</div><div class="line">				session:ctx.session,</div><div class="line">				posts:res	</div><div class="line">			&#125;)</div><div class="line">	&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="购买，部署云服务器"><a href="#购买，部署云服务器" class="headerlink" title="购买，部署云服务器"></a>购买，部署云服务器</h3><p>1.服务器购买<br>我买的是京东云的学生机，选的是centos7.2（国内用centos多一点）</p>
+<p>2.服务器登陆<br>通过ssh方式登陆服务器<br>$ ssh root@192.168.1.112     //格式:ssh用户名@公网IP</p>
+<p>3.<a href="https://help.aliyun.com/document_detail/50775.html" target="_blank" rel="external">部署nodejs</a>  / <a href="http://www.jb51.net/article/118493.htm" target="_blank" rel="external">部署nodejs</a><br>ps:部署node环境我使用NVM安装多版本</p>
+<h3 id="上传项目文件"><a href="#上传项目文件" class="headerlink" title="上传项目文件"></a>上传项目文件</h3><p>我用的是FileZilla 这个ftp可视化客户端<br>直接去官网下载安装<br>然后输入主机名（你买的云服务器的公网ip） ，用户名（默认是root），密码（你设的云服务器密码）<br>还有端口22 。然后连接。<br>想上传啥直接拖拽就行了，记得先把项目里的node包删掉，不然文件数量<br>分分钟上万。。。。上传到猴年马月。</p>
+<p>正确姿势-&gt;<br>删除node包，在云服务器中 npm i  </p>
+<h3 id="部署mysql"><a href="#部署mysql" class="headerlink" title="部署mysql"></a>部署mysql</h3><p>如果想简单快速搞定mysql部署的可以用centos6.5<br>centos7以上的版本部署mysql有点麻烦<br>但是呢，对新鲜技术充满鸡血的我还是入坑centos7.2😂</p>
+<p>1.确认你的系统环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># cat /etc/redhat-release</div></pre></td></tr></table></figure>
+<p>2.安装mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#yum install mysql</div><div class="line">#yum install mysql-devel</div><div class="line">#yum install mysql-server</div></pre></td></tr></table></figure>
+<p>如果你是centos7以上版本，你会发现安装mysql-server会失败</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@yl-web yl]# yum install mysql-server</div><div class="line">Loaded plugins: fastestmirror</div><div class="line">Loading mirror speeds from cached hostfile</div><div class="line"> * base: mirrors.sina.cn</div><div class="line"> * extras: mirrors.sina.cn</div><div class="line"> * updates: mirrors.sina.cn</div><div class="line">No package mysql-server available.</div><div class="line">Error: Nothing to do</div></pre></td></tr></table></figure>
+<p>原因是CentOS 7 版本将MySQL数据库软件从默认的程序列表中移除，用mariadb代替了。</p>
+<blockquote>
+<p>解决办法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</div><div class="line"># rpm -ivh mysql-community-release-el7-5.noarch.rpm</div><div class="line"># yum install mysql-community-server</div></pre></td></tr></table></figure>
+<p>安装成功后重启mysql服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># service mysqld restart</div></pre></td></tr></table></figure>
+<p>初次安装mysql，root账户没有密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">[root@yl-web yl]# mysql -u root </div><div class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</div><div class="line">Your MySQL connection id is 3</div><div class="line">Server version: 5.6.26 MySQL Community Server (GPL)</div><div class="line"></div><div class="line">Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.</div><div class="line"></div><div class="line">Oracle is a registered trademark of Oracle Corporation and/or its</div><div class="line">affiliates. Other names may be trademarks of their respective</div><div class="line">owners.</div><div class="line"></div><div class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</div><div class="line"></div><div class="line">mysql&gt; show databases;</div><div class="line">+--------------------+</div><div class="line">| Database           |</div><div class="line">+--------------------+</div><div class="line">| information_schema |</div><div class="line">| mysql              |</div><div class="line">| performance_schema |</div><div class="line">| test               |</div><div class="line">+--------------------+</div><div class="line">4 rows in set (0.01 sec)</div><div class="line"></div><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<p>设置密码方案1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysql&gt; set password for &apos;root&apos;@&apos;localhost&apos; =password(&apos;password&apos;);</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<p>不需要重启数据库即可生效。</p>
+<p>设置密码方案2（此方案将提高mysql安全性）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mysql_secure_installation</div></pre></td></tr></table></figure>
+<p>这将提示您输入默认的根密码。一旦您输入，您将需要更改它。<br>接下去选择yes or no参考这个<a href="http://www.jb51.net/article/35426.htm" target="_blank" rel="external">连接</a></p>
+<p>登录mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mysql -u root -p</div></pre></td></tr></table></figure>
+<p>输入密码</p>
+<p>如果是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<p>则说明没问题了</p>
+<p>最后mariadb自动替换了，将不再生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># rpm -qa |grep mariadb</div></pre></td></tr></table></figure>
+<p>参考：<br><a href="https://www.howtoing.com/how-to-install-mysql-on-centos-7/" target="_blank" rel="external">文章1</a><br><a href="http://www.cnblogs.com/starof/p/4680083.html" target="_blank" rel="external">文章2</a></p>
+<p>然后要修改mysql可以查这些语法<br><a href="http://www.cnblogs.com/719907411hl/p/6558987.html" target="_blank" rel="external">链接</a></p>
+<p>另外一个看起来还可以的<a href="http://www.jb51.net/article/107075.htm" target="_blank" rel="external">教程</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/10/对付反爬虫战略/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/10/对付反爬虫战略/" itemprop="url">
+                  对付反爬虫战略
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T23:50:00+08:00">
+                2017-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/09/10/对付反爬虫战略/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/09/10/对付反爬虫战略/" class="cy_cmt_count" data-xid="2017/09/10/对付反爬虫战略/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>反爬思路：</p>
+<p>1.设置10s请求一次（这边还可以对请求头处理假装浏览器访问）</p>
+<p>500个请求</p>
+<p>1.4个小时，还行，对请求数量不多刚好可用</p>
+<p>2.对付验证码</p>
+<p>接入打码平台。</p>
+<p>下载验证码  上传验证码 </p>
+<p>获取验证码字符  填写验证码</p>
+<p>说起爬虫，真是磕磕绊绊…</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/10/对付反爬虫战略/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/了解前后端开发，mvc模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/28/了解前后端开发，mvc模式/" itemprop="url">
+                  前后端开发，mvc模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-28T10:21:32+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/08/28/了解前后端开发，mvc模式/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/08/28/了解前后端开发，mvc模式/" class="cy_cmt_count" data-xid="2017/08/28/了解前后端开发，mvc模式/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>实习两个月除了写前端，还写了点后端(nodejs，php)，前阶段自己也写了个前后端的项目，不过没开源。现在记录下自己对全端开发的个人心得(菜鸟入门级别的，错了请大佬们指导更正)。</p>
+<p>感觉不管是php还是nodejs，都是差不多的，大概的作用是处理前端的数据请求，处理数据，操作数据库，把数据返回给前端。</p>
+<p>用mvc模式去写一个全端站点。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/28/了解前后端开发，mvc模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/08/解决非chrome浏览器（移动端适用）后退刷新问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/08/解决非chrome浏览器（移动端适用）后退刷新问题/" itemprop="url">
+                  解决非chrome浏览器（移动端适用）后退刷新问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-08T10:10:32+08:00">
+                2017-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/08/08/解决非chrome浏览器（移动端适用）后退刷新问题/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/08/08/解决非chrome浏览器（移动端适用）后退刷新问题/" class="cy_cmt_count" data-xid="2017/08/08/解决非chrome浏览器（移动端适用）后退刷新问题/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>写页面时你可能会遇到这个问题，就是用Firefox，Safari，IE等非chrome浏览器，点击浏览器自带的返回键会发现不会刷新页面，因为那时js代码没有执行。</p>
+<blockquote>
+<p>在网上搜到的有的不能用，有的兼容性很差，故自己想了解决方法，核心是利用setInterval的特性。</p>
+</blockquote>
+<p>这样比如下面这种情形：<br>本来只建了一个二维码，新建了一个</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/08/解决非chrome浏览器（移动端适用）后退刷新问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/" itemprop="url">
+                  react版的抽奖程序&滚动字幕(入门小demo)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-18T20:21:32+08:00">
+                2017-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/" class="cy_cmt_count" data-xid="2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>因项目需求，需要写一个react的抽奖程序和字幕滚动。<br>本来之前用的是vue，没用过react，而项目组框架用的是react，萌新只能弃vue改学用react了</p>
+<p>写完这个入门小demo，也算初识了下react。</p>
+<blockquote>
+<p>老习惯，写了详细的代码注释。</p>
+</blockquote>
+<p><a href="https://github.com/hxvin/draw">demo地址</a></p>
+<p>更新 ======================</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/08/公司团队开发git分支管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -921,781 +1660,10 @@
 
       
         
-          
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。<br>这是一个基于<code>vue+vue-cli+vue-router+axios+webpack</code>开发的vue社区<code>SPA</code>;UI用<code>Muse-UI</code>;css用<code>scss</code>，<code>flex</code>布局，<code>rem</code>做移动端适配，最终效果电脑端移动端都适配。</p>
-<p>如果你和我一样用vue还挺生疏的，那好好做完这个项目，会学到很多东西，能有挺大的进步，还可以自己加功能，一起(๑•̀ㅂ•́)و✧加油。</p>
-<p>如果对您有帮助，请给一个<code>star</code>鼓励一下萌新，感谢 ^ ^<br>如果您也是前端萌新，来互相follow互相学习，一起进步呀。</p>
-<blockquote>
-<p>建议先去社区<a href="https://www.vue-js.com/signup" target="_blank" rel="external">注册</a>拿accesstoken登录体验(注册可以直接用github账号，挺快的)</p>
-</blockquote>
-<p><a href="http://www.hxvin.me/vue-home/dist/" target="_blank" rel="external">demo</a></p>
-<p><a href="http://ooytyiziz.bkt.clouddn.com/vue-home.gif" target="_blank" rel="external">点击查看gif动图展示</a></p>
-<p><a href="https://github.com/Hxvin/vue-home" target="_blank" rel="external">github项目地址</a> </p>
-<p><a href="https://www.vue-js.com/api/" target="_blank" rel="external">项目API</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/5287253-ea6d4e5ec360acb6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="手机扫描查看效果"></p>
-<blockquote>
-<p>完成功能</p>
-</blockquote>
-<ul>
-<li>[x] 首页列表</li>
-<li>[x] 下拉加载</li>
-<li>[x] 用户信息（点击头像）</li>
-<li>[x] 主题内容</li>
-<li>[x] 登录功能</li>
-<li>[x] 收藏（取消收藏）主题</li>
-<li>[x] 评论列表</li>
-<li>[x] 点赞（取消点赞）功能</li>
-<li>[x] 消息中心（已读、未读）</li>
-<li>[x] 个人中心</li>
-<li>[x] 发表评论</li>
-<li>[x] 回复评论</li>
-<li>[x] 发布主题（支持markdown格式,可预览）</li>
-</ul>
-<blockquote>
-<p>todo功能</p>
-<ul>
-<li>[ ] 左右侧滑</li>
-<li>[ ] 搜索功能</li>
-<li>[ ] vuex重构</li>
-</ul>
-</blockquote>
-<h3 id="准备开发环境"><a href="#准备开发环境" class="headerlink" title="准备开发环境"></a>准备开发环境</h3><ul>
-<li>$ npm install -g vue-cli </li>
-<li>$ vue init webpack vue-home</li>
-</ul>
-<p><code>? Project name vue-home
-? Project description vue-home
-? Author afei
-? Vue build standalone
-? Install vue-router? Yes
-? Use ESLint to lint your code? No
-? Setup unit tests with Karma + Mocha? No
-? Setup e2e tests with Nightwatch? No</code></p>
-<ul>
-<li>$ cd vue-home</li>
-<li>$ npm install</li>
-<li>$ npm run dev<br>等写完项目后</li>
-<li>$ npm run build</li>
-<li><blockquote>
-<p>注意：npm run dev 之后 默认浏览器打开的是<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>  请换成<a href="http://localhost:8080/vue-home/dist" target="_blank" rel="external">http://localhost:8080/vue-home/dist</a><br>如果你电脑的8080端口被占用，请congfig/index.js中找到<code>port: 8080</code>修改成8081或者其他可用的端口</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="开始动手"><a href="#开始动手" class="headerlink" title="开始动手"></a>开始动手</h3><h4 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">├── build</div><div class="line">│   ├── build.js</div><div class="line">│   ├── check-versions.js</div><div class="line">│   ├── dev-client.js</div><div class="line">│   ├── dev-server.js</div><div class="line">│   ├── utils.js</div><div class="line">│   ├── vue-loader.conf.js</div><div class="line">│   ├── webpack.base.conf.js</div><div class="line">│   ├── webpack.dev.conf.js</div><div class="line">│   └── webpack.prod.conf.js</div><div class="line">├── config</div><div class="line">│   ├── dev.env.js</div><div class="line">│   ├── index.js</div><div class="line">│   └── prod.env.js</div><div class="line">├── dist                  //等写完项目后 $ npm run build 的打包文件</div><div class="line">│   ├── index.html</div><div class="line">│   └── static</div><div class="line">├── index.html            //首页入口文件</div><div class="line">├── node_modules</div><div class="line">├── package.json          </div><div class="line">├── src</div><div class="line">│   ├── App.vue           //项目入口文件</div><div class="line">│   ├── assets</div><div class="line">│   │   ├── 1495982696.png  //手机扫描二维码</div><div class="line">│   │   ├── logo.png        //vue logo</div><div class="line">│   │   └── sass            //sass通用样式</div><div class="line">│   ├── components          //组件</div><div class="line">│   │   ├── FooterNav.vue   //底部nav组件</div><div class="line">│   │   ├── HeaderBar.vue   //顶部横条</div><div class="line">│   │   ├── HeaderTabs.vue  //顶部tabs组件&amp;主页面内容拉取</div><div class="line">│   │   └── Hello.vue        </div><div class="line">│   ├── main.js             //核心文件 在这里引入了Muse UI 时间过滤器</div><div class="line">│   ├── pages               //页面</div><div class="line">│   │   ├── content.vue     //帖子内容页面  </div><div class="line">│   │   ├── index.vue       //首页</div><div class="line">│   │   ├── login.vue       //登录页面</div><div class="line">│   │   ├── message.vue     //信息通知页面</div><div class="line">│   │   ├── more.vue        </div><div class="line">│   │   ├── my.vue          //个人信息页面</div><div class="line">│   │   ├── people.vue      //社区用户信息页面</div><div class="line">│   │   └── publish.vue     //发布帖子页面(此页面还没写完)</div><div class="line">│   ├── router              //路由与组件配置</div><div class="line">│   │   └── index.js </div><div class="line">│   └── util                //时间过滤器，转换时间格式</div><div class="line">│       └── filter.js</div><div class="line">└── static</div></pre></td></tr></table></figure>
-<h4 id="vue-home-config-index-js"><a href="#vue-home-config-index-js" class="headerlink" title="vue-home/config/index.js"></a>vue-home/config/index.js</h4><p><img src="http://upload-images.jianshu.io/upload_images/5287253-30138bb5cd33b265.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="vue-home/config/index.js图"></p>
-<p><code>assetsPublicPath: &#39;/vue-home/dist&#39;</code></p>
-<blockquote>
-<p>这个公共路径原本为assetsPublicPath: ‘/‘，这样在本地服务器是可以跑，可是打包上传到github后会发现打开的页面是空白的，报错如下图。</p>
-</blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/5287253-82edc72f02251f48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网页加载报错图"></p>
-<p>原因是路径错了，vue-home是项目文件夹名称，dist是npm run build之后出现的文件夹，github上线就是读取dist文件夹而生成的网页（成功展示的demo地址长这样：<a href="http://www.hxvin.me/vue-home/dist/）" target="_blank" rel="external">http://www.hxvin.me/vue-home/dist/）</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/5287253-86ca75ba374431a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="github图"></p>
-<p>解决上线路径问题不知道还有没有其他更方便的解决方法，如果有，请跟我讲下哦</p>
-<blockquote>
-<p>port: 8080 这个是让你改端口的</p>
-</blockquote>
-<h4 id="vue-home-src-App-vue"><a href="#vue-home-src-App-vue" class="headerlink" title="vue-home/src/App.vue"></a>vue-home/src/App.vue</h4><p><img src="http://upload-images.jianshu.io/upload_images/5287253-711de34d2a7e98b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="vue-home/src/App.vue图"></p>
-<p>rem适配移动端，1rem=10px</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">html&#123;</div><div class="line">  font-size: 62.5%;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>建议注释掉这段，不然会然干扰后面的css</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/*text-align: center;*/</div><div class="line">/*color: #2c3e50;</div><div class="line">margin-top: 60px;*/</div></pre></td></tr></table></figure>
-<h4 id="vue-home-index-html"><a href="#vue-home-index-html" class="headerlink" title="/vue-home/index.html"></a>/vue-home/index.html</h4><p><img src="http://upload-images.jianshu.io/upload_images/5287253-6c3ef9e8a11a259b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="/vue-home/index.html图"></p>
-<p>我们是做的移动端，适配web端，所以在index.html里面加上meta</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,user-scalable=0&quot;&gt;</div></pre></td></tr></table></figure>
-<p>用MuseUI的添加之一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&quot;&gt;</div><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot;&gt;</div></pre></td></tr></table></figure>
-<h4 id="vue-home-src-main-js"><a href="#vue-home-src-main-js" class="headerlink" title="vue-home/src/main.js"></a>vue-home/src/main.js</h4><p><img src="http://upload-images.jianshu.io/upload_images/5287253-6dbc7c159543aefc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="vue-home/src/main.js图"></p>
-<p>图中有标识了哪些是用来干嘛的，分别是用MuseUI的添加之一；filters是用来把社区api数据中的时间格式转换成<code>*分钟前``*小时前``*天前</code></p>
-<h4 id="关于新建主题功能"><a href="#关于新建主题功能" class="headerlink" title="关于新建主题功能"></a>关于新建主题功能</h4><p>api上写了需post</p>
-<p>title String 标题</p>
-<p>tab String 目前有 ask share job</p>
-<p>content String 主体内容</p>
-<ul>
-<li>记得还需要传递accesstoken的参数，不然会报403错误（资源不可用）</li>
-</ul>
-<p>markdown格式支持 直接 npm install marked –save  用法详见代码</p>
-<p>（代码好像用文章不方便介绍，我很详细地写了代码注释哦^_^）</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/17/JS函数方法坑与填坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hxvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hxvin的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/17/JS函数方法坑与填坑/" itemprop="url">
-                  JS函数方法坑与填坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-17T13:37:50+08:00">
-                2017-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/05/17/JS函数方法坑与填坑/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/05/17/JS函数方法坑与填坑/" class="cy_cmt_count" data-xid="2017/05/17/JS函数方法坑与填坑/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="首先，先认识下什么叫函数的方法："><a href="#首先，先认识下什么叫函数的方法：" class="headerlink" title="首先，先认识下什么叫函数的方法："></a>首先，先认识下什么叫函数的方法：</h2><p>在一个对象中绑定函数，称为这个对象的方法。</p>
-<h3 id="再给具体的例子："><a href="#再给具体的例子：" class="headerlink" title="再给具体的例子："></a>再给具体的例子：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var xiaoming = &#123;</div><div class="line">    name: &apos;小明&apos;,</div><div class="line">    birth: 1990,</div><div class="line">    age: function () &#123;</div><div class="line">        var y = new Date().getFullYear();</div><div class="line">        return y - this.birth;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">xiaoming.age; // function xiaoming.age()</div><div class="line">xiaoming.age(); // 27</div></pre></td></tr></table></figure>
-<p>xiaoming是一个对象，age（）函数就是该对象的方法。<br>此时this指向xiaoming</p>
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。<br>这是一个基于<code>vue+vue-cli+vue-router+axios+webpack</code>开发的vue社区<code>SPA</code>;UI用<code>Muse-UI</code>;css用<code>scss</code>，<code>flex</code>布局，<code>rem</code>做移动端适配，最终效果电脑端移动端都适配。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/17/JS函数方法坑与填坑/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/09/vue2的todolist入门小项目的详细解析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hxvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hxvin的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/09/vue2的todolist入门小项目的详细解析/" itemprop="url">
-                  vue2的todolist入门小项目的详细解析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T13:08:49+08:00">
-                2017-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/05/09/vue2的todolist入门小项目的详细解析/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/05/09/vue2的todolist入门小项目的详细解析/" class="cy_cmt_count" data-xid="2017/05/09/vue2的todolist入门小项目的详细解析/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>看完vue2的官方文档后，找个入门项目巩固下知识点，简单的todolsit是个不错的选择。<br>项目用到了<code>vue.js</code> <code>vue.cli</code> <code>webpack</code> <code>ES6</code> <code>node环境</code>，完成项目后会对这些技术栈有了些了解。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/09/vue2的todolist入门小项目的详细解析/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/08/Vue学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hxvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hxvin的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/08/Vue学习/" itemprop="url">
-                  Vue学习
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T10:21:32+08:00">
-                2017-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/05/08/Vue学习/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/05/08/Vue学习/" class="cy_cmt_count" data-xid="2017/05/08/Vue学习/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>此文章用来不断记录Vue学习过程中一知半解知识点的总结，fighting~</p>
-<blockquote>
-<p>组件：可以扩展 HTML 元素，封装可重用的代码</p>
-</blockquote>
-<p><a href="https://www.zhihu.com/question/55892803">理解父组件，子组件</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/08/Vue学习/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/29/冒泡排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hxvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hxvin的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/29/冒泡排序/" itemprop="url">
-                  冒泡排序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-29T17:46:44+08:00">
-                2017-04-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/04/29/冒泡排序/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/04/29/冒泡排序/" class="cy_cmt_count" data-xid="2017/04/29/冒泡排序/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。<br>在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。<br>冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算<br>因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要交换的可能，也可以把最好的复杂度降低到O(n)。在这个情况，已经排序好的数列就无交换的需要。若在每次走访数列时，把走访顺序反过来，也可以稍微地改进效率。有时候称为鸡尾酒排序，因为算法会从数列的一端到另一端之间穿梭往返。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/29/冒泡排序/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/29/轻松学习JS快速排序-QuickSort/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hxvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hxvin的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/29/轻松学习JS快速排序-QuickSort/" itemprop="url">
-                  轻松学习JS快速排序(QuickSort)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-29T11:32:03+08:00">
-                2017-04-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/04/29/轻松学习JS快速排序-QuickSort/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/04/29/轻松学习JS快速排序-QuickSort/" class="cy_cmt_count" data-xid="2017/04/29/轻松学习JS快速排序-QuickSort/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="需了解的基础知识"><a href="#需了解的基础知识" class="headerlink" title="需了解的基础知识"></a>需了解的基础知识</h3><p> 1.递归函数：编程语言中，函数Func(Type a,……)直接或间接调用函数本身，则该函数称为递归函数。<br> <code>一个典型阶乘递归函数：</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function fact(num)&#123; </div><div class="line">   if (num&lt;=1)&#123; </div><div class="line">   return 1; </div><div class="line">   &#125;else&#123; </div><div class="line">   return num*fact(num-1); </div><div class="line">&#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p> <code>该函数的弊端：</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var another=factorical;</div><div class="line">factorical=null;</div><div class="line">console.log(another(2))//会报错说 factorical not a function</div></pre></td></tr></table></figure></p>
-<p> <code>解决方法</code>: 用arguments.callee去代替函数名，就可以确保函数不管怎么调用都不会出错。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/29/轻松学习JS快速排序-QuickSort/#more" rel="contents">
+            <a class="btn" href="/2017/05/29/post用vue写webapp项目总结系列1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1736,7 +1704,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1781,7 +1749,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1794,7 +1762,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

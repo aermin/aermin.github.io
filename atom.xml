@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-07-08T03:32:06.000Z</updated>
+  <updated>2017-09-16T14:56:50.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,279 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记录下node项目部署上线的过程及坑</title>
+    <link href="http://yoursite.com/2017/09/15/%E8%AE%B0%E5%BD%95%E4%B8%8Bnode%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%BA%BF%E7%9A%84%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%9D%91/"/>
+    <id>http://yoursite.com/2017/09/15/记录下node项目部署上线的过程及坑/</id>
+    <published>2017-09-15T02:11:32.000Z</published>
+    <updated>2017-09-16T14:56:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填坑。。。。。。现在趁还记得一些，记录一下，免得下次忘了</p>
+<h3 id="nodejs写爬虫，论坛系统"><a href="#nodejs写爬虫，论坛系统" class="headerlink" title="nodejs写爬虫，论坛系统"></a>nodejs写爬虫，论坛系统</h3><p>说到nodejs，肯定离不开异步，我在项目中用的是<br>promise+async/await这一套异步方案</p>
+<p>async/await是写异步代码的新方式，以前的方法有回调函数和Promise。<br>async/await是基于Promise实现的，它不能用于普通的回调函数。<br>async/await与Promise一样，是非阻塞的。<br>async/await使得异步代码看起来像同步代码，这正是它的魔力所在。</p>
+<p><a href="https://www.zhihu.com/collection/119015788" target="_blank" rel="external">了解回调函数是什么</a></p>
+<p><a href="https://www.zhihu.com/question/19732473/answer/20851256" target="_blank" rel="external">了解异步与同步，阻塞与非阻塞</a></p>
+<p><a href="https://blog.fundebug.com/2017/04/04/nodejs-async-await/" target="_blank" rel="external">Async/Await替代Promise的6个理由</a></p>
+<p><a href="https://cnodejs.org/topic/5640b80d3a6aa72c5e0030b6" target="_blank" rel="external">Async/Await详解</a></p>
+<p>show code：<br>操作mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">let query = function( sql, values ) &#123;</div><div class="line"></div><div class="line">  return new Promise(( resolve, reject ) =&gt; &#123;</div><div class="line">    pool.getConnection(function(err, connection) &#123;</div><div class="line">      if (err) &#123;</div><div class="line">        resolve( err )</div><div class="line">      &#125; else &#123;</div><div class="line">        connection.query(sql, values, ( err, rows) =&gt; &#123;</div><div class="line"></div><div class="line">          if ( err ) &#123;</div><div class="line">            reject( err )</div><div class="line">          &#125; else &#123;</div><div class="line">            resolve( rows )</div><div class="line">          &#125;</div><div class="line">          connection.release()</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;)</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">let findDataByUser = function (  name ) &#123;</div><div class="line">  let _sql = `</div><div class="line">    SELECT * from posts</div><div class="line">      where name=&quot;$&#123;name&#125;&quot;</div><div class="line">      `</div><div class="line">  return query( _sql)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>控制器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Post:async(ctx,next)=&gt;&#123;</div><div class="line">    if (ctx.request.querystring)</div><div class="line">	 &#123;				</div><div class="line"></div><div class="line">		await userModel.findDataByUser(decodeURIComponent(ctx.request.querystring.split(&apos;=&apos;)[1]))</div><div class="line">			.then(result=&gt;&#123;	</div><div class="line">					 var string=JSON.stringify(result); </div><div class="line">					   res=JSON.parse(string).reverse();</div><div class="line">			&#125;)</div><div class="line">		await ctx.render(&apos;post&apos;,&#123;</div><div class="line">				session:ctx.session,</div><div class="line">				posts:res	</div><div class="line">			&#125;)</div><div class="line">	&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="购买，部署云服务器"><a href="#购买，部署云服务器" class="headerlink" title="购买，部署云服务器"></a>购买，部署云服务器</h3><p>1.服务器购买<br>我买的是京东云的学生机，选的是centos7.2（国内用centos多一点）</p>
+<p>2.服务器登陆<br>通过ssh方式登陆服务器<br>$ ssh root@192.168.1.112     //格式:ssh用户名@公网IP</p>
+<p>3.<a href="https://help.aliyun.com/document_detail/50775.html" target="_blank" rel="external">部署nodejs</a>  / <a href="http://www.jb51.net/article/118493.htm" target="_blank" rel="external">部署nodejs</a><br>ps:部署node环境我使用NVM安装多版本</p>
+<h3 id="上传项目文件"><a href="#上传项目文件" class="headerlink" title="上传项目文件"></a>上传项目文件</h3><p>我用的是FileZilla 这个ftp可视化客户端<br>直接去官网下载安装<br>然后输入主机名（你买的云服务器的公网ip） ，用户名（默认是root），密码（你设的云服务器密码）<br>还有端口22 。然后连接。<br>想上传啥直接拖拽就行了，记得先把项目里的node包删掉，不然文件数量<br>分分钟上万。。。。上传到猴年马月。</p>
+<p>正确姿势-&gt;<br>删除node包，在云服务器中 npm i  </p>
+<h3 id="部署mysql"><a href="#部署mysql" class="headerlink" title="部署mysql"></a>部署mysql</h3><p>如果想简单快速搞定mysql部署的可以用centos6.5<br>centos7以上的版本部署mysql有点麻烦<br>但是呢，对新鲜技术充满鸡血的我还是入坑centos7.2😂</p>
+<p>1.确认你的系统环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># cat /etc/redhat-release</div></pre></td></tr></table></figure>
+<p>2.安装mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#yum install mysql</div><div class="line">#yum install mysql-devel</div><div class="line">#yum install mysql-server</div></pre></td></tr></table></figure>
+<p>如果你是centos7以上版本，你会发现安装mysql-server会失败</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@yl-web yl]# yum install mysql-server</div><div class="line">Loaded plugins: fastestmirror</div><div class="line">Loading mirror speeds from cached hostfile</div><div class="line"> * base: mirrors.sina.cn</div><div class="line"> * extras: mirrors.sina.cn</div><div class="line"> * updates: mirrors.sina.cn</div><div class="line">No package mysql-server available.</div><div class="line">Error: Nothing to do</div></pre></td></tr></table></figure>
+<p>原因是CentOS 7 版本将MySQL数据库软件从默认的程序列表中移除，用mariadb代替了。</p>
+<blockquote>
+<p>解决办法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</div><div class="line"># rpm -ivh mysql-community-release-el7-5.noarch.rpm</div><div class="line"># yum install mysql-community-server</div></pre></td></tr></table></figure>
+<p>安装成功后重启mysql服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># service mysqld restart</div></pre></td></tr></table></figure>
+<p>初次安装mysql，root账户没有密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">[root@yl-web yl]# mysql -u root </div><div class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</div><div class="line">Your MySQL connection id is 3</div><div class="line">Server version: 5.6.26 MySQL Community Server (GPL)</div><div class="line"></div><div class="line">Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.</div><div class="line"></div><div class="line">Oracle is a registered trademark of Oracle Corporation and/or its</div><div class="line">affiliates. Other names may be trademarks of their respective</div><div class="line">owners.</div><div class="line"></div><div class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</div><div class="line"></div><div class="line">mysql&gt; show databases;</div><div class="line">+--------------------+</div><div class="line">| Database           |</div><div class="line">+--------------------+</div><div class="line">| information_schema |</div><div class="line">| mysql              |</div><div class="line">| performance_schema |</div><div class="line">| test               |</div><div class="line">+--------------------+</div><div class="line">4 rows in set (0.01 sec)</div><div class="line"></div><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<p>设置密码方案1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysql&gt; set password for &apos;root&apos;@&apos;localhost&apos; =password(&apos;password&apos;);</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<p>不需要重启数据库即可生效。</p>
+<p>设置密码方案2（此方案将提高mysql安全性）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mysql_secure_installation</div></pre></td></tr></table></figure>
+<p>这将提示您输入默认的根密码。一旦您输入，您将需要更改它。<br>接下去选择yes or no参考这个<a href="http://www.jb51.net/article/35426.htm" target="_blank" rel="external">连接</a></p>
+<p>登录mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># mysql -u root -p</div></pre></td></tr></table></figure>
+<p>输入密码</p>
+<p>如果是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<p>则说明没问题了</p>
+<p>最后mariadb自动替换了，将不再生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># rpm -qa |grep mariadb</div></pre></td></tr></table></figure>
+<p>参考：<br><a href="https://www.howtoing.com/how-to-install-mysql-on-centos-7/" target="_blank" rel="external">文章1</a><br><a href="http://www.cnblogs.com/starof/p/4680083.html" target="_blank" rel="external">文章2</a></p>
+<p>然后要修改mysql可以查这些语法<br><a href="http://www.cnblogs.com/719907411hl/p/6558987.html" target="_blank" rel="external">链接</a></p>
+<p>另外一个看起来还可以的<a href="http://www.jb51.net/article/107075.htm" target="_blank" rel="external">教程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填
+    
+    </summary>
+    
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="NODE" scheme="http://yoursite.com/tags/NODE/"/>
+    
+      <category term="运维" scheme="http://yoursite.com/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>对付反爬虫战略</title>
+    <link href="http://yoursite.com/2017/09/10/%E5%AF%B9%E4%BB%98%E5%8F%8D%E7%88%AC%E8%99%AB%E6%88%98%E7%95%A5/"/>
+    <id>http://yoursite.com/2017/09/10/对付反爬虫战略/</id>
+    <published>2017-09-10T15:50:00.000Z</published>
+    <updated>2017-09-16T08:43:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>反爬思路：</p>
+<p>1.设置10s请求一次（这边还可以对请求头处理假装浏览器访问）</p>
+<p>500个请求</p>
+<p>1.4个小时，还行，对请求数量不多刚好可用</p>
+<p>2.对付验证码</p>
+<p>接入打码平台。</p>
+<p>下载验证码  上传验证码 </p>
+<p>获取验证码字符  填写验证码</p>
+<p>说起爬虫，真是磕磕绊绊…</p>
+<a id="more"></a>
+<p>前段时间想着即将成为大四狗了，校招如火如荼，本前端狗刚好学了点后端技术（nodejs，PHP），那就用技术做点有意义的事，爬虫爬取厦门地区的校招信息（大概完成）（之后再爬个宣讲信息），然后建个招聘信息发布（已完成），求职交流系统（已完成），然后再造一些求职工具（代做），如简历生成器。时间充沛的话用socket.ioc写一个求职线上交流平台（实习狗时间一直很捉急）。</p>
+<p>讲了些有的没的，开始说爬虫过程。</p>
+<p>首先，爬虫思路是这样，先把我要爬的网站打开，看想要爬什么，我是爬一个校招网站。先把该内容的首页的文章列表根据分类一个一个爬下来，其中你会看到里面可以爬到每篇文章的url，然后就是访问通过这些url，把每篇文章的具体内容爬取下来，接着就是存到数据库了。</p>
+<p>思路是不是很简单？！这种菜鸟级别的爬虫适合我这菜鸟…第一次基本把近五百条具体内容爬下来了，很受鼓舞…不知道玩到第几次，忽然还没爬到一百条就挂了，刷新网站才知道，被怀疑是爬虫，需要填验证码。</p>
+<p>好好好，验证码是吧，我去找解决办法，疯狂Google，总结如下，分免费的和付费的。免费的就是用Tesseract开源的OCR识别工具识别验证码，当然还需要graphicsmagick这个图像处理工具的辅助来提高基本的识别率，然并卵….清晰简单的验证码识别率还行，那个校招网站的验证码我试了下，正确率惨不忍睹….是可以去训练tesseract，提高相近字符的识别率…有大把空余时间了再说吧，前端大把东西等我去研究呢。付费的就是让打码平台帮你识别验证码，这个之后可以考虑。</p>
+<p>实践一</p>
+<p>当然，怎么可以一下子就屈服呢，至少要挣扎反抗到无力嘛。开始了反反爬虫，一开始，我有点小屈服，最新的校招信息能爬下来就行，甚至做了最后的退路—让用户直接点击链接跳转到具体的网，我就展示校招大体信息就好。之前写出来爬虫的效果是日期靠后的那些能爬下来，这个简单，用articleList.reverse()反转组数，这样就把最新的校招信息爬下来了，然而，只爬了六十几篇。。羞愧。。。</p>
+<p>实践二</p>
+<p>想想对方的反爬虫技术是根据啥来判断是爬虫然后弹出验证码，可能根据ip，短时间请求次数等等，相对更换不同IP地址，短时间请求次数实验成本更低。。然后我给爬虫程序加了定时器setTimeout()，6秒发送一次请求。结果爬了九十多篇。。。这么久爬一次竟然没啥用。。。不科学(<em>@ο@</em>) 。</p>
+<p>实践三</p>
+<p>换个思路，会不会除了对时间访问次数的判断，还加了如果相隔访问时间一致的话也被判为爬虫的判断？</p>
+<p>那我发送请求的相隔时间就 随机嘛，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">vartime=Math.floor(Math.random()*(6-1)+1);</div><div class="line"></div><div class="line">vardelay=time*1000;</div></pre></td></tr></table></figure>
+<p>1-5秒随机发送请求。</p>
+<p>结果。。。。可以了！！！！！</p>
+<p>六百多（更新得越来越多了）篇文章全爬下来了</p>
+<p>看来就是根据访问时间和频率来判断的。</p>
+<p>以防ip被封，我把请求头</p>
+<p>然后，爬虫总不能每天都手动去点爬虫开关吧，借用这两个第三方模块可以定时执行任务</p>
+<p>varspawn=require(‘child_process’).spawn;</p>
+<p>varcronJob=require(‘cron’).CronJob;</p>
+<p>// 定时执行爬虫</p>
+<p>exports.autoUpdate=’30 20 19 <em> </em> *’;// 每天19：20：30 执行一次任务</p>
+<p>varjob=newcronJob(config.autoUpdate,function(){</p>
+<p>console.log(‘开始执行定时更新任务’);</p>
+<p>varupdate=spawn(process.execPath,[path.resolve(__dirname,’./model/all.js’)]);</p>
+<p>update.stdout.pipe(process.stdout);</p>
+<p>update.stderr.pipe(process.stderr);</p>
+<p>update.on(‘close’,function(code) {</p>
+<p>console.log(‘更新任务结束，代码=%d’, code);</p>
+<p>});</p>
+<p>});</p>
+<p>job.start();</p>
+<p>（本文完）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;反爬思路：&lt;/p&gt;
+&lt;p&gt;1.设置10s请求一次（这边还可以对请求头处理假装浏览器访问）&lt;/p&gt;
+&lt;p&gt;500个请求&lt;/p&gt;
+&lt;p&gt;1.4个小时，还行，对请求数量不多刚好可用&lt;/p&gt;
+&lt;p&gt;2.对付验证码&lt;/p&gt;
+&lt;p&gt;接入打码平台。&lt;/p&gt;
+&lt;p&gt;下载验证码  上传验证码 &lt;/p&gt;
+&lt;p&gt;获取验证码字符  填写验证码&lt;/p&gt;
+&lt;p&gt;说起爬虫，真是磕磕绊绊…&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="NODE" scheme="http://yoursite.com/tags/NODE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前后端开发，mvc模式</title>
+    <link href="http://yoursite.com/2017/08/28/%E4%BA%86%E8%A7%A3%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%EF%BC%8Cmvc%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://yoursite.com/2017/08/28/了解前后端开发，mvc模式/</id>
+    <published>2017-08-28T02:21:32.000Z</published>
+    <updated>2017-09-16T08:41:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>实习两个月除了写前端，还写了点后端(nodejs，php)，前阶段自己也写了个前后端的项目，不过没开源。现在记录下自己对全端开发的个人心得(菜鸟入门级别的，错了请大佬们指导更正)。</p>
+<p>感觉不管是php还是nodejs，都是差不多的，大概的作用是处理前端的数据请求，处理数据，操作数据库，把数据返回给前端。</p>
+<p>用mvc模式去写一个全端站点。</p>
+<a id="more"></a>
+<p>mvc：模型（Model）、视图（View）和控制器（Controller）。<br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MVC-Process.svg/500px-MVC-Process.svg.png" alt="mvc"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5287253-718dfa04e0488f65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="nodejs(koa)"></p>
+<p>render(view,model)</p>
+<p>model可以单独抽出来放一个文件夹</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5287253-c7f05140b083e4ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="php(yii)"></p>
+<p>这个就是吧model抽出来，调用model方法，返回数据，render到页面<br>。<br>和nodejs一样的。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;实习两个月除了写前端，还写了点后端(nodejs，php)，前阶段自己也写了个前后端的项目，不过没开源。现在记录下自己对全端开发的个人心得(菜鸟入门级别的，错了请大佬们指导更正)。&lt;/p&gt;
+&lt;p&gt;感觉不管是php还是nodejs，都是差不多的，大概的作用是处理前端的数据请求，处理数据，操作数据库，把数据返回给前端。&lt;/p&gt;
+&lt;p&gt;用mvc模式去写一个全端站点。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="PHP" scheme="http://yoursite.com/tags/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决非chrome浏览器（移动端适用）后退刷新问题</title>
+    <link href="http://yoursite.com/2017/08/08/%E8%A7%A3%E5%86%B3%E9%9D%9Echrome%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%88%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E7%94%A8%EF%BC%89%E5%90%8E%E9%80%80%E5%88%B7%E6%96%B0%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2017/08/08/解决非chrome浏览器（移动端适用）后退刷新问题/</id>
+    <published>2017-08-08T02:10:32.000Z</published>
+    <updated>2017-09-16T08:34:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>写页面时你可能会遇到这个问题，就是用Firefox，Safari，IE等非chrome浏览器，点击浏览器自带的返回键会发现不会刷新页面，因为那时js代码没有执行。</p>
+<blockquote>
+<p>在网上搜到的有的不能用，有的兼容性很差，故自己想了解决方法，核心是利用setInterval的特性。</p>
+</blockquote>
+<p>这样比如下面这种情形：<br>本来只建了一个二维码，新建了一个</p>
+<a id="more"></a>
+<p><img src="http://upload-images.jianshu.io/upload_images/5287253-63828908bed31df6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E4294505-FFE4-473E-9316-5E32A64DB063.png"></p>
+<p>新建完用户没有点击你写的返回按钮（图中的完成按钮），而是点击了浏览器自带的返回键</p>
+<blockquote>
+<p>图片中的chrome浏览器只是当演示用，现实中请用非chrome的去感受这个问题<br>比如<a href="http://www.topscan.com/dongtaima/dcode" target="_blank" rel="external">用firefox点击打开图片示例的网站链接</a></p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/5287253-0e27f0d8813c94a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="736A09E5-D8C0-45E9-90CC-27F4AE5378B5.png"></p>
+<p>结果回去页面没有刷新，结果显示还是原来的样子<br><img src="http://upload-images.jianshu.io/upload_images/5287253-a04bfa95d5a8602f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="736A09E5-D8C0-45E9-90CC-27F4AE5378B5.png"></p>
+<p>而如果返回刷新了，会这样（用户体验会不会好些？）<br><img src="http://upload-images.jianshu.io/upload_images/5287253-8c6658785c2d8222.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="9F4837FE-BF66-437F-B2D7-67FE88229866.png"></p>
+<p>奉上代码</p>
+<blockquote>
+<p>要刷新的页面（如页面A）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    //chrome自带后退刷新，故不再次刷新</div><div class="line">       var ua = window.navigator.userAgent; </div><div class="line">       var isChrome = ua.indexOf(&quot;Chrome&quot;) &amp;&amp; window.chrome;  </div><div class="line">       if (! isChrome) &#123;  </div><div class="line">    //浏览器后退刷新</div><div class="line">            function reload() &#123;</div><div class="line">                setInterval(function() &#123;   //这个定时器返回A页面会继续执行</div><div class="line">                    if (localStorage.reload == &apos;true&apos; ) &#123;  //判断是否刷新页面</div><div class="line">                        localStorage.setItem(&apos;reload&apos;,&apos;false&apos;);</div><div class="line">                        location.reload()</div><div class="line">                    &#125;</div><div class="line">                &#125;, 500)</div><div class="line">            &#125;;</div><div class="line">        reload();</div><div class="line">       &#125;  </div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>在A页面之后访问的页面（如页面B）添加一下一行代码<br>ps：作为A页面执行刷新功能的开关<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">localStorage.setItem(&apos;reload&apos;,&apos;true&apos;);</div></pre></td></tr></table></figure></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;写页面时你可能会遇到这个问题，就是用Firefox，Safari，IE等非chrome浏览器，点击浏览器自带的返回键会发现不会刷新页面，因为那时js代码没有执行。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在网上搜到的有的不能用，有的兼容性很差，故自己想了解决方法，核心是利用setInterval的特性。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这样比如下面这种情形：&lt;br&gt;本来只建了一个二维码，新建了一个&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="功能" scheme="http://yoursite.com/tags/%E5%8A%9F%E8%83%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>react版的抽奖程序&amp;滚动字幕(入门小demo)</title>
+    <link href="http://yoursite.com/2017/07/18/react%E7%89%88%E7%9A%84%E6%8A%BD%E5%A5%96%E7%A8%8B%E5%BA%8F&amp;%E6%BB%9A%E5%8A%A8%E5%AD%97%E5%B9%95(%E5%85%A5%E9%97%A8%E5%B0%8Fdemo)/"/>
+    <id>http://yoursite.com/2017/07/18/react版的抽奖程序&amp;滚动字幕(入门小demo)/</id>
+    <published>2017-07-18T12:21:32.000Z</published>
+    <updated>2017-09-16T08:42:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>因项目需求，需要写一个react的抽奖程序和字幕滚动。<br>本来之前用的是vue，没用过react，而项目组框架用的是react，萌新只能弃vue改学用react了</p>
+<p>写完这个入门小demo，也算初识了下react。</p>
+<blockquote>
+<p>老习惯，写了详细的代码注释。</p>
+</blockquote>
+<p><a href="https://github.com/hxvin/draw" target="_blank" rel="external">demo地址</a></p>
+<p>更新 ======================</p>
+<a id="more"></a>
+<p>a：增加了抽奖前的判断：</p>
+<p>1.当天是否已抽过奖， ‘否’的话进入下一条判断<br>（这里用localstorage储存，获取当天24点时间戳，过了当天24点localstorage储存清除，时间都是获取本地时间，实际应用应采用服务器时间，防止用户修改本地时间来作弊）</p>
+<p>2.现在抽奖时间是否在16-17点之间，‘是’的话则开始抽奖</p>
+<p>b：增加了react版的字幕滚动</p>
+<p><a href="http://ooytyiziz.bkt.clouddn.com/QQ20170715-193001-HD.gif" target="_blank" rel="external">最初版简陋抽奖gif图</a></p>
+<p><a href="http://ooytyiziz.bkt.clouddn.com/draw.png" target="_blank" rel="external">抽奖&amp;字幕滚动图</a></p>
+<h3 id="下载运行"><a href="#下载运行" class="headerlink" title="下载运行"></a>下载运行</h3><p>git  clone <a href="https://github.com/hxvin/draw.git" target="_blank" rel="external">https://github.com/hxvin/draw.git</a></p>
+<p>cd draw</p>
+<p>npm install</p>
+<p>npm start</p>
+<p>有错的或者不完善的地方恳请指出纠正。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;因项目需求，需要写一个react的抽奖程序和字幕滚动。&lt;br&gt;本来之前用的是vue，没用过react，而项目组框架用的是react，萌新只能弃vue改学用react了&lt;/p&gt;
+&lt;p&gt;写完这个入门小demo，也算初识了下react。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;老习惯，写了详细的代码注释。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/hxvin/draw&quot;&gt;demo地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;更新 ======================&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title>公司团队开发git分支管理</title>
@@ -179,9 +452,9 @@
     <link href="http://yoursite.com/2017/05/29/post%E7%94%A8vue%E5%86%99webapp%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%B3%BB%E5%88%971/"/>
     <id>http://yoursite.com/2017/05/29/post用vue写webapp项目总结系列1/</id>
     <published>2017-05-29T01:40:25.000Z</published>
-    <updated>2017-07-08T03:28:19.000Z</updated>
+    <updated>2017-09-16T08:31:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。<br>这是一个基于<code>vue+vue-cli+vue-router+axios+webpack</code>开发的vue社区<code>SPA</code>;UI用<code>Muse-UI</code>;css用<code>scss</code>，<code>flex</code>布局，<code>rem</code>做移动端适配，最终效果电脑端移动端都适配。</p>
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。<br>这是一个基于<code>vue+vue-cli+vue-router+axios+webpack</code>开发的vue社区<code>SPA</code>;UI用<code>Muse-UI</code>;css用<code>scss</code>，<code>flex</code>布局，<code>rem</code>做移动端适配，最终效果电脑端移动端都适配。<br><a id="more"></a></p>
 <p>如果你和我一样用vue还挺生疏的，那好好做完这个项目，会学到很多东西，能有挺大的进步，还可以自己加功能，一起(๑•̀ㅂ•́)و✧加油。</p>
 <p>如果对您有帮助，请给一个<code>star</code>鼓励一下萌新，感谢 ^ ^<br>如果您也是前端萌新，来互相follow互相学习，一起进步呀。</p>
 <blockquote>
@@ -278,7 +551,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。&lt;br&gt;这是一个基于&lt;code&gt;vue+vue-cli+vue-route
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。&lt;br&gt;这是一个基于&lt;code&gt;vue+vue-cli+vue-router+axios+webpack&lt;/code&gt;开发的vue社区&lt;code&gt;SPA&lt;/code&gt;;UI用&lt;code&gt;Muse-UI&lt;/code&gt;;css用&lt;code&gt;scss&lt;/code&gt;，&lt;code&gt;flex&lt;/code&gt;布局，&lt;code&gt;rem&lt;/code&gt;做移动端适配，最终效果电脑端移动端都适配。&lt;br&gt;
     
     </summary>
     
@@ -366,6 +639,38 @@
       <category term="vue2" scheme="http://yoursite.com/tags/vue2/"/>
     
       <category term="项目总结" scheme="http://yoursite.com/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从实际项目小谈react生命周期</title>
+    <link href="http://yoursite.com/2017/05/08/%E4%BB%8E%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%B0%88react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>http://yoursite.com/2017/05/08/从实际项目小谈react生命周期/</id>
+    <published>2017-05-08T02:21:32.000Z</published>
+    <updated>2017-09-16T08:43:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p> 今天写的一个react版的滚动字幕，思路是用js操作展示内容的scrollWidth,然后用setInterval 循环调用function ，function内容大体思路是对文字内容userDOM.style.transform = ‘translateX(-‘+ i +’px)’,每次横向左移动ipx的距离，形成滚动效果，当i&gt;=scrollWidth的时候，将i归零，形成循环滚动。(这里操作了dom，不是很好)</p>
+<p>这里先解释一下浏览器scrollWidth，scrollWidth，offsetWidth三种宽度的区别<br>情况1：<br>元素内无内容或者内容不超过可视区，滚动不出现或不可用的情况下。<br>scrollWidth=scrollWidth，两者皆为内容可视区的宽度。<br>offsetWidth为元素的实际宽度。<br>情况2：<br>元素的内容超过可视区，滚动条出现和可用的情况下。<br>scrollWidth&gt;clientWidth。<br>scrollWidth为实际内容的宽度。<br>clientWidth是内容可视区的宽度。<br>offsetWidth是元素的实际宽度。</p>
+<a id="more"></a>
+<h4 id="出问题了"><a href="#出问题了" class="headerlink" title="出问题了"></a>出问题了</h4><p>为了以便调用后端接口前先模拟展示，将静态生成的内容写死的文字内容换成动态加载，还采取了随机生成用户ip和获奖内容，结果获取到的scrollWidth（元素内容的实际宽度，包括被隐藏的部分）只是内容可视区的宽度，显然是不行的，所以无法滚动全部，我们需要的是元素内容的实际宽度。为什么会出现这种情况呢？如果文字内容是静态生成的，内容写死的，并不会出现这种问题。</p>
+<h4 id="问题出在哪里？"><a href="#问题出在哪里？" class="headerlink" title="问题出在哪里？"></a>问题出在哪里？</h4><p>出在动态加载还要考虑到react的生命周期，componentWillMount(将要挂载)-&gt;render(dom渲染)-&gt;componentDidMount(已经挂载)，这个滚动函数写在了componentDidMount中，也就是页面dom结构渲染完了文字内容才开始动态生成，结果scrollWidth抓取到的文字内容是空的，只能获取了内容可视区的宽度。<br><img src="http://upload-images.jianshu.io/upload_images/5287253-1e0d1ec12f576c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网上找的一张react生命周期的好图"></p>
+<h4 id="问题找出来了，该如何解决呢？"><a href="#问题找出来了，该如何解决呢？" class="headerlink" title="问题找出来了，该如何解决呢？"></a>问题找出来了，该如何解决呢？</h4><p>最简单粗暴的方式就是把动态加载文字内容的函数放在componentWillMount(将要挂载)中，在render页面之前就把该部分内容加载完毕，这样render页面的时候scrollWidth将抓取到早已加载好的文字内容了，可是这样会造成打开页面后，页面空白一会，在渲染出页面的内容来，这段空白期间就是componentWillMount加载你的数据内容去了。如果数据内容少还好说，万一量很大了，那就尴尬了，严重影响用户体验。</p>
+<p>####更好的解决办法是<br>仍把动态加载文字内容的函数放在componentDidMount中，并在此采用window.onload 调用滚动函数，也就是等页面都渲染完了，文字内容也ok了，才会调用滚动函数（scrollWidth，setInterval，transform ）。</p>
+<p>这下，解决了生命周期以及用户体验，加载性能的问题。😀</p>
+<p>如有错误和不足，恳请指出指导^ ^</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt; 今天写的一个react版的滚动字幕，思路是用js操作展示内容的scrollWidth,然后用setInterval 循环调用function ，function内容大体思路是对文字内容userDOM.style.transform = ‘translateX(-‘+ i +’px)’,每次横向左移动ipx的距离，形成滚动效果，当i&amp;gt;=scrollWidth的时候，将i归零，形成循环滚动。(这里操作了dom，不是很好)&lt;/p&gt;
+&lt;p&gt;这里先解释一下浏览器scrollWidth，scrollWidth，offsetWidth三种宽度的区别&lt;br&gt;情况1：&lt;br&gt;元素内无内容或者内容不超过可视区，滚动不出现或不可用的情况下。&lt;br&gt;scrollWidth=scrollWidth，两者皆为内容可视区的宽度。&lt;br&gt;offsetWidth为元素的实际宽度。&lt;br&gt;情况2：&lt;br&gt;元素的内容超过可视区，滚动条出现和可用的情况下。&lt;br&gt;scrollWidth&amp;gt;clientWidth。&lt;br&gt;scrollWidth为实际内容的宽度。&lt;br&gt;clientWidth是内容可视区的宽度。&lt;br&gt;offsetWidth是元素的实际宽度。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -749,280 +1054,6 @@
 &lt;li&gt;接口继承：继承函数签名  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&quot;由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的&quot;&gt;&lt;a href=&quot;#由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的&quot; class=&quot;headerlink&quot; title=&quot;由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的&quot;&gt;&lt;/a&gt;由于函数没有签名，在ECMAScript中只支持实现继承，而且是依靠原型链来实现的&lt;/h4&gt;&lt;h3 id=&quot;原型链&quot;&gt;&lt;a href=&quot;#原型链&quot; class=&quot;headerlink&quot; title=&quot;原型链&quot;&gt;&lt;/a&gt;原型链&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://ooytyiziz.bkt.clouddn.com/7895A860-4021-47A7-A343-BBC78A970381.png&quot; alt=&quot;原型链&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>添加畅言评论</title>
-    <link href="http://yoursite.com/2017/04/25/%E6%B7%BB%E5%8A%A0%E7%95%85%E8%A8%80%E8%AF%84%E8%AE%BA/"/>
-    <id>http://yoursite.com/2017/04/25/添加畅言评论/</id>
-    <published>2017-04-24T16:48:36.000Z</published>
-    <updated>2017-05-10T03:43:42.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="多说评论听说要关闭了，大家都在找评论系统替换。"><a href="#多说评论听说要关闭了，大家都在找评论系统替换。" class="headerlink" title="多说评论听说要关闭了，大家都在找评论系统替换。"></a>多说评论听说要关闭了，大家都在找评论系统替换。</h4><h4 id="我搜索对比了大家的解决方式，最终选择了畅言评论，可以用qq，微博，手机登录，还算可以，后台功能也挺好的。"><a href="#我搜索对比了大家的解决方式，最终选择了畅言评论，可以用qq，微博，手机登录，还算可以，后台功能也挺好的。" class="headerlink" title="我搜索对比了大家的解决方式，最终选择了畅言评论，可以用qq，微博，手机登录，还算可以，后台功能也挺好的。"></a>我搜索对比了大家的解决方式，最终选择了畅言评论，可以用qq，微博，手机登录，还算可以，后台功能也挺好的。</h4><h4 id="而且有小伙伴对畅言评论需要备案这件事望而却步，我试了下，其能实挺快搞定的。"><a href="#而且有小伙伴对畅言评论需要备案这件事望而却步，我试了下，其能实挺快搞定的。" class="headerlink" title="而且有小伙伴对畅言评论需要备案这件事望而却步，我试了下，其能实挺快搞定的。"></a>而且有小伙伴对畅言评论需要备案这件事望而却步，我试了下，其能实挺快搞定的。</h4><blockquote>
-<p>步骤教程写在简书上了，就不搬过来啦</p>
-</blockquote>
-<p><a href="http://www.jianshu.com/p/5888bd91d070" target="_blank" rel="external">简书</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;多说评论听说要关闭了，大家都在找评论系统替换。&quot;&gt;&lt;a href=&quot;#多说评论听说要关闭了，大家都在找评论系统替换。&quot; class=&quot;headerlink&quot; title=&quot;多说评论听说要关闭了，大家都在找评论系统替换。&quot;&gt;&lt;/a&gt;多说评论听说要关闭了，大家都在找评
-    
-    </summary>
-    
-    
-      <category term="其他" scheme="http://yoursite.com/tags/%E5%85%B6%E4%BB%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>justjavac的知乎live听后总结</title>
-    <link href="http://yoursite.com/2017/04/23/justjavac%E7%9A%84%E7%9F%A5%E4%B9%8Elive%E5%90%AC%E5%90%8E%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2017/04/23/justjavac的知乎live听后总结/</id>
-    <published>2017-04-23T00:11:12.000Z</published>
-    <updated>2017-05-10T03:43:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>get点：</strong></p>
-<blockquote>
-<p>1.跟别人互相review代码。<br>2.系统学习js。多写算法相关的，少写特效。如写一个计算器。<br>3.学习不止前端的东西，前端工程师是个程序员，要具备程序员的基础知识能力。<br>4.不要只会拷贝粘贴网上的代码而没有学会其中的知识点。</p>
-</blockquote>
-<a id="more"></a>
-<blockquote>
-<p>5.面试官会根据你写在简历里的东西提问。<br>6.远离外包公司（三个月的经验五年的重复），职业生涯中技术难成长。<br>7.扎实基础再去学框架<br>8.移动端不用jQuery<br>9.与其做很多项目，不如做精一个两项目。<br>10.面试考察点：应届生：基础知识，程序员思维，代码规范；社招：解决问题能力。<br>11.对于学习，首选是看书，系统的全面的学。<br>推荐的书：<br>《黑客与画家》<br>《javascript高级程序设计》<br>《javascript精粹》<br>《你不知道的javascript》<br>推荐的网站：MDN<br>等等。。。。。很多</p>
-</blockquote>
-<p><strong><em>讲了四个小时，jjc大神好敬业，内容很丰盛，很详细，很值得去购买了听~~</em></strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;get点：&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;1.跟别人互相review代码。&lt;br&gt;2.系统学习js。多写算法相关的，少写特效。如写一个计算器。&lt;br&gt;3.学习不止前端的东西，前端工程师是个程序员，要具备程序员的基础知识能力。&lt;br&gt;4.不要只会拷贝粘贴网上的代码而没有学会其中的知识点。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>笔试整理(1)</title>
-    <link href="http://yoursite.com/2017/04/18/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AF%95%EF%BC%8C%E6%95%B4%E7%90%86-1/"/>
-    <id>http://yoursite.com/2017/04/18/第一次笔试，整理-1/</id>
-    <published>2017-04-18T10:11:12.000Z</published>
-    <updated>2017-05-29T01:46:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-CSS的某些样式是具有继承性的"><a href="#1-CSS的某些样式是具有继承性的" class="headerlink" title="1.CSS的某些样式是具有继承性的"></a>1.CSS的某些样式是具有继承性的</h3><p><strong>什么是继承呢？继承是一种规则，它允许样式不仅应用于某个特定html标签元素，而且应用于其后代。</strong></p>
-<blockquote>
-<p>不可继承的：display、margin、border、padding、background、height、min-height、max-height、width、min-width、max-width、overflow、position、left、right、top、bottom、z-index、float、clear、table-layout、vertical-align、page-break-after、page-bread-before和unicode-bidi。（注：基本上什么盒子外边距、内边距，还有定位什么的是不能被继承的）<br>所有元素可继承：visibility和cursor。<br>内联元素可继承：letter-spacing、word-spacing、white-space、line-height、color、font、font-family、font-size、font-style、font-variant、font-weight、text-decoration、text-transform、direction。<br>终端块状元素可继承：text-indent和text-align。<br>列表元素可继承：list-style、list-style-type、list-style-position、list-style-image。<br>表格元素可继承：border-collapse。</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="2-对象的深拷贝与浅拷贝的区别"><a href="#2-对象的深拷贝与浅拷贝的区别" class="headerlink" title="2.对象的深拷贝与浅拷贝的区别"></a>2.对象的深拷贝与浅拷贝的区别</h3><blockquote>
-<p>浅拷贝：仅仅复制对象的引用，而不是对象本身；<br>深拷贝：把复制的对象所引用的全部对象都复制一遍。</p>
-</blockquote>
-<p><strong>浅拷贝例子：</strong></p>
-<figure class="highlight plain"><figcaption><span>================ 浅拷贝 ================ */</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">function simpleClone(initalObj) &#123;</div><div class="line">    var obj = &#123;&#125;;</div><div class="line">    for ( var i in initalObj) &#123;</div><div class="line">        obj[i] = initalObj[i];</div><div class="line">    &#125;</div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line">客户端调用</div><div class="line">/* ================ 客户端调用 ================ */</div><div class="line">var obj = &#123;</div><div class="line">    a: &quot;hello&quot;,</div><div class="line">    b: &#123;</div><div class="line">        a: &quot;world&quot;,</div><div class="line">        b: 21</div><div class="line">    &#125;,</div><div class="line">    c: [&quot;Bob&quot;, &quot;Tom&quot;, &quot;Jenny&quot;],</div><div class="line">    d: function() &#123;</div><div class="line">        alert(&quot;hello world&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var cloneObj = simpleClone(obj); // 对象拷贝</div><div class="line"> </div><div class="line">console.log(cloneObj.b); // &#123;a: &quot;world&quot;, b: 21&#125;</div><div class="line">console.log(cloneObj.c); // [&quot;Bob&quot;, &quot;Tom&quot;, &quot;Jenny&quot;]</div><div class="line">console.log(cloneObj.d); // function() &#123; alert(&quot;hello world&quot;); &#125;</div><div class="line"> </div><div class="line">// 修改拷贝后的对象</div><div class="line">cloneObj.b.a = &quot;changed&quot;;</div><div class="line">cloneObj.c = [1, 2, 3];</div><div class="line">cloneObj.d = function() &#123; alert(&quot;changed&quot;); &#125;;</div><div class="line"> </div><div class="line">console.log(obj.b); // &#123;a: &quot;changed&quot;, b: 21&#125; // // 原对象所引用的对象被修改了</div><div class="line"> </div><div class="line">console.log(obj.c); // [&quot;Bob&quot;, &quot;Tom&quot;, &quot;Jenny&quot;] // 原对象所引用的对象未被修改</div><div class="line">console.log(obj.d); // function() &#123; alert(&quot;hello world&quot;); &#125; // 原对象所引用的函数未被修改</div></pre></td></tr></table></figure>
-<p><strong>深拷贝的实现也有很多种方法，这里就介绍Object.create()方法</strong></p>
-<figure class="highlight plain"><figcaption><span>================ 深拷贝 ================ */</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function deepClone(initalObj, finalObj) &#123;</div><div class="line">    var obj = finalObj || &#123;&#125;;</div><div class="line">    for (var i in initalObj) &#123;</div><div class="line">        var prop = initalObj[i];</div><div class="line">        // 避免相互引用对象导致死循环，如initalObj.a = initalObj的情况</div><div class="line">        if(prop === obj) &#123;</div><div class="line">            continue;</div><div class="line">        &#125;</div><div class="line">        if (typeof prop === &apos;object&apos;) &#123;</div><div class="line">            obj[i] = (prop.constructor === Array) ? [] : Object.create(prop);</div><div class="line">        &#125; else &#123;</div><div class="line">            obj[i] = prop;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return obj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;1-CSS的某些样式是具有继承性的&quot;&gt;&lt;a href=&quot;#1-CSS的某些样式是具有继承性的&quot; class=&quot;headerlink&quot; title=&quot;1.CSS的某些样式是具有继承性的&quot;&gt;&lt;/a&gt;1.CSS的某些样式是具有继承性的&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;什么是继承呢？继承是一种规则，它允许样式不仅应用于某个特定html标签元素，而且应用于其后代。&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;不可继承的：display、margin、border、padding、background、height、min-height、max-height、width、min-width、max-width、overflow、position、left、right、top、bottom、z-index、float、clear、table-layout、vertical-align、page-break-after、page-bread-before和unicode-bidi。（注：基本上什么盒子外边距、内边距，还有定位什么的是不能被继承的）&lt;br&gt;所有元素可继承：visibility和cursor。&lt;br&gt;内联元素可继承：letter-spacing、word-spacing、white-space、line-height、color、font、font-family、font-size、font-style、font-variant、font-weight、text-decoration、text-transform、direction。&lt;br&gt;终端块状元素可继承：text-indent和text-align。&lt;br&gt;列表元素可继承：list-style、list-style-type、list-style-position、list-style-image。&lt;br&gt;表格元素可继承：border-collapse。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="笔试" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>面向对象的程序设计(-)</title>
-    <link href="http://yoursite.com/2017/04/18/js%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/"/>
-    <id>http://yoursite.com/2017/04/18/js面对对象/</id>
-    <published>2017-04-17T16:11:12.000Z</published>
-    <updated>2017-05-10T03:43:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h3><h4 id="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"><a href="#定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数" class="headerlink" title="定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数"></a>定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数</h4><h4 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h4><ul>
-<li>数据属性  <ul>
-<li>[[Configurabke]]:能否通过delete删除属性从而重新定义属性  </li>
-</ul>
-</li>
-<li>访问器属性  </li>
-</ul>
-<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><h4 id="可以通过“构造函数”或者“对象字面量”方法创建函数"><a href="#可以通过“构造函数”或者“对象字面量”方法创建函数" class="headerlink" title="可以通过“构造函数”或者“对象字面量”方法创建函数"></a>可以通过“构造函数”或者“对象字面量”方法创建函数</h4><ul>
-<li>缺点：通过一个接口创建很多对象，会产生大量的重复代码  </li>
-</ul>
-<h4 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h4><a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> function creatPerson(name,age,job)&#123;  </div><div class="line">    var o=new Object();  </div><div class="line">    o.name=name;  </div><div class="line">    o.age=age;  </div><div class="line">    o.job=job;  </div><div class="line">    return o  </div><div class="line">&#125;                                                                        </div><div class="line"> var person1 = creatPerson(“hxvin”,21,”F-E”);</div></pre></td></tr></table></figure>
-<ul>
-<li>用函数来封装以特定接口创建对象的细节  </li>
-<li>缺点：没有解决对象识别的问题  </li>
-</ul>
-<h4 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Person(name,age,job)&#123;  </div><div class="line">    this.name=name;  </div><div class="line">    this.age=age;  </div><div class="line">    this.job=job;  </div><div class="line">    this.sayName=function sayName()&#123;alert(this.name);&#125;;  </div><div class="line">&#125;;  </div><div class="line">var person1=new Person(“hxvin”,21,&quot;Front-end-Engineer&quot;);</div></pre></td></tr></table></figure>
-<ul>
-<li>和工厂模式的区别：  <ul>
-<li>没有显式的创建对象  </li>
-<li>直接将属性和方法赋给了this  </li>
-<li>没有return语句  </li>
-</ul>
-</li>
-<li>用这种方式调用构造函数会经历一下四个步骤  <ul>
-<li>执行构造函数中的代码（为这个新对象添加属性）  </li>
-<li>创建一个新对象  </li>
-<li>将构造函数的作用域赋给新对象  </li>
-<li>返回新对象  </li>
-</ul>
-</li>
-<li><p>缺点：每个方法都要在每个实例上创建一遍  </p>
-<ul>
-<li><p>上例中sayName方法相当于</p>
-<blockquote>
-<p>this.sayName=new Funciton(“alert(name,age,job)”)  </p>
-</blockquote>
-</li>
-<li><p>解决方法  </p>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> function Person(name,age,job)&#123;  </div><div class="line">    this.name=name;  </div><div class="line">    this.age=age;  </div><div class="line">    this.job=job;  </div><div class="line">    this.sayName=sayName  </div><div class="line">&#125;;  </div><div class="line">function sayName()&#123;alert(this.name);&#125;;  </div><div class="line">//将sayName添加到全局变量中，这样显然有很多不足</div></pre></td></tr></table></figure>
-<ul>
-<li>原型模式  </li>
-</ul>
-<h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4><ul>
-<li><p>概念  </p>
-<ul>
-<li><p>每个函数都有一个prototype（原型）属性，这个属性是一个指针，指向一个对象，而这个对象的用途是包含可以<br>  由特定类型的所有实例共享的属性和方法  </p>
-</li>
-<li><p>使用原型对象的好处是可以让所有对象实例共享它所包含的属性和方法  </p>
-</li>
-<li>创建原型:</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  function Person()&#123;&#125;;  </div><div class="line">Person.prototype.name=“hxvin”；  </div><div class="line">Person.prototype.sayname=function()&#123; alert(this.name);  &#125;；                         </div><div class="line">var person1=new Person();                                   </div><div class="line">person1.dayName(); //“hxvin”</div></pre></td></tr></table></figure>
-<ul>
-<li>理解原型  <ul>
-<li>只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个protoype属性，这个属性指向函数的原型对象。  </li>
-<li>在默认情况下，所有原型对象都会自动获得一个constructor（构造函数）属性，包含一个指向prototype属性所在函数的指针  </li>
-<li>搜索流程  <ul>
-<li>当对象实例中与实例原型中的一个属性同名，那我们就在实例中创建该属性，该属性会屏蔽原型中的属性  </li>
-<li>每当代码读取某个对象属性时，先从实例中搜索，后在原型对象中查找  </li>
-<li>hasOwnProperty()  <ul>
-<li>用来检查一个属性时存在于对象实例中还是原型中，这个方法只在给定属性存在于对象实例中时，才会返回true  </li>
-<li>alert(person1 hasOwnProperty(“name”));       //返回true或false  </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>[[prototype]]  <ul>
-<li>当调用构造函数创建一个新实例后，该实例的内部将包含一个指针（内部属性），指向构造函数的原型对象  </li>
-<li>利用[[prototype]]  <ul>
-<li>ECMAScript5增加了一个新方法，叫Object.getPropertyOf(),在所有支持的实现中，这个方法返回[[prototype]]的值  <ul>
-<li>支持的浏览器：IE9+,FireFox3.5+,Safari 3.5+,Opera12+,Chrome  </li>
-</ul>
-</li>
-<li>但可以通过isPrototypeOf()方法来确定对象之间是否存在这种关系  <ul>
-<li>alert(Person.protoype isPrototypeOf(person1));   //true  </li>
-</ul>
-</li>
-<li>没有标准的方式访问[[prototype]]  </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>更简单的原型语法 </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> //可以重新设置constructor  </div><div class="line">function Perspn()&#123;&#125;;  </div><div class="line">Person.prototype=&#123;  </div><div class="line">    constructor=Person,  </div><div class="line">    name=&quot;Nick&quot;  </div><div class="line">&#125;;  </div><div class="line"></div><div class="line"> function Person()&#123;&#125;;  </div><div class="line">Person.prototype=&#123;  </div><div class="line">    name=&quot;Nick&quot;,  </div><div class="line">    sayName=function()&#123;alert(this.name)&#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>注意！！！！constructor属性不再指向Person了，我们在这里使用的语法本质上完全重写了默认的prototype对象，因此现在的constructor指向Object构造函数  <ul>
-<li>原型的动态性  </li>
-<li>注意：如果把原型修改为另一个对象就等于切断了构造函数与最初原型之间的联系（因为改变了[[prototype]]指针）  </li>
-<li>我们对原型对象所做的任何修改都能够立即从实例上反映出来  </li>
-<li>原型对象的问题（缺点）  </li>
-<li>1、省略了为构造函数传递初始化参数这一环节，结果所有实例在默认情况下都将取得相同的属性值  </li>
-<li>2、当在实例中对引用类型的值进行操作时，很有可能改变原型中的值。（共享问题）  <ul>
-<li>由于friends 数组存在于Person.prototype而非person1中，所以刚刚提到的修改也会通过person2. friends (与person2.friends指向同一个数组反映出来  </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="组合使用构造函数模式和原型模式"><a href="#组合使用构造函数模式和原型模式" class="headerlink" title="组合使用构造函数模式和原型模式"></a>组合使用构造函数模式和原型模式</h4> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> function Person(name,age,job)&#123;  </div><div class="line">    this.name=name,  </div><div class="line">    this.age=age,  </div><div class="line">    this.job=job  </div><div class="line">&#125;;  </div><div class="line">Person.prototype=&#123;  </div><div class="line">    constructor=Person,  </div><div class="line">    sayName=function()&#123;alert(this.name)&#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>Person1.friends不会影响到Person2.friends，因为它们分别引用了不同的数组  <ul>
-<li>优点  </li>
-<li>每个实例都会有自己的一份实例属性副本，但同时由共享着对方法的引用，最大限度的节省了内存  </li>
-<li>创建自定义类型最常见的方式  </li>
-<li>支持向构造函数传递参数  </li>
-</ul>
-</li>
-</ul>
-<h4 id="动态原型模式"><a href="#动态原型模式" class="headerlink" title="动态原型模式"></a>动态原型模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> function Person(name,age,job)&#123;          //属性  </div><div class="line">    this.name=name;  </div><div class="line">    this.age=age;  </div><div class="line">    this.job=job;  </div><div class="line">    //方法  </div><div class="line">    if(typeof sayName != &quot;function&quot;)&#123;  </div><div class="line">        Person.prototype.sayName = function()&#123;alert(this.name)&#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>//方法中，只在sayName()方法不存在的清况下，才会将它添加到原型中。<br> 这里对原型所做的修改，能够立即在所有实例中得到反映。  </p>
-</blockquote>
-<ul>
-<li>把所有信息封装在构造函数中，并通过if语句初始化原型  </li>
-</ul>
-<h4 id="寄生构造函数模式"><a href="#寄生构造函数模式" class="headerlink" title="寄生构造函数模式"></a>寄生构造函数模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> function Person(name,age,job)&#123;  </div><div class="line">    var o = new Object();  </div><div class="line">    o.name = name;  </div><div class="line">    o.age = age;  </div><div class="line">    o.job = job;  </div><div class="line">    o.sayName = function()&#123;alert(o.name)&#125;;  </div><div class="line">    return o  </div><div class="line">&#125;;  </div><div class="line">var person1 = new Person();</div></pre></td></tr></table></figure>
-<ul>
-<li>应用场景：创建有额外方法的特殊对象，而又不想改变其原有的构造函数  </li>
-<li>特点  <ul>
-<li>返回的对象和构造函数没有关系  </li>
-<li>不能依赖instanceof操作符来确定对象类型  </li>
-</ul>
-</li>
-</ul>
-<h4 id="稳妥构造函数模式"><a href="#稳妥构造函数模式" class="headerlink" title="稳妥构造函数模式"></a>稳妥构造函数模式</h4><ul>
-<li>所谓稳妥对象，指的是没有公共属性， 而且其方法也不引用this的对象。  </li>
-</ul>
-<pre><code>function Person(name,age,job){  
-      var o = new Object();  
-      o.sayName = function(){alert(name)}  
-  }  
-
-  var friend = Person (“hxvin”,”21”,”f-e”);  
-      friend.sayName(}; //“hxvin”
-</code></pre><blockquote>
-<p>这样，变蜇person 中保存的是一个稳妥对象， 而除了调用sayName() 方法外,没有别的方式可以访问其数据成员。  </p>
-</blockquote>
-<ul>
-<li>这种模式创建的对象中，出了使用sayName()方法之外，没有其他任何办法访问name的值。  </li>
-<li>应用场景： 一些安全的环境中（这些环境中会禁止使用this和new), 或者在防止数据被其他应用程序（如Mashup程序）改动时使用  </li>
-<li>特点：遵循与寄生构造函数类似的模式，但有两点不同： 一是新创建对象的实例方法不引用this;二是不使用new操作符调用构造函数  </li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;理解对象&quot;&gt;&lt;a href=&quot;#理解对象&quot; class=&quot;headerlink&quot; title=&quot;理解对象&quot;&gt;&lt;/a&gt;理解对象&lt;/h3&gt;&lt;h4 id=&quot;定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&quot;&gt;&lt;a href=&quot;#定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&quot; class=&quot;headerlink&quot; title=&quot;定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&quot;&gt;&lt;/a&gt;定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数&lt;/h4&gt;&lt;h4 id=&quot;属性类型&quot;&gt;&lt;a href=&quot;#属性类型&quot; class=&quot;headerlink&quot; title=&quot;属性类型&quot;&gt;&lt;/a&gt;属性类型&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;数据属性  &lt;ul&gt;
-&lt;li&gt;[[Configurabke]]:能否通过delete删除属性从而重新定义属性  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;访问器属性  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;创建对象&quot;&gt;&lt;a href=&quot;#创建对象&quot; class=&quot;headerlink&quot; title=&quot;创建对象&quot;&gt;&lt;/a&gt;创建对象&lt;/h3&gt;&lt;h4 id=&quot;可以通过“构造函数”或者“对象字面量”方法创建函数&quot;&gt;&lt;a href=&quot;#可以通过“构造函数”或者“对象字面量”方法创建函数&quot; class=&quot;headerlink&quot; title=&quot;可以通过“构造函数”或者“对象字面量”方法创建函数&quot;&gt;&lt;/a&gt;可以通过“构造函数”或者“对象字面量”方法创建函数&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;缺点：通过一个接口创建很多对象，会产生大量的重复代码  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;工厂模式&quot;&gt;&lt;a href=&quot;#工厂模式&quot; class=&quot;headerlink&quot; title=&quot;工厂模式&quot;&gt;&lt;/a&gt;工厂模式&lt;/h4&gt;
     
     </summary>
     
