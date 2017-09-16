@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-16T14:56:50.000Z</updated>
+  <updated>2017-09-16T15:03:15.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/09/15/%E8%AE%B0%E5%BD%95%E4%B8%8Bnode%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%BA%BF%E7%9A%84%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%9D%91/"/>
     <id>http://yoursite.com/2017/09/15/记录下node项目部署上线的过程及坑/</id>
     <published>2017-09-15T02:11:32.000Z</published>
-    <updated>2017-09-16T14:56:50.000Z</updated>
+    <updated>2017-09-16T15:03:15.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填坑。。。。。。现在趁还记得一些，记录一下，免得下次忘了</p>
 <h3 id="nodejs写爬虫，论坛系统"><a href="#nodejs写爬虫，论坛系统" class="headerlink" title="nodejs写爬虫，论坛系统"></a>nodejs写爬虫，论坛系统</h3><p>说到nodejs，肯定离不开异步，我在项目中用的是<br>promise+async/await这一套异步方案</p>
@@ -29,7 +29,9 @@
 <p><a href="https://www.zhihu.com/question/19732473/answer/20851256" target="_blank" rel="external">了解异步与同步，阻塞与非阻塞</a></p>
 <p><a href="https://blog.fundebug.com/2017/04/04/nodejs-async-await/" target="_blank" rel="external">Async/Await替代Promise的6个理由</a></p>
 <p><a href="https://cnodejs.org/topic/5640b80d3a6aa72c5e0030b6" target="_blank" rel="external">Async/Await详解</a></p>
-<p>show code：<br>操作mysql</p>
+<p>show code：</p>
+<a id="more"></a>
+<p>操作mysql</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">let query = function( sql, values ) &#123;</div><div class="line"></div><div class="line">  return new Promise(( resolve, reject ) =&gt; &#123;</div><div class="line">    pool.getConnection(function(err, connection) &#123;</div><div class="line">      if (err) &#123;</div><div class="line">        resolve( err )</div><div class="line">      &#125; else &#123;</div><div class="line">        connection.query(sql, values, ( err, rows) =&gt; &#123;</div><div class="line"></div><div class="line">          if ( err ) &#123;</div><div class="line">            reject( err )</div><div class="line">          &#125; else &#123;</div><div class="line">            resolve( rows )</div><div class="line">          &#125;</div><div class="line">          connection.release()</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;)</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">let findDataByUser = function (  name ) &#123;</div><div class="line">  let _sql = `</div><div class="line">    SELECT * from posts</div><div class="line">      where name=&quot;$&#123;name&#125;&quot;</div><div class="line">      `</div><div class="line">  return query( _sql)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>控制器：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Post:async(ctx,next)=&gt;&#123;</div><div class="line">    if (ctx.request.querystring)</div><div class="line">	 &#123;				</div><div class="line"></div><div class="line">		await userModel.findDataByUser(decodeURIComponent(ctx.request.querystring.split(&apos;=&apos;)[1]))</div><div class="line">			.then(result=&gt;&#123;	</div><div class="line">					 var string=JSON.stringify(result); </div><div class="line">					   res=JSON.parse(string).reverse();</div><div class="line">			&#125;)</div><div class="line">		await ctx.render(&apos;post&apos;,&#123;</div><div class="line">				session:ctx.session,</div><div class="line">				posts:res	</div><div class="line">			&#125;)</div><div class="line">	&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
@@ -75,7 +77,14 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;这个月利用空余时间写的xmxz在修了n多bug之后，在填了不少坑之后终于把他部署到云服务器上线了。对我这个技术菜简直就是挖坑，填坑，挖坑，填坑。。。。。。现在趁还记得一些，记录一下，免得下次忘了&lt;/p&gt;
+&lt;h3 id=&quot;nodejs写爬虫，论坛系统&quot;&gt;&lt;a href=&quot;#nodejs写爬虫，论坛系统&quot; class=&quot;headerlink&quot; title=&quot;nodejs写爬虫，论坛系统&quot;&gt;&lt;/a&gt;nodejs写爬虫，论坛系统&lt;/h3&gt;&lt;p&gt;说到nodejs，肯定离不开异步，我在项目中用的是&lt;br&gt;promise+async/await这一套异步方案&lt;/p&gt;
+&lt;p&gt;async/await是写异步代码的新方式，以前的方法有回调函数和Promise。&lt;br&gt;async/await是基于Promise实现的，它不能用于普通的回调函数。&lt;br&gt;async/await与Promise一样，是非阻塞的。&lt;br&gt;async/await使得异步代码看起来像同步代码，这正是它的魔力所在。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.zhihu.com/collection/119015788&quot;&gt;了解回调函数是什么&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.zhihu.com/question/19732473/answer/20851256&quot;&gt;了解异步与同步，阻塞与非阻塞&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.fundebug.com/2017/04/04/nodejs-async-await/&quot;&gt;Async/Await替代Promise的6个理由&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://cnodejs.org/topic/5640b80d3a6aa72c5e0030b6&quot;&gt;Async/Await详解&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;show code：&lt;/p&gt;
     
     </summary>
     
@@ -643,38 +652,6 @@
   </entry>
   
   <entry>
-    <title>从实际项目小谈react生命周期</title>
-    <link href="http://yoursite.com/2017/05/08/%E4%BB%8E%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%B0%88react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    <id>http://yoursite.com/2017/05/08/从实际项目小谈react生命周期/</id>
-    <published>2017-05-08T02:21:32.000Z</published>
-    <updated>2017-09-16T08:43:41.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p> 今天写的一个react版的滚动字幕，思路是用js操作展示内容的scrollWidth,然后用setInterval 循环调用function ，function内容大体思路是对文字内容userDOM.style.transform = ‘translateX(-‘+ i +’px)’,每次横向左移动ipx的距离，形成滚动效果，当i&gt;=scrollWidth的时候，将i归零，形成循环滚动。(这里操作了dom，不是很好)</p>
-<p>这里先解释一下浏览器scrollWidth，scrollWidth，offsetWidth三种宽度的区别<br>情况1：<br>元素内无内容或者内容不超过可视区，滚动不出现或不可用的情况下。<br>scrollWidth=scrollWidth，两者皆为内容可视区的宽度。<br>offsetWidth为元素的实际宽度。<br>情况2：<br>元素的内容超过可视区，滚动条出现和可用的情况下。<br>scrollWidth&gt;clientWidth。<br>scrollWidth为实际内容的宽度。<br>clientWidth是内容可视区的宽度。<br>offsetWidth是元素的实际宽度。</p>
-<a id="more"></a>
-<h4 id="出问题了"><a href="#出问题了" class="headerlink" title="出问题了"></a>出问题了</h4><p>为了以便调用后端接口前先模拟展示，将静态生成的内容写死的文字内容换成动态加载，还采取了随机生成用户ip和获奖内容，结果获取到的scrollWidth（元素内容的实际宽度，包括被隐藏的部分）只是内容可视区的宽度，显然是不行的，所以无法滚动全部，我们需要的是元素内容的实际宽度。为什么会出现这种情况呢？如果文字内容是静态生成的，内容写死的，并不会出现这种问题。</p>
-<h4 id="问题出在哪里？"><a href="#问题出在哪里？" class="headerlink" title="问题出在哪里？"></a>问题出在哪里？</h4><p>出在动态加载还要考虑到react的生命周期，componentWillMount(将要挂载)-&gt;render(dom渲染)-&gt;componentDidMount(已经挂载)，这个滚动函数写在了componentDidMount中，也就是页面dom结构渲染完了文字内容才开始动态生成，结果scrollWidth抓取到的文字内容是空的，只能获取了内容可视区的宽度。<br><img src="http://upload-images.jianshu.io/upload_images/5287253-1e0d1ec12f576c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网上找的一张react生命周期的好图"></p>
-<h4 id="问题找出来了，该如何解决呢？"><a href="#问题找出来了，该如何解决呢？" class="headerlink" title="问题找出来了，该如何解决呢？"></a>问题找出来了，该如何解决呢？</h4><p>最简单粗暴的方式就是把动态加载文字内容的函数放在componentWillMount(将要挂载)中，在render页面之前就把该部分内容加载完毕，这样render页面的时候scrollWidth将抓取到早已加载好的文字内容了，可是这样会造成打开页面后，页面空白一会，在渲染出页面的内容来，这段空白期间就是componentWillMount加载你的数据内容去了。如果数据内容少还好说，万一量很大了，那就尴尬了，严重影响用户体验。</p>
-<p>####更好的解决办法是<br>仍把动态加载文字内容的函数放在componentDidMount中，并在此采用window.onload 调用滚动函数，也就是等页面都渲染完了，文字内容也ok了，才会调用滚动函数（scrollWidth，setInterval，transform ）。</p>
-<p>这下，解决了生命周期以及用户体验，加载性能的问题。😀</p>
-<p>如有错误和不足，恳请指出指导^ ^</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt; 今天写的一个react版的滚动字幕，思路是用js操作展示内容的scrollWidth,然后用setInterval 循环调用function ，function内容大体思路是对文字内容userDOM.style.transform = ‘translateX(-‘+ i +’px)’,每次横向左移动ipx的距离，形成滚动效果，当i&amp;gt;=scrollWidth的时候，将i归零，形成循环滚动。(这里操作了dom，不是很好)&lt;/p&gt;
-&lt;p&gt;这里先解释一下浏览器scrollWidth，scrollWidth，offsetWidth三种宽度的区别&lt;br&gt;情况1：&lt;br&gt;元素内无内容或者内容不超过可视区，滚动不出现或不可用的情况下。&lt;br&gt;scrollWidth=scrollWidth，两者皆为内容可视区的宽度。&lt;br&gt;offsetWidth为元素的实际宽度。&lt;br&gt;情况2：&lt;br&gt;元素的内容超过可视区，滚动条出现和可用的情况下。&lt;br&gt;scrollWidth&amp;gt;clientWidth。&lt;br&gt;scrollWidth为实际内容的宽度。&lt;br&gt;clientWidth是内容可视区的宽度。&lt;br&gt;offsetWidth是元素的实际宽度。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="React" scheme="http://yoursite.com/tags/React/"/>
-    
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Vue学习</title>
     <link href="http://yoursite.com/2017/05/08/Vue%E5%AD%A6%E4%B9%A0/"/>
     <id>http://yoursite.com/2017/05/08/Vue学习/</id>
@@ -715,6 +692,38 @@
       <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
       <category term="Vue" scheme="http://yoursite.com/tags/Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从实际项目小谈react生命周期</title>
+    <link href="http://yoursite.com/2017/05/08/%E4%BB%8E%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%B0%88react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>http://yoursite.com/2017/05/08/从实际项目小谈react生命周期/</id>
+    <published>2017-05-08T02:21:32.000Z</published>
+    <updated>2017-09-16T08:43:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p> 今天写的一个react版的滚动字幕，思路是用js操作展示内容的scrollWidth,然后用setInterval 循环调用function ，function内容大体思路是对文字内容userDOM.style.transform = ‘translateX(-‘+ i +’px)’,每次横向左移动ipx的距离，形成滚动效果，当i&gt;=scrollWidth的时候，将i归零，形成循环滚动。(这里操作了dom，不是很好)</p>
+<p>这里先解释一下浏览器scrollWidth，scrollWidth，offsetWidth三种宽度的区别<br>情况1：<br>元素内无内容或者内容不超过可视区，滚动不出现或不可用的情况下。<br>scrollWidth=scrollWidth，两者皆为内容可视区的宽度。<br>offsetWidth为元素的实际宽度。<br>情况2：<br>元素的内容超过可视区，滚动条出现和可用的情况下。<br>scrollWidth&gt;clientWidth。<br>scrollWidth为实际内容的宽度。<br>clientWidth是内容可视区的宽度。<br>offsetWidth是元素的实际宽度。</p>
+<a id="more"></a>
+<h4 id="出问题了"><a href="#出问题了" class="headerlink" title="出问题了"></a>出问题了</h4><p>为了以便调用后端接口前先模拟展示，将静态生成的内容写死的文字内容换成动态加载，还采取了随机生成用户ip和获奖内容，结果获取到的scrollWidth（元素内容的实际宽度，包括被隐藏的部分）只是内容可视区的宽度，显然是不行的，所以无法滚动全部，我们需要的是元素内容的实际宽度。为什么会出现这种情况呢？如果文字内容是静态生成的，内容写死的，并不会出现这种问题。</p>
+<h4 id="问题出在哪里？"><a href="#问题出在哪里？" class="headerlink" title="问题出在哪里？"></a>问题出在哪里？</h4><p>出在动态加载还要考虑到react的生命周期，componentWillMount(将要挂载)-&gt;render(dom渲染)-&gt;componentDidMount(已经挂载)，这个滚动函数写在了componentDidMount中，也就是页面dom结构渲染完了文字内容才开始动态生成，结果scrollWidth抓取到的文字内容是空的，只能获取了内容可视区的宽度。<br><img src="http://upload-images.jianshu.io/upload_images/5287253-1e0d1ec12f576c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网上找的一张react生命周期的好图"></p>
+<h4 id="问题找出来了，该如何解决呢？"><a href="#问题找出来了，该如何解决呢？" class="headerlink" title="问题找出来了，该如何解决呢？"></a>问题找出来了，该如何解决呢？</h4><p>最简单粗暴的方式就是把动态加载文字内容的函数放在componentWillMount(将要挂载)中，在render页面之前就把该部分内容加载完毕，这样render页面的时候scrollWidth将抓取到早已加载好的文字内容了，可是这样会造成打开页面后，页面空白一会，在渲染出页面的内容来，这段空白期间就是componentWillMount加载你的数据内容去了。如果数据内容少还好说，万一量很大了，那就尴尬了，严重影响用户体验。</p>
+<p>####更好的解决办法是<br>仍把动态加载文字内容的函数放在componentDidMount中，并在此采用window.onload 调用滚动函数，也就是等页面都渲染完了，文字内容也ok了，才会调用滚动函数（scrollWidth，setInterval，transform ）。</p>
+<p>这下，解决了生命周期以及用户体验，加载性能的问题。😀</p>
+<p>如有错误和不足，恳请指出指导^ ^</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt; 今天写的一个react版的滚动字幕，思路是用js操作展示内容的scrollWidth,然后用setInterval 循环调用function ，function内容大体思路是对文字内容userDOM.style.transform = ‘translateX(-‘+ i +’px)’,每次横向左移动ipx的距离，形成滚动效果，当i&amp;gt;=scrollWidth的时候，将i归零，形成循环滚动。(这里操作了dom，不是很好)&lt;/p&gt;
+&lt;p&gt;这里先解释一下浏览器scrollWidth，scrollWidth，offsetWidth三种宽度的区别&lt;br&gt;情况1：&lt;br&gt;元素内无内容或者内容不超过可视区，滚动不出现或不可用的情况下。&lt;br&gt;scrollWidth=scrollWidth，两者皆为内容可视区的宽度。&lt;br&gt;offsetWidth为元素的实际宽度。&lt;br&gt;情况2：&lt;br&gt;元素的内容超过可视区，滚动条出现和可用的情况下。&lt;br&gt;scrollWidth&amp;gt;clientWidth。&lt;br&gt;scrollWidth为实际内容的宽度。&lt;br&gt;clientWidth是内容可视区的宽度。&lt;br&gt;offsetWidth是元素的实际宽度。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
