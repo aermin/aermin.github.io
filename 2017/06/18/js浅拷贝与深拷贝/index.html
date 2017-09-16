@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习笔记,JavaScript," />
+  <meta name="keywords" content="学习总结,JS," />
 
 
 
@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="在ES5中，一共有9个Array方法：  Array.prototype.indexOf;Array.prototype.lastIndexOf;Array.prototype.every;Array.prototype.some;Array.prototype.forEach;Array.prototype.map;Array.prototype.filter;Array.prototype.">
-<meta name="keywords" content="学习笔记,JavaScript">
+<meta name="description" content="深复制和浅复制只针对像 Object, Array 这样的复杂对象的。简单来说，浅复制只复制一层对象的属性，而深复制则递归复制了所有层级。  浅拷贝  123456789101112var obj = &amp;#123; a:1, arr: [2,3] &amp;#125;;var shallowObj = shallowCopy(obj);function shallowCopy(src) &amp;#123;  v">
+<meta name="keywords" content="学习总结,JS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开发中js数组的常用方法">
-<meta property="og:url" content="http://yoursite.com/2017/04/27/开发中js数组的常用方法/index.html">
+<meta property="og:title" content="js浅拷贝与深拷贝">
+<meta property="og:url" content="http://yoursite.com/2017/06/18/js浅拷贝与深拷贝/index.html">
 <meta property="og:site_name" content="Hxvin的博客">
-<meta property="og:description" content="在ES5中，一共有9个Array方法：  Array.prototype.indexOf;Array.prototype.lastIndexOf;Array.prototype.every;Array.prototype.some;Array.prototype.forEach;Array.prototype.map;Array.prototype.filter;Array.prototype.">
-<meta property="og:updated_time" content="2017-05-10T03:44:46.000Z">
+<meta property="og:description" content="深复制和浅复制只针对像 Object, Array 这样的复杂对象的。简单来说，浅复制只复制一层对象的属性，而深复制则递归复制了所有层级。  浅拷贝  123456789101112var obj = &amp;#123; a:1, arr: [2,3] &amp;#125;;var shallowObj = shallowCopy(obj);function shallowCopy(src) &amp;#123;  v">
+<meta property="og:updated_time" content="2017-09-16T15:21:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开发中js数组的常用方法">
-<meta name="twitter:description" content="在ES5中，一共有9个Array方法：  Array.prototype.indexOf;Array.prototype.lastIndexOf;Array.prototype.every;Array.prototype.some;Array.prototype.forEach;Array.prototype.map;Array.prototype.filter;Array.prototype.">
+<meta name="twitter:title" content="js浅拷贝与深拷贝">
+<meta name="twitter:description" content="深复制和浅复制只针对像 Object, Array 这样的复杂对象的。简单来说，浅复制只复制一层对象的属性，而深复制则递归复制了所有层级。  浅拷贝  123456789101112var obj = &amp;#123; a:1, arr: [2,3] &amp;#125;;var shallowObj = shallowCopy(obj);function shallowCopy(src) &amp;#123;  v">
 
 
 
@@ -130,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/27/开发中js数组的常用方法/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/18/js浅拷贝与深拷贝/"/>
 
 
 
 
 
-  <title>开发中js数组的常用方法 | Hxvin的博客</title>
+  <title>js浅拷贝与深拷贝 | Hxvin的博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -289,7 +289,7 @@
   
 
   <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/27/开发中js数组的常用方法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/18/js浅拷贝与深拷贝/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hxvin">
@@ -310,7 +310,7 @@
             
             
               
-                开发中js数组的常用方法
+                js浅拷贝与深拷贝
               
             
           </h1>
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-27T13:03:14+08:00">
-                2017-04-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-18T22:22:12+08:00">
+                2017-06-18
               </time>
             
 
@@ -345,8 +345,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/04/27/开发中js数组的常用方法/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/04/27/开发中js数组的常用方法/" itemprop="commentsCount"></span>
+                <a href="/2017/06/18/js浅拷贝与深拷贝/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/18/js浅拷贝与深拷贝/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -371,51 +371,23 @@
       
 
       
-        <ul>
-<li>在ES5中，一共有9个Array方法：</li>
-</ul>
-<p>Array.prototype.indexOf;<br>Array.prototype.lastIndexOf;<br>Array.prototype.every;<br>Array.prototype.some;<br>Array.prototype.forEach;<br>Array.prototype.map;<br>Array.prototype.filter;<br>Array.prototype.reduce;<br>Array.prototype.reduceRight;</p>
-<p>5种比较常用=&gt;index(),filter(),forEach(),map(),reduce().</p>
+        <p>深复制和浅复制只针对像 Object, Array 这样的复杂对象的。简单来说，浅复制只复制一层对象的属性，而深复制则递归复制了所有层级。</p>
 <blockquote>
-<p>ps:reduce()还没搞懂，就先不整理了。<br>文末有个实例了解实际运用。</p>
+<p>浅拷贝</p>
 </blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var obj = &#123; a:1, arr: [2,3] &#125;;</div><div class="line">var shallowObj = shallowCopy(obj);</div><div class="line"></div><div class="line">function shallowCopy(src) &#123;</div><div class="line">  var dst = &#123;&#125;;</div><div class="line">  for (var prop in src) &#123;</div><div class="line">    if (src.hasOwnProperty(prop)) &#123;</div><div class="line">      dst[prop] = src[prop];</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  return dst;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><h4 id="1-indexOf"><a href="#1-indexOf" class="headerlink" title="1) indexOf"></a>1) indexOf</h4><p>indexOf()方法返回在该数组中第一个找到的元素位置，如果它不存在则返回-1。<br>不使用indexOf时：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var arr = [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;],</div><div class="line">found = false;</div><div class="line"> </div><div class="line">for(var i= 0, l = arr.length; i&lt; l; i++)&#123;</div><div class="line">if(arr[i] === &apos;a&apos;)&#123;</div><div class="line">found = true;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">console.log(&quot;found:&quot;,found);//输出found: true</div></pre></td></tr></table></figure>
-<ul>
-<li>indexOf使用后</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var arr = [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;];</div><div class="line"> </div><div class="line">console.log(&quot;found:&quot;, arr.indexOf(&quot;a&quot;) != -1);//输出found: true</div></pre></td></tr></table></figure>
-<h4 id="2-filter"><a href="#2-filter" class="headerlink" title="2) filter"></a>2) filter</h4><p>该filter()方法创建一个新的匹配过滤条件的数组。</p>
-<ul>
-<li>不用 filter() 时</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var arr = [</div><div class="line">  [&quot;a&quot;, 2],</div><div class="line">  [&quot;b&quot;, 5],</div><div class="line">  [&quot;c&quot;, 3],</div><div class="line">  [&quot;b&quot;, 16],</div><div class="line">];</div><div class="line">   </div><div class="line">var newArr = [];</div><div class="line"> </div><div class="line">for(var i= 0, l = arr.length; i&lt; l; i++)&#123;</div><div class="line">  if(arr[i][0] == &quot;b&quot; )&#123;</div><div class="line">newArr.push(arr[i]);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">alert(newArr);//输出b,5,b,16</div></pre></td></tr></table></figure>
-<ul>
-<li>用了 filter():</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var arr = [</div><div class="line">  [&quot;a&quot;, 2],</div><div class="line">  [&quot;b&quot;, 5],</div><div class="line">  [&quot;c&quot;, 3],</div><div class="line">  [&quot;b&quot;, 16],</div><div class="line">];</div><div class="line">  var newArr = arr.filter(function(element, index, array)&#123;</div><div class="line">  return element[0] == &quot;b&quot; ;</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">alert(newArr); //输出b,5,b,16</div></pre></td></tr></table></figure>
-<h4 id="3-forEach"><a href="#3-forEach" class="headerlink" title="3) forEach()"></a>3) forEach()</h4><p>forEach为每个元素执行对应的方法,用来替换for循环</p>
-<ul>
-<li>不用 forEach() 时</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [1,2,3,4,5,6,7,8];</div><div class="line">for(var i= 0, l = arr.length; i&lt; l; i++)&#123;</div><div class="line">console.log(arr[i]); //输出 1 2 3 4 5 6 7 8 </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>用了forEach()</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [1,2,3,4,5,6,7,8];</div><div class="line">arr.forEach(function(element, index, array)&#123;</div><div class="line">console.log(element);//输出 1 2 3 4 5 6 7 8 </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h4 id="4-map"><a href="#4-map" class="headerlink" title="4) map()"></a>4) map()</h4><p>map()对数组的每个元素进行一定操作（映射）后，会返回一个新的数组，<br>不使用map<br>map()是处理服务器返回数据时是一个非常实用的函数。</p>
-<ul>
-<li>不用 map() 时</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var oldArr = [&#123;first_name:&quot;Colin&quot;,last_name:&quot;Toh&quot;&#125;,&#123;first_name:&quot;Addy&quot;,last_name:&quot;Osmani&quot;&#125;,&#123;first_name:&quot;Yehuda&quot;,last_name:&quot;Katz&quot;&#125;];</div><div class="line"> </div><div class="line">function getNewArr()&#123;</div><div class="line">   </div><div class="line">  var newArr = [];</div><div class="line">   </div><div class="line">  for(var i= 0, l = oldArr.length; i&lt; l; i++)&#123;</div><div class="line">    var item = oldArr[i];</div><div class="line">    full_name = [item.first_name,item.last_name].join(&quot; &quot;);</div><div class="line">    newArr[i] = full_name;</div><div class="line">  &#125;</div><div class="line">   </div><div class="line">  return newArr;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">console.log(getNewArr());//输出 [&quot;Colin Toh&quot;, &quot;Addy Osmani&quot;, &quot;Yehuda Katz&quot;]</div></pre></td></tr></table></figure>
-<ul>
-<li>使用map后</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var oldArr = [&#123;first_name:&quot;Colin&quot;,last_name:&quot;Toh&quot;&#125;,&#123;first_name:&quot;Addy&quot;,last_name:&quot;Osmani&quot;&#125;,&#123;first_name:&quot;Yehuda&quot;,last_name:&quot;Katz&quot;&#125;];</div><div class="line"> </div><div class="line">function getNewArr()&#123;</div><div class="line">     </div><div class="line">  return oldArr.map(function(item,index)&#123;</div><div class="line">    full_name = [item.first_name,item.last_name].join(&quot; &quot;);</div><div class="line">    return full_name;</div><div class="line">  &#125;);</div><div class="line">   </div><div class="line">&#125;</div><div class="line"> </div><div class="line">console.log(getNewArr());  //输出 [&quot;Colin Toh&quot;, &quot;Addy Osmani&quot;, &quot;Yehuda Katz&quot;]</div></pre></td></tr></table></figure>
-<h3 id="百度IFE的js任务-二-的运用"><a href="#百度IFE的js任务-二-的运用" class="headerlink" title="百度IFE的js任务(二)的运用"></a>百度IFE的js任务(二)的运用</h3><p><a href="http://ife.baidu.com/course/detail/id/91" target="_blank" rel="external">传送门</a><br>任务描述:参考以下示例代码，页面加载后，将提供的空气质量数据数组，按照某种逻辑（比如空气质量大于60）进行过滤筛选，最后将符合条件的数据按照一定的格式要求显示在网页上</p>
-<p>实现思路：<br>1、用filter()方法筛选出值大于60的城市赋值给一个新的数组。<br>2、用sort()对这个新的数组进行由大到小的排序。<br>3、用forEach()代替for循环并动态创建li标签并打印名次和城市及其空气质量值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">    &lt;title&gt;IFE JavaScript Task 01&lt;/title&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">  &lt;h3&gt;污染城市列表&lt;/h3&gt;</div><div class="line">  &lt;ul id=&quot;aqi-list&quot;&gt;</div><div class="line">&lt;!--   </div><div class="line">    &lt;li&gt;第一名：福州（样例），10&lt;/li&gt;</div><div class="line">      &lt;li&gt;第二名：福州（样例），10&lt;/li&gt; --&gt;</div><div class="line">  &lt;/ul&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"></div><div class="line">var aqiData = [</div><div class="line">  [&quot;北京&quot;, 90],</div><div class="line">  [&quot;上海&quot;, 50],</div><div class="line">  [&quot;福州&quot;, 10],</div><div class="line">  [&quot;广州&quot;, 50],</div><div class="line">  [&quot;成都&quot;, 90],</div><div class="line">  [&quot;西安&quot;, 100]</div><div class="line">];</div><div class="line"></div><div class="line">(function () &#123;</div><div class="line"></div><div class="line">  /*</div><div class="line">  在注释下方编写代码</div><div class="line">  遍历读取aqiData中各个城市的数据</div><div class="line">  将空气质量指数大于60的城市显示到aqi-list的列表中</div><div class="line">  */</div><div class="line">   var aqiul=document.getElementById(&apos;aqi-list&apos;); //获取数组</div><div class="line"></div><div class="line"> //用filter()方法筛选出空气质量指数大于60的数组</div><div class="line">   var filtered = aqiData.filter(function(element, index, array)&#123;</div><div class="line">      return (element[1] &gt;= 60);</div><div class="line">    &#125;) ;</div><div class="line"></div><div class="line">   filtered.sort(function(a,b)&#123; //从大到小排序</div><div class="line">      return b[1]-a[1];</div><div class="line">  &#125;);</div><div class="line">   </div><div class="line">  //    (function wirte()&#123;    //输出  用for循环</div><div class="line">  //   for(var i=0;i&lt;filtered.length;i++)&#123;</div><div class="line">  //     var li=document.createElement(&apos;li&apos;);</div><div class="line">  //     aqiul.append(li);</div><div class="line">  //     li.innerHTML=&quot;第&quot;+(i+1)+&quot;名：&quot;+filtered[i];</div><div class="line">  //   &#125;</div><div class="line">  // &#125;)();</div><div class="line"></div><div class="line">//用forEach方法代替for循环</div><div class="line"> filtered.forEach(function(element, index, array)&#123;</div><div class="line">      var li=document.createElement(&apos;li&apos;);</div><div class="line">         aqiul.append(li);</div><div class="line">         li.innerHTML=&quot;第&quot;+(index+1)+&quot;名：&quot;+filtered[index];</div><div class="line"> &#125;);</div><div class="line"></div><div class="line">&#125;)();</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>因为浅复制只会将对象的各个属性进行依次复制，并不会进行递归复制，而 JavaScript 存储对象都是存地址的，所以浅复制会导致 obj.arr 和 shallowObj.arr 指向同一块内存地址。</p>
+<p>导致的结果就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">shallowObj.arr[1] = 5;</div><div class="line">obj.arr[1]   // = 5</div></pre></td></tr></table></figure></p>
+<p>深复制则不同，它不仅将原对象的各个属性逐个复制出去，而且将原对象各个属性所包含的对象也依次采用深复制的方法递归复制到新对象上。这就不会存在上面 obj 和 shallowObj 的 arr 属性指向同一个对象的问题。</p>
+<blockquote>
+<p>深拷贝（这个函数可以深拷贝对象和数组）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var deepCopy = function(obj)&#123;</div><div class="line">    var str, newobj = obj.constructor === Array ? [] : &#123;&#125;;</div><div class="line">    if(typeof obj !== &apos;object&apos;)&#123;</div><div class="line">        return;</div><div class="line">    &#125; else if(window.JSON)&#123;</div><div class="line">        str = JSON.stringify(obj), //系列化对象</div><div class="line">        newobj = JSON.parse(str); //还原</div><div class="line">    &#125; else &#123;</div><div class="line">        for(var i in obj)&#123;</div><div class="line">            newobj[i] = typeof obj[i] === &apos;object&apos; ? </div><div class="line">            deepCopy(obj[i]) : obj[i]; </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return newobj;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var obj = &#123; a:1, arr: [1,2] &#125;;</div><div class="line">var deepObj = deepCopy(obj);</div><div class="line">deepObj.arr[1]=5;</div><div class="line">obj.arr[1]; //2</div></pre></td></tr></table></figure>
+<p><a href="https://www.zhihu.com/question/23031215" target="_blank" rel="external">本文参考地址</a>。</p>
+
       
     </div>
 
@@ -444,9 +416,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            <a href="/tags/学习总结/" rel="tag"># 学习总结</a>
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+            <a href="/tags/JS/" rel="tag"># JS</a>
           
         </div>
       
@@ -459,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/29/轻松学习JS快速排序-QuickSort/" rel="next" title="轻松学习JS快速排序(QuickSort)">
-                <i class="fa fa-chevron-left"></i> 轻松学习JS快速排序(QuickSort)
+              <a href="/2017/06/24/图片懒加载及节流函数优化性能/" rel="next" title="图片懒加载及节流函数优化性能">
+                <i class="fa fa-chevron-left"></i> 图片懒加载及节流函数优化性能
               </a>
             
           </div>
@@ -469,8 +441,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/26/关于自执行函数（立即执行函数）/" rel="prev" title="关于自执行函数（立即执行函数）">
-                关于自执行函数（立即执行函数） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/" rel="prev" title="图文解析HTMLElement.offsetHeight,scrollHeight,clientHeight">
+                图文解析HTMLElement.offsetHeight,scrollHeight,clientHeight <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -520,17 +492,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg"
@@ -628,22 +591,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-indexOf"><span class="nav-number">1.1.</span> <span class="nav-text">1) indexOf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-filter"><span class="nav-number">1.2.</span> <span class="nav-text">2) filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-forEach"><span class="nav-number">1.3.</span> <span class="nav-text">3) forEach()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-map"><span class="nav-number">1.4.</span> <span class="nav-text">4) map()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百度IFE的js任务-二-的运用"><span class="nav-number">2.</span> <span class="nav-text">百度IFE的js任务(二)的运用</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
