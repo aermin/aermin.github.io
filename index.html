@@ -375,8 +375,7 @@
 
       
         
-          
-            <p>首先，js的api的命名一般都有它的意义所在，通过英文就能大概理解是干啥用的。（可见英语多重要。。。）<br>现在看看slice,splice和split分别是啥意思</p>
+          <p>首先，js的api的命名一般都有它的意义所在，通过英文就能大概理解是干啥用的。（可见英语多重要。。。）<br>现在看看slice,splice和split分别是啥意思</p>
 <ul>
 <li>slice：片</li>
 <li>splice： 剪接</li>
@@ -387,23 +386,13 @@
 </blockquote>
 <p>用法1：array.slice(start,end) -&gt; 提取数组的片段</p>
 <p>简单可以理解成start是提取片段的开头位置(0开始算)，end是提取的末尾位置(1开始算)<br>看例子领会一下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//如果不传入参数二，那么将从参数一的索引位置开始截取，一直到数组尾</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(0,3);  //[1,2,3]</div><div class="line">var c=a.slice(3);    //[4,5,6]</div><div class="line"> </div><div class="line">//如果两个参数中的任何一个是负数，array.length会和它们相加，试图让它们成为非负数，举例说明：</div><div class="line">//当只传入一个参数，且是负数时，length会与参数相加，然后再截取</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(-1);  //[6]</div><div class="line"> </div><div class="line">//当只传入一个参数，是负数时,并且参数的绝对值大于数组length时，会截取整个数组</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(-6);  //[1,2,3,4,5,6]</div><div class="line">var c=a.slice(-8);  //[1,2,3,4,5,6]</div><div class="line"> </div><div class="line">//当传入两个参数一正一负时，length也会先于负数相加后，再截取</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(2,-3);  //[3]</div><div class="line"> </div><div class="line">//当传入一个参数，大于length时，将返回一个空数组</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(6);　　//[]</div></pre></td></tr></table></figure>
-<p>用法2：string.slice(start,end)   -&gt; 提取字符串的片段<br>道理同上<br>例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var a=&quot;i am a boy&quot;;</div><div class="line">var b=a.slice(0,6);  //&quot;i am a&quot;</div></pre></td></tr></table></figure>
-<h3 id="splice：-剪接"><a href="#splice：-剪接" class="headerlink" title="splice： 剪接"></a>splice： 剪接</h3><blockquote>
-<p>可以理解成一个东西剪掉一部分并接上新的部分</p>
-</blockquote>
-<p>用法：array.splice(start,deleteCount,item…)</p>
-<p>可以理解成array剪掉初始位置为start，个数为deleteCount的部分，该部分赋值给新的变量，如果有item，则接入被剪掉的部分</p>
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var a=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;];</div><div class="line">var b=a.splice(1,1,&apos;e&apos;,&apos;f&apos;);  //a=[&apos;a&apos;,&apos;e&apos;,&apos;f&apos;,&apos;c&apos;],b=[&apos;b&apos;]</div></pre></td></tr></table></figure>
-<h3 id="split：-分割"><a href="#split：-分割" class="headerlink" title="split： 分割"></a>split： 分割</h3><p>用法：string.split(separator,limit)</p>
-<blockquote>
-<p>可以理解成把一个东西从第一位置开始根据separator分割成limit个片段来创建一个字符串数组</p>
-</blockquote>
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var a=&quot;0,1,2,3,4,5,6&quot;;</div><div class="line">var b=a.split(&quot;&quot;,3); // [&quot;0&quot;, &quot;,&quot;, &quot;1&quot;]</div><div class="line"></div><div class="line">var a=&quot;0,1,2,3,4,5,6&quot;;</div><div class="line">var b=a.split(&quot;,&quot;,3);  // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;]</div></pre></td></tr></table></figure>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/15/简单的方法掌握JS中slice-splice和split的使用方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

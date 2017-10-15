@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/15/简单的方法掌握JS中slice-splice和split的使用方法/index.html">
 <meta property="og:site_name" content="Hxvin的博客">
 <meta property="og:description" content="首先，js的api的命名一般都有它的意义所在，通过英文就能大概理解是干啥用的。（可见英语多重要。。。）现在看看slice,splice和split分别是啥意思  slice：片 splice： 剪接 split： 分裂  slice：片 可以理解成是提取某东西的片段  用法1：array.slice(start,end) -&amp;gt; 提取数组的片段 简单可以理解成start是提取片段的开头位置(0">
-<meta property="og:updated_time" content="2017-10-15T13:17:30.000Z">
+<meta property="og:updated_time" content="2017-10-15T13:21:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单的方法掌握JS中slice,splice和split的使用方法">
 <meta name="twitter:description" content="首先，js的api的命名一般都有它的意义所在，通过英文就能大概理解是干啥用的。（可见英语多重要。。。）现在看看slice,splice和split分别是啥意思  slice：片 splice： 剪接 split： 分裂  slice：片 可以理解成是提取某东西的片段  用法1：array.slice(start,end) -&amp;gt; 提取数组的片段 简单可以理解成start是提取片段的开头位置(0">
@@ -382,6 +382,7 @@
 </blockquote>
 <p>用法1：array.slice(start,end) -&gt; 提取数组的片段</p>
 <p>简单可以理解成start是提取片段的开头位置(0开始算)，end是提取的末尾位置(1开始算)<br>看例子领会一下</p>
+ <a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//如果不传入参数二，那么将从参数一的索引位置开始截取，一直到数组尾</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(0,3);  //[1,2,3]</div><div class="line">var c=a.slice(3);    //[4,5,6]</div><div class="line"> </div><div class="line">//如果两个参数中的任何一个是负数，array.length会和它们相加，试图让它们成为非负数，举例说明：</div><div class="line">//当只传入一个参数，且是负数时，length会与参数相加，然后再截取</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(-1);  //[6]</div><div class="line"> </div><div class="line">//当只传入一个参数，是负数时,并且参数的绝对值大于数组length时，会截取整个数组</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(-6);  //[1,2,3,4,5,6]</div><div class="line">var c=a.slice(-8);  //[1,2,3,4,5,6]</div><div class="line"> </div><div class="line">//当传入两个参数一正一负时，length也会先于负数相加后，再截取</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(2,-3);  //[3]</div><div class="line"> </div><div class="line">//当传入一个参数，大于length时，将返回一个空数组</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(6);　　//[]</div></pre></td></tr></table></figure>
 <p>用法2：string.slice(start,end)   -&gt; 提取字符串的片段<br>道理同上<br>例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var a=&quot;i am a boy&quot;;</div><div class="line">var b=a.slice(0,6);  //&quot;i am a&quot;</div></pre></td></tr></table></figure>
