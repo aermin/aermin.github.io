@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-16T15:10:53.000Z</updated>
+  <updated>2017-10-15T13:17:30.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,292 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>简单的方法掌握JS中slice,splice和split的使用方法</title>
+    <link href="http://yoursite.com/2017/10/15/%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%8E%8C%E6%8F%A1JS%E4%B8%ADslice-splice%E5%92%8Csplit%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2017/10/15/简单的方法掌握JS中slice-splice和split的使用方法/</id>
+    <published>2017-10-15T09:15:26.000Z</published>
+    <updated>2017-10-15T13:17:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先，js的api的命名一般都有它的意义所在，通过英文就能大概理解是干啥用的。（可见英语多重要。。。）<br>现在看看slice,splice和split分别是啥意思</p>
+<ul>
+<li>slice：片</li>
+<li>splice： 剪接</li>
+<li>split： 分裂</li>
+</ul>
+<h3 id="slice：片"><a href="#slice：片" class="headerlink" title="slice：片"></a>slice：片</h3><blockquote>
+<p>可以理解成是提取某东西的片段</p>
+</blockquote>
+<p>用法1：array.slice(start,end) -&gt; 提取数组的片段</p>
+<p>简单可以理解成start是提取片段的开头位置(0开始算)，end是提取的末尾位置(1开始算)<br>看例子领会一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//如果不传入参数二，那么将从参数一的索引位置开始截取，一直到数组尾</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(0,3);  //[1,2,3]</div><div class="line">var c=a.slice(3);    //[4,5,6]</div><div class="line"> </div><div class="line">//如果两个参数中的任何一个是负数，array.length会和它们相加，试图让它们成为非负数，举例说明：</div><div class="line">//当只传入一个参数，且是负数时，length会与参数相加，然后再截取</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(-1);  //[6]</div><div class="line"> </div><div class="line">//当只传入一个参数，是负数时,并且参数的绝对值大于数组length时，会截取整个数组</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(-6);  //[1,2,3,4,5,6]</div><div class="line">var c=a.slice(-8);  //[1,2,3,4,5,6]</div><div class="line"> </div><div class="line">//当传入两个参数一正一负时，length也会先于负数相加后，再截取</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(2,-3);  //[3]</div><div class="line"> </div><div class="line">//当传入一个参数，大于length时，将返回一个空数组</div><div class="line">var a=[1,2,3,4,5,6];</div><div class="line">var b=a.slice(6);　　//[]</div></pre></td></tr></table></figure>
+<p>用法2：string.slice(start,end)   -&gt; 提取字符串的片段<br>道理同上<br>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var a=&quot;i am a boy&quot;;</div><div class="line">var b=a.slice(0,6);  //&quot;i am a&quot;</div></pre></td></tr></table></figure>
+<h3 id="splice：-剪接"><a href="#splice：-剪接" class="headerlink" title="splice： 剪接"></a>splice： 剪接</h3><blockquote>
+<p>可以理解成一个东西剪掉一部分并接上新的部分</p>
+</blockquote>
+<p>用法：array.splice(start,deleteCount,item…)</p>
+<p>可以理解成array剪掉初始位置为start，个数为deleteCount的部分，该部分赋值给新的变量，如果有item，则接入被剪掉的部分</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var a=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;];</div><div class="line">var b=a.splice(1,1,&apos;e&apos;,&apos;f&apos;);  //a=[&apos;a&apos;,&apos;e&apos;,&apos;f&apos;,&apos;c&apos;],b=[&apos;b&apos;]</div></pre></td></tr></table></figure>
+<h3 id="split：-分割"><a href="#split：-分割" class="headerlink" title="split： 分割"></a>split： 分割</h3><p>用法：string.split(separator,limit)</p>
+<blockquote>
+<p>可以理解成把一个东西从第一位置开始根据separator分割成limit个片段来创建一个字符串数组</p>
+</blockquote>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var a=&quot;0,1,2,3,4,5,6&quot;;</div><div class="line">var b=a.split(&quot;&quot;,3); // [&quot;0&quot;, &quot;,&quot;, &quot;1&quot;]</div><div class="line"></div><div class="line">var a=&quot;0,1,2,3,4,5,6&quot;;</div><div class="line">var b=a.split(&quot;,&quot;,3);  // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;]</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;首先，js的api的命名一般都有它的意义所在，通过英文就能大概理解是干啥用的。（可见英语多重要。。。）&lt;br&gt;现在看看slice,splice和split分别是啥意思&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;slice：片&lt;/li&gt;
+&lt;li&gt;splice： 剪接&lt;/li&gt;
+&lt;li&gt;spl
+    
+    </summary>
+    
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nginx反向代理centos的80端口</title>
+    <link href="http://yoursite.com/2017/10/14/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86centos%E7%9A%8480%E7%AB%AF%E5%8F%A3/"/>
+    <id>http://yoursite.com/2017/10/14/Nginx反向代理centos的80端口/</id>
+    <published>2017-10-14T11:12:57.000Z</published>
+    <updated>2017-10-15T13:15:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近换了个新的云主机，重新配置了下centos的环境。记录下Nginx反向代理centos的80端口的流程。</p>
+<p>HTTP请求是80端口，但是在Linux上非root权限是无法使用1024以下端口的，并且因为安全原因，最好不要使用root权限登录服务器，所以无法直接用node.js程序监听80端口。因此我们需要使用Nginx给node.js做反向代理，将80端口指向应用程序监听的端口(如node.js默认的3000端口)。</p>
+<ol>
+<li>添加Nginx仓库</li>
+</ol>
+<blockquote>
+<p>yum install epel-release</p>
+</blockquote>
+<p>2.下载Nginx</p>
+<blockquote>
+<p>yum install nginx</p>
+</blockquote>
+<p>3.启用nginx服务</p>
+<blockquote>
+<p>service nginx start</p>
+</blockquote>
+ <a id="more"></a>
+<p>4.添加开机启动</p>
+<blockquote>
+<p>systemctl enable nginx</p>
+</blockquote>
+<p>5.修改Nginx配置文件</p>
+<blockquote>
+<p>vi /etc/nginx/nginx.conf</p>
+</blockquote>
+<p>6.进入配置文件后修改下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">    server &#123;</div><div class="line">        listen       80 default_server;</div><div class="line">        listen       [::]:80 default_server;</div><div class="line">        server_name www.hxvin.com,hxvin.com;   /#修改这一行（写上你绑定的域名）</div><div class="line">       root         /usr/share/nginx/html;</div><div class="line"></div><div class="line">        # Load configuration files for the default server block.</div><div class="line">        include /etc/nginx/default.d/*.conf;</div><div class="line"></div><div class="line">        location / &#123;</div><div class="line">proxy_pass http://127.0.0.1:4000;  # 添上这一行（端口号写你nodejs运行的端口号）</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        error_page 404 /404.html;</div><div class="line">            location = /40x.html &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        error_page 500 502 503 504 /50x.html;</div><div class="line">            location = /50x.html &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>7.测试配置文件是否能够正确运行</p>
+<blockquote>
+<p>nginx -t</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@jdu4e00u53f7 ~]# nginx -t</div><div class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</div><div class="line">nginx: configuration file /etc/nginx/nginx.conf test is successful</div></pre></td></tr></table></figure>
+<p>出现这样，证明配置成功</p>
+<p>8.重启nginx</p>
+<blockquote>
+<p>service nginx restart</p>
+</blockquote>
+<p>现在直接在浏览器中输入我们配置的域名就可以访问我们的项目了。</p>
+<p>ps:如果你用的云主机是国内的，那么你的域名必须先备案才能访问，不然只能域名加后端端口号访问了，如www.hxvin.com:4000</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近换了个新的云主机，重新配置了下centos的环境。记录下Nginx反向代理centos的80端口的流程。&lt;/p&gt;
+&lt;p&gt;HTTP请求是80端口，但是在Linux上非root权限是无法使用1024以下端口的，并且因为安全原因，最好不要使用root权限登录服务器，所以无法直接用node.js程序监听80端口。因此我们需要使用Nginx给node.js做反向代理，将80端口指向应用程序监听的端口(如node.js默认的3000端口)。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;添加Nginx仓库&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;yum install epel-release&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2.下载Nginx&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;yum install nginx&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;3.启用nginx服务&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;service nginx start&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="Nginx" scheme="http://yoursite.com/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>web移动端开发总结3--抓包工具篇(Charles)</title>
+    <link href="http://yoursite.com/2017/10/11/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%933-%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7%E7%AF%87-Charles/"/>
+    <id>http://yoursite.com/2017/10/11/web移动端开发总结3-抓包工具篇-Charles/</id>
+    <published>2017-10-10T17:11:24.000Z</published>
+    <updated>2017-10-15T13:12:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>开发过程中经常使用Charles来抓取网页的接口，方便调试。</p>
+<p>这边推荐两篇教程</p>
+<p>教程1：<br>mac环境下使用Charles抓包Https请求<br><a href="https://segmentfault.com/a/1190000005070614" target="_blank" rel="external">链接</a></p>
+<p>教程2：<br>抓包并篡改返回数据图文详解(有了这个，调试时你就不用麻烦后端给你调整接口的数据)<br><a href="http://www.cnblogs.com/dsxniubility/p/4621314.html" target="_blank" rel="external">链接</a></p>
+<p>抓包工具不仅可以调试的时候用，还有其他用途，比如抓别人网站或者app的接口，然后做个高仿demo玩玩😄</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;开发过程中经常使用Charles来抓取网页的接口，方便调试。&lt;/p&gt;
+&lt;p&gt;这边推荐两篇教程&lt;/p&gt;
+&lt;p&gt;教程1：&lt;br&gt;mac环境下使用Charles抓包Https请求&lt;br&gt;&lt;a href=&quot;https://segmentfault.com/a/11900000050
+    
+    </summary>
+    
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="web移动端" scheme="http://yoursite.com/tags/web%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>web移动端开发总结2--调试篇</title>
+    <link href="http://yoursite.com/2017/10/10/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%932-%E8%B0%83%E8%AF%95%E7%AF%87/"/>
+    <id>http://yoursite.com/2017/10/10/web移动端开发总结2-调试篇/</id>
+    <published>2017-10-10T08:19:59.000Z</published>
+    <updated>2017-10-15T13:12:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>web移动端开发的调试分ios设备和安卓设备。</p>
+<p>ios设备：<br>1.在ios设备上<br>点击   设置—Safari—高级—web检查器</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5287253-abff938d3a5a096c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>2.用数据线连接mac电脑</p>
+<p>3.ios设备上用Safari打开你要调试的网页</p>
+ <a id="more"></a>
+<p>4.打开电脑端的safari<br>点击顶栏的开发—鼠标放在你的设备名称上—点击你要调试的网页</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5287253-aaace6ac1f18d12c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>5.跳出web检查器，进行调试</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5287253-42e94a51bbf64c7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;web移动端开发的调试分ios设备和安卓设备。&lt;/p&gt;
+&lt;p&gt;ios设备：&lt;br&gt;1.在ios设备上&lt;br&gt;点击   设置—Safari—高级—web检查器&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/5287253-abff938d3a5a096c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;2.用数据线连接mac电脑&lt;/p&gt;
+&lt;p&gt;3.ios设备上用Safari打开你要调试的网页&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="web移动端" scheme="http://yoursite.com/tags/web%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>web移动端开发总结1--适配篇</title>
+    <link href="http://yoursite.com/2017/10/10/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%931-%E9%80%82%E9%85%8D%E7%AF%87/"/>
+    <id>http://yoursite.com/2017/10/10/web移动端开发总结1-适配篇/</id>
+    <published>2017-10-10T07:05:47.000Z</published>
+    <updated>2017-10-15T13:09:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在公司主要写web移动端的项目，一开始较大的感触就是适配很麻烦，分ios和安卓，安卓生态又混乱得很，所以适配要做好了，不然这个设备好好的，有些设备却页面错乱。</p>
+<p>在网上找了很多方案，踩了不少坑。</p>
+<p>方案一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">(function (doc, win) &#123;</div><div class="line">          console.log(&quot;dpr:&quot;+win.devicePixelRatio); </div><div class="line">          var docEle = doc.documentElement,</div><div class="line">              isIos = navigator.userAgent.match(/iphone|ipod|ipad/gi),</div><div class="line">              dpr=Math.min(win.devicePixelRatio, 3);</div><div class="line">              scale = 1 / dpr,</div><div class="line"></div><div class="line">              resizeEvent = &apos;orientationchange&apos; in window ? &apos;orientationchange&apos; : &apos;resize&apos;;</div><div class="line"></div><div class="line">          docEle.dataset.dpr = dpr;</div><div class="line"></div><div class="line">          var metaEle = doc.createElement(&apos;meta&apos;);</div><div class="line">          metaEle.name = &apos;viewport&apos;;</div><div class="line">          metaEle.content = &apos;initial-scale=&apos; + scale + &apos;,maximum-scale=&apos; + scale;</div><div class="line">          docEle.firstElementChild.appendChild(metaEle);</div><div class="line">          </div><div class="line"></div><div class="line">          var recalCulate = function () &#123;</div><div class="line">                  var width = docEle.clientWidth;</div><div class="line">                  if (width / dpr &gt; 640) &#123;</div><div class="line">                      width = 640 * dpr;</div><div class="line">                   &#125;</div><div class="line">                docEle.style.fontSize = 20 * (width / 750) + &apos;px&apos;;</div><div class="line">            &#125;;</div><div class="line"></div><div class="line">          recalCulate()</div><div class="line"></div><div class="line">          if (!doc.addEventListener) return;</div><div class="line">          win.addEventListener(resizeEvent, recalCulate, false);</div><div class="line">        &#125;)(document, window);</div></pre></td></tr></table></figure>
+ <a id="more"></a>
+<p>获取设备dpr<br>算出缩放比例 scale = 1/dpr<br>创建meta以及属性<br>将scale值赋给initial-scale，maximum-scale<br>meta插入到文档中<br>创建屏幕大小改变重新计算函数并监听</p>
+<p>特点：这个方案根据设备等比例缩放，每个设备显示内容一致。<br> 缺点：当我用这套方案时，有个问题，因为监听resizeEvent，导致页面打开会先内容变大，然后再正常显示，很是影响用户体验。<br><a href="http://www.cnblogs.com/leinov/p/5209456.html" target="_blank" rel="external">参考链接</a></p>
+<p>方案二（推荐）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//获取屏幕比例</div><div class="line">function sreenRatio() &#123;</div><div class="line">    const ua = navigator.userAgent;</div><div class="line">    const matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d&#123;3&#125;)/i);</div><div class="line">    const UCversion = ua.match(/U3\/((\d+|\.)&#123;5,&#125;)/i);</div><div class="line">    const isUCHd = UCversion &amp;&amp; parseInt(UCversion[1].split(&apos;.&apos;).join(&apos;&apos;), 10) &gt;= 80;</div><div class="line">    const isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi);</div><div class="line">    var dpr = window.devicePixelRatio || 1;</div><div class="line">    if (!isIos &amp;&amp; !(matches &amp;&amp; matches[1] &gt; 534) &amp;&amp; !isUCHd) &#123;</div><div class="line">        // 如果非iOS, 非Android4.3以上, 非UC内核, 就不执行高清, dpr设为1;</div><div class="line">        dpr = 1;</div><div class="line">    &#125;</div><div class="line">    return dpr;</div><div class="line">&#125;</div><div class="line">//初始化屏幕比例</div><div class="line">function screenRatio(baseFontSize, fontscale) &#123;</div><div class="line">    var ratio = sreenRatio();     </div><div class="line">    var scale = document.createElement(&apos;meta&apos;);</div><div class="line">    var scaleRatio = 1 / ratio;</div><div class="line">    scale.name = &apos;viewport&apos;;</div><div class="line">    scale.content = &apos;width=device-width,&apos;+&apos;initial-scale=&apos; + scaleRatio + &apos;, maximum-scale=&apos; + scaleRatio + &apos;, minimum-scale=&apos; +</div><div class="line">        scaleRatio + &apos;, user-scalable=no&apos;;</div><div class="line">    var s = document.getElementsByTagName(&apos;title&apos;)[0];</div><div class="line">    s.parentNode.insertBefore(scale, s);</div><div class="line">    var _baseFontSize = baseFontSize || 100;</div><div class="line">    var _fontscale = fontscale || 1;</div><div class="line">    document.documentElement.style.fontSize = _baseFontSize / 2 * ratio * _fontscale+&apos;px&apos;;</div><div class="line">&#125;</div><div class="line">    if (window.screen.width &gt;= 768) &#123;</div><div class="line">        screenRatio(100, 1.5);//字体放大1.5倍</div><div class="line">    &#125; else &#123;</div><div class="line">        screenRatio();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>特点：</p>
+<ul>
+<li>引用简单，布局简便</li>
+<li>根据设备屏幕的DPR,自动设置最合适的高清缩放。</li>
+<li>保证了不同设备下视觉体验的一致性。（老方案是，屏幕越大元素越大；此方案是，屏幕越大，看的越多）</li>
+<li>有效解决移动端真实1px问题（这里的1px 是设备屏幕上的物理像素）<br>ps：而且不会出现方案一的问题</li>
+</ul>
+<p>缺点：1.有可能会出现字体会不受控制的变大的情况，解决方法：css加上一下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*, *:before, *:after &#123; max-height: 100000px &#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>感觉没啥问题了，然而我司测试硬生生发现一个bug -&gt; 在某安卓设备发现在QQ上打开网页出现页面错乱。解决方法：判断如果是安卓设备，scale.content加上target-densitydpi=device-dpi</li>
+</ol>
+<p>修正：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">   //获取屏幕比例</div><div class="line">   function sreenRatio() &#123;</div><div class="line">       const ua = navigator.userAgent;</div><div class="line">       const matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d&#123;3&#125;)/i);</div><div class="line">       const UCversion = ua.match(/U3\/((\d+|\.)&#123;5,&#125;)/i);</div><div class="line">       const isUCHd = UCversion &amp;&amp; parseInt(UCversion[1].split(&apos;.&apos;).join(&apos;&apos;), 10) &gt;= 80;</div><div class="line">       const isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi);</div><div class="line">       var dpr = window.devicePixelRatio || 1;</div><div class="line">       if (!isIos &amp;&amp; !(matches &amp;&amp; matches[1] &gt; 534) &amp;&amp; !isUCHd) &#123;</div><div class="line">           // 如果非iOS, 非Android4.3以上, 非UC内核, 就不执行高清, dpr设为1;</div><div class="line">           dpr = 1;</div><div class="line">       &#125;</div><div class="line">       return dpr;</div><div class="line">   &#125;</div><div class="line">   //初始化屏幕比例</div><div class="line">   function screenRatio(baseFontSize, fontscale) &#123;</div><div class="line">       var ratio = sreenRatio();</div><div class="line">       var scale = document.createElement(&apos;meta&apos;);</div><div class="line">       var scaleRatio = 1 / ratio;</div><div class="line">       scale.name = &apos;viewport&apos;;</div><div class="line">	&lt;%/*安卓设备兼容*/%&gt;</div><div class="line">	if (/Android/i.test(navigator.userAgent) == true) &#123;</div><div class="line">		scale.content = &apos;width=device-width, target-densitydpi=device-dpi,&apos;+&apos; initial-scale=&apos; + scaleRatio + &apos;, maximum-scale=&apos; + scaleRatio + &apos;, minimum-scale=&apos; +</div><div class="line">            scaleRatio + &apos;, user-scalable=no&apos;;</div><div class="line">	&lt;%/*iOS设备*/%&gt;</div><div class="line">	&#125; else &#123;</div><div class="line">		scale.content = &apos;width=device-width,&apos;+&apos;initial-scale=&apos; + scaleRatio + &apos;, maximum-scale=&apos; + scaleRatio + &apos;, minimum-scale=&apos; +</div><div class="line">            scaleRatio + &apos;, user-scalable=no&apos;;</div><div class="line">	&#125;</div><div class="line">       var s = document.getElementsByTagName(&apos;title&apos;)[0];</div><div class="line">       s.parentNode.insertBefore(scale, s);</div><div class="line">       var _baseFontSize = baseFontSize || 100;</div><div class="line">       var _fontscale = fontscale || 1;</div><div class="line">       document.documentElement.style.fontSize = _baseFontSize / 2 * ratio * _fontscale+&apos;px&apos;;</div><div class="line">   &#125;</div><div class="line">var isAndroid = /Android/i.test(navigator.userAgent) ? true : false;</div><div class="line">&lt;%/*安卓设备不做高清放大处理*/%&gt;</div><div class="line">   if (window.screen.width &gt;= 768 &amp;&amp; !isAndroid) &#123;</div><div class="line">       screenRatio(null, 1.5);&lt;%/*字体放大1.5倍*/%&gt;</div><div class="line">   &#125; else &#123;</div><div class="line">       screenRatio();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p><a href="http://www.jianshu.com/p/985d26b40199" target="_blank" rel="external">参考链接</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在公司主要写web移动端的项目，一开始较大的感触就是适配很麻烦，分ios和安卓，安卓生态又混乱得很，所以适配要做好了，不然这个设备好好的，有些设备却页面错乱。&lt;/p&gt;
+&lt;p&gt;在网上找了很多方案，踩了不少坑。&lt;/p&gt;
+&lt;p&gt;方案一：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;(function (doc, win) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          console.log(&amp;quot;dpr:&amp;quot;+win.devicePixelRatio); &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          var docEle = doc.documentElement,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;              isIos = navigator.userAgent.match(/iphone|ipod|ipad/gi),&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;              dpr=Math.min(win.devicePixelRatio, 3);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;              scale = 1 / dpr,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;              resizeEvent = &amp;apos;orientationchange&amp;apos; in window ? &amp;apos;orientationchange&amp;apos; : &amp;apos;resize&amp;apos;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          docEle.dataset.dpr = dpr;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          var metaEle = doc.createElement(&amp;apos;meta&amp;apos;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          metaEle.name = &amp;apos;viewport&amp;apos;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          metaEle.content = &amp;apos;initial-scale=&amp;apos; + scale + &amp;apos;,maximum-scale=&amp;apos; + scale;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          docEle.firstElementChild.appendChild(metaEle);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          var recalCulate = function () &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                  var width = docEle.clientWidth;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                  if (width / dpr &amp;gt; 640) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                      width = 640 * dpr;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                   &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                docEle.style.fontSize = 20 * (width / 750) + &amp;apos;px&amp;apos;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          recalCulate()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          if (!doc.addEventListener) return;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          win.addEventListener(resizeEvent, recalCulate, false);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;)(document, window);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="web移动端" scheme="http://yoursite.com/tags/web%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>本地mysql客户端连接centos的数据库</title>
+    <link href="http://yoursite.com/2017/10/01/%E6%9C%AC%E5%9C%B0mysql%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5centos%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>http://yoursite.com/2017/10/01/本地mysql客户端连接centos的数据库/</id>
+    <published>2017-10-01T03:04:02.000Z</published>
+    <updated>2017-10-15T13:05:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近觉得用终端修改centos数据库有点麻烦，所以用本地mysql客户端可视化</p>
+<p>进入centos的数据库</p>
+<blockquote>
+<p>mysql -u root -h localhost -p</p>
+</blockquote>
+<p>使用数据库</p>
+<blockquote>
+<p>use mysql;</p>
+</blockquote>
+<p>赋予远程权限</p>
+<blockquote>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘password’ WITH GRANT OPTION;</p>
+</blockquote>
+<p>让权限立即生效</p>
+<blockquote>
+<p>flush privileges;</p>
+</blockquote>
+<p>–解释<br>其中root表示用户名，%表示所有的电脑都可以连接，也可以设置某个ip地址运行连接，password表示密码</p>
+<p>然后在本地的mysql客户端连接</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近觉得用终端修改centos数据库有点麻烦，所以用本地mysql客户端可视化&lt;/p&gt;
+&lt;p&gt;进入centos的数据库&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mysql -u root -h localhost -p&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;使用数据库&lt;
+    
+    </summary>
+    
+    
+      <category term="开发记录总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>记录下node项目部署上线的过程及坑</title>
@@ -299,6 +585,38 @@
     
     
       <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从实际项目小谈react生命周期</title>
+    <link href="http://yoursite.com/2017/07/15/%E4%BB%8E%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%B0%88react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>http://yoursite.com/2017/07/15/从实际项目小谈react生命周期/</id>
+    <published>2017-07-15T02:21:32.000Z</published>
+    <updated>2017-10-15T13:02:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p> 今天写的一个react版的滚动字幕，思路是用js操作展示内容的scrollWidth,然后用setInterval 循环调用function ，function内容大体思路是对文字内容userDOM.style.transform = ‘translateX(-‘+ i +’px)’,每次横向左移动ipx的距离，形成滚动效果，当i&gt;=scrollWidth的时候，将i归零，形成循环滚动。(这里操作了dom，不是很好)</p>
+<p>这里先解释一下浏览器scrollWidth，scrollWidth，offsetWidth三种宽度的区别<br>情况1：<br>元素内无内容或者内容不超过可视区，滚动不出现或不可用的情况下。<br>scrollWidth=scrollWidth，两者皆为内容可视区的宽度。<br>offsetWidth为元素的实际宽度。<br>情况2：<br>元素的内容超过可视区，滚动条出现和可用的情况下。<br>scrollWidth&gt;clientWidth。<br>scrollWidth为实际内容的宽度。<br>clientWidth是内容可视区的宽度。<br>offsetWidth是元素的实际宽度。</p>
+<a id="more"></a>
+<h4 id="出问题了"><a href="#出问题了" class="headerlink" title="出问题了"></a>出问题了</h4><p>为了以便调用后端接口前先模拟展示，将静态生成的内容写死的文字内容换成动态加载，还采取了随机生成用户ip和获奖内容，结果获取到的scrollWidth（元素内容的实际宽度，包括被隐藏的部分）只是内容可视区的宽度，显然是不行的，所以无法滚动全部，我们需要的是元素内容的实际宽度。为什么会出现这种情况呢？如果文字内容是静态生成的，内容写死的，并不会出现这种问题。</p>
+<h4 id="问题出在哪里？"><a href="#问题出在哪里？" class="headerlink" title="问题出在哪里？"></a>问题出在哪里？</h4><p>出在动态加载还要考虑到react的生命周期，componentWillMount(将要挂载)-&gt;render(dom渲染)-&gt;componentDidMount(已经挂载)，这个滚动函数写在了componentDidMount中，也就是页面dom结构渲染完了文字内容才开始动态生成，结果scrollWidth抓取到的文字内容是空的，只能获取了内容可视区的宽度。<br><img src="http://upload-images.jianshu.io/upload_images/5287253-1e0d1ec12f576c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网上找的一张react生命周期的好图"></p>
+<h4 id="问题找出来了，该如何解决呢？"><a href="#问题找出来了，该如何解决呢？" class="headerlink" title="问题找出来了，该如何解决呢？"></a>问题找出来了，该如何解决呢？</h4><p>最简单粗暴的方式就是把动态加载文字内容的函数放在componentWillMount(将要挂载)中，在render页面之前就把该部分内容加载完毕，这样render页面的时候scrollWidth将抓取到早已加载好的文字内容了，可是这样会造成打开页面后，页面空白一会，在渲染出页面的内容来，这段空白期间就是componentWillMount加载你的数据内容去了。如果数据内容少还好说，万一量很大了，那就尴尬了，严重影响用户体验。</p>
+<p>####更好的解决办法是<br>仍把动态加载文字内容的函数放在componentDidMount中，并在此采用window.onload 调用滚动函数，也就是等页面都渲染完了，文字内容也ok了，才会调用滚动函数（scrollWidth，setInterval，transform ）。</p>
+<p>这下，解决了生命周期以及用户体验，加载性能的问题。😀</p>
+<p>如有错误和不足，恳请指出指导^ ^</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt; 今天写的一个react版的滚动字幕，思路是用js操作展示内容的scrollWidth,然后用setInterval 循环调用function ，function内容大体思路是对文字内容userDOM.style.transform = ‘translateX(-‘+ i +’px)’,每次横向左移动ipx的距离，形成滚动效果，当i&amp;gt;=scrollWidth的时候，将i归零，形成循环滚动。(这里操作了dom，不是很好)&lt;/p&gt;
+&lt;p&gt;这里先解释一下浏览器scrollWidth，scrollWidth，offsetWidth三种宽度的区别&lt;br&gt;情况1：&lt;br&gt;元素内无内容或者内容不超过可视区，滚动不出现或不可用的情况下。&lt;br&gt;scrollWidth=scrollWidth，两者皆为内容可视区的宽度。&lt;br&gt;offsetWidth为元素的实际宽度。&lt;br&gt;情况2：&lt;br&gt;元素的内容超过可视区，滚动条出现和可用的情况下。&lt;br&gt;scrollWidth&amp;gt;clientWidth。&lt;br&gt;scrollWidth为实际内容的宽度。&lt;br&gt;clientWidth是内容可视区的宽度。&lt;br&gt;offsetWidth是元素的实际宽度。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
       <category term="React" scheme="http://yoursite.com/tags/React/"/>
     
@@ -696,350 +1014,6 @@
       &lt;h2 id=&quot;首先，先认识下什么叫函数的方法：&quot;&gt;&lt;a href=&quot;#首先，先认识下什么叫函数的方法：&quot; class=&quot;headerlink&quot; title=&quot;首先，先认识下什么叫函数的方法：&quot;&gt;&lt;/a&gt;首先，先认识下什么叫函数的方法：&lt;/h2&gt;&lt;p&gt;在一个对象中绑定函数，称为这个对象的方法。&lt;/p&gt;
 &lt;h3 id=&quot;再给具体的例子：&quot;&gt;&lt;a href=&quot;#再给具体的例子：&quot; class=&quot;headerlink&quot; title=&quot;再给具体的例子：&quot;&gt;&lt;/a&gt;再给具体的例子：&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var xiaoming = &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    name: &amp;apos;小明&amp;apos;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    birth: 1990,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    age: function () &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        var y = new Date().getFullYear();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        return y - this.birth;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;xiaoming.age; // function xiaoming.age()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;xiaoming.age(); // 27&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;xiaoming是一个对象，age（）函数就是该对象的方法。&lt;br&gt;此时this指向xiaoming&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vue2的todolist入门小项目的详细解析</title>
-    <link href="http://yoursite.com/2017/05/09/vue2%E7%9A%84todolist%E5%85%A5%E9%97%A8%E5%B0%8F%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AF%A6%E7%BB%86%E8%A7%A3%E6%9E%90/"/>
-    <id>http://yoursite.com/2017/05/09/vue2的todolist入门小项目的详细解析/</id>
-    <published>2017-05-09T05:08:49.000Z</published>
-    <updated>2017-05-10T03:44:15.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>看完vue2的官方文档后，找个入门项目巩固下知识点，简单的todolsit是个不错的选择。<br>项目用到了<code>vue.js</code> <code>vue.cli</code> <code>webpack</code> <code>ES6</code> <code>node环境</code>，完成项目后会对这些技术栈有了些了解。</p>
-<a id="more"></a>
-<h3 id="准备开发环境"><a href="#准备开发环境" class="headerlink" title="准备开发环境"></a>准备开发环境</h3><ul>
-<li>$ npm install -g vue-cli </li>
-<li>$ vue init <template-name> <project-name> ，比如 vue init webpack todolist</project-name></template-name></li>
-<li>$ cd todolist</li>
-<li>$ npm install</li>
-<li>$ npm run dev</li>
-<li>安装谷歌插件vue.js devtools</li>
-<li>下载vue.js的<a href="https://github.com/vuejs-templates/webpack" target="_blank" rel="external">webpack模板</a></li>
-<li>下载 <a href="https://github.com/tastejs/todomvc-app-template" target="_blank" rel="external">todomvc的模板</a> (提供html和css)（也可以直接$ git clone <a href="https://github.com/tastejs/todomvc-app-template.git" target="_blank" rel="external">https://github.com/tastejs/todomvc-app-template.git</a> 来下载）</li>
-<li>把todomvc的index.html拖到todolist文件夹去覆盖里面的index.html</li>
-<li>打开todomvc的json文件，会看到 “todomvc-app-css”: “^2.0.0”,就是要你 npm  install todomvc-app-css -S 从而下载该css</li>
-<li>删点todolsit index.html的默认css，js引用，src文件夹下的main.js引入模板css（import‘todomvc-app-css/index.css’）</li>
-<li>引入vue（import Vue form ‘vue’）</li>
-<li>等写完代码后 $npm run build 一键打包构建，会看到dist文件夹</li>
-</ul>
-<h3 id="main-js的代码"><a href="#main-js的代码" class="headerlink" title="main.js的代码"></a>main.js的代码</h3><blockquote>
-<p>//后面的为注释讲解， ~表示串联index.html的对应内容</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div></pre></td><td class="code"><pre><div class="line">import &apos;todomvc-app-css/index.css&apos;</div><div class="line"></div><div class="line">import Vue from &apos;vue&apos;</div><div class="line"></div><div class="line">//添加localStorage</div><div class="line">var STORAGE_KEY = &apos;todos-vuejs-2.0&apos;</div><div class="line">var todoStorage = &#123;</div><div class="line">  fetch: function () &#123;</div><div class="line">    var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || &apos;[]&apos;)</div><div class="line">    todos.forEach(function (todo, index) &#123;</div><div class="line">      todo.id = index</div><div class="line">    &#125;)</div><div class="line">    todoStorage.uid = todos.length</div><div class="line">    return todos</div><div class="line">  &#125;,</div><div class="line">  save: function (todos) &#123;</div><div class="line">    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//用过滤器筛选出三种状态</div><div class="line">var filters = &#123;</div><div class="line">  all(todos) &#123;</div><div class="line">    return todos</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  active(todos) &#123;</div><div class="line">    return todos.filter((todo) =&gt; &#123;</div><div class="line">      return !todo.completed</div><div class="line">    &#125;)</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  completed(todos) &#123;</div><div class="line">    return todos.filter((todo) =&gt; &#123;</div><div class="line">      return todo.completed</div><div class="line">    &#125;)</div><div class="line">  &#125;,</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">let app = new Vue(&#123;</div><div class="line">  el: &apos;.todoapp&apos;,    // ~ &lt;section class=&quot;todoapp&quot;&gt;</div><div class="line">  data: &#123;</div><div class="line">    msg: &apos;hello world&apos;,</div><div class="line">    title: &apos;待做清单&apos;,   // 渲染标题 ~ &#123;&#123;title&#125;&#125;</div><div class="line">    newTodo: &apos;&apos;,</div><div class="line">     todos: todoStorage.fetch(),  // ~ v-show=&quot;todos.length&quot; ； ~ &#123;&#123;todos.length&gt;1?&apos;items&apos;:&apos;item&apos;&#125;&#125; 渲染 li ~  v-for=&quot;(todo,index) in filteredTodos&quot; </div><div class="line">    editedTodo: &apos;&apos;,   // 空的编辑对象</div><div class="line">    hashName: &apos;all&apos;    </div><div class="line">  &#125;,</div><div class="line">  </div><div class="line">  watch: &#123;</div><div class="line">    todos: &#123;</div><div class="line">      handler: function (todos) &#123;</div><div class="line">        todoStorage.save(todos)</div><div class="line">      &#125;,</div><div class="line">      deep: true</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  </div><div class="line">  computed: &#123;</div><div class="line">    remain() &#123;</div><div class="line">      return filters.active(this.todos).length   //未完成事项的数量 ~ &#123;&#123;remain&#125;&#125;</div><div class="line">    &#125;, </div><div class="line">    isAll: &#123;     // ~ v-model=&quot;isAll&quot;</div><div class="line">      get() &#123;</div><div class="line">        return this.remain === 0</div><div class="line">      &#125;,</div><div class="line">      set(value) &#123;</div><div class="line">        this.todos.forEach((todo) =&gt; &#123;</div><div class="line">          todo.completed = value</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    filteredTodos() &#123;    //用hashName过滤出当前页面的todos  ~ v-for=&quot;(todo,index) in filteredTodos&quot; </div><div class="line">      return filters[this.hashName](this.todos)</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  methods: &#123;</div><div class="line">    addTodo(e) &#123;  //输入值为空时，不添加（trim去除前后空格） ~ v-model.trim=&quot;newTodo&quot; </div><div class="line">      if (!this.newTodo) &#123;</div><div class="line">        return</div><div class="line">      &#125;</div><div class="line">      this.todos.push(&#123;</div><div class="line">        id: todoStorage.uid++,</div><div class="line">        content: this.newTodo,</div><div class="line">        completed: false //结合v-model 根据completed状态绑定样式  ~:class=&quot;&#123;completed:todo.completed； ~ v-model=&quot;todo.completed&quot;</div><div class="line">      &#125;)</div><div class="line">      this.newTodo = &apos;&apos;</div><div class="line">    &#125;,</div><div class="line">    removeTodo(index) &#123;   //绑定x样式，点击删除该todo ~ @click=&quot;removeTodo(index)&quot;</div><div class="line">      this.todos.splice(index, 1)</div><div class="line">    &#125;,</div><div class="line">    editTodo(todo) &#123;         //编辑 ~ @dblclick=&quot;editTodo(todo)&quot;</div><div class="line">      this.editCache = todo.content //储存编辑前的内容</div><div class="line">      this.editedTodo = todo  // 点击编辑里面的内容而不是只是空文本框~ editing:todo==editedTodo&#125;&quot;</div><div class="line">    &#125;,</div><div class="line">    doneEdit(todo, index) &#123;  //失去焦点后 ~ @blur=&quot;doneEdit(todo)&quot;；@keyup.enter=&quot;doneEdit(todo)&quot;</div><div class="line">      this.editedTodo = null  //不存在编辑了或者说编辑已完成</div><div class="line">      if (!todo.content) &#123;  //如果编辑后没有内容了，删除该todo</div><div class="line">        this.removeTodo(index)</div><div class="line">      &#125;</div><div class="line"></div><div class="line">    &#125;,</div><div class="line">    cancelEdit(todo) &#123;    //按esc键取消此次编辑操作 ~ @keyup.esc=&quot;cancelEdit(todo)&quot;&gt;</div><div class="line">      this.editedTodo = null     </div><div class="line">      todo.content = this.editCache //当esc取消编辑时，还原编辑前的内容</div><div class="line">    &#125;,</div><div class="line">    clear() &#123;  //点击清除已完成的功能 ~ @click=&quot;clear&quot;</div><div class="line">      this.todos = filters.active(this.todos)  //获取并渲染未完成的事项 ~ </div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  directives: &#123;   //自定义属性 ~ v-focus=&quot;todo == editedTodo&quot;</div><div class="line">    focus(el, value) &#123;  //文本框双击获取焦点</div><div class="line">      if (value) &#123;</div><div class="line">        el.focus()</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">//hash（url地址中#以及之后的字符）</div><div class="line">function hashChange() &#123; </div><div class="line">// ~ :class=&quot;&#123;selected:hashName==&apos;all&apos;&#125;&quot;；:class=&quot;&#123;selected:hashName==&apos;active&apos;&#125;&quot;；:class=&quot;&#123;selected:hashName==&apos;completed&apos;&#125;&quot;</div><div class="line">  let hashName = location.hash.replace(/#\/?/, &apos;&apos;)  //正则表达式去除#/？，获取如all，active，completed</div><div class="line">  if (filters[hashName]) &#123;   //如果过滤状态的hashName存在</div><div class="line">    app.hashName = hashName  //给整个app变量里的hashName赋上那个值</div><div class="line">  &#125; else &#123;</div><div class="line">    location.hash = &apos;&apos;    //取消</div><div class="line">    app.hashName = &apos;all&apos;  //否则就赋值‘all’，回到全部事项的页面</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">window.addEventListener(&apos;hashchange&apos;, hashChange) //全局监听hash</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;看完vue2的官方文档后，找个入门项目巩固下知识点，简单的todolsit是个不错的选择。&lt;br&gt;项目用到了&lt;code&gt;vue.js&lt;/code&gt; &lt;code&gt;vue.cli&lt;/code&gt; &lt;code&gt;webpack&lt;/code&gt; &lt;code&gt;ES6&lt;/code&gt; &lt;code&gt;node环境&lt;/code&gt;，完成项目后会对这些技术栈有了些了解。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="vue2" scheme="http://yoursite.com/tags/vue2/"/>
-    
-      <category term="项目总结" scheme="http://yoursite.com/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue学习</title>
-    <link href="http://yoursite.com/2017/05/08/Vue%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://yoursite.com/2017/05/08/Vue学习/</id>
-    <published>2017-05-08T02:21:32.000Z</published>
-    <updated>2017-05-11T02:26:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>此文章用来不断记录Vue学习过程中一知半解知识点的总结，fighting~</p>
-<blockquote>
-<p>组件：可以扩展 HTML 元素，封装可重用的代码</p>
-</blockquote>
-<p><a href="https://www.zhihu.com/question/55892803" target="_blank" rel="external">理解父组件，子组件</a></p>
-<a id="more"></a>
-<blockquote>
-<p>v-model：使用 v-model 来进行数据双向绑定，根据控件类型自动选取正确的方法来更新元素，负责监听用户的输入事件以更新数据</p>
-</blockquote>
-<p>  <a href="http://blog.csdn.net/hellochenlu/article/details/52821827" target="_blank" rel="external">理解数据单向绑定，双向绑定</a></p>
-<blockquote>
-<p>钩子：</p>
-</blockquote>
-<p><a href="https://segmentfault.com/q/1010000004335505" target="_blank" rel="external">hook形象解释</a></p>
-<blockquote>
-<p>生命周期：</p>
-</blockquote>
-<p><a href="https://www.zhihu.com/question/52917848/answer/150661534" target="_blank" rel="external">生命周期形象解释</a><br><img src="https://cn.vuejs.org/images/lifecycle.png" alt="生命周期官网图"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;此文章用来不断记录Vue学习过程中一知半解知识点的总结，fighting~&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;组件：可以扩展 HTML 元素，封装可重用的代码&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.zhihu.com/question/55892803&quot;&gt;理解父组件，子组件&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="Vue" scheme="http://yoursite.com/tags/Vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>从实际项目小谈react生命周期</title>
-    <link href="http://yoursite.com/2017/05/08/%E4%BB%8E%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%B0%88react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    <id>http://yoursite.com/2017/05/08/从实际项目小谈react生命周期/</id>
-    <published>2017-05-08T02:21:32.000Z</published>
-    <updated>2017-09-16T08:43:41.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p> 今天写的一个react版的滚动字幕，思路是用js操作展示内容的scrollWidth,然后用setInterval 循环调用function ，function内容大体思路是对文字内容userDOM.style.transform = ‘translateX(-‘+ i +’px)’,每次横向左移动ipx的距离，形成滚动效果，当i&gt;=scrollWidth的时候，将i归零，形成循环滚动。(这里操作了dom，不是很好)</p>
-<p>这里先解释一下浏览器scrollWidth，scrollWidth，offsetWidth三种宽度的区别<br>情况1：<br>元素内无内容或者内容不超过可视区，滚动不出现或不可用的情况下。<br>scrollWidth=scrollWidth，两者皆为内容可视区的宽度。<br>offsetWidth为元素的实际宽度。<br>情况2：<br>元素的内容超过可视区，滚动条出现和可用的情况下。<br>scrollWidth&gt;clientWidth。<br>scrollWidth为实际内容的宽度。<br>clientWidth是内容可视区的宽度。<br>offsetWidth是元素的实际宽度。</p>
-<a id="more"></a>
-<h4 id="出问题了"><a href="#出问题了" class="headerlink" title="出问题了"></a>出问题了</h4><p>为了以便调用后端接口前先模拟展示，将静态生成的内容写死的文字内容换成动态加载，还采取了随机生成用户ip和获奖内容，结果获取到的scrollWidth（元素内容的实际宽度，包括被隐藏的部分）只是内容可视区的宽度，显然是不行的，所以无法滚动全部，我们需要的是元素内容的实际宽度。为什么会出现这种情况呢？如果文字内容是静态生成的，内容写死的，并不会出现这种问题。</p>
-<h4 id="问题出在哪里？"><a href="#问题出在哪里？" class="headerlink" title="问题出在哪里？"></a>问题出在哪里？</h4><p>出在动态加载还要考虑到react的生命周期，componentWillMount(将要挂载)-&gt;render(dom渲染)-&gt;componentDidMount(已经挂载)，这个滚动函数写在了componentDidMount中，也就是页面dom结构渲染完了文字内容才开始动态生成，结果scrollWidth抓取到的文字内容是空的，只能获取了内容可视区的宽度。<br><img src="http://upload-images.jianshu.io/upload_images/5287253-1e0d1ec12f576c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网上找的一张react生命周期的好图"></p>
-<h4 id="问题找出来了，该如何解决呢？"><a href="#问题找出来了，该如何解决呢？" class="headerlink" title="问题找出来了，该如何解决呢？"></a>问题找出来了，该如何解决呢？</h4><p>最简单粗暴的方式就是把动态加载文字内容的函数放在componentWillMount(将要挂载)中，在render页面之前就把该部分内容加载完毕，这样render页面的时候scrollWidth将抓取到早已加载好的文字内容了，可是这样会造成打开页面后，页面空白一会，在渲染出页面的内容来，这段空白期间就是componentWillMount加载你的数据内容去了。如果数据内容少还好说，万一量很大了，那就尴尬了，严重影响用户体验。</p>
-<p>####更好的解决办法是<br>仍把动态加载文字内容的函数放在componentDidMount中，并在此采用window.onload 调用滚动函数，也就是等页面都渲染完了，文字内容也ok了，才会调用滚动函数（scrollWidth，setInterval，transform ）。</p>
-<p>这下，解决了生命周期以及用户体验，加载性能的问题。😀</p>
-<p>如有错误和不足，恳请指出指导^ ^</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt; 今天写的一个react版的滚动字幕，思路是用js操作展示内容的scrollWidth,然后用setInterval 循环调用function ，function内容大体思路是对文字内容userDOM.style.transform = ‘translateX(-‘+ i +’px)’,每次横向左移动ipx的距离，形成滚动效果，当i&amp;gt;=scrollWidth的时候，将i归零，形成循环滚动。(这里操作了dom，不是很好)&lt;/p&gt;
-&lt;p&gt;这里先解释一下浏览器scrollWidth，scrollWidth，offsetWidth三种宽度的区别&lt;br&gt;情况1：&lt;br&gt;元素内无内容或者内容不超过可视区，滚动不出现或不可用的情况下。&lt;br&gt;scrollWidth=scrollWidth，两者皆为内容可视区的宽度。&lt;br&gt;offsetWidth为元素的实际宽度。&lt;br&gt;情况2：&lt;br&gt;元素的内容超过可视区，滚动条出现和可用的情况下。&lt;br&gt;scrollWidth&amp;gt;clientWidth。&lt;br&gt;scrollWidth为实际内容的宽度。&lt;br&gt;clientWidth是内容可视区的宽度。&lt;br&gt;offsetWidth是元素的实际宽度。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="React" scheme="http://yoursite.com/tags/React/"/>
-    
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>冒泡排序</title>
-    <link href="http://yoursite.com/2017/04/29/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/"/>
-    <id>http://yoursite.com/2017/04/29/冒泡排序/</id>
-    <published>2017-04-29T09:46:44.000Z</published>
-    <updated>2017-05-10T03:42:53.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。<br>在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。<br>冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算<br>因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要交换的可能，也可以把最好的复杂度降低到O(n)。在这个情况，已经排序好的数列就无交换的需要。若在每次走访数列时，把走访顺序反过来，也可以稍微地改进效率。有时候称为鸡尾酒排序，因为算法会从数列的一端到另一端之间穿梭往返。</p>
-<a id="more"></a>
-<p>冒泡排序算法的运作如下：（两个for循环差不多搞定）</p>
-<p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。<br>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。<br>针对所有的元素重复以上的步骤，除了最后一个。<br>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。<br>由于它的简洁，冒泡排序通常被用来对于程序设计入门的学生介绍算法的概念。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function bubbleSort(arr)&#123;</div><div class="line">if(arr.length&lt;=1)&#123;</div><div class="line"> return arr;</div><div class="line"> &#125;</div><div class="line"> for(var j=0;j&lt;arr.length;j++)&#123;</div><div class="line">     for( var i = 0; i&lt;arr.length-j;i++)&#123;</div><div class="line">         if(arr[i] &gt; arr[i+1])&#123; </div><div class="line">             var num = arr[i];</div><div class="line">             arr[i] = arr[i+1];</div><div class="line">             arr[i+1] = num;</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      return arr;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;冒泡排序是与插入排序拥有相等的运行时间，但是两种算法在需要的交换次数却很大地不同。&lt;br&gt;在最好的情况，冒泡排序需要O(n^2)次交换，而插入排序只要最多O(n)交换。&lt;br&gt;冒泡排序的实现（类似下面）通常会对已经排序好的数列拙劣地运行O(n^2)，而插入排序在这个例子只需要O(n)个运算&lt;br&gt;因此很多现代的算法教科书避免使用冒泡排序，而用插入排序替换之。冒泡排序如果能在内部循环第一次运行时，使用一个旗标来表示有无需要交换的可能，也可以把最好的复杂度降低到O(n)。在这个情况，已经排序好的数列就无交换的需要。若在每次走访数列时，把走访顺序反过来，也可以稍微地改进效率。有时候称为鸡尾酒排序，因为算法会从数列的一端到另一端之间穿梭往返。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
-    
-      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>轻松学习JS快速排序(QuickSort)</title>
-    <link href="http://yoursite.com/2017/04/29/%E8%BD%BB%E6%9D%BE%E5%AD%A6%E4%B9%A0JS%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F-QuickSort/"/>
-    <id>http://yoursite.com/2017/04/29/轻松学习JS快速排序-QuickSort/</id>
-    <published>2017-04-29T03:32:03.000Z</published>
-    <updated>2017-05-11T01:38:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="需了解的基础知识"><a href="#需了解的基础知识" class="headerlink" title="需了解的基础知识"></a>需了解的基础知识</h3><p> 1.递归函数：编程语言中，函数Func(Type a,……)直接或间接调用函数本身，则该函数称为递归函数。<br> <code>一个典型阶乘递归函数：</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function fact(num)&#123; </div><div class="line">   if (num&lt;=1)&#123; </div><div class="line">   return 1; </div><div class="line">   &#125;else&#123; </div><div class="line">   return num*fact(num-1); </div><div class="line">&#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p> <code>该函数的弊端：</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var another=factorical;</div><div class="line">factorical=null;</div><div class="line">console.log(another(2))//会报错说 factorical not a function</div></pre></td></tr></table></figure></p>
-<p> <code>解决方法</code>: 用arguments.callee去代替函数名，就可以确保函数不管怎么调用都不会出错。</p>
- <a id="more"></a>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function factorical(num)&#123;</div><div class="line">　　if(num&lt;=1)&#123;</div><div class="line">　　　　return 1;</div><div class="line">　　&#125;</div><div class="line">　　else&#123;</div><div class="line">　　　　return num*arguments.callee(num-1);</div><div class="line">　　&#125;</div><div class="line">&#125;</div><div class="line">var another=factorical;</div><div class="line">factorical=null;</div><div class="line">console.log(another(2))//2</div></pre></td></tr></table></figure>
-<p> (来自js高程)<br> 2.<a href="http://www.jb51.net/article/88894.htm" target="_blank" rel="external">JavaScript中的splice方法用法详解</a><br> 3.<a href="http://www.w3school.com.cn/jsref/jsref_concat_array.asp" target="_blank" rel="external">JavaScript concat()方法</a><br> 3.<a href="http://www.jb51.net/article/86083.htm" target="_blank" rel="external">Javascript之Math对象详解</a></p>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>以下内容整理自<code>阮一峰老师</code>的<a href="http://www.ruanyifeng.com/blog/2011/04/quicksort_in_javascript.html" target="_blank" rel="external">快速排序（Quicksort）的Javascript实现</a></p>
-<blockquote>
-<p>首先，定义一个quickSort函数，它的参数是一个数组。</p>
-</blockquote>
-<p>var quickSort = function(arr) { </p>
-<blockquote>
-<p>然后，检查数组的元素个数，如果小于等于1，就返回。</p>
-</blockquote>
-<p>　　if (arr.length &lt;= 1) { return arr; } 
-　　</p>
-<blockquote>
-<p>接着，选择”基准”（pivot），并将其与原数组分离，再定义两个空数组，用来存放一左一右的两个子集。</p>
-</blockquote>
-<p>　　var pivotIndex = Math.floor(arr.length / 2);<br>　　var pivot = arr.splice(pivotIndex, 1);<br>　　var left = [];<br>　　var right = [];
-　　</p>
-<blockquote>
-<p>然后，开始遍历数组，小于”基准”的元素放入左边的子集，大于基准的元素放入右边的子集。</p>
-</blockquote>
-<p>　　for (var i = 0; i &lt; arr.length; i++){<br>　　　　if (arr[i] &lt; pivot) {<br>　　　　　　left.push(arr[i]);<br>　　　　} else {<br>　　　　　　right.push(arr[i]);<br>　　　　}<br>　　}
-　　</p>
-<blockquote>
-<p>最后，使用递归不断重复这个过程，就可以得到排序后的数组。</p>
-</blockquote>
-<p>　　return quickSort(left).concat([pivot], quickSort(right));<br>};</p>
-<blockquote>
-<p>使用的时候，直接调用quickSort()就行了。</p>
-</blockquote>
-<h3 id="最终的快排函数"><a href="#最终的快排函数" class="headerlink" title="最终的快排函数"></a>最终的快排函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var quickSort = function(arr) &#123;</div><div class="line">　　if (arr.length &lt;= 1) &#123; return arr; &#125;</div><div class="line">　　var pivotIndex = Math.floor(arr.length / 2);</div><div class="line">　　var pivot = arr.splice(pivotIndex, 1);</div><div class="line">　　var left = [];</div><div class="line">　　var right = [];</div><div class="line">　　for (var i = 0; i &lt; arr.length; i++)&#123;</div><div class="line">　　　　if (arr[i] &lt; pivot) &#123;</div><div class="line">　　　　　　left.push(arr[i]);</div><div class="line">　　　　&#125; else &#123;</div><div class="line">　　　　　　right.push(arr[i]);</div><div class="line">　　　　&#125;</div><div class="line">　　&#125;</div><div class="line">　　return quickSort(left).concat([pivot], quickSort(right));</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="实例运用"><a href="#实例运用" class="headerlink" title="实例运用"></a>实例运用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var array = [7,4,1,9,6,3,2,5,8] ;</div><div class="line">quickSort(array); //输出1，2，3，4，5，6，7，8，9</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;需了解的基础知识&quot;&gt;&lt;a href=&quot;#需了解的基础知识&quot; class=&quot;headerlink&quot; title=&quot;需了解的基础知识&quot;&gt;&lt;/a&gt;需了解的基础知识&lt;/h3&gt;&lt;p&gt; 1.递归函数：编程语言中，函数Func(Type a,……)直接或间接调用函数本身，则该函数称为递归函数。&lt;br&gt; &lt;code&gt;一个典型阶乘递归函数：&lt;/code&gt;&lt;br&gt; &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;function fact(num)&amp;#123; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   if (num&amp;lt;=1)&amp;#123; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   return 1; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   &amp;#125;else&amp;#123; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   return num*fact(num-1); &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt; &lt;code&gt;该函数的弊端：&lt;/code&gt;&lt;br&gt; &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var another=factorical;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;factorical=null;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;console.log(another(2))//会报错说 factorical not a function&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt; &lt;code&gt;解决方法&lt;/code&gt;: 用arguments.callee去代替函数名，就可以确保函数不管怎么调用都不会出错。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>开发中js数组的常用方法</title>
-    <link href="http://yoursite.com/2017/04/27/%E5%BC%80%E5%8F%91%E4%B8%ADjs%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2017/04/27/开发中js数组的常用方法/</id>
-    <published>2017-04-27T05:03:14.000Z</published>
-    <updated>2017-05-10T03:44:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>在ES5中，一共有9个Array方法：</li>
-</ul>
-<p>Array.prototype.indexOf;<br>Array.prototype.lastIndexOf;<br>Array.prototype.every;<br>Array.prototype.some;<br>Array.prototype.forEach;<br>Array.prototype.map;<br>Array.prototype.filter;<br>Array.prototype.reduce;<br>Array.prototype.reduceRight;</p>
-<p>5种比较常用=&gt;index(),filter(),forEach(),map(),reduce().</p>
-<blockquote>
-<p>ps:reduce()还没搞懂，就先不整理了。<br>文末有个实例了解实际运用。</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><h4 id="1-indexOf"><a href="#1-indexOf" class="headerlink" title="1) indexOf"></a>1) indexOf</h4><p>indexOf()方法返回在该数组中第一个找到的元素位置，如果它不存在则返回-1。<br>不使用indexOf时：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var arr = [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;],</div><div class="line">found = false;</div><div class="line"> </div><div class="line">for(var i= 0, l = arr.length; i&lt; l; i++)&#123;</div><div class="line">if(arr[i] === &apos;a&apos;)&#123;</div><div class="line">found = true;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">console.log(&quot;found:&quot;,found);//输出found: true</div></pre></td></tr></table></figure>
-<ul>
-<li>indexOf使用后</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var arr = [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;];</div><div class="line"> </div><div class="line">console.log(&quot;found:&quot;, arr.indexOf(&quot;a&quot;) != -1);//输出found: true</div></pre></td></tr></table></figure>
-<h4 id="2-filter"><a href="#2-filter" class="headerlink" title="2) filter"></a>2) filter</h4><p>该filter()方法创建一个新的匹配过滤条件的数组。</p>
-<ul>
-<li>不用 filter() 时</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var arr = [</div><div class="line">  [&quot;a&quot;, 2],</div><div class="line">  [&quot;b&quot;, 5],</div><div class="line">  [&quot;c&quot;, 3],</div><div class="line">  [&quot;b&quot;, 16],</div><div class="line">];</div><div class="line">   </div><div class="line">var newArr = [];</div><div class="line"> </div><div class="line">for(var i= 0, l = arr.length; i&lt; l; i++)&#123;</div><div class="line">  if(arr[i][0] == &quot;b&quot; )&#123;</div><div class="line">newArr.push(arr[i]);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">alert(newArr);//输出b,5,b,16</div></pre></td></tr></table></figure>
-<ul>
-<li>用了 filter():</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var arr = [</div><div class="line">  [&quot;a&quot;, 2],</div><div class="line">  [&quot;b&quot;, 5],</div><div class="line">  [&quot;c&quot;, 3],</div><div class="line">  [&quot;b&quot;, 16],</div><div class="line">];</div><div class="line">  var newArr = arr.filter(function(element, index, array)&#123;</div><div class="line">  return element[0] == &quot;b&quot; ;</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">alert(newArr); //输出b,5,b,16</div></pre></td></tr></table></figure>
-<h4 id="3-forEach"><a href="#3-forEach" class="headerlink" title="3) forEach()"></a>3) forEach()</h4><p>forEach为每个元素执行对应的方法,用来替换for循环</p>
-<ul>
-<li>不用 forEach() 时</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [1,2,3,4,5,6,7,8];</div><div class="line">for(var i= 0, l = arr.length; i&lt; l; i++)&#123;</div><div class="line">console.log(arr[i]); //输出 1 2 3 4 5 6 7 8 </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>用了forEach()</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [1,2,3,4,5,6,7,8];</div><div class="line">arr.forEach(function(element, index, array)&#123;</div><div class="line">console.log(element);//输出 1 2 3 4 5 6 7 8 </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h4 id="4-map"><a href="#4-map" class="headerlink" title="4) map()"></a>4) map()</h4><p>map()对数组的每个元素进行一定操作（映射）后，会返回一个新的数组，<br>不使用map<br>map()是处理服务器返回数据时是一个非常实用的函数。</p>
-<ul>
-<li>不用 map() 时</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var oldArr = [&#123;first_name:&quot;Colin&quot;,last_name:&quot;Toh&quot;&#125;,&#123;first_name:&quot;Addy&quot;,last_name:&quot;Osmani&quot;&#125;,&#123;first_name:&quot;Yehuda&quot;,last_name:&quot;Katz&quot;&#125;];</div><div class="line"> </div><div class="line">function getNewArr()&#123;</div><div class="line">   </div><div class="line">  var newArr = [];</div><div class="line">   </div><div class="line">  for(var i= 0, l = oldArr.length; i&lt; l; i++)&#123;</div><div class="line">    var item = oldArr[i];</div><div class="line">    full_name = [item.first_name,item.last_name].join(&quot; &quot;);</div><div class="line">    newArr[i] = full_name;</div><div class="line">  &#125;</div><div class="line">   </div><div class="line">  return newArr;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">console.log(getNewArr());//输出 [&quot;Colin Toh&quot;, &quot;Addy Osmani&quot;, &quot;Yehuda Katz&quot;]</div></pre></td></tr></table></figure>
-<ul>
-<li>使用map后</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var oldArr = [&#123;first_name:&quot;Colin&quot;,last_name:&quot;Toh&quot;&#125;,&#123;first_name:&quot;Addy&quot;,last_name:&quot;Osmani&quot;&#125;,&#123;first_name:&quot;Yehuda&quot;,last_name:&quot;Katz&quot;&#125;];</div><div class="line"> </div><div class="line">function getNewArr()&#123;</div><div class="line">     </div><div class="line">  return oldArr.map(function(item,index)&#123;</div><div class="line">    full_name = [item.first_name,item.last_name].join(&quot; &quot;);</div><div class="line">    return full_name;</div><div class="line">  &#125;);</div><div class="line">   </div><div class="line">&#125;</div><div class="line"> </div><div class="line">console.log(getNewArr());  //输出 [&quot;Colin Toh&quot;, &quot;Addy Osmani&quot;, &quot;Yehuda Katz&quot;]</div></pre></td></tr></table></figure>
-<h3 id="百度IFE的js任务-二-的运用"><a href="#百度IFE的js任务-二-的运用" class="headerlink" title="百度IFE的js任务(二)的运用"></a>百度IFE的js任务(二)的运用</h3><p><a href="http://ife.baidu.com/course/detail/id/91" target="_blank" rel="external">传送门</a><br>任务描述:参考以下示例代码，页面加载后，将提供的空气质量数据数组，按照某种逻辑（比如空气质量大于60）进行过滤筛选，最后将符合条件的数据按照一定的格式要求显示在网页上</p>
-<p>实现思路：<br>1、用filter()方法筛选出值大于60的城市赋值给一个新的数组。<br>2、用sort()对这个新的数组进行由大到小的排序。<br>3、用forEach()代替for循环并动态创建li标签并打印名次和城市及其空气质量值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">    &lt;title&gt;IFE JavaScript Task 01&lt;/title&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">  &lt;h3&gt;污染城市列表&lt;/h3&gt;</div><div class="line">  &lt;ul id=&quot;aqi-list&quot;&gt;</div><div class="line">&lt;!--   </div><div class="line">    &lt;li&gt;第一名：福州（样例），10&lt;/li&gt;</div><div class="line">      &lt;li&gt;第二名：福州（样例），10&lt;/li&gt; --&gt;</div><div class="line">  &lt;/ul&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"></div><div class="line">var aqiData = [</div><div class="line">  [&quot;北京&quot;, 90],</div><div class="line">  [&quot;上海&quot;, 50],</div><div class="line">  [&quot;福州&quot;, 10],</div><div class="line">  [&quot;广州&quot;, 50],</div><div class="line">  [&quot;成都&quot;, 90],</div><div class="line">  [&quot;西安&quot;, 100]</div><div class="line">];</div><div class="line"></div><div class="line">(function () &#123;</div><div class="line"></div><div class="line">  /*</div><div class="line">  在注释下方编写代码</div><div class="line">  遍历读取aqiData中各个城市的数据</div><div class="line">  将空气质量指数大于60的城市显示到aqi-list的列表中</div><div class="line">  */</div><div class="line">   var aqiul=document.getElementById(&apos;aqi-list&apos;); //获取数组</div><div class="line"></div><div class="line"> //用filter()方法筛选出空气质量指数大于60的数组</div><div class="line">   var filtered = aqiData.filter(function(element, index, array)&#123;</div><div class="line">      return (element[1] &gt;= 60);</div><div class="line">    &#125;) ;</div><div class="line"></div><div class="line">   filtered.sort(function(a,b)&#123; //从大到小排序</div><div class="line">      return b[1]-a[1];</div><div class="line">  &#125;);</div><div class="line">   </div><div class="line">  //    (function wirte()&#123;    //输出  用for循环</div><div class="line">  //   for(var i=0;i&lt;filtered.length;i++)&#123;</div><div class="line">  //     var li=document.createElement(&apos;li&apos;);</div><div class="line">  //     aqiul.append(li);</div><div class="line">  //     li.innerHTML=&quot;第&quot;+(i+1)+&quot;名：&quot;+filtered[i];</div><div class="line">  //   &#125;</div><div class="line">  // &#125;)();</div><div class="line"></div><div class="line">//用forEach方法代替for循环</div><div class="line"> filtered.forEach(function(element, index, array)&#123;</div><div class="line">      var li=document.createElement(&apos;li&apos;);</div><div class="line">         aqiul.append(li);</div><div class="line">         li.innerHTML=&quot;第&quot;+(index+1)+&quot;名：&quot;+filtered[index];</div><div class="line"> &#125;);</div><div class="line"></div><div class="line">&#125;)();</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;在ES5中，一共有9个Array方法：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Array.prototype.indexOf;&lt;br&gt;Array.prototype.lastIndexOf;&lt;br&gt;Array.prototype.every;&lt;br&gt;Array.prototype.some;&lt;br&gt;Array.prototype.forEach;&lt;br&gt;Array.prototype.map;&lt;br&gt;Array.prototype.filter;&lt;br&gt;Array.prototype.reduce;&lt;br&gt;Array.prototype.reduceRight;&lt;/p&gt;
-&lt;p&gt;5种比较常用=&amp;gt;index(),filter(),forEach(),map(),reduce().&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;ps:reduce()还没搞懂，就先不整理了。&lt;br&gt;文末有个实例了解实际运用。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于自执行函数（立即执行函数）</title>
-    <link href="http://yoursite.com/2017/04/26/%E5%85%B3%E4%BA%8E%E8%87%AA%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%EF%BC%88%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%EF%BC%89/"/>
-    <id>http://yoursite.com/2017/04/26/关于自执行函数（立即执行函数）/</id>
-    <published>2017-04-26T15:42:12.000Z</published>
-    <updated>2017-05-10T03:44:04.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="什么是自执行函数？"><a href="#什么是自执行函数？" class="headerlink" title="什么是自执行函数？"></a>什么是自执行函数？</h3><p>一下有三种写法</p>
-<p>1.最前最后加括号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(function()&#123;alert(1);&#125;());</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>这种方法好处是能提醒阅读代码的人，这段代码是一个整体。 坏处是前面的代码行后记得加分号，不然会报错。如：</p>
-</blockquote>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var a=1 </div><div class="line">(function()&#123;alert(1);&#125;());</div></pre></td></tr></table></figure>
-<p>2.function外面加括号 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(function()&#123;alert(1);&#125;)();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>这种做法比方法1少了一个代码整体性的好处.</p>
-</blockquote>
-<p>3.function前面加运算符，常见的是!与void 。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">!function()&#123;alert(1);&#125;(); </div><div class="line">void function()&#123;alert(2);&#125;();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>显然，加上“!”或“+”等运算符，写起来是最简单的。加上“void ”要敲五下键盘，但是听说有一个好处是，比加”!”少一次逻辑运算。</p>
-</blockquote>
-<p><img src="http://images2015.cnblogs.com/blog/336056/201610/336056-20161011221635859-1560145581.png" alt="自执行函数"></p>
-<ul>
-<li>首先声明一个匿名函数 function(){alert(‘我是匿名函数’)}。</li>
-<li>然后在匿名函数后面接一对括号 ()，调用这个匿名函数。</li>
-</ul>
-<h3 id="自执行函数的作用"><a href="#自执行函数的作用" class="headerlink" title="自执行函数的作用"></a>自执行函数的作用</h3><p>创建一个独立的作用域，这个作用域里面的变量，外面访问不到（即避免「变量污染」）</p>
-<p>例子来看一个著名的面试题：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var liList = ul.getElementsByTagName(&apos;li&apos;)</div><div class="line">for(var i=0; i&lt;6; i++)&#123;</div><div class="line">  liList[i].onclick = function()&#123;</div><div class="line">    alert(i) // 为什么 alert 出来的总是6,而不是0、1、2、3、4、5</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> 为什么 alert 的总是 6 呢?</p>
-<blockquote>
-<p>因为 i 是贯穿整个作用域的，而不是给每个li 分配了一个i,如下：</p>
-</blockquote>
-<p><img src="http://images2015.cnblogs.com/blog/336056/201610/336056-20161011221647906-1355610620.png" alt="也是网上的图"></p>
-<p> 那么怎么解决这个问题呢？</p>
-<blockquote>
-<p>用立即执行函数给每个li创造一个独立作用域即可（当然还有其他办法）：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var liList = ul.getElementsByTagName(&apos;li&apos;)</div><div class="line">for(var i=0; i&lt;6; i++)&#123;</div><div class="line">  !function(ii)&#123;</div><div class="line">    liList[ii].onclick = function()&#123;</div><div class="line">      alert(ii) // 0、1、2、3、4、5</div><div class="line">    &#125;</div><div class="line">  &#125;(i)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>在立即执行函数执行的时候，i 的值被赋值给 ii，此后 ii 的值一直不变。i 的值从 0 变化到 5，对应 6 个立即执行函数，这 6 个立即执行函数里面的 ii 「分别」是 0、1、2、3、4、5。</p>
-</blockquote>
-<p>(整理自网络)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;什么是自执行函数？&quot;&gt;&lt;a href=&quot;#什么是自执行函数？&quot; class=&quot;headerlink&quot; title=&quot;什么是自执行函数？&quot;&gt;&lt;/a&gt;什么是自执行函数？&lt;/h3&gt;&lt;p&gt;一下有三种写法&lt;/p&gt;
-&lt;p&gt;1.最前最后加括号&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;(function()&amp;#123;alert(1);&amp;#125;());&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;这种方法好处是能提醒阅读代码的人，这段代码是一个整体。 坏处是前面的代码行后记得加分号，不然会报错。如：&lt;/p&gt;
-&lt;/blockquote&gt;
     
     </summary>
     

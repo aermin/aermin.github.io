@@ -1,0 +1,1018 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="开发总结,web移动端," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hxvin的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在公司主要写web移动端的项目，一开始较大的感触就是适配很麻烦，分ios和安卓，安卓生态又混乱得很，所以适配要做好了，不然这个设备好好的，有些设备却页面错乱。 在网上找了很多方案，踩了不少坑。 方案一： 123456789101112131415161718192021222324252627282930(function (doc, win) &amp;#123;          console.lo">
+<meta name="keywords" content="开发总结,web移动端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web移动端开发总结1--适配篇">
+<meta property="og:url" content="http://yoursite.com/2017/10/10/web移动端开发总结1-适配篇/index.html">
+<meta property="og:site_name" content="Hxvin的博客">
+<meta property="og:description" content="在公司主要写web移动端的项目，一开始较大的感触就是适配很麻烦，分ios和安卓，安卓生态又混乱得很，所以适配要做好了，不然这个设备好好的，有些设备却页面错乱。 在网上找了很多方案，踩了不少坑。 方案一： 123456789101112131415161718192021222324252627282930(function (doc, win) &amp;#123;          console.lo">
+<meta property="og:updated_time" content="2017-10-15T13:09:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web移动端开发总结1--适配篇">
+<meta name="twitter:description" content="在公司主要写web移动端的项目，一开始较大的感触就是适配很麻烦，分ios和安卓，安卓生态又混乱得很，所以适配要做好了，不然这个设备好好的，有些设备却页面错乱。 在网上找了很多方案，踩了不少坑。 方案一： 123456789101112131415161718192021222324252627282930(function (doc, win) &amp;#123;          console.lo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/10/web移动端开发总结1-适配篇/"/>
+
+
+
+
+
+  <title>web移动端开发总结1--适配篇 | Hxvin的博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hxvin的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/10/web移动端开发总结1-适配篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                web移动端开发总结1--适配篇
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-10T15:05:47+08:00">
+                2017-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/10/10/web移动端开发总结1-适配篇/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/10/10/web移动端开发总结1-适配篇/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在公司主要写web移动端的项目，一开始较大的感触就是适配很麻烦，分ios和安卓，安卓生态又混乱得很，所以适配要做好了，不然这个设备好好的，有些设备却页面错乱。</p>
+<p>在网上找了很多方案，踩了不少坑。</p>
+<p>方案一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">(function (doc, win) &#123;</div><div class="line">          console.log(&quot;dpr:&quot;+win.devicePixelRatio); </div><div class="line">          var docEle = doc.documentElement,</div><div class="line">              isIos = navigator.userAgent.match(/iphone|ipod|ipad/gi),</div><div class="line">              dpr=Math.min(win.devicePixelRatio, 3);</div><div class="line">              scale = 1 / dpr,</div><div class="line"></div><div class="line">              resizeEvent = &apos;orientationchange&apos; in window ? &apos;orientationchange&apos; : &apos;resize&apos;;</div><div class="line"></div><div class="line">          docEle.dataset.dpr = dpr;</div><div class="line"></div><div class="line">          var metaEle = doc.createElement(&apos;meta&apos;);</div><div class="line">          metaEle.name = &apos;viewport&apos;;</div><div class="line">          metaEle.content = &apos;initial-scale=&apos; + scale + &apos;,maximum-scale=&apos; + scale;</div><div class="line">          docEle.firstElementChild.appendChild(metaEle);</div><div class="line">          </div><div class="line"></div><div class="line">          var recalCulate = function () &#123;</div><div class="line">                  var width = docEle.clientWidth;</div><div class="line">                  if (width / dpr &gt; 640) &#123;</div><div class="line">                      width = 640 * dpr;</div><div class="line">                   &#125;</div><div class="line">                docEle.style.fontSize = 20 * (width / 750) + &apos;px&apos;;</div><div class="line">            &#125;;</div><div class="line"></div><div class="line">          recalCulate()</div><div class="line"></div><div class="line">          if (!doc.addEventListener) return;</div><div class="line">          win.addEventListener(resizeEvent, recalCulate, false);</div><div class="line">        &#125;)(document, window);</div></pre></td></tr></table></figure>
+ <a id="more"></a>
+<p>获取设备dpr<br>算出缩放比例 scale = 1/dpr<br>创建meta以及属性<br>将scale值赋给initial-scale，maximum-scale<br>meta插入到文档中<br>创建屏幕大小改变重新计算函数并监听</p>
+<p>特点：这个方案根据设备等比例缩放，每个设备显示内容一致。<br> 缺点：当我用这套方案时，有个问题，因为监听resizeEvent，导致页面打开会先内容变大，然后再正常显示，很是影响用户体验。<br><a href="http://www.cnblogs.com/leinov/p/5209456.html" target="_blank" rel="external">参考链接</a></p>
+<p>方案二（推荐）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//获取屏幕比例</div><div class="line">function sreenRatio() &#123;</div><div class="line">    const ua = navigator.userAgent;</div><div class="line">    const matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d&#123;3&#125;)/i);</div><div class="line">    const UCversion = ua.match(/U3\/((\d+|\.)&#123;5,&#125;)/i);</div><div class="line">    const isUCHd = UCversion &amp;&amp; parseInt(UCversion[1].split(&apos;.&apos;).join(&apos;&apos;), 10) &gt;= 80;</div><div class="line">    const isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi);</div><div class="line">    var dpr = window.devicePixelRatio || 1;</div><div class="line">    if (!isIos &amp;&amp; !(matches &amp;&amp; matches[1] &gt; 534) &amp;&amp; !isUCHd) &#123;</div><div class="line">        // 如果非iOS, 非Android4.3以上, 非UC内核, 就不执行高清, dpr设为1;</div><div class="line">        dpr = 1;</div><div class="line">    &#125;</div><div class="line">    return dpr;</div><div class="line">&#125;</div><div class="line">//初始化屏幕比例</div><div class="line">function screenRatio(baseFontSize, fontscale) &#123;</div><div class="line">    var ratio = sreenRatio();     </div><div class="line">    var scale = document.createElement(&apos;meta&apos;);</div><div class="line">    var scaleRatio = 1 / ratio;</div><div class="line">    scale.name = &apos;viewport&apos;;</div><div class="line">    scale.content = &apos;width=device-width,&apos;+&apos;initial-scale=&apos; + scaleRatio + &apos;, maximum-scale=&apos; + scaleRatio + &apos;, minimum-scale=&apos; +</div><div class="line">        scaleRatio + &apos;, user-scalable=no&apos;;</div><div class="line">    var s = document.getElementsByTagName(&apos;title&apos;)[0];</div><div class="line">    s.parentNode.insertBefore(scale, s);</div><div class="line">    var _baseFontSize = baseFontSize || 100;</div><div class="line">    var _fontscale = fontscale || 1;</div><div class="line">    document.documentElement.style.fontSize = _baseFontSize / 2 * ratio * _fontscale+&apos;px&apos;;</div><div class="line">&#125;</div><div class="line">    if (window.screen.width &gt;= 768) &#123;</div><div class="line">        screenRatio(100, 1.5);//字体放大1.5倍</div><div class="line">    &#125; else &#123;</div><div class="line">        screenRatio();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>特点：</p>
+<ul>
+<li>引用简单，布局简便</li>
+<li>根据设备屏幕的DPR,自动设置最合适的高清缩放。</li>
+<li>保证了不同设备下视觉体验的一致性。（老方案是，屏幕越大元素越大；此方案是，屏幕越大，看的越多）</li>
+<li>有效解决移动端真实1px问题（这里的1px 是设备屏幕上的物理像素）<br>ps：而且不会出现方案一的问题</li>
+</ul>
+<p>缺点：1.有可能会出现字体会不受控制的变大的情况，解决方法：css加上一下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*, *:before, *:after &#123; max-height: 100000px &#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>感觉没啥问题了，然而我司测试硬生生发现一个bug -&gt; 在某安卓设备发现在QQ上打开网页出现页面错乱。解决方法：判断如果是安卓设备，scale.content加上target-densitydpi=device-dpi</li>
+</ol>
+<p>修正：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">   //获取屏幕比例</div><div class="line">   function sreenRatio() &#123;</div><div class="line">       const ua = navigator.userAgent;</div><div class="line">       const matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d&#123;3&#125;)/i);</div><div class="line">       const UCversion = ua.match(/U3\/((\d+|\.)&#123;5,&#125;)/i);</div><div class="line">       const isUCHd = UCversion &amp;&amp; parseInt(UCversion[1].split(&apos;.&apos;).join(&apos;&apos;), 10) &gt;= 80;</div><div class="line">       const isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi);</div><div class="line">       var dpr = window.devicePixelRatio || 1;</div><div class="line">       if (!isIos &amp;&amp; !(matches &amp;&amp; matches[1] &gt; 534) &amp;&amp; !isUCHd) &#123;</div><div class="line">           // 如果非iOS, 非Android4.3以上, 非UC内核, 就不执行高清, dpr设为1;</div><div class="line">           dpr = 1;</div><div class="line">       &#125;</div><div class="line">       return dpr;</div><div class="line">   &#125;</div><div class="line">   //初始化屏幕比例</div><div class="line">   function screenRatio(baseFontSize, fontscale) &#123;</div><div class="line">       var ratio = sreenRatio();</div><div class="line">       var scale = document.createElement(&apos;meta&apos;);</div><div class="line">       var scaleRatio = 1 / ratio;</div><div class="line">       scale.name = &apos;viewport&apos;;</div><div class="line">	&lt;%/*安卓设备兼容*/%&gt;</div><div class="line">	if (/Android/i.test(navigator.userAgent) == true) &#123;</div><div class="line">		scale.content = &apos;width=device-width, target-densitydpi=device-dpi,&apos;+&apos; initial-scale=&apos; + scaleRatio + &apos;, maximum-scale=&apos; + scaleRatio + &apos;, minimum-scale=&apos; +</div><div class="line">            scaleRatio + &apos;, user-scalable=no&apos;;</div><div class="line">	&lt;%/*iOS设备*/%&gt;</div><div class="line">	&#125; else &#123;</div><div class="line">		scale.content = &apos;width=device-width,&apos;+&apos;initial-scale=&apos; + scaleRatio + &apos;, maximum-scale=&apos; + scaleRatio + &apos;, minimum-scale=&apos; +</div><div class="line">            scaleRatio + &apos;, user-scalable=no&apos;;</div><div class="line">	&#125;</div><div class="line">       var s = document.getElementsByTagName(&apos;title&apos;)[0];</div><div class="line">       s.parentNode.insertBefore(scale, s);</div><div class="line">       var _baseFontSize = baseFontSize || 100;</div><div class="line">       var _fontscale = fontscale || 1;</div><div class="line">       document.documentElement.style.fontSize = _baseFontSize / 2 * ratio * _fontscale+&apos;px&apos;;</div><div class="line">   &#125;</div><div class="line">var isAndroid = /Android/i.test(navigator.userAgent) ? true : false;</div><div class="line">&lt;%/*安卓设备不做高清放大处理*/%&gt;</div><div class="line">   if (window.screen.width &gt;= 768 &amp;&amp; !isAndroid) &#123;</div><div class="line">       screenRatio(null, 1.5);&lt;%/*字体放大1.5倍*/%&gt;</div><div class="line">   &#125; else &#123;</div><div class="line">       screenRatio();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p><a href="http://www.jianshu.com/p/985d26b40199" target="_blank" rel="external">参考链接</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发总结/" rel="tag"># 开发总结</a>
+          
+            <a href="/tags/web移动端/" rel="tag"># web移动端</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/10/web移动端开发总结2-调试篇/" rel="next" title="web移动端开发总结2--调试篇">
+                <i class="fa fa-chevron-left"></i> web移动端开发总结2--调试篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/01/本地mysql客户端连接centos的数据库/" rel="prev" title="本地mysql客户端连接centos的数据库">
+                本地mysql客户端连接centos的数据库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg"
+               alt="Hxvin" />
+          <p class="site-author-name" itemprop="name">Hxvin</p>
+           
+              <p class="site-description motion-element" itemprop="description">做最努力的FE</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Hxvin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:13055503310@163.com" target="_blank" title="email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  email
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.hxvin.me/-demo-practice-/weixincontact/weixincontact.html" target="_blank" title="微信">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微信
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/64d96b36bbc5" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hxvin</span>
+</div>
+
+
+<div class="powered-by">
+   <a class="theme-link" href="https://github.com/Hxvin">github互动</a> 
+</div>
+
+<div class="theme-info">
+  学无止境 
+  
+</div>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysXCghbr';
+      var conf = 'c9c5c4144766cfcea9c2ab8b6a44650c';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            var resultItems = [];
+            if (this.value.trim().length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCountInArticle = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCountInArticle = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  var resultItem = '';
+
+                  function highlightKeyword(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+
+                    var matchText = text.substring(start, end);
+                    var matchResult = [];
+                    var prevEnd = 0;
+                    while (position + word.length <= end && index.length != 0) {
+
+                      // highlight keyword
+
+                      var wordBegin = position - start;
+                      var wordEnd = position - start + word.length;
+                      matchResult.push(matchText.substring(prevEnd, wordBegin));
+                      matchResult.push("<b class=\"search-keyword\">" + matchText.substring(wordBegin, wordEnd) + "</b>");
+
+                      // move to next position of hit
+
+                      index.pop();
+                      prevEnd = wordEnd;
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (prevEnd > position - start) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    matchResult.push(matchText.substring(prevEnd));
+                    return matchResult.join('');
+                  }
+
+                  // sort index by position of keyword
+
+                  indexOfTitle.sort(function (itemLeft, itemRight) {
+                    return itemRight.position - itemLeft.position;
+                  });
+
+                  indexOfContent.sort(function (itemLeft, itemRight) {
+                    return itemRight.position - itemLeft.position;
+                  });
+
+                  // highlight title
+
+                  if (indexOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, 0, title.length, indexOfTitle) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  // highlight content
+
+                  var resultUpperBound = parseInt(1);
+                  var withoutUpperBound = false;
+                  if (resultUpperBound === -1) {
+                    withoutUpperBound = true;
+                  }
+                  var currentResultNum = 0;
+                  while (indexOfContent.length != 0 && (withoutUpperBound || (currentResultNum < resultUpperBound))) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                    "<p class=\"search-result\">" + highlightKeyword(content, start, end, indexOfContent) +
+                    "...</p>" + "</a>";
+                    currentResultNum++;
+                  }
+                  resultItem += "</li>";
+                  resultItems.push({item: resultItem, hitCount: hitCountInArticle, id: resultItems.length});
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              $resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              $resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.hitCount != resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultLeft.id - resultRight.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result, i) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              $resultContent.innerHTML = searchResultList;
+            }
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

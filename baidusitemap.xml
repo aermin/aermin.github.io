@@ -4,6 +4,137 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/10/15/%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%8E%8C%E6%8F%A1JS%E4%B8%ADslice-splice%E5%92%8Csplit%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2017-10-15T13:17:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>简单的方法掌握JS中slice,splice和split的使用方法</title>
+        <pubTime>2017-10-15T09:15:26.000Z</pubTime>
+        
+        <tag>开发总结</tag>
+         
+        <tag>JS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/10/14/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86centos%E7%9A%8480%E7%AB%AF%E5%8F%A3/</loc>
+    <lastmod>2017-10-15T13:15:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx反向代理centos的80端口</title>
+        <pubTime>2017-10-14T11:12:57.000Z</pubTime>
+        
+        <tag>开发总结</tag>
+         
+        <tag>Nginx</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/10/10/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%932-%E8%B0%83%E8%AF%95%E7%AF%87/</loc>
+    <lastmod>2017-10-15T13:12:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>web移动端开发总结2--调试篇</title>
+        <pubTime>2017-10-10T08:19:59.000Z</pubTime>
+        
+        <tag>开发总结</tag>
+         
+        <tag>web移动端</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/10/11/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%933-%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7%E7%AF%87-Charles/</loc>
+    <lastmod>2017-10-15T13:12:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>web移动端开发总结3--抓包工具篇(Charles)</title>
+        <pubTime>2017-10-10T17:11:24.000Z</pubTime>
+        
+        <tag>开发总结</tag>
+         
+        <tag>web移动端</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/10/10/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%931-%E9%80%82%E9%85%8D%E7%AF%87/</loc>
+    <lastmod>2017-10-15T13:09:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>web移动端开发总结1--适配篇</title>
+        <pubTime>2017-10-10T07:05:47.000Z</pubTime>
+        
+        <tag>开发总结</tag>
+         
+        <tag>web移动端</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/10/01/%E6%9C%AC%E5%9C%B0mysql%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5centos%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2017-10-15T13:05:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>本地mysql客户端连接centos的数据库</title>
+        <pubTime>2017-10-01T03:04:02.000Z</pubTime>
+        
+        <tag>开发记录总结</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/07/15/%E4%BB%8E%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%B0%88react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+    <lastmod>2017-10-15T13:02:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>从实际项目小谈react生命周期</title>
+        <pubTime>2017-07-15T02:21:32.000Z</pubTime>
+        
+        <tag>开发总结</tag>
+         
+        <tag>React</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/07/10/js%E5%9B%BE%E7%89%87%E9%A2%84%E5%8A%A0%E8%BD%BD/</loc>
     <lastmod>2017-09-16T15:23:57.000Z</lastmod>
     <data>
@@ -54,25 +185,6 @@
         <tag>NODE</tag>
          
         <tag>运维</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/05/08/%E4%BB%8E%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%B0%88react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
-    <lastmod>2017-09-16T08:43:41.000Z</lastmod>
-    <data>
-        <display>
-        <title>从实际项目小谈react生命周期</title>
-        <pubTime>2017-05-08T02:21:32.000Z</pubTime>
-        
-        <tag>React</tag>
-         
-        <tag>开发总结</tag>
          
          
            
