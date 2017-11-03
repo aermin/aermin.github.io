@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://www.hxvin.me/"/>
   <updated>2017-10-24T15:48:13.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://www.hxvin.me/</id>
   
   <author>
     <name>Hxvin</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>搁浅</title>
-    <link href="http://yoursite.com/2017/10/24/%E6%90%81%E6%B5%85/"/>
-    <id>http://yoursite.com/2017/10/24/搁浅/</id>
+    <link href="http://www.hxvin.me/2017/10/24/%E6%90%81%E6%B5%85/"/>
+    <id>http://www.hxvin.me/2017/10/24/搁浅/</id>
     <published>2017-10-24T15:20:41.000Z</published>
     <updated>2017-10-24T15:48:13.000Z</updated>
     
@@ -35,14 +35,14 @@
     </summary>
     
     
-      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://www.hxvin.me/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
   <entry>
     <title>简单的方法掌握JS中slice,splice和split的使用方法</title>
-    <link href="http://yoursite.com/2017/10/15/%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%8E%8C%E6%8F%A1JS%E4%B8%ADslice-splice%E5%92%8Csplit%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2017/10/15/简单的方法掌握JS中slice-splice和split的使用方法/</id>
+    <link href="http://www.hxvin.me/2017/10/15/%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%8E%8C%E6%8F%A1JS%E4%B8%ADslice-splice%E5%92%8Csplit%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://www.hxvin.me/2017/10/15/简单的方法掌握JS中slice-splice和split的使用方法/</id>
     <published>2017-10-15T09:15:26.000Z</published>
     <updated>2017-10-17T13:42:12.000Z</updated>
     
@@ -94,16 +94,16 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
-      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
     
   </entry>
   
   <entry>
     <title>Nginx反向代理centos的80端口</title>
-    <link href="http://yoursite.com/2017/10/14/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86centos%E7%9A%8480%E7%AB%AF%E5%8F%A3/"/>
-    <id>http://yoursite.com/2017/10/14/Nginx反向代理centos的80端口/</id>
+    <link href="http://www.hxvin.me/2017/10/14/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86centos%E7%9A%8480%E7%AB%AF%E5%8F%A3/"/>
+    <id>http://www.hxvin.me/2017/10/14/Nginx反向代理centos的80端口/</id>
     <published>2017-10-14T11:12:57.000Z</published>
     <updated>2017-10-15T13:15:01.000Z</updated>
     
@@ -170,16 +170,16 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
-      <category term="Nginx" scheme="http://yoursite.com/tags/Nginx/"/>
+      <category term="Nginx" scheme="http://www.hxvin.me/tags/Nginx/"/>
     
   </entry>
   
   <entry>
     <title>web移动端开发总结3--抓包工具篇(Charles)</title>
-    <link href="http://yoursite.com/2017/10/11/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%933-%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7%E7%AF%87-Charles/"/>
-    <id>http://yoursite.com/2017/10/11/web移动端开发总结3-抓包工具篇-Charles/</id>
+    <link href="http://www.hxvin.me/2017/10/11/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%933-%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7%E7%AF%87-Charles/"/>
+    <id>http://www.hxvin.me/2017/10/11/web移动端开发总结3-抓包工具篇-Charles/</id>
     <published>2017-10-10T17:11:24.000Z</published>
     <updated>2017-10-15T13:12:12.000Z</updated>
     
@@ -199,16 +199,16 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
-      <category term="web移动端" scheme="http://yoursite.com/tags/web%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+      <category term="web移动端" scheme="http://www.hxvin.me/tags/web%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>web移动端开发总结2--调试篇</title>
-    <link href="http://yoursite.com/2017/10/10/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%932-%E8%B0%83%E8%AF%95%E7%AF%87/"/>
-    <id>http://yoursite.com/2017/10/10/web移动端开发总结2-调试篇/</id>
+    <link href="http://www.hxvin.me/2017/10/10/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%932-%E8%B0%83%E8%AF%95%E7%AF%87/"/>
+    <id>http://www.hxvin.me/2017/10/10/web移动端开发总结2-调试篇/</id>
     <published>2017-10-10T08:19:59.000Z</published>
     <updated>2017-10-15T13:12:29.000Z</updated>
     
@@ -235,16 +235,16 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
-      <category term="web移动端" scheme="http://yoursite.com/tags/web%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+      <category term="web移动端" scheme="http://www.hxvin.me/tags/web%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>web移动端开发总结1--适配篇</title>
-    <link href="http://yoursite.com/2017/10/10/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%931-%E9%80%82%E9%85%8D%E7%AF%87/"/>
-    <id>http://yoursite.com/2017/10/10/web移动端开发总结1-适配篇/</id>
+    <link href="http://www.hxvin.me/2017/10/10/web%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%931-%E9%80%82%E9%85%8D%E7%AF%87/"/>
+    <id>http://www.hxvin.me/2017/10/10/web移动端开发总结1-适配篇/</id>
     <published>2017-10-10T07:05:47.000Z</published>
     <updated>2017-10-15T13:09:40.000Z</updated>
     
@@ -284,16 +284,16 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
-      <category term="web移动端" scheme="http://yoursite.com/tags/web%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+      <category term="web移动端" scheme="http://www.hxvin.me/tags/web%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>本地mysql客户端连接centos的数据库</title>
-    <link href="http://yoursite.com/2017/10/01/%E6%9C%AC%E5%9C%B0mysql%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5centos%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    <id>http://yoursite.com/2017/10/01/本地mysql客户端连接centos的数据库/</id>
+    <link href="http://www.hxvin.me/2017/10/01/%E6%9C%AC%E5%9C%B0mysql%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5centos%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>http://www.hxvin.me/2017/10/01/本地mysql客户端连接centos的数据库/</id>
     <published>2017-10-01T03:04:02.000Z</published>
     <updated>2017-10-15T13:05:27.000Z</updated>
     
@@ -330,14 +330,14 @@
     </summary>
     
     
-      <category term="开发记录总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E6%80%BB%E7%BB%93/"/>
+      <category term="开发记录总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>记录下node项目部署上线的过程及坑</title>
-    <link href="http://yoursite.com/2017/09/15/%E8%AE%B0%E5%BD%95%E4%B8%8Bnode%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%BA%BF%E7%9A%84%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%9D%91/"/>
-    <id>http://yoursite.com/2017/09/15/记录下node项目部署上线的过程及坑/</id>
+    <link href="http://www.hxvin.me/2017/09/15/%E8%AE%B0%E5%BD%95%E4%B8%8Bnode%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%BA%BF%E7%9A%84%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%9D%91/"/>
+    <id>http://www.hxvin.me/2017/09/15/记录下node项目部署上线的过程及坑/</id>
     <published>2017-09-15T02:11:32.000Z</published>
     <updated>2017-09-16T15:10:53.000Z</updated>
     
@@ -415,18 +415,18 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
-      <category term="NODE" scheme="http://yoursite.com/tags/NODE/"/>
+      <category term="NODE" scheme="http://www.hxvin.me/tags/NODE/"/>
     
-      <category term="运维" scheme="http://yoursite.com/tags/%E8%BF%90%E7%BB%B4/"/>
+      <category term="运维" scheme="http://www.hxvin.me/tags/%E8%BF%90%E7%BB%B4/"/>
     
   </entry>
   
   <entry>
     <title>对付反爬虫战略</title>
-    <link href="http://yoursite.com/2017/09/10/%E5%AF%B9%E4%BB%98%E5%8F%8D%E7%88%AC%E8%99%AB%E6%88%98%E7%95%A5/"/>
-    <id>http://yoursite.com/2017/09/10/对付反爬虫战略/</id>
+    <link href="http://www.hxvin.me/2017/09/10/%E5%AF%B9%E4%BB%98%E5%8F%8D%E7%88%AC%E8%99%AB%E6%88%98%E7%95%A5/"/>
+    <id>http://www.hxvin.me/2017/09/10/对付反爬虫战略/</id>
     <published>2017-09-10T15:50:00.000Z</published>
     <updated>2017-10-15T13:24:15.000Z</updated>
     
@@ -487,16 +487,16 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
-      <category term="NODE" scheme="http://yoursite.com/tags/NODE/"/>
+      <category term="NODE" scheme="http://www.hxvin.me/tags/NODE/"/>
     
   </entry>
   
   <entry>
     <title>前后端开发，mvc模式</title>
-    <link href="http://yoursite.com/2017/08/28/%E4%BA%86%E8%A7%A3%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%EF%BC%8Cmvc%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://yoursite.com/2017/08/28/了解前后端开发，mvc模式/</id>
+    <link href="http://www.hxvin.me/2017/08/28/%E4%BA%86%E8%A7%A3%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%EF%BC%8Cmvc%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://www.hxvin.me/2017/08/28/了解前后端开发，mvc模式/</id>
     <published>2017-08-28T02:21:32.000Z</published>
     <updated>2017-09-16T08:41:13.000Z</updated>
     
@@ -521,16 +521,16 @@
     </summary>
     
     
-      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
     
-      <category term="PHP" scheme="http://yoursite.com/tags/PHP/"/>
+      <category term="PHP" scheme="http://www.hxvin.me/tags/PHP/"/>
     
   </entry>
   
   <entry>
     <title>解决非chrome浏览器（移动端适用）后退刷新问题</title>
-    <link href="http://yoursite.com/2017/08/08/%E8%A7%A3%E5%86%B3%E9%9D%9Echrome%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%88%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E7%94%A8%EF%BC%89%E5%90%8E%E9%80%80%E5%88%B7%E6%96%B0%E9%97%AE%E9%A2%98/"/>
-    <id>http://yoursite.com/2017/08/08/解决非chrome浏览器（移动端适用）后退刷新问题/</id>
+    <link href="http://www.hxvin.me/2017/08/08/%E8%A7%A3%E5%86%B3%E9%9D%9Echrome%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%88%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E7%94%A8%EF%BC%89%E5%90%8E%E9%80%80%E5%88%B7%E6%96%B0%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.hxvin.me/2017/08/08/解决非chrome浏览器（移动端适用）后退刷新问题/</id>
     <published>2017-08-08T02:10:32.000Z</published>
     <updated>2017-09-16T08:34:14.000Z</updated>
     
@@ -566,16 +566,16 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
-      <category term="功能" scheme="http://yoursite.com/tags/%E5%8A%9F%E8%83%BD/"/>
+      <category term="功能" scheme="http://www.hxvin.me/tags/%E5%8A%9F%E8%83%BD/"/>
     
   </entry>
   
   <entry>
     <title>react版的抽奖程序&amp;滚动字幕(入门小demo)</title>
-    <link href="http://yoursite.com/2017/07/18/react%E7%89%88%E7%9A%84%E6%8A%BD%E5%A5%96%E7%A8%8B%E5%BA%8F&amp;%E6%BB%9A%E5%8A%A8%E5%AD%97%E5%B9%95(%E5%85%A5%E9%97%A8%E5%B0%8Fdemo)/"/>
-    <id>http://yoursite.com/2017/07/18/react版的抽奖程序&amp;滚动字幕(入门小demo)/</id>
+    <link href="http://www.hxvin.me/2017/07/18/react%E7%89%88%E7%9A%84%E6%8A%BD%E5%A5%96%E7%A8%8B%E5%BA%8F&amp;%E6%BB%9A%E5%8A%A8%E5%AD%97%E5%B9%95(%E5%85%A5%E9%97%A8%E5%B0%8Fdemo)/"/>
+    <id>http://www.hxvin.me/2017/07/18/react版的抽奖程序&amp;滚动字幕(入门小demo)/</id>
     <published>2017-07-18T12:21:32.000Z</published>
     <updated>2017-09-16T08:42:18.000Z</updated>
     
@@ -613,16 +613,16 @@
     </summary>
     
     
-      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+      <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
-      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+      <category term="React" scheme="http://www.hxvin.me/tags/React/"/>
     
   </entry>
   
   <entry>
     <title>从实际项目小谈react生命周期</title>
-    <link href="http://yoursite.com/2017/07/15/%E4%BB%8E%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%B0%88react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    <id>http://yoursite.com/2017/07/15/从实际项目小谈react生命周期/</id>
+    <link href="http://www.hxvin.me/2017/07/15/%E4%BB%8E%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%B0%88react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>http://www.hxvin.me/2017/07/15/从实际项目小谈react生命周期/</id>
     <published>2017-07-15T02:21:32.000Z</published>
     <updated>2017-10-15T13:02:38.000Z</updated>
     
@@ -645,16 +645,16 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
-      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+      <category term="React" scheme="http://www.hxvin.me/tags/React/"/>
     
   </entry>
   
   <entry>
     <title>js图片预加载</title>
-    <link href="http://yoursite.com/2017/07/10/js%E5%9B%BE%E7%89%87%E9%A2%84%E5%8A%A0%E8%BD%BD/"/>
-    <id>http://yoursite.com/2017/07/10/js图片预加载/</id>
+    <link href="http://www.hxvin.me/2017/07/10/js%E5%9B%BE%E7%89%87%E9%A2%84%E5%8A%A0%E8%BD%BD/"/>
+    <id>http://www.hxvin.me/2017/07/10/js图片预加载/</id>
     <published>2017-07-10T12:21:32.000Z</published>
     <updated>2017-09-16T15:23:57.000Z</updated>
     
@@ -662,7 +662,7 @@
 <blockquote>
 <p>先上demo</p>
 </blockquote>
-<p><a href="http://www.hxvin.me/PracticeJS/preload/preload.html" target="_blank" rel="external">demo:图片预加载</a></p>
+<p><a href="http://www.hxvin.me/PracticeJS/preload/preload.html">demo:图片预加载</a></p>
 <blockquote>
 <p>再上代码</p>
 </blockquote>
@@ -694,16 +694,16 @@
     </summary>
     
     
-      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+      <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
-      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
     
   </entry>
   
   <entry>
     <title>公司团队开发git分支管理</title>
-    <link href="http://yoursite.com/2017/07/08/%E5%85%AC%E5%8F%B8%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/"/>
-    <id>http://yoursite.com/2017/07/08/公司团队开发git分支管理/</id>
+    <link href="http://www.hxvin.me/2017/07/08/%E5%85%AC%E5%8F%B8%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/"/>
+    <id>http://www.hxvin.me/2017/07/08/公司团队开发git分支管理/</id>
     <published>2017-07-08T02:48:02.000Z</published>
     <updated>2017-07-08T03:32:06.000Z</updated>
     
@@ -726,16 +726,16 @@
     </summary>
     
     
-      <category term="工具使用" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+      <category term="工具使用" scheme="http://www.hxvin.me/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
     
-      <category term="实习日记" scheme="http://yoursite.com/tags/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/"/>
+      <category term="实习日记" scheme="http://www.hxvin.me/tags/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title>图片懒加载及节流函数优化性能</title>
-    <link href="http://yoursite.com/2017/06/24/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD%E5%8F%8A%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD/"/>
-    <id>http://yoursite.com/2017/06/24/图片懒加载及节流函数优化性能/</id>
+    <link href="http://www.hxvin.me/2017/06/24/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD%E5%8F%8A%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD/"/>
+    <id>http://www.hxvin.me/2017/06/24/图片懒加载及节流函数优化性能/</id>
     <published>2017-06-24T13:02:40.000Z</published>
     <updated>2017-06-25T04:14:35.000Z</updated>
     
@@ -784,16 +784,16 @@
     </summary>
     
     
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="http://www.hxvin.me/tags/JavaScript/"/>
     
   </entry>
   
   <entry>
     <title>js浅拷贝与深拷贝</title>
-    <link href="http://yoursite.com/2017/06/18/js%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/"/>
-    <id>http://yoursite.com/2017/06/18/js浅拷贝与深拷贝/</id>
+    <link href="http://www.hxvin.me/2017/06/18/js%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/"/>
+    <id>http://www.hxvin.me/2017/06/18/js浅拷贝与深拷贝/</id>
     <published>2017-06-18T14:22:12.000Z</published>
     <updated>2017-09-16T15:21:27.000Z</updated>
     
@@ -826,16 +826,16 @@
     </summary>
     
     
-      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+      <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
-      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
     
   </entry>
   
   <entry>
     <title>图文解析HTMLElement.offsetHeight,scrollHeight,clientHeight</title>
-    <link href="http://yoursite.com/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/"/>
-    <id>http://yoursite.com/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/</id>
+    <link href="http://www.hxvin.me/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/"/>
+    <id>http://www.hxvin.me/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/</id>
     <published>2017-06-05T14:32:29.000Z</published>
     <updated>2017-06-20T07:17:03.000Z</updated>
     
@@ -867,16 +867,16 @@
     </summary>
     
     
-      <category term="学习总结" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+      <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
-      <category term="HTML" scheme="http://yoursite.com/tags/HTML/"/>
+      <category term="HTML" scheme="http://www.hxvin.me/tags/HTML/"/>
     
   </entry>
   
   <entry>
     <title>mac使用tree</title>
-    <link href="http://yoursite.com/2017/05/30/mac%E4%BD%BF%E7%94%A8tree/"/>
-    <id>http://yoursite.com/2017/05/30/mac使用tree/</id>
+    <link href="http://www.hxvin.me/2017/05/30/mac%E4%BD%BF%E7%94%A8tree/"/>
+    <id>http://www.hxvin.me/2017/05/30/mac使用tree/</id>
     <published>2017-05-30T05:53:43.000Z</published>
     <updated>2017-05-30T08:49:09.000Z</updated>
     
@@ -897,14 +897,14 @@
     </summary>
     
     
-      <category term="工具使用" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+      <category term="工具使用" scheme="http://www.hxvin.me/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
     
   </entry>
   
   <entry>
     <title>vue2写单页面项目总结记录</title>
-    <link href="http://yoursite.com/2017/05/29/post%E7%94%A8vue%E5%86%99webapp%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%B3%BB%E5%88%971/"/>
-    <id>http://yoursite.com/2017/05/29/post用vue写webapp项目总结系列1/</id>
+    <link href="http://www.hxvin.me/2017/05/29/post%E7%94%A8vue%E5%86%99webapp%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%B3%BB%E5%88%971/"/>
+    <id>http://www.hxvin.me/2017/05/29/post用vue写webapp项目总结系列1/</id>
     <published>2017-05-29T01:40:25.000Z</published>
     <updated>2017-09-16T08:31:07.000Z</updated>
     
@@ -914,7 +914,7 @@
 <blockquote>
 <p>建议先去社区<a href="https://www.vue-js.com/signup" target="_blank" rel="external">注册</a>拿accesstoken登录体验(注册可以直接用github账号，挺快的)</p>
 </blockquote>
-<p><a href="http://www.hxvin.me/vue-home/dist/" target="_blank" rel="external">demo</a></p>
+<p><a href="http://www.hxvin.me/vue-home/dist/">demo</a></p>
 <p><a href="http://ooytyiziz.bkt.clouddn.com/vue-home.gif" target="_blank" rel="external">点击查看gif动图展示</a></p>
 <p><a href="https://github.com/Hxvin/vue-home" target="_blank" rel="external">github项目地址</a> </p>
 <p><a href="https://www.vue-js.com/api/" target="_blank" rel="external">项目API</a></p>
@@ -974,7 +974,7 @@
 <p>这个公共路径原本为assetsPublicPath: ‘/‘，这样在本地服务器是可以跑，可是打包上传到github后会发现打开的页面是空白的，报错如下图。</p>
 </blockquote>
 <p><img src="http://upload-images.jianshu.io/upload_images/5287253-82edc72f02251f48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网页加载报错图"></p>
-<p>原因是路径错了，vue-home是项目文件夹名称，dist是npm run build之后出现的文件夹，github上线就是读取dist文件夹而生成的网页（成功展示的demo地址长这样：<a href="http://www.hxvin.me/vue-home/dist/）" target="_blank" rel="external">http://www.hxvin.me/vue-home/dist/）</a></p>
+<p>原因是路径错了，vue-home是项目文件夹名称，dist是npm run build之后出现的文件夹，github上线就是读取dist文件夹而生成的网页（成功展示的demo地址长这样：<a href="http://www.hxvin.me/vue-home/dist/）">http://www.hxvin.me/vue-home/dist/）</a></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/5287253-86ca75ba374431a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="github图"></p>
 <p>解决上线路径问题不知道还有没有其他更方便的解决方法，如果有，请跟我讲下哦</p>
 <blockquote>
@@ -1010,9 +1010,9 @@
     </summary>
     
     
-      <category term="vue2" scheme="http://yoursite.com/tags/vue2/"/>
+      <category term="vue2" scheme="http://www.hxvin.me/tags/vue2/"/>
     
-      <category term="项目总结" scheme="http://yoursite.com/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+      <category term="项目总结" scheme="http://www.hxvin.me/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
