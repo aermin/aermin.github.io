@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-10-17T13:42:12.000Z</updated>
+  <updated>2017-10-24T15:48:13.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搁浅</title>
+    <link href="http://yoursite.com/2017/10/24/%E6%90%81%E6%B5%85/"/>
+    <id>http://yoursite.com/2017/10/24/搁浅/</id>
+    <published>2017-10-24T15:20:41.000Z</published>
+    <updated>2017-10-24T15:48:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近有点茫然，对于编程的学习，到底什么样的方法才是好的，才是适合我的。</p>
+<p>实习三个月，我不断汲取新知识新技术，react，node，php，git。。。各种，又杂又乱，虽说刚开始是挺崩溃，比如node，php一周上手写项目代码，react两天上手写项目代码，以前习惯系统学习的我不得不做出适应，快速去学习。</p>
+<p>这样的环境下，步伐迈得很快，但是都是学部分部分的，没有系统，所以感觉自己不敢说会这门技术。。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近有点茫然，对于编程的学习，到底什么样的方法才是好的，才是适合我的。&lt;/p&gt;
+&lt;p&gt;实习三个月，我不断汲取新知识新技术，react，node，php，git。。。各种，又杂又乱，虽说刚开始是挺崩溃，比如node，php一周上手写项目代码，react两天上手写项目代码，以前
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
   
   <entry>
     <title>简单的方法掌握JS中slice,splice和split的使用方法</title>
@@ -70,9 +94,9 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
-    
       <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="开发总结" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -989,43 +1013,6 @@
       <category term="vue2" scheme="http://yoursite.com/tags/vue2/"/>
     
       <category term="项目总结" scheme="http://yoursite.com/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS函数方法坑与填坑</title>
-    <link href="http://yoursite.com/2017/05/17/JS%E5%87%BD%E6%95%B0%E6%96%B9%E6%B3%95%E5%9D%91%E4%B8%8E%E5%A1%AB%E5%9D%91/"/>
-    <id>http://yoursite.com/2017/05/17/JS函数方法坑与填坑/</id>
-    <published>2017-05-17T05:37:50.000Z</published>
-    <updated>2017-05-17T05:41:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="首先，先认识下什么叫函数的方法："><a href="#首先，先认识下什么叫函数的方法：" class="headerlink" title="首先，先认识下什么叫函数的方法："></a>首先，先认识下什么叫函数的方法：</h2><p>在一个对象中绑定函数，称为这个对象的方法。</p>
-<h3 id="再给具体的例子："><a href="#再给具体的例子：" class="headerlink" title="再给具体的例子："></a>再给具体的例子：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var xiaoming = &#123;</div><div class="line">    name: &apos;小明&apos;,</div><div class="line">    birth: 1990,</div><div class="line">    age: function () &#123;</div><div class="line">        var y = new Date().getFullYear();</div><div class="line">        return y - this.birth;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">xiaoming.age; // function xiaoming.age()</div><div class="line">xiaoming.age(); // 27</div></pre></td></tr></table></figure>
-<p>xiaoming是一个对象，age（）函数就是该对象的方法。<br>此时this指向xiaoming</p>
-<a id="more"></a>
-<h3 id="如果拆开写："><a href="#如果拆开写：" class="headerlink" title="如果拆开写："></a>如果拆开写：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function getAge() &#123;</div><div class="line">    var y = new Date().getFullYear();</div><div class="line">    return y - this.birth;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var xiaoming = &#123;</div><div class="line">    name: &apos;小明&apos;,</div><div class="line">    birth: 1990,</div><div class="line">    age: getAge</div><div class="line">&#125;;</div><div class="line"></div><div class="line">xiaoming.age(); // 27, 正常结果</div><div class="line">getAge(); // NaN</div><div class="line">var fn = xiaoming.age; // 先拿到xiaoming的age函数</div><div class="line">fn(); // NaN</div></pre></td></tr></table></figure>
-<p>以对象的方法形式调用没问题，该函数的this指向被调用的对象xiaomign； 你会发现单独调用getAge()函数返回NaN,该函数的this指向全局对象，也就是window，这是JS的一个<code>坑</code>。</p>
-<h3 id="填坑："><a href="#填坑：" class="headerlink" title="填坑："></a>填坑：</h3><h4 id="1-要保证this指向正确，必须用obj-xxx-的形式调用！"><a href="#1-要保证this指向正确，必须用obj-xxx-的形式调用！" class="headerlink" title="1. 要保证this指向正确，必须用obj.xxx()的形式调用！"></a>1. 要保证this指向正确，必须用obj.xxx()的形式调用！</h4><p>这里需<code>注意</code>：obj.xxx()也不是什么情况下都适用的，比如在在函数内定义的函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line"></div><div class="line">var xiaoming = &#123;</div><div class="line">    name: &apos;小明&apos;,</div><div class="line">    birth: 1990,</div><div class="line">    age: function () &#123;</div><div class="line">        function getAgeFromBirth() &#123;</div><div class="line">            var y = new Date().getFullYear();</div><div class="line">            return y - this.birth;</div><div class="line">        &#125;</div><div class="line">        return getAgeFromBirth();</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">xiaoming.age(); // Uncaught TypeError: Cannot read property &apos;birth&apos; of undefined</div><div class="line">填坑：</div><div class="line">&apos;use strict&apos;;</div><div class="line"></div><div class="line">var xiaoming = &#123;</div><div class="line">    name: &apos;小明&apos;,</div><div class="line">    birth: 1990,</div><div class="line">    age: function () &#123;</div><div class="line">        var that = this; // 在方法内部一开始就捕获this</div><div class="line">        function getAgeFromBirth() &#123;</div><div class="line">            var y = new Date().getFullYear();</div><div class="line">            return y - that.birth; // 用that而不是this</div><div class="line">        &#125;</div><div class="line">        return getAgeFromBirth();</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">xiaoming.age(); // 27</div></pre></td></tr></table></figure>
-<h4 id="2-或者用apply-和call-方法修复函数调用："><a href="#2-或者用apply-和call-方法修复函数调用：" class="headerlink" title="2.或者用apply()和call()方法修复函数调用："></a>2.或者用apply()和call()方法修复函数调用：</h4><p>函数本身的apply方法，它接收两个参数，第一个参数就是需要绑定的this变量，第二个参数是Array，表示函数本身的参数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function getAge() &#123;</div><div class="line">    var y = new Date().getFullYear();</div><div class="line">    return y - this.birth;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var xiaoming = &#123;</div><div class="line">    name: &apos;小明&apos;,</div><div class="line">    birth: 1990,</div><div class="line">    age: getAge</div><div class="line">&#125;;</div><div class="line"></div><div class="line">xiaoming.age(); // 25</div><div class="line">getAge.apply(xiaoming, []); // 25, this指向xiaoming, 参数为空</div></pre></td></tr></table></figure>
-<p>apply()类似的方法是call()，唯一区别是：</p>
-<p>apply()把参数打包成Array再传入；</p>
-<p>call()把参数按顺序传入。<br>如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Math.max.apply(null, [3, 5, 4]); // 5</div><div class="line">Math.max.call(null, 3, 5, 4); // 5</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;首先，先认识下什么叫函数的方法：&quot;&gt;&lt;a href=&quot;#首先，先认识下什么叫函数的方法：&quot; class=&quot;headerlink&quot; title=&quot;首先，先认识下什么叫函数的方法：&quot;&gt;&lt;/a&gt;首先，先认识下什么叫函数的方法：&lt;/h2&gt;&lt;p&gt;在一个对象中绑定函数，称为这个对象的方法。&lt;/p&gt;
-&lt;h3 id=&quot;再给具体的例子：&quot;&gt;&lt;a href=&quot;#再给具体的例子：&quot; class=&quot;headerlink&quot; title=&quot;再给具体的例子：&quot;&gt;&lt;/a&gt;再给具体的例子：&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var xiaoming = &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    name: &amp;apos;小明&amp;apos;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    birth: 1990,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    age: function () &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        var y = new Date().getFullYear();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        return y - this.birth;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;xiaoming.age; // function xiaoming.age()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;xiaoming.age(); // 27&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;xiaoming是一个对象，age（）函数就是该对象的方法。&lt;br&gt;此时this指向xiaoming&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
   </entry>
   
