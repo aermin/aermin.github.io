@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hxvin.me/"/>
-  <updated>2017-11-19T14:00:36.000Z</updated>
+  <updated>2017-11-19T15:05:14.000Z</updated>
   <id>http://www.hxvin.me/</id>
   
   <author>
@@ -16,11 +16,41 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>各种时间转换总结</title>
+    <link href="http://www.hxvin.me/2017/11/19/js%E5%90%84%E7%A7%8D%E6%97%B6%E9%97%B4%E8%BD%AC%E6%8D%A2%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.hxvin.me/2017/11/19/js各种时间转换总结/</id>
+    <published>2017-11-19T14:57:34.000Z</published>
+    <updated>2017-11-19T15:05:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p> 这次项目写的的商业数据系统后台管理，用vue+饿了么的UI组件，其中我负责的模块有大量的时间选择器交互，写项目的过程中，很多时候都在封装一些时间格式转换的函数，在此总结一些，有一些借助以后的全局的轮子就不写了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//获取日期 yyyy-MM-dd </div><div class="line">getDate: function(yourDate, i) &#123;</div><div class="line">    // 获取当前日期</div><div class="line">    const date = new Date(yourDate);</div><div class="line">    // 获取当前月份</div><div class="line">    let nowMonth = date.getMonth() + 1;</div><div class="line">    // 获取当前是几号或者距离今天i天</div><div class="line">    let strDate = date.getDate() + i;</div><div class="line">    // 添加分隔符“-”</div><div class="line">    const seperator = &quot;-&quot;;</div><div class="line">    // 对月份进行处理，1-9月在前面添加一个“0”</div><div class="line">    if (nowMonth &gt;= 1 &amp;&amp; nowMonth &lt;= 9) &#123;</div><div class="line">        nowMonth = &quot;0&quot; + nowMonth;</div><div class="line">    &#125;</div><div class="line">    // 对月份进行处理，1-9号在前面添加一个“0”</div><div class="line">    if (strDate &gt;= 0 &amp;&amp; strDate &lt;= 9) &#123;</div><div class="line">        strDate = &quot;0&quot; + strDate;</div><div class="line">    &#125;</div><div class="line">    // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期</div><div class="line">    const nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;</div><div class="line">    return nowDate;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+ <a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//当月某一个时间的date转换成当月1号的date</div><div class="line">    getMonthfirstDayDate(yourDate, i) &#123;</div><div class="line">        const y = yourDate.getFullYear();</div><div class="line">        const m = yourDate.getMonth();</div><div class="line">        return new Date(y, m + i, 1);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//获取年月 yyyy-MM   i 为距离本月的月数</div><div class="line">getMonthTime: function(i) &#123;</div><div class="line">    // 获取当前日期</div><div class="line">    const date = new Date();</div><div class="line">    // 获取当前月份</div><div class="line">    let nowMonth = date.getMonth() + 1 + i;</div><div class="line">    // 对月份进行处理，1-9月在前面添加一个“0”</div><div class="line">    if (nowMonth &gt;= 1 &amp;&amp; nowMonth &lt;= 9) &#123;</div><div class="line">        nowMonth = &quot;0&quot; + nowMonth;</div><div class="line">    &#125;</div><div class="line">    // 最后拼接字符串，得到一个格式为(yyyy-MM)的日期</div><div class="line">    const nowDate = date.getFullYear() + &quot;-&quot; + nowMonth;</div><div class="line">    return nowDate;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//获取当前日期 yyyy-MM-dd</div><div class="line">getSimpleDate: function() &#123;</div><div class="line">    // 获取当前日期</div><div class="line">    const date = new Date();</div><div class="line">    // 获取当前月份</div><div class="line">    let nowMonth = date.getMonth() + 1;</div><div class="line">    // 获取当前是几号</div><div class="line">    let strDate = date.getDate();</div><div class="line">    // 添加分隔符“-”</div><div class="line">    const seperator = &quot;-&quot;;</div><div class="line">    // 对月份进行处理，1-9月在前面添加一个“0”</div><div class="line">    if (nowMonth &gt;= 1 &amp;&amp; nowMonth &lt;= 9) &#123;</div><div class="line">        nowMonth = &quot;0&quot; + nowMonth;</div><div class="line">    &#125;</div><div class="line">    // 对月份进行处理，1-9号在前面添加一个“0”</div><div class="line">    if (strDate &gt;= 0 &amp;&amp; strDate &lt;= 9) &#123;</div><div class="line">        strDate = &quot;0&quot; + strDate;</div><div class="line">    &#125;</div><div class="line">    // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期</div><div class="line">    const nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;</div><div class="line">    return nowDate;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//获取当前星期几</div><div class="line">getWeekDay: function() &#123;</div><div class="line">    const day = new Date().getDay();</div><div class="line">    const weekday = new Array(7);</div><div class="line">    weekday[0] = &quot;周日&quot;;</div><div class="line">    weekday[1] = &quot;周一&quot;;</div><div class="line">    weekday[2] = &quot;周二&quot;;</div><div class="line">    weekday[3] = &quot;周三&quot;;</div><div class="line">    weekday[4] = &quot;周四&quot;;</div><div class="line">    weekday[5] = &quot;周五&quot;;</div><div class="line">    weekday[6] = &quot;周六&quot;;</div><div class="line">    return weekday[day];</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//获取当前时间</div><div class="line">getTime: function() &#123;</div><div class="line">    const date = new Date();</div><div class="line">    const hour = date.getHours() &lt; 10 ? &quot;0&quot; + date.getHours() : date.getHours();</div><div class="line">    const minute = date.getMinutes() &lt; 10 ? &quot;0&quot; + date.getMinutes() : date.getMinutes();</div><div class="line">    return hour + &quot;:&quot; + minute;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 这次项目写的的商业数据系统后台管理，用vue+饿了么的UI组件，其中我负责的模块有大量的时间选择器交互，写项目的过程中，很多时候都在封装一些时间格式转换的函数，在此总结一些，有一些借助以后的全局的轮子就不写了。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;//获取日期 yyyy-MM-dd &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;getDate: function(yourDate, i) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // 获取当前日期&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const date = new Date(yourDate);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // 获取当前月份&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    let nowMonth = date.getMonth() + 1;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // 获取当前是几号或者距离今天i天&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    let strDate = date.getDate() + i;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // 添加分隔符“-”&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const seperator = &amp;quot;-&amp;quot;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // 对月份进行处理，1-9月在前面添加一个“0”&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (nowMonth &amp;gt;= 1 &amp;amp;&amp;amp; nowMonth &amp;lt;= 9) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        nowMonth = &amp;quot;0&amp;quot; + nowMonth;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // 对月份进行处理，1-9号在前面添加一个“0”&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (strDate &amp;gt;= 0 &amp;amp;&amp;amp; strDate &amp;lt;= 9) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        strDate = &amp;quot;0&amp;quot; + strDate;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return nowDate;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Js" scheme="http://www.hxvin.me/tags/Js/"/>
+    
+      <category term="周总结" scheme="http://www.hxvin.me/tags/%E5%91%A8%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
     <title>“js各种遍历总结”</title>
     <link href="http://www.hxvin.me/2017/11/19/%E2%80%9Cjs%E9%81%8D%E5%8E%86%E6%80%BB%E7%BB%93%E2%80%9D/"/>
     <id>http://www.hxvin.me/2017/11/19/“js遍历总结”/</id>
     <published>2017-11-19T06:44:38.000Z</published>
-    <updated>2017-11-19T14:00:36.000Z</updated>
+    <updated>2017-11-19T15:05:22.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近忙着写项目，是时候来一波总结了。<br>因为项目中数据交互炒！鸡！多！，遍历很常用，本篇对js的遍历做一次总结</p>
 <h3 id="一-、普通for循环-只能遍历数组和字符串"><a href="#一-、普通for循环-只能遍历数组和字符串" class="headerlink" title="一 、普通for循环 (只能遍历数组和字符串)"></a>一 、普通for循环 (只能遍历数组和字符串)</h3><ul>
@@ -106,7 +136,9 @@
     </summary>
     
     
-      <category term="-- JS -- 周总结" scheme="http://www.hxvin.me/tags/JS-%E5%91%A8%E6%80%BB%E7%BB%93/"/>
+      <category term="周总结" scheme="http://www.hxvin.me/tags/%E5%91%A8%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
     
   </entry>
   
@@ -115,7 +147,7 @@
     <link href="http://www.hxvin.me/2017/11/19/%E2%80%9C%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E5%89%8D%E7%AB%AF%E4%B9%8B%E6%97%85%EF%BC%8C%E5%86%99%E5%86%99%E6%84%9F%E6%83%B3-%E2%80%9D/"/>
     <id>http://www.hxvin.me/2017/11/19/“一个人的前端之旅，写写感想-”/</id>
     <published>2017-11-19T01:31:04.000Z</published>
-    <updated>2017-11-19T14:06:03.000Z</updated>
+    <updated>2017-11-19T15:05:28.000Z</updated>
     
     <content type="html"><![CDATA[<p>想想步入前端，成为一名码农已经快一年(大概还差两个多月吧)，自己从小 心水的技术梦也算有了着落。</p>
 <p>这次参加了后半段秋招，7~10月一直忙着实习，十月中旬真正开始参加了校招，虽然对互联网校招来说，算蛮晚的，很多大厂的校招也结束了，哈哈哈，后知后觉。</p>
@@ -136,7 +168,7 @@
     </summary>
     
     
-      <category term="--随笔" scheme="http://www.hxvin.me/tags/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://www.hxvin.me/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
@@ -219,9 +251,9 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
-    
       <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
+    
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -770,9 +802,9 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
-    
       <category term="React" scheme="http://www.hxvin.me/tags/React/"/>
+    
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -954,47 +986,6 @@
       <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
       <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图文解析HTMLElement.offsetHeight,scrollHeight,clientHeight</title>
-    <link href="http://www.hxvin.me/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/"/>
-    <id>http://www.hxvin.me/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/</id>
-    <published>2017-06-05T14:32:29.000Z</published>
-    <updated>2017-06-20T07:17:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="HTMLElement-offsetHeight"><a href="#HTMLElement-offsetHeight" class="headerlink" title="HTMLElement.offsetHeight"></a>HTMLElement.offsetHeight</h3><p>是一个只读属性，它返回该元素的像素高度，高度包含该元素的垂直内边距和边框，且是一个整数。</p>
-<p>通常，元素的offsetHeight是一种衡量标准，包括元素的边框、垂直内边距和元素的水平滚动条（如果存在且渲染的话）和元素的CSS高度。</p>
-<p>对于文档的主体对象，它包括代替元素的CSS高度线性总含量高。浮动元素的向下延伸内容高度是被忽略的。 </p>
-<p><img src="https://developer.mozilla.org/@api/deki/files/788/=OffsetHeight.png" alt="实例"></p>
-<a id="more"></a>
-<h3 id="Element-scrollHeight"><a href="#Element-scrollHeight" class="headerlink" title="Element.scrollHeight"></a>Element.scrollHeight</h3><p>Element.scrollHeight 是计量元素内容高度的只读属性，包括overflow样式属性导致的视图中不可见内容。没有垂直滚动条的情况下，scrollHeight值与元素视图填充所有内容所需要的最小值clientHeight相同。包括元素的padding，但不包括元素的margin.</p>
-<p><img src="https://developer.mozilla.org/@api/deki/files/840/=ScrollHeight.png" alt="实例"></p>
-<h3 id="Element-clientHeight"><a href="#Element-clientHeight" class="headerlink" title="Element.clientHeight"></a>Element.clientHeight</h3><p>返回元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。</p>
-<p>clientHeight 可以通过 CSS height + CSS padding - 水平滚动条高度 (如果存在)来计算.</p>
-<p>也就是说，是没有垂直滚动条版本的scrollHeight。</p>
-<hr>
-<p>更新：</p>
-<p>clientWidth = width + padding</p>
-<p>clientHeight = height + padding</p>
-<p>offsetWidth = width + padding + border</p>
-<p>offsetHeight = height + padding + border</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;HTMLElement-offsetHeight&quot;&gt;&lt;a href=&quot;#HTMLElement-offsetHeight&quot; class=&quot;headerlink&quot; title=&quot;HTMLElement.offsetHeight&quot;&gt;&lt;/a&gt;HTMLElement.offsetHeight&lt;/h3&gt;&lt;p&gt;是一个只读属性，它返回该元素的像素高度，高度包含该元素的垂直内边距和边框，且是一个整数。&lt;/p&gt;
-&lt;p&gt;通常，元素的offsetHeight是一种衡量标准，包括元素的边框、垂直内边距和元素的水平滚动条（如果存在且渲染的话）和元素的CSS高度。&lt;/p&gt;
-&lt;p&gt;对于文档的主体对象，它包括代替元素的CSS高度线性总含量高。浮动元素的向下延伸内容高度是被忽略的。 &lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://developer.mozilla.org/@api/deki/files/788/=OffsetHeight.png&quot; alt=&quot;实例&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="HTML" scheme="http://www.hxvin.me/tags/HTML/"/>
     
   </entry>
   
