@@ -289,6 +289,289 @@
   
 
   <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.hxvin.me/2017/11/19/“js遍历总结”/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/19/“js遍历总结”/" itemprop="url">
+                  “js各种遍历总结”
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-19T14:44:38+08:00">
+                2017-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/19/“js遍历总结”/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.hxvin.me" class="cy_cmt_count" data-xid="2017/11/19/“js遍历总结”/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近忙着写项目，是时候来一波总结了。<br>因为项目中数据交互炒！鸡！多！，遍历很常用，本篇对js的遍历做一次总结</p>
+<h3 id="一-、普通for循环-只能遍历数组和字符串"><a href="#一-、普通for循环-只能遍历数组和字符串" class="headerlink" title="一 、普通for循环 (只能遍历数组和字符串)"></a>一 、普通for循环 (只能遍历数组和字符串)</h3><ul>
+<li>遍历数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [1,2,3,4,5];</div><div class="line">for(var i = 0 ; i &lt; arr.length; i++)&#123;</div><div class="line">  console.log(i); //1 2 3 4 5 </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不足：重复获取数组长度</p>
+<blockquote>
+<p>优化</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [1,2,3,4,5];</div><div class="line">for(var i = 0 ;  len = arr.length ;  i &lt; len;  i++)&#123;</div><div class="line">  console.log(i); //1 2 3 4 5 </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用临时变量，将长度缓存起来，避免重复获取数组长度，当数组较大时优化效果才会比较明显。</p>
+<p>这种方法基本上是所有循环遍历方法中性能最高的一种</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/19/“js遍历总结”/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.hxvin.me/2017/11/19/“一个人的前端之旅，写写感想-”/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hxvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hxvin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/19/“一个人的前端之旅，写写感想-”/" itemprop="url">
+                  “一个人的前端之旅，写写感想~”
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-19T09:31:04+08:00">
+                2017-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/19/“一个人的前端之旅，写写感想-”/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.hxvin.me" class="cy_cmt_count" data-xid="2017/11/19/“一个人的前端之旅，写写感想-”/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>想想步入前端，成为一名码农已经快一年(大概还差两个多月吧)，自己从小 心水的技术梦也算有了着落。</p>
+<p>这次参加了后半段秋招，7~10月一直忙着实习，十月中旬真正开始参加了校招，虽然对互联网校招来说，算蛮晚的，很多大厂的校招也结束了，哈哈哈，后知后觉。</p>
+<p>想起面试中面试官喜欢问的一个问题，你一个非科班的为什么选择前端，我总是叽叽歪歪说了一堆，其实很简单，我想当一名程序员(慕名已久)，刚好遇见了前端，是前端让我打破非科班难以成为程序员的狭隘眼界~感谢</p>
+<p>然后，我喜欢js，一门前后端，pc端，客户端，桌面端通吃的奇妙语言，虽然目前自己掌握的js依然很菜，但有一天，我相信自己会成为很好的jser的，希望这天早点到来，希望有一天我能用js写出在各种使用环境下跑的优质产品。</p>
+<p>一直在探索适合自己的学习方式，后来项目驱动成为了我的学习自驱方式，不过这样倒是忽略了对js基础知识的巩固，校招中也吃了亏，后遇一名前辈指点，对自己学习模式完善了下，项目驱动为主干，在项目中遇到不会，不解的知识点和坑，及时去做总结，不单单是总结那个知识点，而应是由点及线到面，比如js遍历中的foreach 用法不是很熟悉，这时候就可以把整个js遍历的方法总结出来，把知识点串联成一条线，甚至一个面。</p>
+<p>作为一名技术菜，虽然技术接触了不少，HTML(5),CSS(3),ES(6,7),VUE,REACT,NODE,KOA,EJS,GULP,SCSS,MYSQL,LINUX….但是 由于时间原因，有些只是是浅尝而止，想想这样不是很好，是走路都艰难的虚胖，所以呢，给接下去的自己做下规划~~</p>
+<p>具体的规划还是我完成了再写出来吧，不过要成为一名程序员，数据结构算法分析这些肯定跑不了的了，而且还有很多很nice的书等我去看~~先酱紫  加油 进击的菜鸡！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.hxvin.me/2017/10/24/搁浅/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1411,284 +1694,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.hxvin.me/2017/09/10/对付反爬虫战略/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hxvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hxvin的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/09/10/对付反爬虫战略/" itemprop="url">
-                  对付反爬虫战略
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T23:50:00+08:00">
-                2017-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/09/10/对付反爬虫战略/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.hxvin.me" class="cy_cmt_count" data-xid="2017/09/10/对付反爬虫战略/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>一开始我的反爬思路是这样的：</p>
-<p>1.设置几秒请求一次（这边还可以对请求头处理假装浏览器访问）</p>
-<p>2.对付验证码</p>
-<p>接入打码平台。</p>
-<p>下载验证码  上传验证码 </p>
-<p>获取验证码字符  填写验证码</p>
-<p>说起爬虫，真是磕磕绊绊…</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/10/对付反爬虫战略/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.hxvin.me/2017/08/28/了解前后端开发，mvc模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hxvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ooytyiziz.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hxvin的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/28/了解前后端开发，mvc模式/" itemprop="url">
-                  前后端开发，mvc模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-28T10:21:32+08:00">
-                2017-08-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/08/28/了解前后端开发，mvc模式/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.hxvin.me" class="cy_cmt_count" data-xid="2017/08/28/了解前后端开发，mvc模式/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>实习两个月除了写前端，还写了点后端(nodejs，php)，前阶段自己也写了个前后端的项目，不过没开源。现在记录下自己对全端开发的个人心得(菜鸟入门级别的，错了请大佬们指导更正)。</p>
-<p>感觉不管是php还是nodejs，都是差不多的，大概的作用是处理前端的数据请求，处理数据，操作数据库，把数据返回给前端。</p>
-<p>用mvc模式去写一个全端站点。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/28/了解前后端开发，mvc模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1738,7 +1743,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1751,7 +1756,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

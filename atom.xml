@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hxvin.me/"/>
-  <updated>2017-10-24T15:48:13.000Z</updated>
+  <updated>2017-11-19T14:00:36.000Z</updated>
   <id>http://www.hxvin.me/</id>
   
   <author>
@@ -14,6 +14,130 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>“js各种遍历总结”</title>
+    <link href="http://www.hxvin.me/2017/11/19/%E2%80%9Cjs%E9%81%8D%E5%8E%86%E6%80%BB%E7%BB%93%E2%80%9D/"/>
+    <id>http://www.hxvin.me/2017/11/19/“js遍历总结”/</id>
+    <published>2017-11-19T06:44:38.000Z</published>
+    <updated>2017-11-19T14:00:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近忙着写项目，是时候来一波总结了。<br>因为项目中数据交互炒！鸡！多！，遍历很常用，本篇对js的遍历做一次总结</p>
+<h3 id="一-、普通for循环-只能遍历数组和字符串"><a href="#一-、普通for循环-只能遍历数组和字符串" class="headerlink" title="一 、普通for循环 (只能遍历数组和字符串)"></a>一 、普通for循环 (只能遍历数组和字符串)</h3><ul>
+<li>遍历数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [1,2,3,4,5];</div><div class="line">for(var i = 0 ; i &lt; arr.length; i++)&#123;</div><div class="line">  console.log(i); //1 2 3 4 5 </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不足：重复获取数组长度</p>
+<blockquote>
+<p>优化</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [1,2,3,4,5];</div><div class="line">for(var i = 0 ;  len = arr.length ;  i &lt; len;  i++)&#123;</div><div class="line">  console.log(i); //1 2 3 4 5 </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用临时变量，将长度缓存起来，避免重复获取数组长度，当数组较大时优化效果才会比较明显。</p>
+<p>这种方法基本上是所有循环遍历方法中性能最高的一种</p>
+ <a id="more"></a>
+<ul>
+<li>遍历字符串</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var str = &quot;for循环遍历字符串&quot; ;</div><div class="line">for (var i = 0; i &lt; str.length; i++) &#123;</div><div class="line">console.log(str[i]+&apos;==&apos;+str.charAt(i)+&apos;==&apos;+str.charCodeAt(i));</div><div class="line">//f==f==102</div><div class="line"> o==o==111</div><div class="line"> r==r==114</div><div class="line">循==循==24490</div><div class="line"> 环==环==29615</div><div class="line"> 遍==遍==36941</div><div class="line"> 历==历==21382</div><div class="line"> 字==字==23383</div><div class="line"> 符==符==31526</div><div class="line"> 串==串==20018</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>遍历对象   不能使用</li>
+</ul>
+<p>###二、 for..in..循环 （可以遍历字符串、对象、数组）</p>
+<p>这个循环很多人爱用，但实际上，经分析测试，在众多的循环遍历方式中</p>
+<p>它的效率是最低的</p>
+<ul>
+<li>遍历数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [2,3,4]</div><div class="line">for (var i in arr) &#123;</div><div class="line">  console.log(arr[i]);//2 3 4 </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>遍历对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var obj = &#123;name:&quot;xiaoming&quot;,</div><div class="line">age:&quot;18&quot;</div><div class="line">&#125;</div><div class="line">for (var prop in obj) &#123;</div><div class="line">  console.log(obj[prop]);  // xiaoming  18 </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>遍历字符串</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var str  = &quot;循环遍历字符串&quot;;</div><div class="line">for(var i in str)&#123;</div><div class="line">  console.log(i+&quot;~&quot;+str[i]);</div><div class="line">&#125;</div><div class="line">//0~循</div><div class="line">1~环</div><div class="line">2~遍</div><div class="line">3~历</div><div class="line">4~字</div><div class="line">5~符</div><div class="line">6~串</div></pre></td></tr></table></figure>
+<h3 id="三、-forEach-循环-不能遍历字符串、对象"><a href="#三、-forEach-循环-不能遍历字符串、对象" class="headerlink" title="三、 forEach 循环(不能遍历字符串、对象)"></a>三、 forEach 循环(不能遍历字符串、对象)</h3><ul>
+<li>遍历数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr = [1,2,3,4,5];</div><div class="line">arr.forEach(function(e)&#123;</div><div class="line">	console.log(e); //1 2 3 4 5 </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var arr = [3,4,5];</div><div class="line">arr.forEach(function(ele,index,arr)&#123;</div><div class="line">  console.log(ele+&apos;~&apos;+index);  //3 ~ 0    4~1    5~2 </div><div class="line">  console.log(arr[index]); // 3 4 5 </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>数组自带的foreach循环，使用频率较高，实际上性能比普通for循环弱</p>
+<ul>
+<li>forEach遍历字符串  不能使用</li>
+<li>forEach遍历对象  不能使用</li>
+</ul>
+<h3 id="四、-for-of-循环-需要ES6支持-且不能遍历对象"><a href="#四、-for-of-循环-需要ES6支持-且不能遍历对象" class="headerlink" title="四、 for..of..循环 (需要ES6支持,且不能遍历对象)"></a>四、 for..of..循环 (需要ES6支持,且不能遍历对象)</h3><ul>
+<li>遍历数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var str  = [2,3,4,5];</div><div class="line">for (var ele of str) &#123;</div><div class="line">  console.log(ele); // 2  3  4  5  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>遍历对象  不能遍历，需要实现Symbol.interator接口</li>
+<li>遍历字符串</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var str  = &quot;循环遍历字符串&quot;;</div><div class="line">for (var ele of str) &#123;</div><div class="line">  console.log(ele);//  循  环  遍  历  字  符  串</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种方式是es6里面用到的，性能要好于forin，但仍然比不上普通for循环<br>ps：个人感觉数组的用法和forEach挺相似，都是操作数组的元素</p>
+<h3 id="五、map"><a href="#五、map" class="headerlink" title="五、map"></a>五、map</h3><ul>
+<li>遍历数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function pow(x) &#123;</div><div class="line">    return x * x;</div><div class="line">&#125;</div><div class="line">var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];</div><div class="line">var results = arr.map(pow); // [1, 4, 9, 16, 25, 36, 49, 64, 81]</div><div class="line">console.log(results);</div></pre></td></tr></table></figure>
+<p>map是操作每一个arr的元素，如上例子中对数组的每一个元素执行pow方法。最后的结果仍是数组。<br>这种方式也是用的比较广泛的，虽然用起来比较优雅，但实际效率还比不上foreach</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5287253-f4f2848c000b6417.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图文无直接关系"></p>
+<blockquote>
+<p>推荐阅读<br><a href="http://www.jianshu.com/p/10bc16564cda" target="_blank" rel="external">js遍历方式总结</a><br><a href="https://www.cnblogs.com/lvmh/p/6104397.html" target="_blank" rel="external">JS几种数组遍历方式以及性能分析对比</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近忙着写项目，是时候来一波总结了。&lt;br&gt;因为项目中数据交互炒！鸡！多！，遍历很常用，本篇对js的遍历做一次总结&lt;/p&gt;
+&lt;h3 id=&quot;一-、普通for循环-只能遍历数组和字符串&quot;&gt;&lt;a href=&quot;#一-、普通for循环-只能遍历数组和字符串&quot; class=&quot;headerlink&quot; title=&quot;一 、普通for循环 (只能遍历数组和字符串)&quot;&gt;&lt;/a&gt;一 、普通for循环 (只能遍历数组和字符串)&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;遍历数组&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var arr = [1,2,3,4,5];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;for(var i = 0 ; i &amp;lt; arr.length; i++)&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  console.log(i); //1 2 3 4 5 &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;不足：重复获取数组长度&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;优化&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var arr = [1,2,3,4,5];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;for(var i = 0 ;  len = arr.length ;  i &amp;lt; len;  i++)&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  console.log(i); //1 2 3 4 5 &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;使用临时变量，将长度缓存起来，避免重复获取数组长度，当数组较大时优化效果才会比较明显。&lt;/p&gt;
+&lt;p&gt;这种方法基本上是所有循环遍历方法中性能最高的一种&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="-- JS -- 周总结" scheme="http://www.hxvin.me/tags/JS-%E5%91%A8%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“一个人的前端之旅，写写感想~”</title>
+    <link href="http://www.hxvin.me/2017/11/19/%E2%80%9C%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E5%89%8D%E7%AB%AF%E4%B9%8B%E6%97%85%EF%BC%8C%E5%86%99%E5%86%99%E6%84%9F%E6%83%B3-%E2%80%9D/"/>
+    <id>http://www.hxvin.me/2017/11/19/“一个人的前端之旅，写写感想-”/</id>
+    <published>2017-11-19T01:31:04.000Z</published>
+    <updated>2017-11-19T14:03:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>想想步入前端，成为一名码农已经快一年(大概还差两个多月吧)，自己从小 心水的技术梦也算有了着落。</p>
+<p>这次参加了后半段秋招，7~10月一直忙着实习，十月中旬真正开始参加了校招，虽然对互联网校招来说，算蛮晚的，很多大厂的校招也结束了，哈哈哈，后知后觉。</p>
+<p>想起面试中面试官喜欢问的一个问题，你一个非科班的为什么选择前端，我总是叽叽歪歪说了一堆，其实很简单，我想当一名程序员(慕名已久)，刚好遇见了前端，是前端让我打破非科班难以成为程序员的狭隘眼界~感谢</p>
+<p>然后，我喜欢js，一门前后端，pc端，客户端，桌面端通吃的奇妙语言，虽然目前自己掌握的js依然很菜，但有一天，我相信自己会成为很好的jser的，希望这天早点到来，希望有一天我能用js写出在各种使用环境下跑的优质产品。</p>
+<p>一直在探索适合自己的学习方式，后来项目驱动成为了我的学习自驱方式，不过这样倒是忽略了对js基础知识的巩固，校招中也吃了亏，后遇一名前辈指点，对自己学习模式完善了下，项目驱动为主干，在项目中遇到不会，不解的知识点和坑，及时去做总结，不单单是总结那个知识点，而应是由点及线到面，比如js遍历中的foreach 用法不是很熟悉，这时候就可以把整个js遍历的方法总结出来，把知识点串联成一条线，甚至一个面。</p>
+<p>作为一名技术菜，虽然技术接触了不少，HTML(5),CSS(3),ES(6,7),VUE,REACT,NODE,KOA,EJS,GULP,SCSS,MYSQL,LINUX….但是 由于时间原因，有些只是是浅尝而止，想想这样不是很好，是走路都艰难的虚胖，所以呢，给接下去的自己做下规划~~</p>
+<p>具体的规划还是我完成了再写出来吧，不过要成为一名程序员，数据结构算法分析这些肯定跑不了的了，而且还有很多很nice的书等我去看~~先酱紫  加油 进击的菜鸡！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;想想步入前端，成为一名码农已经快一年(大概还差两个多月吧)，自己从小 心水的技术梦也算有了着落。&lt;/p&gt;
+&lt;p&gt;这次参加了后半段秋招，7~10月一直忙着实习，十月中旬真正开始参加了校招，虽然对互联网校招来说，算蛮晚的，很多大厂的校招也结束了，哈哈哈，后知后觉。&lt;/p&gt;
+&lt;p
+    
+    </summary>
+    
+    
+      <category term="--随笔" scheme="http://www.hxvin.me/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
   
   <entry>
     <title>搁浅</title>
@@ -870,149 +994,6 @@
       <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
       <category term="HTML" scheme="http://www.hxvin.me/tags/HTML/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mac使用tree</title>
-    <link href="http://www.hxvin.me/2017/05/30/mac%E4%BD%BF%E7%94%A8tree/"/>
-    <id>http://www.hxvin.me/2017/05/30/mac使用tree/</id>
-    <published>2017-05-30T05:53:43.000Z</published>
-    <updated>2017-05-30T08:49:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一、brew安装"><a href="#一、brew安装" class="headerlink" title="一、brew安装"></a>一、brew安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure>
-<p>然后一直按return键即可</p>
-<h2 id="二、brew使用"><a href="#二、brew使用" class="headerlink" title="二、brew使用"></a>二、brew使用</h2><h3 id="brew安装套件："><a href="#brew安装套件：" class="headerlink" title="brew安装套件："></a>brew安装套件：</h3><blockquote>
-<p>$ brew install tree</p>
-</blockquote>
-<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><p>$ tree -a          //显示所有文件和目录。</p>
-<p>$ tree -d         //显示目录名称而非内容</p>
-<p>$ tree -L 2      //这个命令是比较实用的，后面的数字2代表几层</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;一、brew安装&quot;&gt;&lt;a href=&quot;#一、brew安装&quot; class=&quot;headerlink&quot; title=&quot;一、brew安装&quot;&gt;&lt;/a&gt;一、brew安装&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td cl
-    
-    </summary>
-    
-    
-      <category term="工具使用" scheme="http://www.hxvin.me/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vue2写单页面项目总结记录</title>
-    <link href="http://www.hxvin.me/2017/05/29/post%E7%94%A8vue%E5%86%99webapp%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%B3%BB%E5%88%971/"/>
-    <id>http://www.hxvin.me/2017/05/29/post用vue写webapp项目总结系列1/</id>
-    <published>2017-05-29T01:40:25.000Z</published>
-    <updated>2017-09-16T08:31:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。<br>这是一个基于<code>vue+vue-cli+vue-router+axios+webpack</code>开发的vue社区<code>SPA</code>;UI用<code>Muse-UI</code>;css用<code>scss</code>，<code>flex</code>布局，<code>rem</code>做移动端适配，最终效果电脑端移动端都适配。<br><a id="more"></a></p>
-<p>如果你和我一样用vue还挺生疏的，那好好做完这个项目，会学到很多东西，能有挺大的进步，还可以自己加功能，一起(๑•̀ㅂ•́)و✧加油。</p>
-<p>如果对您有帮助，请给一个<code>star</code>鼓励一下萌新，感谢 ^ ^<br>如果您也是前端萌新，来互相follow互相学习，一起进步呀。</p>
-<blockquote>
-<p>建议先去社区<a href="https://www.vue-js.com/signup" target="_blank" rel="external">注册</a>拿accesstoken登录体验(注册可以直接用github账号，挺快的)</p>
-</blockquote>
-<p><a href="http://www.hxvin.me/vue-home/dist/">demo</a></p>
-<p><a href="http://ooytyiziz.bkt.clouddn.com/vue-home.gif" target="_blank" rel="external">点击查看gif动图展示</a></p>
-<p><a href="https://github.com/Hxvin/vue-home" target="_blank" rel="external">github项目地址</a> </p>
-<p><a href="https://www.vue-js.com/api/" target="_blank" rel="external">项目API</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/5287253-ea6d4e5ec360acb6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="手机扫描查看效果"></p>
-<blockquote>
-<p>完成功能</p>
-</blockquote>
-<ul>
-<li>[x] 首页列表</li>
-<li>[x] 下拉加载</li>
-<li>[x] 用户信息（点击头像）</li>
-<li>[x] 主题内容</li>
-<li>[x] 登录功能</li>
-<li>[x] 收藏（取消收藏）主题</li>
-<li>[x] 评论列表</li>
-<li>[x] 点赞（取消点赞）功能</li>
-<li>[x] 消息中心（已读、未读）</li>
-<li>[x] 个人中心</li>
-<li>[x] 发表评论</li>
-<li>[x] 回复评论</li>
-<li>[x] 发布主题（支持markdown格式,可预览）</li>
-</ul>
-<blockquote>
-<p>todo功能</p>
-<ul>
-<li>[ ] 左右侧滑</li>
-<li>[ ] 搜索功能</li>
-<li>[ ] vuex重构</li>
-</ul>
-</blockquote>
-<h3 id="准备开发环境"><a href="#准备开发环境" class="headerlink" title="准备开发环境"></a>准备开发环境</h3><ul>
-<li>$ npm install -g vue-cli </li>
-<li>$ vue init webpack vue-home</li>
-</ul>
-<p><code>? Project name vue-home
-? Project description vue-home
-? Author afei
-? Vue build standalone
-? Install vue-router? Yes
-? Use ESLint to lint your code? No
-? Setup unit tests with Karma + Mocha? No
-? Setup e2e tests with Nightwatch? No</code></p>
-<ul>
-<li>$ cd vue-home</li>
-<li>$ npm install</li>
-<li>$ npm run dev<br>等写完项目后</li>
-<li>$ npm run build</li>
-<li><blockquote>
-<p>注意：npm run dev 之后 默认浏览器打开的是<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>  请换成<a href="http://localhost:8080/vue-home/dist" target="_blank" rel="external">http://localhost:8080/vue-home/dist</a><br>如果你电脑的8080端口被占用，请congfig/index.js中找到<code>port: 8080</code>修改成8081或者其他可用的端口</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="开始动手"><a href="#开始动手" class="headerlink" title="开始动手"></a>开始动手</h3><h4 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">├── build</div><div class="line">│   ├── build.js</div><div class="line">│   ├── check-versions.js</div><div class="line">│   ├── dev-client.js</div><div class="line">│   ├── dev-server.js</div><div class="line">│   ├── utils.js</div><div class="line">│   ├── vue-loader.conf.js</div><div class="line">│   ├── webpack.base.conf.js</div><div class="line">│   ├── webpack.dev.conf.js</div><div class="line">│   └── webpack.prod.conf.js</div><div class="line">├── config</div><div class="line">│   ├── dev.env.js</div><div class="line">│   ├── index.js</div><div class="line">│   └── prod.env.js</div><div class="line">├── dist                  //等写完项目后 $ npm run build 的打包文件</div><div class="line">│   ├── index.html</div><div class="line">│   └── static</div><div class="line">├── index.html            //首页入口文件</div><div class="line">├── node_modules</div><div class="line">├── package.json          </div><div class="line">├── src</div><div class="line">│   ├── App.vue           //项目入口文件</div><div class="line">│   ├── assets</div><div class="line">│   │   ├── 1495982696.png  //手机扫描二维码</div><div class="line">│   │   ├── logo.png        //vue logo</div><div class="line">│   │   └── sass            //sass通用样式</div><div class="line">│   ├── components          //组件</div><div class="line">│   │   ├── FooterNav.vue   //底部nav组件</div><div class="line">│   │   ├── HeaderBar.vue   //顶部横条</div><div class="line">│   │   ├── HeaderTabs.vue  //顶部tabs组件&amp;主页面内容拉取</div><div class="line">│   │   └── Hello.vue        </div><div class="line">│   ├── main.js             //核心文件 在这里引入了Muse UI 时间过滤器</div><div class="line">│   ├── pages               //页面</div><div class="line">│   │   ├── content.vue     //帖子内容页面  </div><div class="line">│   │   ├── index.vue       //首页</div><div class="line">│   │   ├── login.vue       //登录页面</div><div class="line">│   │   ├── message.vue     //信息通知页面</div><div class="line">│   │   ├── more.vue        </div><div class="line">│   │   ├── my.vue          //个人信息页面</div><div class="line">│   │   ├── people.vue      //社区用户信息页面</div><div class="line">│   │   └── publish.vue     //发布帖子页面(此页面还没写完)</div><div class="line">│   ├── router              //路由与组件配置</div><div class="line">│   │   └── index.js </div><div class="line">│   └── util                //时间过滤器，转换时间格式</div><div class="line">│       └── filter.js</div><div class="line">└── static</div></pre></td></tr></table></figure>
-<h4 id="vue-home-config-index-js"><a href="#vue-home-config-index-js" class="headerlink" title="vue-home/config/index.js"></a>vue-home/config/index.js</h4><p><img src="http://upload-images.jianshu.io/upload_images/5287253-30138bb5cd33b265.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="vue-home/config/index.js图"></p>
-<p><code>assetsPublicPath: &#39;/vue-home/dist&#39;</code></p>
-<blockquote>
-<p>这个公共路径原本为assetsPublicPath: ‘/‘，这样在本地服务器是可以跑，可是打包上传到github后会发现打开的页面是空白的，报错如下图。</p>
-</blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/5287253-82edc72f02251f48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网页加载报错图"></p>
-<p>原因是路径错了，vue-home是项目文件夹名称，dist是npm run build之后出现的文件夹，github上线就是读取dist文件夹而生成的网页（成功展示的demo地址长这样：<a href="http://www.hxvin.me/vue-home/dist/）">http://www.hxvin.me/vue-home/dist/）</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/5287253-86ca75ba374431a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="github图"></p>
-<p>解决上线路径问题不知道还有没有其他更方便的解决方法，如果有，请跟我讲下哦</p>
-<blockquote>
-<p>port: 8080 这个是让你改端口的</p>
-</blockquote>
-<h4 id="vue-home-src-App-vue"><a href="#vue-home-src-App-vue" class="headerlink" title="vue-home/src/App.vue"></a>vue-home/src/App.vue</h4><p><img src="http://upload-images.jianshu.io/upload_images/5287253-711de34d2a7e98b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="vue-home/src/App.vue图"></p>
-<p>rem适配移动端，1rem=10px</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">html&#123;</div><div class="line">  font-size: 62.5%;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>建议注释掉这段，不然会然干扰后面的css</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/*text-align: center;*/</div><div class="line">/*color: #2c3e50;</div><div class="line">margin-top: 60px;*/</div></pre></td></tr></table></figure>
-<h4 id="vue-home-index-html"><a href="#vue-home-index-html" class="headerlink" title="/vue-home/index.html"></a>/vue-home/index.html</h4><p><img src="http://upload-images.jianshu.io/upload_images/5287253-6c3ef9e8a11a259b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="/vue-home/index.html图"></p>
-<p>我们是做的移动端，适配web端，所以在index.html里面加上meta</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,user-scalable=0&quot;&gt;</div></pre></td></tr></table></figure>
-<p>用MuseUI的添加之一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&quot;&gt;</div><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot;&gt;</div></pre></td></tr></table></figure>
-<h4 id="vue-home-src-main-js"><a href="#vue-home-src-main-js" class="headerlink" title="vue-home/src/main.js"></a>vue-home/src/main.js</h4><p><img src="http://upload-images.jianshu.io/upload_images/5287253-6dbc7c159543aefc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="vue-home/src/main.js图"></p>
-<p>图中有标识了哪些是用来干嘛的，分别是用MuseUI的添加之一；filters是用来把社区api数据中的时间格式转换成<code>*分钟前``*小时前``*天前</code></p>
-<h4 id="关于新建主题功能"><a href="#关于新建主题功能" class="headerlink" title="关于新建主题功能"></a>关于新建主题功能</h4><p>api上写了需post</p>
-<p>title String 标题</p>
-<p>tab String 目前有 ask share job</p>
-<p>content String 主体内容</p>
-<ul>
-<li>记得还需要传递accesstoken的参数，不然会报403错误（资源不可用）</li>
-</ul>
-<p>markdown格式支持 直接 npm install marked –save  用法详见代码</p>
-<p>（代码好像用文章不方便介绍，我很详细地写了代码注释哦^_^）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;一直想做个有数据内容的项目，刚好vue社区提供了API，在此感谢。&lt;br&gt;这是一个基于&lt;code&gt;vue+vue-cli+vue-router+axios+webpack&lt;/code&gt;开发的vue社区&lt;code&gt;SPA&lt;/code&gt;;UI用&lt;code&gt;Muse-UI&lt;/code&gt;;css用&lt;code&gt;scss&lt;/code&gt;，&lt;code&gt;flex&lt;/code&gt;布局，&lt;code&gt;rem&lt;/code&gt;做移动端适配，最终效果电脑端移动端都适配。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="vue2" scheme="http://www.hxvin.me/tags/vue2/"/>
-    
-      <category term="项目总结" scheme="http://www.hxvin.me/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
