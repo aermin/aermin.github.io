@@ -24,13 +24,6 @@
 
     
     <entry>
-      <title><![CDATA[搁浅]]></title>
-      <url>%2F2017%2F10%2F24%2F%E6%90%81%E6%B5%85%2F</url>
-      <content type="text"><![CDATA[最近有点茫然，对于编程的学习，到底什么样的方法才是好的，才是适合我的。 实习三个月，我不断汲取新知识新技术，react，node，php，git。。。各种，又杂又乱，虽说刚开始是挺崩溃，比如node，php一周上手写项目代码，react两天上手写项目代码，以前习惯系统学习的我不得不做出适应，快速去学习。 这样的环境下，步伐迈得很快，但是都是学部分部分的，没有系统，所以感觉自己不敢说会这门技术。。]]></content>
-    </entry>
-
-    
-    <entry>
       <title><![CDATA[简单的方法掌握JS中slice,splice和split的使用方法]]></title>
       <url>%2F2017%2F10%2F15%2F%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%8E%8C%E6%8F%A1JS%E4%B8%ADslice-splice%E5%92%8Csplit%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%2F</url>
       <content type="text"><![CDATA[首先，js的api的命名一般都有它的意义所在，通过英文就能大概理解是干啥用的。（可见英语多重要。。。）现在看看slice,splice和split分别是啥意思 slice：片 splice： 剪接 split： 分裂 slice：片 可以理解成是提取某东西的片段 用法1：array.slice(start,end) -&gt; 提取数组的片段 简单可以理解成start是提取片段的开头位置(0开始算)，end是提取的末尾位置(1开始算)看例子领会一下 12345678910111213141516171819202122//如果不传入参数二，那么将从参数一的索引位置开始截取，一直到数组尾var a=[1,2,3,4,5,6];var b=a.slice(0,3); //[1,2,3]var c=a.slice(3); //[4,5,6] //如果两个参数中的任何一个是负数，array.length会和它们相加，试图让它们成为非负数，举例说明：//当只传入一个参数，且是负数时，length会与参数相加，然后再截取var a=[1,2,3,4,5,6];var b=a.slice(-1); //[6] //当只传入一个参数，是负数时,并且参数的绝对值大于数组length时，会截取整个数组var a=[1,2,3,4,5,6];var b=a.slice(-6); //[1,2,3,4,5,6]var c=a.slice(-8); //[1,2,3,4,5,6] //当传入两个参数一正一负时，length也会先于负数相加后，再截取var a=[1,2,3,4,5,6];var b=a.slice(2,-3); //[3] //当传入一个参数，大于length时，将返回一个空数组var a=[1,2,3,4,5,6];var b=a.slice(6); //[] 用法2：string.slice(start,end) -&gt; 提取字符串的片段道理同上例子： 12var a=&quot;i am a boy&quot;;var b=a.slice(0,6); //&quot;i am a&quot; splice： 剪接 可以理解成一个东西剪掉一部分并接上新的部分 用法：array.splice(start,deleteCount,item…) 可以理解成array剪掉初始位置为start，个数为deleteCount的部分，该部分赋值给新的变量，如果有item，则接入被剪掉的部分 例子： 12var a=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;];var b=a.splice(1,1,&apos;e&apos;,&apos;f&apos;); //a=[&apos;a&apos;,&apos;e&apos;,&apos;f&apos;,&apos;c&apos;],b=[&apos;b&apos;] split： 分割用法：string.split(separator,limit) 可以理解成把一个东西从第一位置开始根据separator分割成limit个片段来创建一个字符串数组 例子： 12345var a=&quot;0,1,2,3,4,5,6&quot;;var b=a.split(&quot;&quot;,3); // [&quot;0&quot;, &quot;,&quot;, &quot;1&quot;]var a=&quot;0,1,2,3,4,5,6&quot;;var b=a.split(&quot;,&quot;,3); // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;] ps： join的作用恰好与split相反，是添加组装作用 12var arr = [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;];var b = arr.join(&quot;&quot;);// &quot;012&quot;]]></content>

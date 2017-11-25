@@ -173,30 +173,6 @@
   </entry>
   
   <entry>
-    <title>搁浅</title>
-    <link href="http://www.hxvin.me/2017/10/24/%E6%90%81%E6%B5%85/"/>
-    <id>http://www.hxvin.me/2017/10/24/搁浅/</id>
-    <published>2017-10-24T15:20:41.000Z</published>
-    <updated>2017-10-24T15:48:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近有点茫然，对于编程的学习，到底什么样的方法才是好的，才是适合我的。</p>
-<p>实习三个月，我不断汲取新知识新技术，react，node，php，git。。。各种，又杂又乱，虽说刚开始是挺崩溃，比如node，php一周上手写项目代码，react两天上手写项目代码，以前习惯系统学习的我不得不做出适应，快速去学习。</p>
-<p>这样的环境下，步伐迈得很快，但是都是学部分部分的，没有系统，所以感觉自己不敢说会这门技术。。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近有点茫然，对于编程的学习，到底什么样的方法才是好的，才是适合我的。&lt;/p&gt;
-&lt;p&gt;实习三个月，我不断汲取新知识新技术，react，node，php，git。。。各种，又杂又乱，虽说刚开始是挺崩溃，比如node，php一周上手写项目代码，react两天上手写项目代码，以前
-    
-    </summary>
-    
-    
-      <category term="随笔" scheme="http://www.hxvin.me/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
     <title>简单的方法掌握JS中slice,splice和split的使用方法</title>
     <link href="http://www.hxvin.me/2017/10/15/%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%8E%8C%E6%8F%A1JS%E4%B8%ADslice-splice%E5%92%8Csplit%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
     <id>http://www.hxvin.me/2017/10/15/简单的方法掌握JS中slice-splice和split的使用方法/</id>
@@ -251,9 +227,9 @@
     </summary>
     
     
-      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
-    
       <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
     
   </entry>
   
@@ -802,9 +778,9 @@
     </summary>
     
     
-      <category term="React" scheme="http://www.hxvin.me/tags/React/"/>
-    
       <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="React" scheme="http://www.hxvin.me/tags/React/"/>
     
   </entry>
   
@@ -986,6 +962,47 @@
       <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
       <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图文解析HTMLElement.offsetHeight,scrollHeight,clientHeight</title>
+    <link href="http://www.hxvin.me/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/"/>
+    <id>http://www.hxvin.me/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/</id>
+    <published>2017-06-05T14:32:29.000Z</published>
+    <updated>2017-06-20T07:17:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="HTMLElement-offsetHeight"><a href="#HTMLElement-offsetHeight" class="headerlink" title="HTMLElement.offsetHeight"></a>HTMLElement.offsetHeight</h3><p>是一个只读属性，它返回该元素的像素高度，高度包含该元素的垂直内边距和边框，且是一个整数。</p>
+<p>通常，元素的offsetHeight是一种衡量标准，包括元素的边框、垂直内边距和元素的水平滚动条（如果存在且渲染的话）和元素的CSS高度。</p>
+<p>对于文档的主体对象，它包括代替元素的CSS高度线性总含量高。浮动元素的向下延伸内容高度是被忽略的。 </p>
+<p><img src="https://developer.mozilla.org/@api/deki/files/788/=OffsetHeight.png" alt="实例"></p>
+<a id="more"></a>
+<h3 id="Element-scrollHeight"><a href="#Element-scrollHeight" class="headerlink" title="Element.scrollHeight"></a>Element.scrollHeight</h3><p>Element.scrollHeight 是计量元素内容高度的只读属性，包括overflow样式属性导致的视图中不可见内容。没有垂直滚动条的情况下，scrollHeight值与元素视图填充所有内容所需要的最小值clientHeight相同。包括元素的padding，但不包括元素的margin.</p>
+<p><img src="https://developer.mozilla.org/@api/deki/files/840/=ScrollHeight.png" alt="实例"></p>
+<h3 id="Element-clientHeight"><a href="#Element-clientHeight" class="headerlink" title="Element.clientHeight"></a>Element.clientHeight</h3><p>返回元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。</p>
+<p>clientHeight 可以通过 CSS height + CSS padding - 水平滚动条高度 (如果存在)来计算.</p>
+<p>也就是说，是没有垂直滚动条版本的scrollHeight。</p>
+<hr>
+<p>更新：</p>
+<p>clientWidth = width + padding</p>
+<p>clientHeight = height + padding</p>
+<p>offsetWidth = width + padding + border</p>
+<p>offsetHeight = height + padding + border</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;HTMLElement-offsetHeight&quot;&gt;&lt;a href=&quot;#HTMLElement-offsetHeight&quot; class=&quot;headerlink&quot; title=&quot;HTMLElement.offsetHeight&quot;&gt;&lt;/a&gt;HTMLElement.offsetHeight&lt;/h3&gt;&lt;p&gt;是一个只读属性，它返回该元素的像素高度，高度包含该元素的垂直内边距和边框，且是一个整数。&lt;/p&gt;
+&lt;p&gt;通常，元素的offsetHeight是一种衡量标准，包括元素的边框、垂直内边距和元素的水平滚动条（如果存在且渲染的话）和元素的CSS高度。&lt;/p&gt;
+&lt;p&gt;对于文档的主体对象，它包括代替元素的CSS高度线性总含量高。浮动元素的向下延伸内容高度是被忽略的。 &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://developer.mozilla.org/@api/deki/files/788/=OffsetHeight.png&quot; alt=&quot;实例&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="HTML" scheme="http://www.hxvin.me/tags/HTML/"/>
     
   </entry>
   
