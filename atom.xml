@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hxvin.me/"/>
-  <updated>2017-12-22T04:20:06.000Z</updated>
+  <updated>2017-12-22T04:23:12.000Z</updated>
   <id>http://www.hxvin.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.hxvin.me/2017/12/19/JS%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9F%BA%E7%A1%80-%E6%95%B0%E7%BB%84%E7%9A%84%E5%90%84%E7%A7%8D%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95/"/>
     <id>http://www.hxvin.me/2017/12/19/JS数据结构与算法之基础-数组的各种操作方法/</id>
     <published>2017-12-19T04:57:34.000Z</published>
-    <updated>2017-12-22T04:20:06.000Z</updated>
+    <updated>2017-12-22T04:23:12.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="先来个经典数组操作题："><a href="#先来个经典数组操作题：" class="headerlink" title="先来个经典数组操作题："></a>先来个经典数组操作题：</h3><p>求斐波那契数列的前20 个数字。已知斐波那契数列中第一个数字是1 ，<br>第二个是2 ，从第三项开始，每一项都等于前两项之和</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var fibonacci = []; </div><div class="line">fibonacci[0] = 1;</div><div class="line">fibonacci[1] = 2; </div><div class="line">for(var i = 2; i &lt; 20; i++)&#123;</div><div class="line">fibonacci[i] = fibonacci[i-1] + fibonacci[i-2]; </div><div class="line">&#125;</div><div class="line">console.log(fibonacci); //[1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946]</div></pre></td></tr></table></figure>
@@ -84,9 +84,9 @@
     </summary>
     
     
-      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
-    
       <category term="数据结构与算法" scheme="http://www.hxvin.me/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
     
   </entry>
   
@@ -211,9 +211,9 @@
     </summary>
     
     
-      <category term="周总结" scheme="http://www.hxvin.me/tags/%E5%91%A8%E6%80%BB%E7%BB%93/"/>
-    
       <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
+    
+      <category term="周总结" scheme="http://www.hxvin.me/tags/%E5%91%A8%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -302,9 +302,9 @@
     </summary>
     
     
-      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
-    
       <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
+    
+      <category term="开发总结" scheme="http://www.hxvin.me/tags/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
