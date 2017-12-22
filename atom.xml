@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hxvin.me/"/>
-  <updated>2017-11-19T15:05:14.000Z</updated>
+  <updated>2017-12-22T04:20:06.000Z</updated>
   <id>http://www.hxvin.me/</id>
   
   <author>
@@ -14,6 +14,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS数据结构与算法之基础--数组的各种操作方法</title>
+    <link href="http://www.hxvin.me/2017/12/19/JS%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9F%BA%E7%A1%80-%E6%95%B0%E7%BB%84%E7%9A%84%E5%90%84%E7%A7%8D%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95/"/>
+    <id>http://www.hxvin.me/2017/12/19/JS数据结构与算法之基础-数组的各种操作方法/</id>
+    <published>2017-12-19T04:57:34.000Z</published>
+    <updated>2017-12-22T04:20:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="先来个经典数组操作题："><a href="#先来个经典数组操作题：" class="headerlink" title="先来个经典数组操作题："></a>先来个经典数组操作题：</h3><p>求斐波那契数列的前20 个数字。已知斐波那契数列中第一个数字是1 ，<br>第二个是2 ，从第三项开始，每一项都等于前两项之和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var fibonacci = []; </div><div class="line">fibonacci[0] = 1;</div><div class="line">fibonacci[1] = 2; </div><div class="line">for(var i = 2; i &lt; 20; i++)&#123;</div><div class="line">fibonacci[i] = fibonacci[i-1] + fibonacci[i-2]; </div><div class="line">&#125;</div><div class="line">console.log(fibonacci); //[1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946]</div></pre></td></tr></table></figure>
+<h3 id="数组增删"><a href="#数组增删" class="headerlink" title="数组增删"></a>数组增删</h3><blockquote>
+<p> push  unshift shift  pop</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var numbers = [0,1,2,3,4,5,6,7,8,9];</div><div class="line">numbers[numbers.length] = 10; //插入尾</div><div class="line">numbers.push(11);//插入尾</div><div class="line">numbers.push(12, 13); //插入尾</div><div class="line">numbers.unshift(-2); //插入头</div><div class="line">numbers.unshift(-4, -3);//插入头</div><div class="line">numbers.shift();//删除第一个数</div><div class="line">numbers.pop(); // 删除最后一个数</div><div class="line">console.log(numbers);  //[-3, -2, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,]</div></pre></td></tr></table></figure>
+<p>通过push和pop方法，就能用数组来模拟栈<br>通过shift和unshift方法，就能用数组模拟基本的队列数据结构</p>
+<a id="more"></a>
+<ul>
+<li>二维数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var averageTemp = [];</div><div class="line">averageTemp[0] = [72,75,79,79,81,81];</div><div class="line">averageTemp[1] = [81,79,75,75,73,72];</div><div class="line"></div><div class="line">function printMatrix(myMatrix) &#123;</div><div class="line">for (var i=0; i&lt;myMatrix.length; i++)&#123;</div><div class="line">for (var j=0; j&lt;myMatrix[i].length; j++)&#123;</div><div class="line">console.log(myMatrix[i][j]);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">printMatrix(averageTemp); //72 75 79 79 81 81 81 79 75 75 73 72</div></pre></td></tr></table></figure>
+<p>三维就三个for循环，以此类推。</p>
+<h3 id="数组迭代方法"><a href="#数组迭代方法" class="headerlink" title="数组迭代方法"></a>数组迭代方法</h3><p><img src="http://upload-images.jianshu.io/upload_images/5287253-f169bd23edddb96a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数组迭代方法"><br><img src="http://upload-images.jianshu.io/upload_images/5287253-0e978239c71a83a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数组迭代方法"></p>
+<ul>
+<li>数组合并</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var zero = 0;</div><div class="line">var positiveNumbers = [1,2,3];</div><div class="line">var negativeNumbers = [-3,-2,-1];</div><div class="line"></div><div class="line">console.log(negativeNumbers.concat(zero, positiveNumbers))//-3 -2 -1 0 1 2 3</div><div class="line">console.log(negativeNumbers.concat(positiveNumbers))//-3 -2 -1 1 2 3</div></pre></td></tr></table></figure>
+<ul>
+<li>迭代器函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var isEven = function (x) &#123;</div><div class="line">// 如果x是2的倍数，就返回true</div><div class="line">console.log(x);</div><div class="line">return (x % 2 == 0) ? true : false;</div><div class="line">// 也可以写成return (x % 2 == 0) ? true : false</div><div class="line">&#125;;</div><div class="line">var numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];</div></pre></td></tr></table></figure>
+<blockquote>
+<p>[every]数组numbers的第一个元素是1，它不是2的倍数， 因此isEven 函数返回false，然后every执行结束。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">numbers.every(isEven); // 1 false</div></pre></td></tr></table></figure>
+<blockquote>
+<p>[some] some方法和every的行为类似，不过some方法会迭代数组的每个元素，直到函数返回true：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">numbers.some(isEven); //1 2 true</div></pre></td></tr></table></figure>
+<blockquote>
+<p>[forEach]如果要迭代整个数组，可以用forEach方法。它和使用for循环的结果相同：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">numbers.forEach(function(x)&#123;</div><div class="line">console.log((x % 2 == 0));</div><div class="line">&#125;); // [false, true, false, true, false, true, false, true,</div><div class="line">false, true, false, true, false, true, false]</div></pre></td></tr></table></figure>
+<blockquote>
+<p> [map]JavaScript还有两个会返回新数组的遍历方法。第一个是map：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var myMap = numbers.map(isEven); //：[false, true, false, true, false, true, false, true,false, true, false, true, false, true, false]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>[filter]。它返回的新数组由使函数返回true的元素组成：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var evenNumbers = numbers.filter(isEven);//[2, 4, 6, 8, 10, 12, 14]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>[reduce]reduce方法接收一个函数作为参数，这个函数有四个参数：previousValue、currentValue、index和array。这个函数会返回一个将被叠加到累加器的值，reduce方法停止执行后会返回这个累加器。对一个数组中的所有元素求和:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">numbers.reduce(function(previous, current, index)&#123;</div><div class="line">return previous + current;</div><div class="line">&#125;); //120</div></pre></td></tr></table></figure>
+<p>还有我写的另外一篇 <a href="http://www.jianshu.com/p/a32d527df6df" target="_blank" rel="external">js各种遍历方法总结</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;先来个经典数组操作题：&quot;&gt;&lt;a href=&quot;#先来个经典数组操作题：&quot; class=&quot;headerlink&quot; title=&quot;先来个经典数组操作题：&quot;&gt;&lt;/a&gt;先来个经典数组操作题：&lt;/h3&gt;&lt;p&gt;求斐波那契数列的前20 个数字。已知斐波那契数列中第一个数字是1 ，&lt;br&gt;第二个是2 ，从第三项开始，每一项都等于前两项之和&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var fibonacci = []; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fibonacci[0] = 1;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fibonacci[1] = 2; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;for(var i = 2; i &amp;lt; 20; i++)&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fibonacci[i] = fibonacci[i-1] + fibonacci[i-2]; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;console.log(fibonacci); //[1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946]&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;数组增删&quot;&gt;&lt;a href=&quot;#数组增删&quot; class=&quot;headerlink&quot; title=&quot;数组增删&quot;&gt;&lt;/a&gt;数组增删&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt; push  unshift shift  pop&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var numbers = [0,1,2,3,4,5,6,7,8,9];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;numbers[numbers.length] = 10; //插入尾&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;numbers.push(11);//插入尾&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;numbers.push(12, 13); //插入尾&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;numbers.unshift(-2); //插入头&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;numbers.unshift(-4, -3);//插入头&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;numbers.shift();//删除第一个数&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;numbers.pop(); // 删除最后一个数&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;console.log(numbers);  //[-3, -2, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,]&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;通过push和pop方法，就能用数组来模拟栈&lt;br&gt;通过shift和unshift方法，就能用数组模拟基本的队列数据结构&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
+    
+      <category term="数据结构与算法" scheme="http://www.hxvin.me/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>各种时间转换总结</title>
@@ -962,47 +1037,6 @@
       <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
       <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图文解析HTMLElement.offsetHeight,scrollHeight,clientHeight</title>
-    <link href="http://www.hxvin.me/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/"/>
-    <id>http://www.hxvin.me/2017/06/05/HTMLElement-offsetHeight-scrollHeight-clientHeight/</id>
-    <published>2017-06-05T14:32:29.000Z</published>
-    <updated>2017-06-20T07:17:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="HTMLElement-offsetHeight"><a href="#HTMLElement-offsetHeight" class="headerlink" title="HTMLElement.offsetHeight"></a>HTMLElement.offsetHeight</h3><p>是一个只读属性，它返回该元素的像素高度，高度包含该元素的垂直内边距和边框，且是一个整数。</p>
-<p>通常，元素的offsetHeight是一种衡量标准，包括元素的边框、垂直内边距和元素的水平滚动条（如果存在且渲染的话）和元素的CSS高度。</p>
-<p>对于文档的主体对象，它包括代替元素的CSS高度线性总含量高。浮动元素的向下延伸内容高度是被忽略的。 </p>
-<p><img src="https://developer.mozilla.org/@api/deki/files/788/=OffsetHeight.png" alt="实例"></p>
-<a id="more"></a>
-<h3 id="Element-scrollHeight"><a href="#Element-scrollHeight" class="headerlink" title="Element.scrollHeight"></a>Element.scrollHeight</h3><p>Element.scrollHeight 是计量元素内容高度的只读属性，包括overflow样式属性导致的视图中不可见内容。没有垂直滚动条的情况下，scrollHeight值与元素视图填充所有内容所需要的最小值clientHeight相同。包括元素的padding，但不包括元素的margin.</p>
-<p><img src="https://developer.mozilla.org/@api/deki/files/840/=ScrollHeight.png" alt="实例"></p>
-<h3 id="Element-clientHeight"><a href="#Element-clientHeight" class="headerlink" title="Element.clientHeight"></a>Element.clientHeight</h3><p>返回元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。</p>
-<p>clientHeight 可以通过 CSS height + CSS padding - 水平滚动条高度 (如果存在)来计算.</p>
-<p>也就是说，是没有垂直滚动条版本的scrollHeight。</p>
-<hr>
-<p>更新：</p>
-<p>clientWidth = width + padding</p>
-<p>clientHeight = height + padding</p>
-<p>offsetWidth = width + padding + border</p>
-<p>offsetHeight = height + padding + border</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;HTMLElement-offsetHeight&quot;&gt;&lt;a href=&quot;#HTMLElement-offsetHeight&quot; class=&quot;headerlink&quot; title=&quot;HTMLElement.offsetHeight&quot;&gt;&lt;/a&gt;HTMLElement.offsetHeight&lt;/h3&gt;&lt;p&gt;是一个只读属性，它返回该元素的像素高度，高度包含该元素的垂直内边距和边框，且是一个整数。&lt;/p&gt;
-&lt;p&gt;通常，元素的offsetHeight是一种衡量标准，包括元素的边框、垂直内边距和元素的水平滚动条（如果存在且渲染的话）和元素的CSS高度。&lt;/p&gt;
-&lt;p&gt;对于文档的主体对象，它包括代替元素的CSS高度线性总含量高。浮动元素的向下延伸内容高度是被忽略的。 &lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://developer.mozilla.org/@api/deki/files/788/=OffsetHeight.png&quot; alt=&quot;实例&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="HTML" scheme="http://www.hxvin.me/tags/HTML/"/>
     
   </entry>
   
