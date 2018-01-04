@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="一开始我的反爬思路是这样的： 1.设置几秒请求一次（这边还可以对请求头处理假装浏览器访问） 2.对付验证码 接入打码平台。 下载验证码  上传验证码  获取验证码字符  填写验证码 说起爬虫，真是磕磕绊绊…">
+<meta name="description" content="一开始我的反爬思路是这样的： 1.设置几秒请求一次（这边还可以对请求头处理假装浏览器访问） 2.对付验证码 接入打码平台。 下载验证码  上传验证码  3.ip代理 获取验证码字符  填写验证码 说起爬虫，真是磕磕绊绊…">
 <meta name="keywords" content="开发总结,NODE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对付反爬虫战略">
 <meta property="og:url" content="http://www.hxvin.me/2017/09/10/对付反爬虫战略/index.html">
 <meta property="og:site_name" content="Hxvin的博客">
-<meta property="og:description" content="一开始我的反爬思路是这样的： 1.设置几秒请求一次（这边还可以对请求头处理假装浏览器访问） 2.对付验证码 接入打码平台。 下载验证码  上传验证码  获取验证码字符  填写验证码 说起爬虫，真是磕磕绊绊…">
-<meta property="og:updated_time" content="2017-10-15T13:24:15.000Z">
+<meta property="og:description" content="一开始我的反爬思路是这样的： 1.设置几秒请求一次（这边还可以对请求头处理假装浏览器访问） 2.对付验证码 接入打码平台。 下载验证码  上传验证码  3.ip代理 获取验证码字符  填写验证码 说起爬虫，真是磕磕绊绊…">
+<meta property="og:updated_time" content="2018-01-04T08:29:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对付反爬虫战略">
-<meta name="twitter:description" content="一开始我的反爬思路是这样的： 1.设置几秒请求一次（这边还可以对请求头处理假装浏览器访问） 2.对付验证码 接入打码平台。 下载验证码  上传验证码  获取验证码字符  填写验证码 说起爬虫，真是磕磕绊绊…">
+<meta name="twitter:description" content="一开始我的反爬思路是这样的： 1.设置几秒请求一次（这边还可以对请求头处理假装浏览器访问） 2.对付验证码 接入打码平台。 下载验证码  上传验证码  3.ip代理 获取验证码字符  填写验证码 说起爬虫，真是磕磕绊绊…">
 
 
 
@@ -376,6 +376,7 @@
 <p>2.对付验证码</p>
 <p>接入打码平台。</p>
 <p>下载验证码  上传验证码 </p>
+<p>3.ip代理</p>
 <p>获取验证码字符  填写验证码</p>
 <p>说起爬虫，真是磕磕绊绊…</p>
 <a id="more"></a>
@@ -412,7 +413,9 @@
 <p>});</p>
 <p>});</p>
 <p>job.start();</p>
-<p>（本文完）</p>
+<hr>
+<p>更新：<br>目前爬了一千多篇，期间ip还是被封了<br>然后我使用ip代理来解决这个问题</p>
+<p>方法在这：<br><a href="https://segmentfault.com/q/1010000008196143" target="_blank" rel="external">代理列表 + 用代理访问目标网站</a></p>
 
       
     </div>
@@ -534,7 +537,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -547,7 +550,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -634,7 +637,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

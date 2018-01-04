@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hxvin.me/"/>
-  <updated>2017-12-22T04:23:12.000Z</updated>
+  <updated>2018-01-04T08:32:09.000Z</updated>
   <id>http://www.hxvin.me/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>javascript数据结构--栈</title>
+    <link href="http://www.hxvin.me/2018/01/03/javascript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/"/>
+    <id>http://www.hxvin.me/2018/01/03/javascript数据结构-栈/</id>
+    <published>2018-01-03T08:19:47.000Z</published>
+    <updated>2018-01-04T08:32:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>数组是计算机科学中最常用的数据结构，栈和队列类似数组，但 添加和删除元素时更为可控。</p>
+<p>栈(stack)是一种后进先出原则的有序集合。（如一摞书，后放进去的先拿出来）<br><img src="http://upload-images.jianshu.io/upload_images/5287253-59e833ea0bba5e70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="栈"></p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">function Stack() &#123;</div><div class="line">    //用一种数据结构保存栈里的元素，这里选择数组</div><div class="line">    var items = []; </div><div class="line">    //添加一个一个或几个元素到栈顶</div><div class="line">    this.push = function(element)&#123;</div><div class="line">        items.push(element);</div><div class="line">    &#125;;</div><div class="line">    //移除栈顶的元素，同时返回被移出的元素</div><div class="line">    this.pop = function()&#123;</div><div class="line">        return items.pop();</div><div class="line">    &#125;;</div><div class="line">   //返回栈顶的元素，不对栈做任何修改</div><div class="line">    this.peek = function()&#123;</div><div class="line">        return items[items.length-1];</div><div class="line">    &#125;;</div><div class="line">    //栈里没元素返回true 有就返回false</div><div class="line">    this.isEmpty = function()&#123;</div><div class="line">        return items.length == 0;</div><div class="line">    &#125;;</div><div class="line">    //返回栈里的个数</div><div class="line">    this.size = function()&#123;</div><div class="line">        return items.length;</div><div class="line">    &#125;;</div><div class="line">    //移除栈里所有元素</div><div class="line">    this.clear = function()&#123;</div><div class="line">        items = [];</div><div class="line">    &#125;;</div><div class="line">    //打印</div><div class="line">    this.print = function()&#123;</div><div class="line">        console.log(items.toString());</div><div class="line">    &#125;;</div><div class="line">    //数组转字符串</div><div class="line">    this.toString = function()&#123;</div><div class="line">        return items.toString();</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var stack = new Stack(); console.log(stack.isEmpty()); //true</div><div class="line">stack.push(5); </div><div class="line">stack.push(8);</div><div class="line">console.log(stack.peek());// 8</div><div class="line">stack.push(11); </div><div class="line">console.log(stack.size());//3</div><div class="line">console.log(stack.isEmpty()); //false</div></pre></td></tr></table></figure>
+<h2 id="十进制到二进制"><a href="#十进制到二进制" class="headerlink" title="十进制到二进制"></a>十进制到二进制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">function divideBy2(decNumber)&#123;</div><div class="line"></div><div class="line">var remStack = new Stack(), </div><div class="line">      rem, </div><div class="line">      binaryString = &apos;&apos;;</div><div class="line"></div><div class="line">while (decNumber &gt; 0)&#123; //&#123;1&#125;</div><div class="line">     rem = Math.floor(decNumber % 2); //&#123;2&#125;       </div><div class="line">     remStack.push(rem); //&#123;3&#125;</div><div class="line">     decNumber = Math.floor(decNumber / 2); //&#123;4&#125; </div><div class="line">&#125;</div><div class="line"></div><div class="line">while (!remStack.isEmpty())&#123; //&#123;5&#125; </div><div class="line">      binaryString += remStack.pop().toString(); </div><div class="line">&#125;</div><div class="line"></div><div class="line">return binaryString;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用 （测试时记得把上面封装的Stack函数带上）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">divideBy2(10);  // &quot;1010&quot;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/5287253-7fb482a908db3fa6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="十转二进制"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;数组是计算机科学中最常用的数据结构，栈和队列类似数组，但 添加和删除元素时更为可控。&lt;/p&gt;
+&lt;p&gt;栈(stack)是一种后进先出原则的有序集合。（如一摞书，后放进去的先拿出来）&lt;br&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/5287253-59e833ea0bba5e70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;栈&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
+    
+      <category term="数据结构" scheme="http://www.hxvin.me/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>JS数据结构与算法之基础--数组的各种操作方法</title>
@@ -636,13 +669,14 @@
     <link href="http://www.hxvin.me/2017/09/10/%E5%AF%B9%E4%BB%98%E5%8F%8D%E7%88%AC%E8%99%AB%E6%88%98%E7%95%A5/"/>
     <id>http://www.hxvin.me/2017/09/10/对付反爬虫战略/</id>
     <published>2017-09-10T15:50:00.000Z</published>
-    <updated>2017-10-15T13:24:15.000Z</updated>
+    <updated>2018-01-04T08:29:24.000Z</updated>
     
     <content type="html"><![CDATA[<p>一开始我的反爬思路是这样的：</p>
 <p>1.设置几秒请求一次（这边还可以对请求头处理假装浏览器访问）</p>
 <p>2.对付验证码</p>
 <p>接入打码平台。</p>
 <p>下载验证码  上传验证码 </p>
+<p>3.ip代理</p>
 <p>获取验证码字符  填写验证码</p>
 <p>说起爬虫，真是磕磕绊绊…</p>
 <a id="more"></a>
@@ -679,7 +713,9 @@
 <p>});</p>
 <p>});</p>
 <p>job.start();</p>
-<p>（本文完）</p>
+<hr>
+<p>更新：<br>目前爬了一千多篇，期间ip还是被封了<br>然后我使用ip代理来解决这个问题</p>
+<p>方法在这：<br><a href="https://segmentfault.com/q/1010000008196143" target="_blank" rel="external">代理列表 + 用代理访问目标网站</a></p>
 ]]></content>
     
     <summary type="html">
@@ -689,6 +725,7 @@
 &lt;p&gt;2.对付验证码&lt;/p&gt;
 &lt;p&gt;接入打码平台。&lt;/p&gt;
 &lt;p&gt;下载验证码  上传验证码 &lt;/p&gt;
+&lt;p&gt;3.ip代理&lt;/p&gt;
 &lt;p&gt;获取验证码字符  填写验证码&lt;/p&gt;
 &lt;p&gt;说起爬虫，真是磕磕绊绊…&lt;/p&gt;
     
@@ -945,7 +982,7 @@
     <link href="http://www.hxvin.me/2017/06/24/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD%E5%8F%8A%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD/"/>
     <id>http://www.hxvin.me/2017/06/24/图片懒加载及节流函数优化性能/</id>
     <published>2017-06-24T13:02:40.000Z</published>
-    <updated>2017-06-25T04:14:35.000Z</updated>
+    <updated>2018-01-04T08:31:07.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="为啥要用图片懒加载"><a href="#为啥要用图片懒加载" class="headerlink" title="为啥要用图片懒加载"></a>为啥要用图片懒加载</h2><p>对页面加载速度影响最大的就是图片，一张普通的图片可以达到几M的大小，而代码也许就只有几十KB。当页面图片很多时，页面的加载速度缓慢，几S钟内页面没有加载完成，也许会失去很多的用户。<br>所以，对于图片过多的页面，为了加速页面加载速度，所以很多时候我们需要将页面内未出现在可视区域内的图片先不做加载， 等到滚动到可视区域后再去加载。这样子对于页面加载性能上会有很大的提升，也提高了用户体验。</p>
 <a id="more"></a>
@@ -992,51 +1029,9 @@
     </summary>
     
     
-      <category term="学习笔记" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="JavaScript" scheme="http://www.hxvin.me/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>js浅拷贝与深拷贝</title>
-    <link href="http://www.hxvin.me/2017/06/18/js%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/"/>
-    <id>http://www.hxvin.me/2017/06/18/js浅拷贝与深拷贝/</id>
-    <published>2017-06-18T14:22:12.000Z</published>
-    <updated>2017-09-16T15:21:27.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>深复制和浅复制只针对像 Object, Array 这样的复杂对象的。简单来说，浅复制只复制一层对象的属性，而深复制则递归复制了所有层级。</p>
-<blockquote>
-<p>浅拷贝</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var obj = &#123; a:1, arr: [2,3] &#125;;</div><div class="line">var shallowObj = shallowCopy(obj);</div><div class="line"></div><div class="line">function shallowCopy(src) &#123;</div><div class="line">  var dst = &#123;&#125;;</div><div class="line">  for (var prop in src) &#123;</div><div class="line">    if (src.hasOwnProperty(prop)) &#123;</div><div class="line">      dst[prop] = src[prop];</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  return dst;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>因为浅复制只会将对象的各个属性进行依次复制，并不会进行递归复制，而 JavaScript 存储对象都是存地址的，所以浅复制会导致 obj.arr 和 shallowObj.arr 指向同一块内存地址。</p>
-<p>导致的结果就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">shallowObj.arr[1] = 5;</div><div class="line">obj.arr[1]   // = 5</div></pre></td></tr></table></figure></p>
-<p>深复制则不同，它不仅将原对象的各个属性逐个复制出去，而且将原对象各个属性所包含的对象也依次采用深复制的方法递归复制到新对象上。这就不会存在上面 obj 和 shallowObj 的 arr 属性指向同一个对象的问题。</p>
-<blockquote>
-<p>深拷贝（这个函数可以深拷贝对象和数组）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var deepCopy = function(obj)&#123;</div><div class="line">    var str, newobj = obj.constructor === Array ? [] : &#123;&#125;;</div><div class="line">    if(typeof obj !== &apos;object&apos;)&#123;</div><div class="line">        return;</div><div class="line">    &#125; else if(window.JSON)&#123;</div><div class="line">        str = JSON.stringify(obj), //系列化对象</div><div class="line">        newobj = JSON.parse(str); //还原</div><div class="line">    &#125; else &#123;</div><div class="line">        for(var i in obj)&#123;</div><div class="line">            newobj[i] = typeof obj[i] === &apos;object&apos; ? </div><div class="line">            deepCopy(obj[i]) : obj[i]; </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return newobj;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>结果是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var obj = &#123; a:1, arr: [1,2] &#125;;</div><div class="line">var deepObj = deepCopy(obj);</div><div class="line">deepObj.arr[1]=5;</div><div class="line">obj.arr[1]; //2</div></pre></td></tr></table></figure>
-<p><a href="https://www.zhihu.com/question/23031215" target="_blank" rel="external">本文参考地址</a>。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;深复制和浅复制只针对像 Object, Array 这样的复杂对象的。简单来说，浅复制只复制一层对象的属性，而深复制则递归复制了所有层级。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;浅拷贝&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var obj = &amp;#123; a:1, arr: [2,3] &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;var shallowObj = shallowCopy(obj);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;function shallowCopy(src) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  var dst = &amp;#123;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  for (var prop in src) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (src.hasOwnProperty(prop)) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      dst[prop] = src[prop];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  return dst;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="学习总结" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
-    
       <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
+    
+      <category term="学习笔记" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
