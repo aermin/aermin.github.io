@@ -19,23 +19,23 @@ cookie数据会自动在Web浏览器和Web服务器之间传输，在服务端�
 
 因此服务端脚本就可以 读、 写存储在客户端的 cookie的值。
 
-* 前后端协同使用
+前后端协同使用流程
 
 ![前后端cookie](http://www.hxvin.me/posts/img/前后端cookie.png)
 
-* Response headers
+##### Response headers
 
 ![服务器响应头](http://www.hxvin.me/posts/img/服务器响应头.png)
 
-> Set-Cookie 字段的属性
+##### Set-Cookie 字段的属性
 
 ![Set-Cookie 字段的属性](http://www.hxvin.me/posts/img/set-cookie字段的属性.png)
 
-* Request headers
+##### Request headers
 
 ![客服端请求头](http://www.hxvin.me/posts/img/客服端请求头.png)
 
-> cookie的使用场景
+#### 使用场景
 
 1.自动填写用户名。比如你某次登陆过一个网站，下次登录的时候不想再次输入账号了，怎么办？这个信息可以写到Cookie里面，访问网站的时候，网站页面的脚本可以读取这个信息，就自动帮你把用户名给填了，能够方便一下用户。
 
@@ -46,7 +46,7 @@ cookie数据会自动在Web浏览器和Web服务器之间传输，在服务端�
 session 是一种基于cookie的让服务器能识别某个用户的「机制」，当然也可以特指服务器存储的 session数据。
 Session不会支持跨域名访问，仅在他所在的域名内有效。
 
-### 用一个购物过程来理解
+#### 使用场景举例：购物
 
 当一个用户打开淘宝登录后，刷新浏览器仍然展示登录状态。然后把购物车的东西下单支付了。
 
@@ -59,6 +59,7 @@ Session不会支持跨域名访问，仅在他所在的域名内有效。
 ![cookie and session](http://www.hxvin.me/posts/img/cookieAndSession.png)
 
 1.用户在输入用户名密码提交给服务端，服务端验证通过后会创建一个session用于记录用户的相关信息的对象，这个session对象中放有生成的sessionid，也可以放一些非机密的userinfo。session对象可保存在服务器内存中（容易产生内存泄露），生产环境一般是保存在数据库中。
+
 ![存在数据库的session](http://www.hxvin.me/posts/img/存在数据库的session.png)
  上图为使用koa-session-minimal 后存在数据库的session store
 
@@ -69,7 +70,7 @@ Session不会支持跨域名访问，仅在他所在的域名内有效。
 
 ![koa-session-minimal相关源码](http://www.hxvin.me/posts/img/koa-session-minimal相关源码.png)
 
-### 需要注意
+#### 需要注意
 
 1.如果 Session ID 被第三方盗走，对方就可以伪装成你的身份进 行恶意操作了。因此必须防止 Session ID 被盗，或被猜出。为了做到 这点，Session ID 应使用难以推测的字符串，且服务器端也需要进行 有效期的管理（即使不幸被盗，之后也因有效期已过而失效），保证其安全性。
 
@@ -77,7 +78,7 @@ Session不会支持跨域名访问，仅在他所在的域名内有效。
 
 3.如果客户端的浏览器禁用了 Cookie 怎么办？一般这种情况下，会使用一种叫做URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如 sid=xxxxx 这样的参数，服务端据此来识别用户。
 
-### cookie + session  方式的局限性
+#### cookie + session  方式的局限性
 
 * 是存储式的有状态验证,由于一定时间内它是保存在服务器上的，当访问增多时，会较大地占用服务器的性能。
 
@@ -87,7 +88,7 @@ Session不会支持跨域名访问，仅在他所在的域名内有效。
 [浅谈CSRF攻击方式](http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html)
 
 
-#### 参考阅读&&鸣谢：
+##### 参考阅读&&鸣谢：
 
 [Cookie 与 Session 的区别](https://juejin.im/entry/5766c29d6be3ff006a31b84e)
 [session 、cookie、token的区别](http://blog.csdn.net/jikeehuang/article/details/51488020)
