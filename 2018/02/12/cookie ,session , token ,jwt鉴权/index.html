@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习总结,React," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -92,17 +92,25 @@
 
 
 
-<meta name="description" content="因项目需求，需要写一个react的抽奖程序和字幕滚动。本来之前用的是vue，没用过react，而项目组框架用的是react，萌新只能弃vue改学用react了 写完这个入门小demo，也算初识了下react。  老习惯，写了详细的代码注释。  demo地址 更新 ======================">
-<meta name="keywords" content="学习总结,React">
+<meta name="description" content="cookiecookie是指Web浏览器存储的少址数据 浏览器使用cookie可以使用 js 在浏览器直接设置（用于记录不敏感信息，如用户名） 大小和数量会有限制 如果没有设置有效期，那就是会话储存，关了浏览器就没了。 尽管浏览器对cookie做了大小限制，不过最好还是尽可能在coki中少存储信息，以免避免影响性能。 前后端协同使用cookie数据会自动在Web浏览器和Web服务器之间传输，在服务">
+<meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react版的抽奖程序&滚动字幕(入门小demo)">
-<meta property="og:url" content="http://www.hxvin.me/2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/index.html">
+<meta property="og:title" content="Hxvin的博客">
+<meta property="og:url" content="http://www.hxvin.me/2018/02/12/cookie ,session , token ,jwt鉴权/index.html">
 <meta property="og:site_name" content="Hxvin的博客">
-<meta property="og:description" content="因项目需求，需要写一个react的抽奖程序和字幕滚动。本来之前用的是vue，没用过react，而项目组框架用的是react，萌新只能弃vue改学用react了 写完这个入门小demo，也算初识了下react。  老习惯，写了详细的代码注释。  demo地址 更新 ======================">
-<meta property="og:updated_time" content="2017-09-16T08:42:18.000Z">
+<meta property="og:description" content="cookiecookie是指Web浏览器存储的少址数据 浏览器使用cookie可以使用 js 在浏览器直接设置（用于记录不敏感信息，如用户名） 大小和数量会有限制 如果没有设置有效期，那就是会话储存，关了浏览器就没了。 尽管浏览器对cookie做了大小限制，不过最好还是尽可能在coki中少存储信息，以免避免影响性能。 前后端协同使用cookie数据会自动在Web浏览器和Web服务器之间传输，在服务">
+<meta property="og:image" content="http://www.hxvin.me/2018/02/12/cookie%20,session%20,%20token%20,jwt鉴权/img/前后端cookie.png">
+<meta property="og:image" content="http://www.hxvin.me/2018/02/12/cookie%20,session%20,%20token%20,jwt鉴权/img/服务器响应头.png">
+<meta property="og:image" content="http://www.hxvin.me/2018/02/12/cookie%20,session%20,%20token%20,jwt鉴权/img/set-cookie字段的属性.png">
+<meta property="og:image" content="http://www.hxvin.me/2018/02/12/cookie%20,session%20,%20token%20,jwt鉴权/img/客服端请求头.png">
+<meta property="og:image" content="http://www.hxvin.me/2018/02/12/cookie%20,session%20,%20token%20,jwt鉴权/img/cookieAndSession.png">
+<meta property="og:image" content="http://www.hxvin.me/2018/02/12/cookie%20,session%20,%20token%20,jwt鉴权/img/存在数据库的session.png">
+<meta property="og:image" content="http://www.hxvin.me/2018/02/12/cookie%20,session%20,%20token%20,jwt鉴权/img/koa-session-minimal相关源码.png">
+<meta property="og:updated_time" content="2018-02-12T12:58:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react版的抽奖程序&滚动字幕(入门小demo)">
-<meta name="twitter:description" content="因项目需求，需要写一个react的抽奖程序和字幕滚动。本来之前用的是vue，没用过react，而项目组框架用的是react，萌新只能弃vue改学用react了 写完这个入门小demo，也算初识了下react。  老习惯，写了详细的代码注释。  demo地址 更新 ======================">
+<meta name="twitter:title" content="Hxvin的博客">
+<meta name="twitter:description" content="cookiecookie是指Web浏览器存储的少址数据 浏览器使用cookie可以使用 js 在浏览器直接设置（用于记录不敏感信息，如用户名） 大小和数量会有限制 如果没有设置有效期，那就是会话储存，关了浏览器就没了。 尽管浏览器对cookie做了大小限制，不过最好还是尽可能在coki中少存储信息，以免避免影响性能。 前后端协同使用cookie数据会自动在Web浏览器和Web服务器之间传输，在服务">
+<meta name="twitter:image" content="http://www.hxvin.me/2018/02/12/cookie%20,session%20,%20token%20,jwt鉴权/img/前后端cookie.png">
 
 
 
@@ -130,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://www.hxvin.me/2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/"/>
+  <link rel="canonical" href="http://www.hxvin.me/2018/02/12/cookie ,session , token ,jwt鉴权/"/>
 
 
 
 
 
-  <title>react版的抽奖程序&滚动字幕(入门小demo) | Hxvin的博客</title>
+  <title> | Hxvin的博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -288,8 +296,8 @@
   
   
 
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.hxvin.me/2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.hxvin.me/2018/02/12/cookie ,session , token ,jwt鉴权/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hxvin">
@@ -310,7 +318,7 @@
             
             
               
-                react版的抽奖程序&滚动字幕(入门小demo)
+                
               
             
           </h1>
@@ -325,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-18T20:21:32+08:00">
-                2017-07-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T10:01:19+08:00">
+                2018-02-12
               </time>
             
 
@@ -345,8 +353,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/07/18/react版的抽奖程序&滚动字幕(入门小demo)/" itemprop="commentsCount"></span>
+                <a href="/2018/02/12/cookie ,session , token ,jwt鉴权/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/02/12/cookie ,session , token ,jwt鉴权/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -371,25 +379,46 @@
       
 
       
-        <p>因项目需求，需要写一个react的抽奖程序和字幕滚动。<br>本来之前用的是vue，没用过react，而项目组框架用的是react，萌新只能弃vue改学用react了</p>
-<p>写完这个入门小demo，也算初识了下react。</p>
+        <h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><p>cookie是指Web浏览器存储的少址数据</p>
+<h4 id="浏览器使用"><a href="#浏览器使用" class="headerlink" title="浏览器使用"></a>浏览器使用</h4><p>cookie可以使用 js 在浏览器直接设置（用于记录不敏感信息，如用户名）</p>
+<p>大小和数量会有限制</p>
+<p>如果没有设置有效期，那就是会话储存，关了浏览器就没了。</p>
+<p>尽管浏览器对cookie做了大小限制，不过最好还是尽可能在coki中少存储信息，以免避免影响性能。</p>
+<h4 id="前后端协同使用"><a href="#前后端协同使用" class="headerlink" title="前后端协同使用"></a>前后端协同使用</h4><p>cookie数据会自动在Web浏览器和Web服务器之间传输，在服务端通使用 HTTP 协议规定的 set-cookie 来让浏览器种下cookie，每次网络请求 Request headers 中都会带上cookie。所以如果 cookie 太多太大对传输效率会有影响。</p>
+<p>因此服务端脚本就可以 读、 写存储在客户端的 cookie的值。</p>
+<ul>
+<li>前后端协同使用</li>
+</ul>
+<p><img src="img/前后端cookie.png" alt="前后端cookie"></p>
+<ul>
+<li>Response headers</li>
+</ul>
+<p><img src="img/服务器响应头.png" alt="服务器响应头"></p>
 <blockquote>
-<p>老习惯，写了详细的代码注释。</p>
+<p>Set-Cookie 字段的属性</p>
 </blockquote>
-<p><a href="https://github.com/hxvin/draw" target="_blank" rel="external">demo地址</a></p>
-<p>更新 ======================</p>
-<a id="more"></a>
-<p>a：增加了抽奖前的判断：</p>
-<p>1.当天是否已抽过奖， ‘否’的话进入下一条判断<br>（这里用localstorage储存，获取当天24点时间戳，过了当天24点localstorage储存清除，时间都是获取本地时间，实际应用应采用服务器时间，防止用户修改本地时间来作弊）</p>
-<p>2.现在抽奖时间是否在16-17点之间，‘是’的话则开始抽奖</p>
-<p>b：增加了react版的字幕滚动</p>
-<p><a href="http://ooytyiziz.bkt.clouddn.com/QQ20170715-193001-HD.gif" target="_blank" rel="external">最初版简陋抽奖gif图</a></p>
-<p><a href="http://ooytyiziz.bkt.clouddn.com/draw.png" target="_blank" rel="external">抽奖&amp;字幕滚动图</a></p>
-<h3 id="下载运行"><a href="#下载运行" class="headerlink" title="下载运行"></a>下载运行</h3><p>git  clone <a href="https://github.com/hxvin/draw.git" target="_blank" rel="external">https://github.com/hxvin/draw.git</a></p>
-<p>cd draw</p>
-<p>npm install</p>
-<p>npm start</p>
-<p>有错的或者不完善的地方恳请指出纠正。</p>
+<p><img src="img/set-cookie字段的属性.png" alt="Set-Cookie 字段的属性"></p>
+<ul>
+<li>Request headers</li>
+</ul>
+<p><img src="img/客服端请求头.png" alt="客服端请求头"></p>
+<h2 id="session"><a href="#session" class="headerlink" title="session"></a>session</h2><p>session 是一种基于cookie的让服务器能识别某个用户的「机制」，当然也可以特指服务器存储的 session数据。</p>
+<blockquote>
+<p>用一个购物过程来理解</p>
+</blockquote>
+<p>当一个用户打开淘宝登录后，刷新浏览器仍然展示登录状态。然后把购物车的东西下单支付了。</p>
+<p>刷新的时候服务器如何分辨这次发起请求的用户是刚才登录过的用户呢？下单的时候又怎么知道是哪个用户下单的呢？</p>
+<blockquote>
+<p>鉴于 HTTP 是无状态协议，之前已认证成功的用户状态无法通过协 议层面保存下来。即，无法实现状态管理，因此即使当该用户下一次 继续访问，也无法区分他与其他的用户。</p>
+</blockquote>
+<p>于是我们会使用 Cookie 来 管理 Session，以弥补 HTTP 协议中不存在的状态管理功能。</p>
+<p><img src="img/cookieAndSession.png" alt="cookie and session"></p>
+<p>1.用户在输入用户名密码提交给服务端，服务端验证通过后会创建一个session用于记录用户的相关信息的对象，这个session对象中放有生成的sessionid，也可以放一些非机密的userinfo。session对象可保存在服务器内存中（容易产生内存泄露），生产环境一般是保存在数据库中。<br><img src="img/存在数据库的session.png" alt="存在数据库的session"><br> 上图为使用koa-session-minimal 后存在数据库的session store</p>
+<p>2.创建session后，会把关联的session_id 通过setCookie 添加到http响应头部中。<br>浏览器在加载页面时发现响应头部有 set-cookie字段，就把这个cookie 种到浏览器指定域名下</p>
+<p>3.客户端接收到从服务器端发来的 Session ID 后，会将其作为 Cookie 保存在本地。之后你发起刷新或者下单的请求时，浏览器会自动发送被种下sessionid的cookie，后端接受后去存session的地方根据sessionid查找是否有此session（有既证明处于登录状态的真实用户，否则拒绝此次请求），如果有，还可以读取登录时放的userinfo，获取用户身份（user_id）。</p>
+<p><img src="img/koa-session-minimal相关源码.png" alt="koa-session-minimal相关源码"></p>
+<p>需要注意的是，如果 Session ID 被第三方盗走，对方就可以伪装成你的身份进 行恶意操作了。因此必须防止 Session ID 被盗，或被猜出。为了做到 这点，Session ID 应使用难以推测的字符串，且服务器端也需要进行 有效期的管理（即使不幸被盗，之后也因有效期已过而失效），保证其安全性。</p>
+<p>另外，为减轻跨站脚本攻击（XSS）造成的损失，建议事先在 Cookie 内加上 httponly 属性。</p>
 
       
     </div>
@@ -417,14 +446,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/学习总结/" rel="tag"># 学习总结</a>
-          
-            <a href="/tags/React/" rel="tag"># React</a>
-          
-        </div>
-      
 
       
         
@@ -434,18 +455,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/08/解决非chrome浏览器（移动端适用）后退刷新问题/" rel="next" title="解决非chrome浏览器（移动端适用）后退刷新问题">
-                <i class="fa fa-chevron-left"></i> 解决非chrome浏览器（移动端适用）后退刷新问题
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/15/从实际项目小谈react生命周期/" rel="prev" title="从实际项目小谈react生命周期">
-                从实际项目小谈react生命周期 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/03/javascript数据结构--队列/" rel="prev" title="JS数据结构--队列">
+                JS数据结构--队列 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -613,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载运行"><span class="nav-number">1.</span> <span class="nav-text">下载运行</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie"><span class="nav-number">1.</span> <span class="nav-text">cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器使用"><span class="nav-number">1.0.1.</span> <span class="nav-text">浏览器使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前后端协同使用"><span class="nav-number">1.0.2.</span> <span class="nav-text">前后端协同使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session"><span class="nav-number">2.</span> <span class="nav-text">session</span></a></li></ol></div>
             
 
           </div>
