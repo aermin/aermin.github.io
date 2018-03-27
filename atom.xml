@@ -189,8 +189,8 @@
   
   <entry>
     <title>“js各种遍历总结”</title>
-    <link href="http://www.hxvin.me/2017/11/19/%E2%80%9Cjs%E9%81%8D%E5%8E%86%E6%80%BB%E7%BB%93%E2%80%9D/"/>
-    <id>http://www.hxvin.me/2017/11/19/“js遍历总结”/</id>
+    <link href="http://www.hxvin.me/2017/11/19/js%E9%81%8D%E5%8E%86%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.hxvin.me/2017/11/19/js遍历总结/</id>
     <published>2017-11-19T06:44:38.000Z</published>
     <updated>2017-11-19T15:05:22.000Z</updated>
     
@@ -281,36 +281,6 @@
       <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
     
       <category term="周总结" scheme="http://www.hxvin.me/tags/%E5%91%A8%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>“一个人的前端之旅，写写感想~”</title>
-    <link href="http://www.hxvin.me/2017/11/19/%E2%80%9C%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E5%89%8D%E7%AB%AF%E4%B9%8B%E6%97%85%EF%BC%8C%E5%86%99%E5%86%99%E6%84%9F%E6%83%B3-%E2%80%9D/"/>
-    <id>http://www.hxvin.me/2017/11/19/“一个人的前端之旅，写写感想-”/</id>
-    <published>2017-11-19T01:31:04.000Z</published>
-    <updated>2017-11-19T15:05:28.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>想想步入前端，成为一名码农已经快一年(大概还差两个多月吧)，自己从小 心水的技术梦也算有了着落。</p>
-<p>这次参加了后半段秋招，7~10月一直忙着实习，十月中旬真正开始参加了校招，虽然对互联网校招来说，算蛮晚的，很多大厂的校招也结束了，哈哈哈，后知后觉。</p>
-<p>想起面试中面试官喜欢问的一个问题，你一个非科班的为什么选择前端，我总是叽叽歪歪说了一堆，其实很简单，我想当一名程序员(慕名已久)，刚好遇见了前端，是前端让我打破非科班难以成为程序员的狭隘眼界~感谢</p>
- <a id="more"></a>
-<p>然后，我喜欢js，一门前后端，pc端，客户端，桌面端通吃的奇妙语言，虽然目前自己掌握的js依然很菜，但有一天，我相信自己会成为很好的jser的，希望这天早点到来，希望有一天我能用js写出在各种使用环境下跑的优质产品。</p>
-<p>一直在探索适合自己的学习方式，后来项目驱动成为了我的学习自驱方式，不过这样倒是忽略了对js基础知识的巩固，校招中也吃了亏，后遇一名前辈指点，对自己学习模式完善了下，项目驱动为主干，在项目中遇到不会，不解的知识点和坑，及时去做总结，不单单是总结那个知识点，而应是由点及线到面，比如js遍历中的foreach 用法不是很熟悉，这时候就可以把整个js遍历的方法总结出来，把知识点串联成一条线，甚至一个面。</p>
-<p>作为一名技术菜，虽然技术接触了不少，HTML(5),CSS(3),ES(6,7),VUE,REACT,NODE,KOA,EJS,GULP,SCSS,MYSQL,LINUX….但是 由于时间原因，有些只是是浅尝而止，想想这样不是很好，是走路都艰难的虚胖，所以呢，给接下去的自己做下规划~~</p>
-<p>具体的规划还是我完成了再写出来吧，不过要成为一名程序员，数据结构算法分析这些肯定跑不了的了，而且还有很多很nice的书等我去看~~先酱紫  加油 进击的菜鸡！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;想想步入前端，成为一名码农已经快一年(大概还差两个多月吧)，自己从小 心水的技术梦也算有了着落。&lt;/p&gt;
-&lt;p&gt;这次参加了后半段秋招，7~10月一直忙着实习，十月中旬真正开始参加了校招，虽然对互联网校招来说，算蛮晚的，很多大厂的校招也结束了，哈哈哈，后知后觉。&lt;/p&gt;
-&lt;p&gt;想起面试中面试官喜欢问的一个问题，你一个非科班的为什么选择前端，我总是叽叽歪歪说了一堆，其实很简单，我想当一名程序员(慕名已久)，刚好遇见了前端，是前端让我打破非科班难以成为程序员的狭隘眼界~感谢&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="随笔" scheme="http://www.hxvin.me/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
@@ -1008,6 +978,64 @@
       <category term="工具使用" scheme="http://www.hxvin.me/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
     
       <category term="实习日记" scheme="http://www.hxvin.me/tags/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图片懒加载及节流函数优化性能</title>
+    <link href="http://www.hxvin.me/2017/06/24/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD%E5%8F%8A%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD/"/>
+    <id>http://www.hxvin.me/2017/06/24/图片懒加载及节流函数优化性能/</id>
+    <published>2017-06-24T13:02:40.000Z</published>
+    <updated>2018-01-04T08:31:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="为啥要用图片懒加载"><a href="#为啥要用图片懒加载" class="headerlink" title="为啥要用图片懒加载"></a>为啥要用图片懒加载</h2><p>对页面加载速度影响最大的就是图片，一张普通的图片可以达到几M的大小，而代码也许就只有几十KB。当页面图片很多时，页面的加载速度缓慢，几S钟内页面没有加载完成，也许会失去很多的用户。<br>所以，对于图片过多的页面，为了加速页面加载速度，所以很多时候我们需要将页面内未出现在可视区域内的图片先不做加载， 等到滚动到可视区域后再去加载。这样子对于页面加载性能上会有很大的提升，也提高了用户体验。</p>
+<a id="more"></a>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>将页面中的img标签src指向一张小图片或者src为空，然后定义data-src（这个属性可以自定义命名，我才用data-src）属性指向真实的图片。src指向一张默认的图片，否则当src为空时也会向服务器发送一次请求（指向默认的一张图那就只需请求一次）。可以指向loading的地址。</p>
+<p>当载入页面时，先把可视区域内的img标签的data-src属性值负给src，然后监听滚动事件，把用户即将看到的图片加载。这样便实现了懒加载。</p>
+<ul>
+<li>ps：图片要指定宽高</li>
+</ul>
+<p>关于窗口各种宽度，给出网上找的一张好图</p>
+<p><img src="http://ooytyiziz.bkt.clouddn.com/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%90%84%E7%A7%8D%E5%AE%BD%E5%BA%A6.png" alt="各种宽度"></p>
+<blockquote>
+<p>如果仍不是很理解，看这两篇文章</p>
+</blockquote>
+<p><a href="http://www.cnblogs.com/kongxianghai/p/4192032.html" target="_blank" rel="external">scrollWidth,clientWidth,offsetWidth的区别</a></p>
+<p><a href="http://www.cnblogs.com/fullhouse/archive/2012/01/16/2324131.html" target="_blank" rel="external">JS中关于clientWidth offsetWidth scrollWidth 等的含义</a></p>
+<h2 id="图片懒加载的实现代码"><a href="#图片懒加载的实现代码" class="headerlink" title="图片懒加载的实现代码"></a>图片懒加载的实现代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</div><div class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;style&gt;</div><div class="line">        img &#123;</div><div class="line">            display: block;</div><div class="line">            margin-bottom: 50px;</div><div class="line">            width: 400px;</div><div class="line">            height: 400px;</div><div class="line">        &#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">     &lt;img src=&quot;&quot; data-src=&quot;http://pic.58pic.com/58pic/17/18/97/01U58PIC4Xr_1024.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://cover.read.duokan.com/mfsv2/download/fdsc3/p01N203pHTU7/Wr5314kcLAtVCi.jpg!t&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://77fkxu.com1.z0.glb.clouddn.com/20160308/1457402219_73571.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://pic1.cxtuku.com/00/16/18/b3809a2ba0f3.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://img.bitscn.com/upimg/allimg/c150708/14363B06253120-6060O.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://cover.read.duokan.com/mfsv2/download/fdsc3/p015trgKM7vw/H0iyDPPneOVrA4.jpg!t&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://imgsrc.baidu.com/baike/pic/item/2f9cbdcc5e0bcf5c00e9283b.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    (function()&#123;</div><div class="line">    let num = document.getElementsByTagName(&apos;img&apos;).length;</div><div class="line">    let img = document.getElementsByTagName(&quot;img&quot;);</div><div class="line">    let n = 0; //存储图片加载到的位置，避免每次都从第一张图片开始遍历</div><div class="line">    lazyload(); //页面载入完毕加载可是区域内的图片</div><div class="line">     window.onscroll = lazyload;</div><div class="line">    function lazyload() &#123; //监听页面滚动事件</div><div class="line">        let seeHeight = document.documentElement.clientHeight; //可见区域高度</div><div class="line">        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop; //滚动条距离顶部高度</div><div class="line">        for (let i = n; i &lt; num; i++) &#123;</div><div class="line">            // 图片未出现时距离顶部的距离大于滚动条距顶部的距离+可视区的高度</div><div class="line">            if (img[i].offsetTop &lt; seeHeight + scrollTop) &#123;</div><div class="line">                if (img[i].getAttribute(&quot;src&quot;) == &quot;&quot;) &#123;</div><div class="line">                    img[i].src = img[i].getAttribute(&quot;data-src&quot;);</div><div class="line">                &#125;</div><div class="line">                n = i + 1;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    &#125;)()</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="使用节流函数进行优化"><a href="#使用节流函数进行优化" class="headerlink" title="使用节流函数进行优化"></a>使用节流函数进行优化</h2><p>如果直接将函数绑定在scroll事件上，当页面滚动时，函数会被高频触发，这非常影响浏览器的性能。</p>
+<p>同时还有以下场景往往由于事件频繁被触发，因而频繁执行DOM操作、资源加载等重行为，导致UI停顿甚至浏览器崩溃。</p>
+<p>1.window对象的resize、scroll事件</p>
+<p>2.拖拽时的mousemove事件</p>
+<p>3.射击游戏中的mousedown、keydown事件</p>
+<p>4.文字输入、自动完成的keyup事件</p>
+<p>解决这个问题的方法有去抖动和节流的方法</p>
+<ul>
+<li>去抖动原理： 当调用动作n毫秒后，才会执行该动作，若在这n毫秒内又调用此动作则将重新计算执行时间。</li>
+</ul>
+<blockquote>
+<p>不足:当我一直滚动鼠标的时候，lazyload函数就会不断被延迟，这样只有停下来的时候才会执行，那么再有些需要及时显示的情况下，就显得不那么友好了</p>
+</blockquote>
+<ul>
+<li>节流原理：预设一个执行周期，如果这个周期结束了都还没触发函数，那就会执行一次函数；如果这个周期还没结束就触发了函数，那定时器将重置，开始新周期。</li>
+</ul>
+<blockquote>
+<p>达到了想要的效果，既没有频繁的执行也没有延迟执行</p>
+</blockquote>
+<p>详细可看此文<br><a href="http://www.jianshu.com/p/4f3e2c8f5e95" target="_blank" rel="external">关于js函数节流和去抖动</a></p>
+<h2 id="运用节流函数的图片懒加载代码"><a href="#运用节流函数的图片懒加载代码" class="headerlink" title="运用节流函数的图片懒加载代码"></a>运用节流函数的图片懒加载代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</div><div class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;style&gt;</div><div class="line">        img &#123;</div><div class="line">            display: block;</div><div class="line">            margin-bottom: 50px;</div><div class="line">            width: 400px;</div><div class="line">            height: 400px;</div><div class="line">        &#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">     &lt;img src=&quot;&quot; data-src=&quot;http://pic.58pic.com/58pic/17/18/97/01U58PIC4Xr_1024.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://cover.read.duokan.com/mfsv2/download/fdsc3/p01N203pHTU7/Wr5314kcLAtVCi.jpg!t&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://77fkxu.com1.z0.glb.clouddn.com/20160308/1457402219_73571.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://pic1.cxtuku.com/00/16/18/b3809a2ba0f3.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://img.bitscn.com/upimg/allimg/c150708/14363B06253120-6060O.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://cover.read.duokan.com/mfsv2/download/fdsc3/p015trgKM7vw/H0iyDPPneOVrA4.jpg!t&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://imgsrc.baidu.com/baike/pic/item/2f9cbdcc5e0bcf5c00e9283b.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">    &lt;img src=&quot;&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    (function()&#123;</div><div class="line">    let num = document.getElementsByTagName(&apos;img&apos;).length;</div><div class="line">    let img = document.getElementsByTagName(&quot;img&quot;);</div><div class="line">    let n = 0; //存储图片加载到的位置，避免每次都从第一张图片开始遍历</div><div class="line">    lazyload(); //页面载入完毕加载可是区域内的图片</div><div class="line">    function lazyload() &#123; //监听页面滚动事件</div><div class="line">        let seeHeight = document.documentElement.clientHeight; //可见区域高度</div><div class="line">        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop; //滚动条距离顶部高度</div><div class="line">        for (let i = n; i &lt; num; i++) &#123;</div><div class="line">            // 图片未出现时距离顶部的距离大于滚动条距顶部的距离+可视区的高度</div><div class="line">            if (img[i].offsetTop &lt; seeHeight + scrollTop) &#123;</div><div class="line">                if (img[i].getAttribute(&quot;src&quot;) == &quot;&quot;) &#123;</div><div class="line">                    img[i].src = img[i].getAttribute(&quot;data-src&quot;);</div><div class="line">                &#125;</div><div class="line">                n = i + 1;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    采用了节流函数</div><div class="line">        function throttle(fun, delay, time) &#123;</div><div class="line">    let timeout,</div><div class="line">        startTime = new Date();</div><div class="line">    return function() &#123;</div><div class="line">        let context = this,</div><div class="line">            args = arguments,</div><div class="line">            curTime = new Date();</div><div class="line">        clearTimeout(timeout);</div><div class="line">        // 如果达到了规定的触发时间间隔，触发 handler</div><div class="line">        if (curTime - startTime &gt;= time) &#123;</div><div class="line">            fun.apply(context, args);</div><div class="line">            startTime = curTime;</div><div class="line">            // 没达到触发间隔，重新设定定时器</div><div class="line">        &#125; else &#123;</div><div class="line">            timeout = setTimeout(fun, delay);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line">window.addEventListener(&apos;scroll&apos;,throttle(lazyload,500,1000));</div><div class="line">    &#125;)()</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;为啥要用图片懒加载&quot;&gt;&lt;a href=&quot;#为啥要用图片懒加载&quot; class=&quot;headerlink&quot; title=&quot;为啥要用图片懒加载&quot;&gt;&lt;/a&gt;为啥要用图片懒加载&lt;/h2&gt;&lt;p&gt;对页面加载速度影响最大的就是图片，一张普通的图片可以达到几M的大小，而代码也许就只有几十KB。当页面图片很多时，页面的加载速度缓慢，几S钟内页面没有加载完成，也许会失去很多的用户。&lt;br&gt;所以，对于图片过多的页面，为了加速页面加载速度，所以很多时候我们需要将页面内未出现在可视区域内的图片先不做加载， 等到滚动到可视区域后再去加载。这样子对于页面加载性能上会有很大的提升，也提高了用户体验。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://www.hxvin.me/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="JS" scheme="http://www.hxvin.me/tags/JS/"/>
     
   </entry>
   
